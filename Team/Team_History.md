@@ -6,7 +6,7 @@
 
 ### 프로젝트 기획 회의
  - 인공지능에 대한 이해 
-![Alt text](<image (6).png>)
+![Alt text](<assets/image (6).png>)
 ### 아이디어 
 - 시각장애인 화상회의 표정분석, 수화 번역 - 사회공헌 바이브
 
@@ -41,7 +41,7 @@ rename      : 파일 혹은 폴더명을 수정하거나 옮기는 작업만 한
 remove      : 파일을 삭제하는 작업만 수행한 경우  
 ```
 ### 번다운차트
-![Alt text](<image (7).png>)
+![Alt text](<assets/image (7).png>)
 
 
 ------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ remove      : 파일을 삭제하는 작업만 수행한 경우
 
 - [airdraw](https://github.com/arefmalek/airdraw)
 
-![Alt text](demo.gif)
+![Alt text](assets/demo.gif)
 
 ### 취업특강
 - 1Hour
@@ -99,7 +99,7 @@ remove      : 파일을 삭제하는 작업만 수행한 경우
         - 문장을 넣으면 Vector 값으로 변환 후 Vertor 값끼리 비교
         
     - 문제점 : 초기 데이터 설정 + 성취도 및 진행도 기준 설정
-![Alt text](<Untitled (5).png>)
+![Alt text](<assets/Untitled (5).png>)
 
 ### 기술 회의
 - [VisionCraft](https://github.com/diStyApps/VisionCrafter)
@@ -163,7 +163,7 @@ remove      : 파일을 삭제하는 작업만 수행한 경우
 - airdraw 기술을 사용해서 키보드나 마우스를 이용하기 어려울 때 손의 움직임만으로...
 
 ### 번다운차트
-![Alt text](1233.PNG)
+![Alt text](assets/1233.PNG)
 
 
 ------------------------------------------------------------------------------------------------------------------
@@ -173,7 +173,7 @@ remove      : 파일을 삭제하는 작업만 수행한 경우
 ### 프로젝트 기획 회의
 
 ### 번다운차트
-![Alt text](image-1.png)
+![Alt text](assets/image-1.png)
 
 ### KPT
 - Keep
@@ -205,12 +205,20 @@ remove      : 파일을 삭제하는 작업만 수행한 경우
 ------------------------------------------------------------------------
 # 2 weeks
 
-## 2023 / 08 / 28 [월]
+## 2023 / 09 / 04 [월]
 
 ### 프로젝트 기획 회의
- - 인공지능에 대한 이해 
-![Alt text](<assets/image (6).png>)
+- [한국어 존댓말/반말 분류 모델](https://acdongpgm.tistory.com/332)
+- [다글로](https://daglo.ai/)
+- [Voli.ai](https://voli.ai/#STS)
+- [아이디어 공모전](http://www.ai-idea.co.kr/list.asp?boardcode=notice)
+- [Boostcamp](https://m.blog.naver.com/boostcamp_official/222931879326)
+
 ### 아이디어 
+- [오타 교정기](https://acdongpgm.tistory.com/354)
+- [존댓말 변환기](https://acdongpgm.tistory.com/355)
+- 스피치 노트
+- 작곡 서비스
 
 ### 번다운차트
-![Alt text](<image (7).png>)
+![Alt text](assets/2weeks_mon.PNG)
