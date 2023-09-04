@@ -99,6 +99,7 @@ remove      : 파일을 삭제하는 작업만 수행한 경우
         - 문장을 넣으면 Vector 값으로 변환 후 Vertor 값끼리 비교
         
     - 문제점 : 초기 데이터 설정 + 성취도 및 진행도 기준 설정
+    
 ![Alt text](<assets/Untitled (5).png>)
 
 ### 기술 회의
