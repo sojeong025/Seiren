@@ -223,3 +223,27 @@ remove      : 파일을 삭제하는 작업만 수행한 경우
 
 ### 번다운차트
 ![Alt text](assets/2weeks_mon.PNG)
+
+------------------------------------------------------------------------
+
+## 2023 / 09 / 05 [화]
+
+### 프로젝트 기획 회의 및 설계 초안
+
+- 팀 미팅
+- [Sound Studio] 로 확정
+- [Sound Studio] 기획서 작성 및 세부 내용 회의
+- 레퍼런스 자료조사
+- AI 자료조사
+
+### 자료
+- [VoiceVerse]
+![Alt text](<assets/Untitled (6).png>)
+
+- [내 목소리로 TTS](https://sce-tts.github.io/#/)
+- [내 목소리로 TTS2](https://sce-tts.github.io/#/v2/train?id=glow-tts-%ED%95%99%EC%8A%B5)
+- [파이버](https://www.fiverr.com/)
+- [크몽](https://kmong.com/category/706)
+
+### 번다운차트
+![Alt text](assets/2weeks_Tue.png)
