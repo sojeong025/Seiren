@@ -287,6 +287,6 @@ remove      : 파일을 삭제하는 작업만 수행한 경우
 
 ### 번다운 차트
 
-![Alt text](assets/image.png)
+![Alt text](assets/2weeks_wed.png)
 
 
