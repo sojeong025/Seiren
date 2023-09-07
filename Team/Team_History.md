@@ -289,4 +289,30 @@ remove      : 파일을 삭제하는 작업만 수행한 경우
 
 ![Alt text](assets/2weeks_wed.png)
 
+------------------------------------------------------------------------
 
+## 2023 / 09 / 07 [목]
+
+### 프로젝트 설계
+
+- 피그마 설계
+![Alt text](assets/figma1.png)
+![Alt text](assets/figma2.png)
+
+- ERD 설계
+![Alt text](assets/ERD.png)
+
+- 로고 회의
+![Alt text](assets/logo.png)
+
+### 회의 및 활동
+- 로고에 대한 토론
+- ERD 추가 및 수정
+- 와이어 프레임 설계 및 작성
+- 페이지 구조 상세화
+- GPU 서버 가동
+- AI 자료조사 및 데이터 모음
+
+### 번다운 차트
+
+![Alt text](assets/2weeks_Thu.png)
