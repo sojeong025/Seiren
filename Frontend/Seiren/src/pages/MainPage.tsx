@@ -1,12 +1,11 @@
-import KakaoSocialLogin from "../components/kakaoLogin/kakaoSocialLogin";
+import styles from './MainPage.module.css'
+import danceduck from "../assets/duckdance.gif";
 
-function MainPage() {
+export default function MainPage() {
   return (
     <div>
       <h1>main</h1>
-      <KakaoSocialLogin />
+      <img src={danceduck} className={styles.img} alt="" />
     </div>
   );
 }
-
-export default MainPage;
