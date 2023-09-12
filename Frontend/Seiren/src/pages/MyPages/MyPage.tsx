@@ -1,7 +1,7 @@
 import styles from './MyPage.module.css';
-import MyInfo from '../components/MyProfile/MyInfo';
-import Likes from '../components/MyProfile/Likes';
-import YourVoice from '../components/MyProfile/YourVoice';
+import MyInfo from '../../components/MyProfile/MyInfo';
+import Likes from '../../components/MyProfile/Likes';
+import YourVoice from '../../components/MyProfile/YourVoice';
 
 function MyPage() {
   return (

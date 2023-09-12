@@ -1,0 +1,5 @@
+.buyCountContainer{
+    border: 1px solid black;
+    margin-bottom: 5vh;
+    display: flex;
+}
