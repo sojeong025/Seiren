@@ -50,6 +50,8 @@ public class SecurityConfig {
         http.authorizeHttpRequests((req) -> req
                                 .requestMatchers(mvcMatcherBuilder.pattern("/api/login/oauth2/code/kakao")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern( "/h2-console/**")).permitAll()
+                                .requestMatchers(mvcMatcherBuilder.pattern( "https://kauth.kakao.com/oauth/token")).permitAll()
+                                .requestMatchers(mvcMatcherBuilder.pattern( "https://kapi.kakao.com/v2/user/me")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern( "/favicon.ico")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern( "/error")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern( "/swagger-ui/**")).permitAll()

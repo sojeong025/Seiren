@@ -3,6 +3,7 @@ package ssafy.e105.Seiren.domain.user.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -28,9 +29,18 @@ public class User {
 
     private Boolean isDelete;
 
-    private Date createAt;
+    private LocalDateTime createAt;
 
     /**
      * oauth 회원 가입 로직
      */
+    public static User fromEntity(String email, String nickname, String profileImg){
+        return User.builder()
+                .email(email)
+                .nickname(nickname)
+                .profileImg(profileImg)
+                .createAt(LocalDateTime.now())
+                .isDelete(false)
+                .build();
+    }
 }
