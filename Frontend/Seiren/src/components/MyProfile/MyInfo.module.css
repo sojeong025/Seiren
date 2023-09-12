@@ -1,0 +1,23 @@
+.profileContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profileImage {
+
+  width: 25vh;
+  height: auto;
+  margin-right: 2vh;
+}
+
+.nickName{
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.feel{
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
