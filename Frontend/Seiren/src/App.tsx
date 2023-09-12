@@ -1,14 +1,24 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-// pages
+// 메인 페이지
 import MainPage from "./pages/MainPage";
+
+// 프로그램 소개 페이지
 import AboutPage from "./pages/AboutPage";
-import VoiceMarketPage from "./pages/VoiceMarketPage";
+
+// 목소리 장터 페이지
+import VoiceMarketPage from "./pages/VoiceMarketPage/VoiceMarketPage";
+import VoiceDetailPage from "./pages/VoiceMarketPage/VoiceDetailPage";
+
+// 목소리 학습 페이지
 import VoiceStudyPage from "./pages/VoiceStudyPage";
+
+// 마이 페이지
 import MyPage from "./pages/MyPage";
 
-// common
+// 공통
 import NavBar from "./components/common/NavBar";
+
 
 function App() {
   return (
@@ -18,6 +28,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/voice-market" element={<VoiceMarketPage />} />
+        <Route path="/voice/:id" element={<VoiceDetailPage />} />
         <Route path="/voice-study" element={<VoiceStudyPage />} />
         <Route path="/my-page" element={<MyPage />} />
       </Routes>
