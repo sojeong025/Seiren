@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.repository.UserRepository;
@@ -33,9 +34,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     return new UsernameNotFoundException("Invalid authentication!");
                 });
 
-
         return org.springframework.security.core.userdetails.User.builder()
-                .username(email)
+                .username(user.getEmail())
+                .password(user.getPassword())
                 .build();
 
     }
