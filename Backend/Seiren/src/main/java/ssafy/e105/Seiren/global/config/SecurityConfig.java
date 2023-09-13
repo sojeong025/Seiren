@@ -36,11 +36,6 @@ public class SecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder getPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration
     ) throws Exception {
