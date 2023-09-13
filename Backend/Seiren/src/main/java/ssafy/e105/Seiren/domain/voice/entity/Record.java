@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
-import java.util.Date;
 import lombok.Builder;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,14 +12,14 @@ import org.hibernate.annotations.CreationTimestamp;
 @Builder
 @Getter
 @Entity
-public class Script {
+public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long scriptId;
+    private Long recordId;
 
-    private String script;
-    private Boolean isDelete;
+//    private Voice voice;
+//    private Script script;
+    private String recordUrl;
     @CreationTimestamp
     private LocalDateTime createdAt;
-
 }
