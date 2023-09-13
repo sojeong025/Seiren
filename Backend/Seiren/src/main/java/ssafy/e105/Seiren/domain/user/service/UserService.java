@@ -54,26 +54,39 @@ public class UserService {
     /**
      * 로그인 로직
      */
-//    public TokenDto login(
-//        HttpServletResponse response,
-//        LoginReqDto loginReqDto
-//    ){
-//        try{
-//            System.out.println("로그인 시작");
-//            Authentication authentication = authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(
-//                            loginReqDto.getEmail(),
-//                            loginReqDto.getPassword()
-//                    )
-//            );
-//            log.info("로그인 컨트롤러 에러 >>> " + authentication);
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            throw new IllegalArgumentException("로그인 에러");
-//        }
-//
-//    }
+    public TokenDto login(
+        HttpServletResponse response,
+        LoginReqDto loginReqDto
+    ){
+        try{
+            System.out.println("로그인 시작");
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginReqDto.getEmail(),
+                            loginReqDto.getPassword()
+                    )
+            );
+            log.info("로그인 컨트롤러 에러 >>> " + authentication);
+            String accssToken = jwtTokenProvider.createAccessToken(authentication);
+            String refreshToken = jwtTokenProvider.createRefreshToken(authentication);
+
+            TokenDto tokenDto = TokenDto.builder()
+                    .accessToken(accssToken)
+                    .refreshToken(refreshToken)
+                    .build();
+            // 헤더에 토큰 담기
+            jwtTokenProvider.setHeaderAccessToken(response, accssToken);
+            jwtTokenProvider.setHeaderRefreshToken(response, refreshToken);
+
+            log.info("토큰Dto 생성 후 에러 >>> " + tokenDto);
+
+            return tokenDto;
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new IllegalArgumentException("로그인 에러");
+        }
+
+    }
 
 
 

@@ -42,7 +42,7 @@ public class UserController {
             HttpServletResponse response
             ){
         try{
-            return BaseResponse.success(userService);
+            return BaseResponse.success(userService.login(response, loginReqDto));
         }catch (Exception e){
             e.printStackTrace();
             return BaseResponse.error("로그인 실패");

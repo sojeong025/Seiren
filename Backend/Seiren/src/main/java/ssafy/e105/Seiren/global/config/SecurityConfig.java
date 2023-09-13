@@ -34,6 +34,7 @@ public class SecurityConfig {
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration
@@ -54,6 +55,8 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests((req) -> req
                                 .requestMatchers(mvcMatcherBuilder.pattern("/api/login/oauth2/code/kakao")).permitAll()
+                                .requestMatchers(mvcMatcherBuilder.pattern("/api/user/signup")).permitAll()
+                                .requestMatchers(mvcMatcherBuilder.pattern("/api/user/login")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern( "/h2-console/**")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern( "https://kauth.kakao.com/oauth/token")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern( "https://kapi.kakao.com/v2/user/me")).permitAll()
