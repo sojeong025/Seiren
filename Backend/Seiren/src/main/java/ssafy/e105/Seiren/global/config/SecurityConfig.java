@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
@@ -28,6 +30,15 @@ public class SecurityConfig {
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     private final CorsConfig corsConfig;
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public AuthenticationManager authenticationManager(
@@ -49,6 +60,8 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests((req) -> req
                                 .requestMatchers(mvcMatcherBuilder.pattern("/api/login/oauth2/code/kakao")).permitAll()
+                                .requestMatchers(mvcMatcherBuilder.pattern("/api/user/signup")).permitAll()
+                                .requestMatchers(mvcMatcherBuilder.pattern("/api/user/login")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern( "/h2-console/**")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern( "https://kauth.kakao.com/oauth/token")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern( "https://kapi.kakao.com/v2/user/me")).permitAll()

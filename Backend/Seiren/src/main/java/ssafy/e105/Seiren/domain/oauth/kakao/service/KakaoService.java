@@ -23,6 +23,7 @@ import ssafy.e105.Seiren.domain.user.repository.UserRepository;
 import ssafy.e105.Seiren.global.jwt.JwtTokenProvider;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -113,13 +114,14 @@ public class KakaoService {
 
         long id = (long) jsonObj.get("id");
         String email = String.valueOf(account.get("email"));
-        String nickname = String.valueOf(profile.get("nickname"));
+//        String nickname = String.valueOf(profile.get("nickname"));
         String profileImg = String.valueOf(profile.get("profile_image_url"));
 
         Optional<User> user = userRepository.findByEmail(email);
+        String nickname = generateUniqueNickname();
 
         if(user.isEmpty()){
-            userRepository.save(User.fromEntity(email, nickname,profileImg));
+            userRepository.save(User.toEntity(email, nickname,profileImg));
             userRepository.flush();
         }
 
@@ -144,8 +146,19 @@ public class KakaoService {
             e.printStackTrace();
             throw new NullPointerException("로그인 에러");
         }
+    }
 
-
-
+    public String generateUniqueNickname(){
+//        UUID uuid = UUID.randomUUID();
+        String nickname = UUID.randomUUID().toString();
+        boolean check = true;
+        while(check){
+            Optional<User> user = userRepository.findByNickname(nickname);
+            if(user.isEmpty()){
+                check = false;
+            }
+            nickname = UUID.randomUUID().toString();
+        }
+        return nickname;
     }
 }
