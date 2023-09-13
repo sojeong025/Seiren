@@ -121,7 +121,7 @@ public class KakaoService {
         String nickname = generateUniqueNickname();
 
         if(user.isEmpty()){
-            userRepository.save(User.fromEntity(email, nickname,profileImg));
+            userRepository.save(User.toEntity(email, nickname,profileImg));
             userRepository.flush();
         }
 
