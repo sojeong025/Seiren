@@ -8,4 +8,6 @@ import ssafy.e105.Seiren.domain.voice.repository.VoiceRepository;
 @RequiredArgsConstructor
 public class VoiceService {
     private final VoiceRepository voiceRepository;
+
+
 }
