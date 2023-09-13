@@ -14,11 +14,12 @@ import VoiceDetailPage from "./pages/VoiceMarketPage/VoiceDetailPage";
 import VoiceStudyPage from "./pages/VoiceStudyPage";
 
 // 마이 페이지
-import MyPage from "./pages/MyPage";
+import MyPage from "./pages/MyPages/MyPage";
+import BuyList from "./pages/MyPages/BuyList";
+import SellList from "./pages/MyPages/SellList";
 
 // 공통
 import NavBar from "./components/common/NavBar";
-
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
         <Route path="/voice/:id" element={<VoiceDetailPage />} />
         <Route path="/voice-study" element={<VoiceStudyPage />} />
         <Route path="/my-page" element={<MyPage />} />
+        <Route path="/buy-list" element={<BuyList />} />
+        <Route path="/sell-list" element={<SellList />} />
       </Routes>
     </Router>
   );

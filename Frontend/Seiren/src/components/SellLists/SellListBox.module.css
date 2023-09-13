@@ -1,0 +1,36 @@
+.sellListBox {
+  border: 1px solid black;
+  margin-bottom: 5vh;
+}
+
+.sellListBoxContainer {
+  border: 1px solid #e1e1e1;
+  padding: 20px;
+  background-color: #f8f8f8;
+}
+
+.sellListBoxTitle {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.sellList {
+  display: flex;
+  flex-wrap: wrap; /* 가로로 나열하고 넘칠 경우 줄바꿈 */
+  gap: 20px; /* 각 목록 아이템 간의 간격 설정 */
+}
+
+.sellListItem {
+  width: calc(33.33% - 20px); /* 3개의 아이템이 가로로 나열되도록 설정 */
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  text-align: center;
+}
+
+.sellListItem img {
+  width: 100px; /* 이미지의 너비 설정 */
+  height: 100px; /* 이미지의 높이 설정 */
+  object-fit: cover; /* 이미지 크기 유지 및 자르기 */
+  border-radius: 50%; /* 이미지를 원 모양으로 만들기 위한 설정 */
+}
