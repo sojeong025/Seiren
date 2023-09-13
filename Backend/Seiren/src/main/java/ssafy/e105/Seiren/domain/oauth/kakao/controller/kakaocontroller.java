@@ -26,7 +26,7 @@ public class kakaocontroller {
     ){
         try{
             TokenDto tokenDto = kakaoService.getKakaoInfo(code);
-            response.sendRedirect(UriComponentsBuilder.fromUriString("http://localhost:8080")
+            response.sendRedirect(UriComponentsBuilder.fromUriString("http://localhost:3000/redirect")
                     .queryParam("accessToken", "Bearer "+tokenDto.getAccessToken())
                     .queryParam("refreshToken", "Bearer " + tokenDto.getRefreshToken())
                     .build()
