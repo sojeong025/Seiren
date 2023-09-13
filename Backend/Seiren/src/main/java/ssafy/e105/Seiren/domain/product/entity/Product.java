@@ -6,8 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,13 +29,22 @@ public class Product {
     private Long productId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="voice_id")
+    @JoinColumn(name = "voice_id")
     private Voice voice;
+
     private String productTitle;
+
     private String summary;
+
     private Double price;
+
     private LocalDateTime createAt;
+
     private LocalDateTime updatedAt;
+
     private Boolean state;
+
+    @OneToMany(mappedBy = "product")
+    private List<TestHistory> testHistories = new ArrayList<>();
 
 }
