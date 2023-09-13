@@ -4,8 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Builder;
 import lombok.Getter;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Builder
 @Getter
@@ -13,7 +16,11 @@ import lombok.Getter;
 public class Script {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long scriptId;
 
+    private String script;
+    private Boolean isDelete;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
 }
