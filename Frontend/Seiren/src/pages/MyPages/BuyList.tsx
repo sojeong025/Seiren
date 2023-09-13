@@ -2,7 +2,7 @@ import styles from "./BuyList.module.css";
 import MyInfo from "../../components/MyProfile/MyInfo";
 import BuyListBox from "../../components/BuyLists/BuyListBox";
 
-function MyPage() {
+function BuyList() {
   return (
     <div>
       <div className={styles.buyCountContainer}>
@@ -14,4 +14,4 @@ function MyPage() {
   );
 }
 
-export default MyPage;
+export default BuyList;
