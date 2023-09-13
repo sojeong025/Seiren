@@ -5,12 +5,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import ssafy.e105.Seiren.common.BaseResponse;
+import ssafy.e105.Seiren.global.common.BaseResponse;
 import ssafy.e105.Seiren.domain.oauth.kakao.service.KakaoService;
 import ssafy.e105.Seiren.domain.user.dto.token.TokenDto;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/login/oauth2", produces = "application/json")

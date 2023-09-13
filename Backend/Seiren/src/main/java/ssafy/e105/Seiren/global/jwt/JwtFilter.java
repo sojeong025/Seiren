@@ -1,4 +1,4 @@
-package ssafy.e105.Seiren.jwt;
+package ssafy.e105.Seiren.global.jwt;
 
 
 import jakarta.servlet.FilterChain;

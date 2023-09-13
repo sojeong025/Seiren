@@ -1,4 +1,4 @@
-package ssafy.e105.Seiren.config;
+package ssafy.e105.Seiren.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

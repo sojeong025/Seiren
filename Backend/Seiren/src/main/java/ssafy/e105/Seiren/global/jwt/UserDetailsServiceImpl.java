@@ -1,4 +1,4 @@
-package ssafy.e105.Seiren.jwt;
+package ssafy.e105.Seiren.global.jwt;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

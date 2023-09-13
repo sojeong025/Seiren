@@ -1,4 +1,4 @@
-package ssafy.e105.Seiren.config;
+package ssafy.e105.Seiren.global.config;
 
 
 import lombok.RequiredArgsConstructor;
@@ -13,10 +13,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
-import ssafy.e105.Seiren.jwt.JwtAccessDeniedHandler;
-import ssafy.e105.Seiren.jwt.JwtAuthenticationEntryPoint;
-import ssafy.e105.Seiren.jwt.JwtSecurityConfig;
-import ssafy.e105.Seiren.jwt.JwtTokenProvider;
+import ssafy.e105.Seiren.global.jwt.JwtAccessDeniedHandler;
+import ssafy.e105.Seiren.global.jwt.JwtAuthenticationEntryPoint;
+import ssafy.e105.Seiren.global.jwt.JwtSecurityConfig;
+import ssafy.e105.Seiren.global.jwt.JwtTokenProvider;
 
 @Configuration
 @RequiredArgsConstructor

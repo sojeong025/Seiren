@@ -20,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import ssafy.e105.Seiren.domain.user.dto.token.TokenDto;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.repository.UserRepository;
-import ssafy.e105.Seiren.jwt.JwtTokenProvider;
+import ssafy.e105.Seiren.global.jwt.JwtTokenProvider;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package ssafy.e105.Seiren.swagger;
+package ssafy.e105.Seiren.global.swagger;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
