@@ -1,9 +1,12 @@
 package ssafy.e105.Seiren.domain.voice.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,8 +20,14 @@ public class Record {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long recordId;
 
-//    private Voice voice;
-//    private Script script;
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="voice_id")
+    private Voice voice;
+
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="script_id")
+    private Script script;
+
     private String recordUrl;
     @CreationTimestamp
     private LocalDateTime createdAt;
