@@ -11,6 +11,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ssafy.e105.Seiren.global.common.BaseResponse;
 import ssafy.e105.Seiren.domain.oauth.kakao.service.KakaoService;
 import ssafy.e105.Seiren.domain.user.dto.token.TokenDto;
+import ssafy.e105.Seiren.global.utils.ApiResult;
+import ssafy.e105.Seiren.global.utils.ApiUtils;
 
 import java.nio.charset.StandardCharsets;
 
@@ -30,18 +32,20 @@ public class kakaoController {
 //            , @PathVariable("registrationId") String registrationId
     ){
         try{
-            TokenDto tokenDto = kakaoService.getKakaoInfo(code);
-            response.sendRedirect(UriComponentsBuilder.fromUriString("http://localhost:3000/redirect")
-                    .queryParam("accessToken", "Bearer "+tokenDto.getAccessToken())
-                    .queryParam("refreshToken", "Bearer " + tokenDto.getRefreshToken())
-                    .build()
-                    .encode(StandardCharsets.UTF_8)
-                    .toUriString());
-
-            return BaseResponse.success(tokenDto);
+//            TokenDto tokenDto = kakaoService.getKakaoInfo(code);
+//            response.sendRedirect(UriComponentsBuilder.fromUriString("http://localhost:3000/redirect")
+//                    .queryParam("accessToken", "Bearer "+tokenDto.getAccessToken())
+//                    .queryParam("refreshToken", "Bearer " + tokenDto.getRefreshToken())
+//                    .build()
+//                    .encode(StandardCharsets.UTF_8)
+//                    .toUriString());
+//
+//            return BaseResponse.success(tokenDto);
+            return BaseResponse.success(kakaoService.getKakaoInfo(code));
         }catch (Exception e){
             e.printStackTrace();
             return BaseResponse.error("OAUTH로그인에 실패하였습니다.");
         }
+
     }
 }
