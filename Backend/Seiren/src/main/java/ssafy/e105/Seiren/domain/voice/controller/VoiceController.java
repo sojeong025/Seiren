@@ -6,29 +6,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ssafy.e105.Seiren.domain.voice.entity.Script;
 import ssafy.e105.Seiren.domain.voice.service.VoiceService;
 
 @RestController
 @RequiredArgsConstructor
 public class VoiceController {
     private final VoiceService voiceService;
-    @GetMapping("voices")
+    @GetMapping("/voice/voices")
     public void voiceList(){
 
     }
 
-    @PostMapping("voices")
+    @PostMapping("/voice/voices")
     public void addVoice(){
 
     }
 
-    @PutMapping("voices")
+    @PutMapping("/voice/voices")
     public void modifyVoiceInfo(){
 
     }
 
-    @DeleteMapping("voices")
+    @DeleteMapping("/voice/voices")
     public void deleteVoice(){
 
     }
