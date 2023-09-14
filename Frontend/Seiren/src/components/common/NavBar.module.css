@@ -1,0 +1,26 @@
+.container {
+  margin: 30px 50px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+}
+
+.nav {
+  padding-left: 10px;
+}
+
+.nav a:not(:last-child) {
+  margin-right: 20px; 
+}
+
+/* Add this for responsive design */
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column; 
+  }
+
+  .nav a:not(:last-child) {
+      margin-right:0; 
+      margin-bottom:10px; 
+  }
+}
