@@ -1,7 +1,16 @@
 package ssafy.e105.Seiren.domain.user.service;
 
+import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.EXIST_NICKNAME;
+import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.LOGIN_ERROR;
+import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NICKNAME_UNMATCHED_FORMAT;
+import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_USER;
+import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.REGISTER_ERROR;
+import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.UPDATE_NICKNAME_ERROR;
+import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.UPDATE_PROFILE_IMG_ERROR;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -19,15 +28,10 @@ import ssafy.e105.Seiren.domain.user.dto.register.RegisterReqDto;
 import ssafy.e105.Seiren.domain.user.dto.register.RegisterResDto;
 import ssafy.e105.Seiren.domain.user.dto.token.TokenDto;
 import ssafy.e105.Seiren.domain.user.entity.User;
-import ssafy.e105.Seiren.domain.user.exception.UserErrorCode;
 import ssafy.e105.Seiren.domain.user.repository.UserRepository;
 import ssafy.e105.Seiren.global.error.type.BaseException;
 import ssafy.e105.Seiren.global.jwt.JwtTokenProvider;
 import ssafy.e105.Seiren.global.utils.ApiError;
-
-import java.util.Optional;
-
-import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.*;
 
 @Service
 @Slf4j
@@ -110,9 +114,7 @@ public class UserService {
     @Transactional
     public boolean nicknameUpdate(HttpServletRequest request, NicknameReqDto nicknameReqDto){
         try{
-            String userEmail = jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request));
-            User user = userRepository.findByEmail(userEmail)
-                    .orElseThrow(()-> new BaseException(new ApiError(NOT_EXIST_USER.getMessage(),NOT_EXIST_USER.getCode())));
+            User user = getUser(request);
             user.updateNickname(nicknameReqDto.getNickname());
             return true;
         }catch (Exception e){
@@ -124,9 +126,7 @@ public class UserService {
     @Transactional
     public boolean profileImgUpdate(HttpServletRequest request, ProfileImgRequest profileImgRequest){
         try{
-            String userEmail = jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request));
-            User user = userRepository.findByEmail(userEmail)
-                    .orElseThrow(()-> new BaseException(new ApiError(NOT_EXIST_USER.getMessage(),NOT_EXIST_USER.getCode())));
+            User user = getUser(request);
             user.updateProfileImg(profileImgRequest.getProfileImgUrl());
             return true;
         }catch (Exception e){
@@ -137,21 +137,14 @@ public class UserService {
 
     @Transactional
     public boolean deleteUser(HttpServletRequest request){
-        try{
-            String userEmail = jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request));
-
-            User user = userRepository.findByEmail(userEmail)
-                    .orElseThrow(()-> new BaseException(new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode())));
-            userRepository.deleteById(user.getId());
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
-            throw new BaseException(new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode()));
-        }
+        User user = getUser(request);
+        userRepository.deleteById(user.getId());
+        return true;
     }
 
-
-
-
-
+    public User getUser(HttpServletRequest request){
+        User user = userRepository.findByEmail(jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request)))
+                .orElseThrow(()-> new BaseException(new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode())));
+        return user;
+    }
 }
