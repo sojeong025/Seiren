@@ -1,16 +1,21 @@
 .container {
   margin: 30px 50px;
+}
+.content {
   display: flex;
   justify-content: space-between;
-  font-size: 20px;
 }
-
 .nav {
+  display: block;
   padding-left: 10px;
 }
 
 .nav a:not(:last-child) {
-  margin-right: 20px; 
+  margin-right:20px; 
+}
+
+.btn {
+  display: none;
 }
 
 /* Add this for responsive design */
@@ -19,8 +24,10 @@
       flex-direction: column; 
   }
 
-  .nav a:not(:last-child) {
-      margin-right:0; 
-      margin-bottom:10px; 
+  .nav{
+    display :none; 
+  }
+  .btn {
+    display: block;
   }
 }

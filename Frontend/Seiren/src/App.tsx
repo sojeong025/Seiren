@@ -27,7 +27,7 @@ function App() {
   return (
     <Router>
       <NavBar />
-      <Routes className="container-wide">
+      <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/voice-market" element={<VoiceMarketPage />} />
