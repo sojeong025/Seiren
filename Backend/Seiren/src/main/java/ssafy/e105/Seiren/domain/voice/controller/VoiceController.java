@@ -1,5 +1,6 @@
 package ssafy.e105.Seiren.domain.voice.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ public class VoiceController {
     }
 
     @PostMapping("/voice/voices")
-    public void addVoice(){
+    public void addVoice(HttpServletRequest request){
 
     }
 
