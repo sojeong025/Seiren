@@ -143,8 +143,7 @@ public class UserService {
     }
 
     public User getUser(HttpServletRequest request){
-        User user = userRepository.findByEmail(jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request)))
+        return userRepository.findByEmail(jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request)))
                 .orElseThrow(()-> new BaseException(new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode())));
-        return user;
     }
 }
