@@ -15,6 +15,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ssafy.e105.Seiren.domain.product.dto.ProductCreateRequest;
+import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.voice.entity.Voice;
 
 @Data
@@ -46,5 +48,15 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<TestHistory> testHistories = new ArrayList<>();
+
+    public static Product toEntity(ProductCreateRequest productCreateRequest, Voice voice) {
+        return Product.builder()
+                .voice(voice)
+                .productTitle(productCreateRequest.getProductTitle())
+                .summary(productCreateRequest.getSummary())
+                .price(productCreateRequest.getPrice())
+                .createAt(LocalDateTime.now())
+                .build();
+    }
 
 }

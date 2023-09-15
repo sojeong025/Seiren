@@ -29,5 +29,4 @@ public class Preview {
     private String voiceUrl;
 
     private String previewText;
-
 }
