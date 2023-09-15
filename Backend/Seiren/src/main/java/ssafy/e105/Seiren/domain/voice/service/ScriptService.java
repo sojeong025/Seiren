@@ -36,6 +36,6 @@ public class ScriptService {
             throw new BaseException(new ApiError(SCRIPT_DELETE_ERROR.getMessage(),SCRIPT_DELETE_ERROR.getCode()));
         }
 
-        insertScript(script.getScript());
+        insertScript(scriptRequest.getScript());
     }
 }
