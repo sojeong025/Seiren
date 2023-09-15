@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ssafy.e105.Seiren.domain.voice.service.VoiceService;
+import ssafy.e105.Seiren.global.utils.ApiResult;
+import ssafy.e105.Seiren.global.utils.ApiUtils;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,8 +21,8 @@ public class VoiceController {
     }
 
     @PostMapping("/voice/voices")
-    public void addVoice(HttpServletRequest request){
-
+    public ApiResult<?> addVoice(HttpServletRequest request){
+        return ApiUtils.success(voiceService.addVoice(request));
     }
 
     @PutMapping("/voice/voices")

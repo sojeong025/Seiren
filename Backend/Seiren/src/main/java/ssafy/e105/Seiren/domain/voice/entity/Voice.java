@@ -1,5 +1,6 @@
 package ssafy.e105.Seiren.domain.voice.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -31,10 +32,19 @@ public class Voice {
     private String voiceTitle;
     private String memo;
     private String voiceAvatarUrl;
-    private String modelFileUrl;
+    private String glowModelUrl;
+    private String hifiModelUrl;
     @CreationTimestamp
     private LocalDateTime createdAt;
-    private Boolean isDelete;
+    @Column(nullable = false)
+    @Builder.Default
+    private Boolean isDelete=false;
+
+    public static Voice toEntity(User user){
+        return Voice.builder()
+                .user(user)
+                .build();
+    }
 
     public void modifyMemo(String memo){
         this.memo = memo;
