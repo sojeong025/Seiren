@@ -6,7 +6,7 @@
   justify-content: space-between;
 }
 .nav {
-  display: block;
+  display: flex;
   padding-left: 10px;
 }
 
@@ -17,6 +17,7 @@
 .btn {
   display: none;
 }
+
 
 /* Add this for responsive design */
 @media (max-width: 768px) {
