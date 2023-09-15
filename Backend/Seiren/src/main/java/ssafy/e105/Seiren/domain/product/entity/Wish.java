@@ -17,8 +17,8 @@ import ssafy.e105.Seiren.domain.user.entity.User;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(TestHistoryId.class)
-public class TestHistory {
+@IdClass(WishId.class)
+public class Wish {
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,5 +30,10 @@ public class TestHistory {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    private int count;
+    public static Wish toEntity(User user, Product product) {
+        return Wish.builder()
+                .user(user)
+                .product(product)
+                .build();
+    }
 }
