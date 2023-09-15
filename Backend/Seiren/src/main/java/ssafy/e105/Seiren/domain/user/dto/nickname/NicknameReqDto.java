@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 public class NicknameReqDto {
 
     @Schema(description = "닉네임 수정", example = "짱구")
-    String nickname;
+    private String nickname;
 }

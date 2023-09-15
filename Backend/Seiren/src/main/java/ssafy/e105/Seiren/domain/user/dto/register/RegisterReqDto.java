@@ -9,8 +9,8 @@ import lombok.Data;
 public class RegisterReqDto {
 
     @Schema(description = "회원 이메일", example = "cute@cute.com")
-    String email;
+    private String email;
 
     @Schema(description = "회원 비밀번호", example = "cutecute")
-    String password;
+    private String password;
 }

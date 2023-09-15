@@ -9,5 +9,5 @@ import lombok.Data;
 public class RegisterResDto {
 
     @Schema(description = "회원 가입 성공 여부", example = "true")
-    boolean check;
+    private boolean check;
 }

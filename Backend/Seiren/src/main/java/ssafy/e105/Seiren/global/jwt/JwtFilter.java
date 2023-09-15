@@ -39,7 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
         String token = jwtTokenProvider.resolveToken(request);
-        System.out.println("doFilter >>> " + token);
+//        System.out.println("doFilter >>> " + token);
         try{
             if(token != null && jwtTokenProvider.validateToken(token)){
                 Authentication auth = jwtTokenProvider.getAuthentication(token);

@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 public class ProfileImgRequest {
 
     @Schema(description = "프로필 사진 수정", example = "업데이트된 사진")
-    String profileImgUrl;
+    private String profileImgUrl;
 }
