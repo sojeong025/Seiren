@@ -6,7 +6,7 @@
 .sellListBoxContainer {
   border: 1px solid #e1e1e1;
   padding: 20px;
-  background-color: #f8f8f8;
+  background-color: #000;
 }
 
 .sellListBoxTitle {
@@ -24,8 +24,9 @@
   width: calc(33.33% - 20px); /* 3개의 아이템이 가로로 나열되도록 설정 */
   padding: 10px;
   border: 1px solid #ddd;
-  background-color: #fff;
+  background-color: #000;
   text-align: center;
+  border-radius: 10px;
 }
 
 .sellListItem img {

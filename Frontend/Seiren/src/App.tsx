@@ -18,7 +18,8 @@ import VoiceRecordPage from "./pages/VoiceStudyPages/VoiceRecordPage";
 import MyPage from "./pages/MyPages/MyPage";
 import BuyList from "./pages/MyPages/BuyList";
 import SellList from "./pages/MyPages/SellList";
-import DetailPage from "./components/SellLists/DetailPage";
+import DetailPage from "./pages/MyPages/DetailPage";
+import UseVoice from "./pages/MyPages/UseVoice";
 
 // 공통
 import NavBar from "./components/common/NavBar";
@@ -37,12 +38,11 @@ function App() {
 
         {/* 목소리 등록 페이지 */}
         <Route path="/voice-study" element={<VoiceStudyPage />} />
-        <Route path="/Voice-Record" element={<VoiceRecordPage />} />
-        
-        {/* 마이페이지 */}
+
         <Route path="/my-page" element={<MyPage />} />
         <Route path="/buy-list" element={<BuyList />} />
         <Route path="/sell-list" element={<SellList />} />
+        <Route path="/use-voice" element={<UseVoice />} />
         <Route path="/detail/:index" element={<DetailPage />} />
 
       </Routes>
