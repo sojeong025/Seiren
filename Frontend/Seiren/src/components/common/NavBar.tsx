@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import styles from "./NavBar.module.css"
-import {AiOutlineMenu} from "react-icons/ai"
+import styles from "./NavBar.module.css";
+import { AiOutlineMenu } from "react-icons/ai";
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +9,6 @@ function NavBar() {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-
         {/* logo 자리  */}
         <div className={styles.logo}>
           <div> Seiren </div>
