@@ -10,9 +10,9 @@ function NavBar() {
     <div className={styles.container}>
       <div className={styles.content}>
         {/* logo 자리  */}
-        <div className={styles.logo}>
+        <NavLink to="/" className={styles.logo}>
           <div> Seiren </div>
-        </div>
+        </NavLink>
 
         {/* 메뉴 자리 */}
         <div className={styles.btn} onClick={() => setIsOpen(!isOpen)}>
