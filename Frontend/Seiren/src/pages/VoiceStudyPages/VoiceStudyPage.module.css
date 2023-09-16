@@ -1,0 +1,19 @@
+.MainState {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 400px;
+  background: #F582A7;
+}
+.MainState_record {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.record_img {
+  background-color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
