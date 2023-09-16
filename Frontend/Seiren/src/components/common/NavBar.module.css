@@ -1,5 +1,9 @@
 .container {
   margin: 30px 50px;
+  background-color: transparent;
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
 }
 .content {
   display: flex;
