@@ -8,8 +8,8 @@ function BuyList() {
       <div className={styles.buyCountContainer}>
         <MyInfo />
         <div>여기는 구매 숫자</div>
+        <BuyListBox />
       </div>
-      <BuyListBox />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import UseVoiceBox from "../../components/UseVoice/UseVoiceBox";
 
 function SellList() {
   return (
-    <div>
+    <div className={styles.useVoiceContainer}>
         <UseVoiceBox /> 
     </div>
   );

@@ -4,11 +4,10 @@ import SellChart from "../../components/ChartBox/SellChart";
 
 function SellList() {
   return (
-    <div>
-      <SellChart />
-      <SellListBox />
-      <div className={styles.sellCountContainer}></div>
-    </div>
+      <div className={styles.sellCountContainer}>
+        <SellChart />
+        <SellListBox />
+      </div>
   );
 }
 
