@@ -2,7 +2,11 @@ package ssafy.e105.Seiren.domain.voice.dto;
 
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class VoiceDto {
 
@@ -11,4 +15,5 @@ public class VoiceDto {
     private String voiceAvatarUrl;
     private LocalDateTime createdAt;
     private Integer state;
+
 }
