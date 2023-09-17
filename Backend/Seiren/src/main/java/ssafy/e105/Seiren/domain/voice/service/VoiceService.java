@@ -7,6 +7,8 @@ import static ssafy.e105.Seiren.domain.voice.exception.VoiceErrorCode.UNMACHED_V
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +30,17 @@ public class VoiceService {
     private final UserService userService;
 
     public List<VoiceDto> getVoiceList(HttpServletRequest request) {
-        return voiceRepository.findVoiceJoin(userService.getUser(request).getId());
+        List<Voice> voiceList = voiceRepository.findByUser_Id(userService.getUser(request).getId());
+        return voiceList.stream()
+                .map(voice -> {
+                    Integer state = Optional.ofNullable(voice.getProduct())
+                            .map(product -> product.getState() ? 1 : 2)
+                            .orElse(0); //0:등록X, 1:등록&판매, 2:등록&판매중지
+                    return new VoiceDto(voice.getVoiceId(), voice.getVoiceTitle(),
+                            voice.getVoiceAvatarUrl(),
+                            voice.getCreatedAt(), state);
+                })
+                .collect(Collectors.toList());
     }
 
     public Long addVoice(HttpServletRequest request) {
