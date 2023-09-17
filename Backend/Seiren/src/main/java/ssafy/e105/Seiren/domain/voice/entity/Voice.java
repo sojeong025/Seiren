@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import java.time.LocalDateTime;
@@ -49,7 +50,9 @@ public class Voice {
     private Boolean isDelete = false;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
+    @JoinTable(name = "product_id",
+            joinColumns = @JoinColumn(name = "VOICE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
     private Product product;
 
     public static Voice toEntity(User user) {
