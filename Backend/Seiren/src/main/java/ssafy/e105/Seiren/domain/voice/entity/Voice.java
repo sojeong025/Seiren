@@ -7,52 +7,71 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
+import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.user.entity.User;
+import ssafy.e105.Seiren.domain.voice.dto.VoiceUpdateDto;
 
 @Builder
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Voice {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long voiceId;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="parent_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
     private Voice parent;
     private String voiceTitle;
     private String memo;
     private String voiceAvatarUrl;
     private String glowModelUrl;
     private String hifiModelUrl;
-    @CreationTimestamp
+    @UpdateTimestamp
     private LocalDateTime createdAt;
     @Column(nullable = false)
     @Builder.Default
-    private Boolean isDelete=false;
+    private Boolean isDelete = false;
 
-    public static Voice toEntity(User user){
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "product_id",
+            joinColumns = @JoinColumn(name = "VOICE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+    private Product product;
+
+    public static Voice toEntity(User user) {
         return Voice.builder()
                 .user(user)
                 .build();
     }
 
-    public void modifyMemo(String memo){
+    public void update(String memo) {
         this.memo = memo;
     }
 
-    public void modifyInformation(String title, String url, String memo){
-        this.voiceTitle = title;
-        this.voiceAvatarUrl = url;
-        this.memo = memo;
+    public void update(VoiceUpdateDto voiceUpdateDto) {
+        this.voiceTitle = voiceUpdateDto.getVoiceTitle();
+        this.voiceAvatarUrl = voiceUpdateDto.getVoiceAvatarUrl();
+        this.memo = voiceUpdateDto.getMemo();
+    }
+
+    public void delete() {
+        this.isDelete = true;
     }
 }
