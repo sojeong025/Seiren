@@ -13,6 +13,7 @@ import VoiceDetailPage from "./pages/VoiceMarketPage/VoiceDetailPage";
 // 목소리 학습 페이지
 import VoiceStudyPage from "./pages/VoiceStudyPages/VoiceStudyPage";
 import VoiceRecordPage from "./pages/VoiceStudyPages/VoiceRecordPage";
+import VoiceStudyingPage from "./pages/VoiceStudyPages/VoiceStudyingPage";
 
 // 마이 페이지
 import MyPage from "./pages/MyPages/MyPage";
@@ -38,6 +39,7 @@ function App() {
         {/* 목소리 등록 페이지 */}
         <Route path="/voice-study" element={<VoiceStudyPage />} />
         <Route path="/Voice-Record" element={<VoiceRecordPage />} />
+        <Route path="/Voice-studying" element={<VoiceStudyingPage />} />
         
         {/* 마이페이지 */}
         <Route path="/my-page" element={<MyPage />} />
