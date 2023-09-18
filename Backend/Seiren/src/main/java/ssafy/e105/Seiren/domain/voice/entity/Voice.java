@@ -7,7 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import java.time.LocalDateTime;
@@ -48,6 +47,8 @@ public class Voice {
     @Column(nullable = false)
     @Builder.Default
     private Boolean isDelete = false;
+    @Builder.Default
+    private Integer state = 0;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
@@ -61,6 +62,10 @@ public class Voice {
 
     public void update(String memo) {
         this.memo = memo;
+    }
+
+    public void update(Integer state) {
+        this.state = state;
     }
 
     public void update(VoiceUpdateDto voiceUpdateDto) {

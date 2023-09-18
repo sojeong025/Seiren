@@ -18,21 +18,22 @@ import org.hibernate.annotations.CreationTimestamp;
 @AllArgsConstructor
 @Entity
 public class Script {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scriptId;
 
-    private String script;
+    private String text;
 
-//    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE", nullable = false)
+    //    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE", nullable = false)
     @Column(nullable = false)
     @Builder.Default
-    private Boolean isDelete=false;
+    private Boolean isDelete = false;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    public void modifyDelete(Boolean isDelete){
-        this.isDelete=isDelete;
+    public void delete(Boolean isDelete) {
+        this.isDelete = isDelete;
     }
 }

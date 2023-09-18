@@ -1,7 +1,10 @@
 package ssafy.e105.Seiren.domain.voice.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,23 +16,31 @@ import ssafy.e105.Seiren.global.utils.ApiUtils;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "스크립트 API")
 public class ScriptController {
+
     private final ScriptService scriptService;
 
-    @GetMapping("scripts")
-    public void getScripts(){
-
+    @GetMapping("/api/nextScripts/{scriptId}")
+    public ApiResult<?> getNextScript(@PathVariable Long scriptId) {
+        return ApiUtils.success(scriptService.getNextScript(scriptId));
     }
 
-    @PostMapping("scripts")
-    public ApiResult<?> addScripts(String script){
+    @PostMapping("/api/scripts")
+    public ApiResult<?> addScripts(String script) {
         scriptService.insertScript(script);
         return ApiUtils.success("스크립트 추가 완료");
     }
 
-    @PutMapping("scripts")
-    public ApiResult<?> updateScripts(@RequestBody ScriptRequest scriptRequest){
+    @PutMapping("/api/scripts")
+    public ApiResult<?> updateScripts(@RequestBody ScriptRequest scriptRequest) {
         scriptService.updateScript(scriptRequest);
         return ApiUtils.success("스크립트 수정 완료");
+    }
+
+    @DeleteMapping("/api/scripts/{scriptId}")
+    public ApiResult<?> deleteScripts(@PathVariable Long scriptId) {
+        scriptService.deleteScript(scriptId);
+        return ApiUtils.success("스크립트 삭제 완료");
     }
 }
