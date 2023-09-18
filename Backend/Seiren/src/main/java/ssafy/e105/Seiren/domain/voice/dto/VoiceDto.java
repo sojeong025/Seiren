@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import ssafy.e105.Seiren.domain.voice.entity.Voice;
 
 @Getter
 @NoArgsConstructor
@@ -16,4 +17,9 @@ public class VoiceDto {
     private LocalDateTime createdAt;
     private Integer state;
 
+    public VoiceDto(Voice voice) {
+        this.voiceId = voice.getVoiceId();
+        this.createdAt = voice.getCreatedAt();
+        this.state = voice.getState();
+    }
 }
