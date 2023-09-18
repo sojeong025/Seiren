@@ -1,4 +1,6 @@
 import { useState, useCallback } from "react";
+import Script from "../../components/VoiceStudy/Script";
+import VoiceStudyHeader from "../../components/VoiceStudy/VoiceStudyHeader";
 
 const VoiceRecordPage = () => {
   const [stream, setStream] = useState();
@@ -82,10 +84,12 @@ const VoiceRecordPage = () => {
   }, [audioUrl]);
 
   return (
-    <>
+    <div>
+      <VoiceStudyHeader/>
       <button onClick={onRec ? onRecAudio : offRecAudio}>녹음</button>
       <button onClick={onSubmitAudioFile}>결과 확인</button>
-    </>
+      <Script />
+    </div>
   );
 };
 
