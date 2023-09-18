@@ -22,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ssafy.e105.Seiren.domain.user.dto.ProfileImgRequest;
+import ssafy.e105.Seiren.domain.user.dto.UserInfoResponse;
 import ssafy.e105.Seiren.domain.user.dto.login.LoginReqDto;
 import ssafy.e105.Seiren.domain.user.dto.nickname.NicknameReqDto;
 import ssafy.e105.Seiren.domain.user.dto.register.RegisterReqDto;
@@ -142,8 +143,17 @@ public class UserService {
         return true;
     }
 
+    public UserInfoResponse getUserInfo(HttpServletRequest request){
+        User user = getUser(request);
+        return UserInfoResponse.builder()
+                .nickname(user.getNickname())
+                .profileImg(user.getProfileImg())
+                .build();
+    }
+
     public User getUser(HttpServletRequest request){
         return userRepository.findByEmail(jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request)))
                 .orElseThrow(()-> new BaseException(new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode())));
     }
+
 }
