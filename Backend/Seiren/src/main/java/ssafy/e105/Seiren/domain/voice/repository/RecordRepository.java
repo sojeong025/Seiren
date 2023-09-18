@@ -6,5 +6,9 @@ import ssafy.e105.Seiren.domain.voice.entity.Record;
 
 public interface RecordRepository extends JpaRepository<Record, Long> {
 
-    Optional<Record> findTopByVoice_User_IdOrderByScript_IdDesc(Long userId);
+    Optional<Record> findTopByVoiceUserIdAndVoiceVoiceIdOrderByScriptScriptIdDesc(Long userId,
+            Long voiceId);
+
+
+    Integer findCountByVoice_User_IdAndVoice_VoiceId(Long userId, Long voiceId);
 }
