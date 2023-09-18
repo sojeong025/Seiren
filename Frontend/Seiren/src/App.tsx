@@ -19,7 +19,8 @@ import VoiceStudyingPage from "./pages/VoiceStudyPages/VoiceStudyingPage";
 import MyPage from "./pages/MyPages/MyPage";
 import BuyList from "./pages/MyPages/BuyList";
 import SellList from "./pages/MyPages/SellList";
-import DetailPage from "./components/SellLists/DetailPage";
+import DetailPage from "./pages/MyPages/DetailPage";
+import UseVoice from "./pages/MyPages/UseVoice";
 
 // 공통
 import NavBar from "./components/common/NavBar";
@@ -28,6 +29,7 @@ function App() {
   return (
     <Router>
       <NavBar />
+
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/about" element={<AboutPage />} />
@@ -38,15 +40,19 @@ function App() {
 
         {/* 목소리 등록 페이지 */}
         <Route path="/voice-study" element={<VoiceStudyPage />} />
+<<<<<<< HEAD
         <Route path="/Voice-Record" element={<VoiceRecordPage />} />
         <Route path="/Voice-studying" element={<VoiceStudyingPage />} />
         
         {/* 마이페이지 */}
+=======
+
+>>>>>>> ef6035e640bd1c9fba3d6784dae8116b81009f75
         <Route path="/my-page" element={<MyPage />} />
         <Route path="/buy-list" element={<BuyList />} />
         <Route path="/sell-list" element={<SellList />} />
+        <Route path="/use-voice" element={<UseVoice />} />
         <Route path="/detail/:index" element={<DetailPage />} />
-
       </Routes>
     </Router>
   );
