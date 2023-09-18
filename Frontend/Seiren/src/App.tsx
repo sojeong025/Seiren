@@ -40,14 +40,11 @@ function App() {
 
         {/* 목소리 등록 페이지 */}
         <Route path="/voice-study" element={<VoiceStudyPage />} />
-<<<<<<< HEAD
         <Route path="/Voice-Record" element={<VoiceRecordPage />} />
         <Route path="/Voice-studying" element={<VoiceStudyingPage />} />
         
         {/* 마이페이지 */}
-=======
 
->>>>>>> ef6035e640bd1c9fba3d6784dae8116b81009f75
         <Route path="/my-page" element={<MyPage />} />
         <Route path="/buy-list" element={<BuyList />} />
         <Route path="/sell-list" element={<SellList />} />
