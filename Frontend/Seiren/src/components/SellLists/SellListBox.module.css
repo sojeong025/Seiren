@@ -1,12 +1,10 @@
 .sellListBox {
-  border: 1px solid black;
-  margin-bottom: 5vh;
+
 }
 
 .sellListBoxContainer {
-  border: 1px solid #e1e1e1;
-  padding: 20px;
-  background-color: #000;
+  width: 100%;
+  flex-direction: row;
 }
 
 .sellListBoxTitle {

@@ -28,6 +28,7 @@ function App() {
   return (
     <Router>
       <NavBar />
+
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/about" element={<AboutPage />} />
@@ -44,7 +45,6 @@ function App() {
         <Route path="/sell-list" element={<SellList />} />
         <Route path="/use-voice" element={<UseVoice />} />
         <Route path="/detail/:index" element={<DetailPage />} />
-
       </Routes>
     </Router>
   );

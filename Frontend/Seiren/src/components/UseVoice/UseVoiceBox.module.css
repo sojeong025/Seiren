@@ -9,65 +9,63 @@
 /* UseVoiceBox.module.css */
 
 .UseVoiceContainer {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 20px;
-  }
+  flex-direction: column;
   
-  .textBox {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .voiceItems {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .voiceItem {
-    border: 1px solid #ddd;
-    padding: 10px;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 10%;
-  }
-  
-  .profileImage {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-  }
-  
-  .title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .moodHashtag {
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 10px;
-  }
-  
-  .playButton {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .playButton:hover {
-    background-color: #0056b3;
-  }
-  
+}
+
+.textBox {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.voiceItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.voiceItem {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10%;
+}
+
+.profileImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.moodHashtag {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.playButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.playButton:hover {
+  background-color: #0056b3;
+}

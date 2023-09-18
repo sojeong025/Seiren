@@ -1,6 +1,6 @@
 .naviBox{
+    flex-direction: row;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+    justify-content: space-around;
+    width: 50%;
 }

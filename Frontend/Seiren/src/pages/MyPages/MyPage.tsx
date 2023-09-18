@@ -6,7 +6,7 @@ import Testnavi from "./testnavi";
 
 function MyPage() {
   return (
-    <div>
+    <div className={styles.mainPageContainer}>
       <Testnavi />
       <MyInfo />
       <Likes />
