@@ -20,31 +20,37 @@ public class VoiceController {
 
     private final VoiceService voiceService;
 
-    @GetMapping("/voice/voices")
+    @GetMapping("/api/progressingVoices/")
+    public ApiResult<?> getProgressVoiceId(HttpServletRequest request) {
+        return ApiUtils.success(
+                voiceService.getCurrentVoiceId(request)); // 녹음 페이지 처음 접속 시 호출 - 현재 녹음 중인 음성 id
+    }
+
+    @GetMapping("/api/voices")
     public ApiResult<?> voiceList(HttpServletRequest request) {
         return ApiUtils.success(voiceService.getVoiceList(request));
     }
 
-    @PostMapping("/voice/voices")
+    @PostMapping("/api/voices")
     public ApiResult<?> addVoice(HttpServletRequest request) {
-        return ApiUtils.success(voiceService.addVoice(request));
+        return ApiUtils.success(voiceService.addVoice(request)); // 현재 녹음중인 음성이 없으면 음성 생성 호출
     }
 
-    @PutMapping("/voice/voices")
+    @PutMapping("/api/voices")
     public ApiResult<?> modifyVoiceInfo(HttpServletRequest request,
             @RequestBody VoiceUpdateDto voiceUpdateDto) {
         voiceService.updateVoice(request, voiceUpdateDto);
         return ApiUtils.success("목소리 정보 수정 완료");
     }
 
-    @PutMapping("/voice/voices/memo")
+    @PutMapping("/api/voices/memo")
     public ApiResult<?> modifyVoiceMemo(HttpServletRequest request,
             @RequestBody VoiceUpdateDto voiceUpdateDto) {
         voiceService.updateVoiceMemo(request, voiceUpdateDto);
         return ApiUtils.success("목소리 메모 수정 완료");
     }
 
-    @DeleteMapping("/voice/voices/{voiceId}")
+    @DeleteMapping("/api/voices/{voiceId}")
     public ApiResult<?> deleteVoice(HttpServletRequest request, @PathVariable Long voiceId) {
         voiceService.deleteVoice(request, voiceId);
         return ApiUtils.success("목소리 삭제 상태로 변경");
