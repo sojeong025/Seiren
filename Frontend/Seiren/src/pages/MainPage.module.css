@@ -4,7 +4,7 @@
 }
 
 .videoBackground{
-  width: 100%;
+  width: 100%; 
   height: 100%;
   object-fit: cover; /* 비디오를 화면에 맞추어 표시 */
   object-position: center top; /* 화면 중앙 상단에 비디오 위치 */
