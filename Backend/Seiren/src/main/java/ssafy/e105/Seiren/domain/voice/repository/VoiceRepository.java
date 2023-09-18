@@ -1,6 +1,7 @@
 package ssafy.e105.Seiren.domain.voice.repository;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,4 +14,10 @@ public interface VoiceRepository extends JpaRepository<Voice, Long> {
 
     @Query("SELECT v FROM Voice v WHERE v.user.id = :userId AND v.state = 0")
     List<Voice> findByUser_IdAndStateIsZero(@Param("userId") Long userId);
+
+    List<Voice> findByUser_IdAndStateLessThan(Long userId, int state);
+
+    Optional<Voice> findOneByUser_IdAndVoiceId(Long userId, Long voiceId);
+
+    List<Voice> findByUser_IdAndStateLessThanOrderByCreatedAtDesc(Long userId, int state);
 }
