@@ -65,6 +65,12 @@ public class UserController {
         return ApiUtils.success(userService.deleteUser(request));
     }
 
+    @Operation(summary = "회원 정보")
+    @GetMapping()
+    public ApiResult getUserInfo(HttpServletRequest request){
+        return ApiUtils.success(userService.getUserInfo(request));
+    }
+
 
 
 }

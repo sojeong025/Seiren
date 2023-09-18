@@ -31,4 +31,12 @@ public class TestHistory {
     private Product product;
 
     private int count;
+
+    public static TestHistory toEntity(User user, Product product) {
+        return TestHistory.builder()
+                .user(user)
+                .product(product)
+                .count(3)
+                .build();
+    }
 }
