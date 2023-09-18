@@ -50,9 +50,7 @@ public class Voice {
     private Boolean isDelete = false;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinTable(name = "product_id",
-            joinColumns = @JoinColumn(name = "VOICE_ID"),
-            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+    @JoinColumn(name = "product_id")
     private Product product;
 
     public static Voice toEntity(User user) {

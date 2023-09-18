@@ -2,6 +2,8 @@ package ssafy.e105.Seiren.domain.product.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,5 +23,18 @@ public class ProductController {
             HttpServletRequest request) {
         productService.createProduct(productCreateRequest, request);
         return ApiUtils.success("성공적으로 상품을 등록하였습니다.");
+    }
+
+    @GetMapping("/api/product/{productId}")
+    public ApiResult<?> productDetail(@PathVariable Long productId,
+            HttpServletRequest request) {
+        return ApiUtils.success(productService.getProductDetail(productId, request));
+    }
+
+    @GetMapping("/api/preview")
+    public ApiResult<?> productPreview(@PathVariable Long productId,
+            HttpServletRequest request) {
+        return ApiUtils.success(productService.getProductPreview(productId, request));
+
     }
 }

@@ -26,7 +26,7 @@ public class Preview {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    private String voiceUrl;
+    private String previewUrl;
 
     private String previewText;
 }
