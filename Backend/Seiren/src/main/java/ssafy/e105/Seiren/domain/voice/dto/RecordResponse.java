@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class RecordResponse {
 
     Integer recordCount;
-    Integer scriptCount;
+    Integer totalCount;
 }
