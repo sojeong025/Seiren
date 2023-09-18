@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ssafy.e105.Seiren.domain.product.entity.TestHistory;
 import ssafy.e105.Seiren.domain.product.entity.Wish;
 import ssafy.e105.Seiren.domain.user.dto.register.RegisterReqDto;
 
@@ -45,6 +46,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Wish> wishes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<TestHistory> testHistories = new ArrayList<>();
 
     /**
      * oauth 회원 가입 로직

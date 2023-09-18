@@ -13,5 +13,5 @@ public class ProductCreateRequest {
     private String summary;
     private Double price;
     private List<String> previewTexts;
-    // 상품 카테고리 목록 코드 추가
+    private List<Long> categoryList;
 }
