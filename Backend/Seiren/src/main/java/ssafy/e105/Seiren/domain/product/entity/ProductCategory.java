@@ -9,10 +9,12 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ssafy.e105.Seiren.domain.category.entity.Category;
 
-@Data
+//@Data
+@Getter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor

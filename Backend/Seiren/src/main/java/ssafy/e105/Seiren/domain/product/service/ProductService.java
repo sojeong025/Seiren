@@ -2,16 +2,22 @@ package ssafy.e105.Seiren.domain.product.service;
 
 import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.CREATE_PRODUCT_ERROR;
 import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.NOT_EXIST_CATEGORY;
+import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.NOT_EXIST_PRODUCT;
 import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.NOT_EXIST_VOICE;
 import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_USER;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ssafy.e105.Seiren.domain.category.entity.Category;
 import ssafy.e105.Seiren.domain.category.repository.CategoryRepository;
+import ssafy.e105.Seiren.domain.product.dto.PreviewDto;
 import ssafy.e105.Seiren.domain.product.dto.ProductCreateRequest;
+import ssafy.e105.Seiren.domain.product.dto.ProductDetailDto;
+import ssafy.e105.Seiren.domain.product.entity.Preview;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.entity.ProductCategory;
 import ssafy.e105.Seiren.domain.product.entity.TestHistory;
@@ -43,7 +49,7 @@ public class ProductService {
     @Transactional
     public boolean createProduct(ProductCreateRequest productCreateRequest,
             HttpServletRequest request) {
-        Voice voice = getVoice(productCreateRequest);
+        Voice voice = getVoice(productCreateRequest.getVoiceId());
         User user = getUser(request);
         try {
             Product product = productRepository.save(Product.toEntity(productCreateRequest, voice));
@@ -67,6 +73,32 @@ public class ProductService {
 
     }
 
+    public ProductDetailDto getProductDetail(Long productId, HttpServletRequest request) {
+        Product product = getProduct(productId);
+        Voice voice = product.getVoice();
+        User user = getUser(request);
+        List<ProductCategory> productCategoryList = product.getProductCategories();
+        List<String> categoryList = new ArrayList<>();
+        for (ProductCategory productCategory : productCategoryList) {
+            Category category = categoryRepository.findById(productCategory.getCategory().getId())
+                    .get();
+            categoryList.add(category.getName());
+        }
+        ProductDetailDto productDetailDto = new ProductDetailDto(product, voice, user,
+                categoryList);
+
+        return productDetailDto;
+    }
+
+    public PreviewDto getProductPreview(Long productId, HttpServletRequest request) {
+        List<Preview> previewList = previewRepository.findAllByProductId(productId);
+        List<String> previewUrls = new ArrayList<>();
+        for (Preview preview : previewList) {
+            previewUrls.add(preview.getPreviewUrl());
+        }
+        return new PreviewDto(previewUrls);
+    }
+
     public User getUser(HttpServletRequest request) {
         String userEmail = jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request));
         return userRepository.findByEmail(userEmail)
@@ -74,8 +106,8 @@ public class ProductService {
                         new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode())));
     }
 
-    public Voice getVoice(ProductCreateRequest productCreateRequest) {
-        return voiceRepository.findById(productCreateRequest.getVoiceId())
+    public Voice getVoice(Long voiceId) {
+        return voiceRepository.findById(voiceId)
                 .orElseThrow(() -> new BaseException(
                         new ApiError(NOT_EXIST_VOICE.getMessage(), NOT_EXIST_VOICE.getCode())));
     }
@@ -86,5 +118,10 @@ public class ProductService {
                         NOT_EXIST_CATEGORY.getCode())));
     }
 
+    public Product getProduct(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new BaseException(
+                        new ApiError(NOT_EXIST_PRODUCT.getMessage(), NOT_EXIST_PRODUCT.getCode())));
+    }
 
 }
