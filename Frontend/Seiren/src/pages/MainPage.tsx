@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import styles from './MainPage.module.css';
-import danceduck from '../assets/duckdance.gif';
-import videoSource from '../assets/night_-_28860 (1080p).mp4';
+import React, { useState, useEffect } from "react";
+import styles from "./MainPage.module.css";
+import danceduck from "../assets/duckdance.gif";
+import videoSource from "../assets/car_-_73405 (Original).mp4";
 
 export default function MainPage() {
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = e => {
     const mouseX = e.clientX;
     const mouseY = e.clientY;
 
@@ -20,9 +20,9 @@ export default function MainPage() {
   };
 
   useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
@@ -36,11 +36,10 @@ export default function MainPage() {
         <source src={videoSource} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+      <img src={danceduck} className={styles.duck} alt="" />
       <div style={textStyle} className={styles.textContainer}>
         <div className={styles.text}>
-          <p className={styles.title}>
-            예혰예혰 움직인댱 ㅋㅋㅋ
-          </p>
+          <p className={styles.title}>예혰예혰 움직인댱 ㅋㅋㅋ</p>
           <p className={styles.subtitle}>
             Full freedom to sound like <br /> anyone in the metaverse
           </p>
