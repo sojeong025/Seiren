@@ -15,6 +15,7 @@ import VoiceDetailPage from "./pages/VoiceMarketPage/VoiceDetailPage";
 import VoiceStudyPage from "./pages/VoiceStudyPages/VoiceStudyPage";
 import VoiceRecordPage from "./pages/VoiceStudyPages/VoiceRecordPage";
 import VoiceStudyingPage from "./pages/VoiceStudyPages/VoiceStudyingPage";
+import VoiceCustomPage from "./pages/VoiceStudyPages/VoiceCustomPage";
 
 // 마이 페이지
 import MyPage from "./pages/MyPages/MyPage";
@@ -44,8 +45,9 @@ function App() {
 
             {/* 목소리 등록 페이지 */}
             <Route path="/voice-study" element={<VoiceStudyPage />} />
-            <Route path="/Voice-Record" element={<VoiceRecordPage />} />
-            <Route path="/Voice-studying" element={<VoiceStudyingPage />} />
+            <Route path="/voice-record" element={<VoiceRecordPage />} />
+            <Route path="/voice-studying" element={<VoiceStudyingPage />} />
+            <Route path="/voice-custom" element={<VoiceCustomPage />} />
             
             {/* 마이페이지 */}
 
