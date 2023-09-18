@@ -1,16 +1,10 @@
 import { useState } from "react";
 import styles from "./Script.module.css"
+import VoiceStudyHeader from "./VoiceStudyHeader";
 
 const Script: React.FC = () => {
-  // 더미 데이터
-  const scripts = [
-    "스크립트 문장 1",
-    "스크립트 문장 2",
-    "스크립트 문장 3",
-    "스크립트 문장 4",
-    "스크립트 문장 5",
-    "스크립트 문장 6",
-  ];
+  // 더미 데이터 생성
+  const scripts = Array.from({length: 10}, (_, i) => `스크립트 문장 ${i+1}`);
 
   const [index, setIndex] = useState<number>(0);
 
@@ -19,13 +13,18 @@ const Script: React.FC = () => {
   }
 
   return (
-    <div className={styles.text}>
-      {scripts[index]}
-      <br />
-      {scripts[index + 1]}
-      <button onClick={goNext}>다음</button>
+    <div>
+      <VoiceStudyHeader currentIndex={index} /> {/* index 값을 prop으로 전달 */}
+      
+      <div className={styles.text}>
+        {scripts[index]}
+        <br />
+        {scripts[index + 1]}
+        <button onClick={goNext}>다음</button>
+      </div>
     </div>
   );
 };
 
 export default Script;
+

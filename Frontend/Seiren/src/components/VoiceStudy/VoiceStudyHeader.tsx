@@ -1,11 +1,24 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from "./VoiceStudyHeader.module.css"
 
-const VoiceStudyHeader: React.FC = () => {
+interface VoiceStudyHeaderProps {
+  currentIndex: number; // 현재 script의 인덱스 값을 받는 props 추가
+}
+
+const VoiceStudyHeader: React.FC<VoiceStudyHeaderProps> = ({ currentIndex }) => {
+  
+  const isButtonDisabled = currentIndex < 9; // 버튼 활성화 여부 판단
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    navigate('/voice-studying');
+  }
+
   return (
     <div className={styles.header}>
       <div>목소리 녹음</div>
-      <button className={styles.button_study}>목소리 학습</button>
+      {/* isButtonDisabled 값에 따라 버튼의 disabled 속성 설정 */}
+      <button className={styles.button_study} disabled={isButtonDisabled}
+      onClick={handleButtonClick}>목소리 학습</button>
     </div>
   );
 };
