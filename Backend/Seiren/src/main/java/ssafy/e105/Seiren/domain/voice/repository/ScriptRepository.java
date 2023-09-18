@@ -8,5 +8,5 @@ public interface ScriptRepository extends JpaRepository<Script, Long> {
 
     Optional<Script> findTopByScriptIdGreaterThanAndIsDeleteFalseOrderByScriptIdAsc(Long scripId);
 
-    Integer findCountByScriptIdGreaterThanAndIsDeleteFalse(Long scriptId);
+    Integer countByScriptIdGreaterThanAndIsDeleteFalse(Long scriptId);
 }
