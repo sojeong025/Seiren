@@ -23,7 +23,7 @@ public class Script {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scriptId;
 
-    private String script;
+    private String text;
 
     //    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE", nullable = false)
     @Column(nullable = false)

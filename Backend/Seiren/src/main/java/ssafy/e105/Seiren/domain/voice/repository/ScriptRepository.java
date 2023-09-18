@@ -6,5 +6,7 @@ import ssafy.e105.Seiren.domain.voice.entity.Script;
 
 public interface ScriptRepository extends JpaRepository<Script, Long> {
 
-    Optional<Script> findTopByScriptIdGreaterThanAndIsDeleteFalseOrderByScript_IdAsc(Long scripId);
+    Optional<Script> findTopByScriptIdGreaterThanAndIsDeleteFalseOrderByScriptIdAsc(Long scripId);
+
+    Integer findCountByScriptIdGreaterThanAndIsDeleteFalse(Long scriptId);
 }

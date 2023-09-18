@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ssafy.e105.Seiren.domain.user.service.UserService;
 import ssafy.e105.Seiren.domain.voice.dto.ScriptRequest;
 import ssafy.e105.Seiren.domain.voice.service.ScriptService;
 import ssafy.e105.Seiren.global.utils.ApiResult;
@@ -19,7 +18,6 @@ import ssafy.e105.Seiren.global.utils.ApiUtils;
 public class ScriptController {
 
     private final ScriptService scriptService;
-    private final UserService userService;
 
     @GetMapping("/api/scripts/{scriptId}")
     public ApiResult<?> getNextScript(@PathVariable Long scriptId) {

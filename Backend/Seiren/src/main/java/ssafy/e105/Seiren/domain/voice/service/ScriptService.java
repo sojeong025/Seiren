@@ -22,7 +22,7 @@ public class ScriptService {
     private final ScriptRepository scriptRepository;
 
     public ScriptResponse getNextScript(Long scriptId) {
-        Script script = scriptRepository.findTopByScriptIdGreaterThanAndIsDeleteFalseOrderByScript_IdAsc(
+        Script script = scriptRepository.findTopByScriptIdGreaterThanAndIsDeleteFalseOrderByScriptIdAsc(
                         scriptId)
                 .orElseThrow(() -> new BaseException(
                         new ApiError(NO_MORE_SCRIPT.getMessage(), NO_MORE_SCRIPT.getCode())));
@@ -31,7 +31,7 @@ public class ScriptService {
 
     public void insertScript(String script) {
         try {
-            scriptRepository.save(Script.builder().script(script).build());
+            scriptRepository.save(Script.builder().text(script).build());
         } catch (Exception e) {
             throw new BaseException(
                     new ApiError(SCRIPT_INSERT_ERROR.getMessage(), SCRIPT_INSERT_ERROR.getCode()));

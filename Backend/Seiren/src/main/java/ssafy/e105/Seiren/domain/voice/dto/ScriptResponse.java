@@ -15,6 +15,6 @@ public class ScriptResponse {
 
     public ScriptResponse(Script script) {
         this.scriptId = script.getScriptId();
-        this.script = script.getScript();
+        this.script = script.getText();
     }
 }
