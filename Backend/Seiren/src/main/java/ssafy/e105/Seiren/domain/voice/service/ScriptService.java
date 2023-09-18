@@ -40,9 +40,7 @@ public class ScriptService {
 
     @Transactional
     public void updateScript(ScriptRequest scriptRequest) {
-        Script script = scriptRepository.findById(scriptRequest.getScriptId())
-                .orElseThrow(() -> new BaseException(
-                        new ApiError(NOT_EXIST_SCRIPT.getMessage(), NOT_EXIST_SCRIPT.getCode())));
+        Script script = getScript(scriptRequest.getScriptId());
         try {
             script.delete(true);
         } catch (Exception e) {
@@ -57,5 +55,10 @@ public class ScriptService {
     public void deleteScript(Long scriptId) {
         Script script = scriptRepository.findById(scriptId).orElseThrow();
         script.delete(true);
+    }
+
+    public Script getScript(Long scriptId) {
+        return scriptRepository.findById(scriptId).orElseThrow(() -> new BaseException(
+                new ApiError(NOT_EXIST_SCRIPT.getMessage(), NOT_EXIST_SCRIPT.getCode())));
     }
 }
