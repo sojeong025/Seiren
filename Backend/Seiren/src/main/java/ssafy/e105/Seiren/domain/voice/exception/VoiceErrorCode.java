@@ -12,7 +12,8 @@ public enum VoiceErrorCode {
     FAIL_CREATE_VOICE(3033, "음성 생성 실패"),
     NOT_EXSIT_VOICE(3034, "존재하지 않는 Voice"),
     UNMACHED_VOICE_USER(3035, "Voice 생성자와 사용자 id가 일치하지 않습니다."),
-    FAIL_UPDATE_VOICE(3036, "Voice 업데이트 실패");
+    FAIL_UPDATE_VOICE(3036, "Voice 업데이트 실패"),
+    NO_MORE_SCRIPT(3037, "마지막 스크립트였습니다.");
 
     private final int code;
     private final String message;
