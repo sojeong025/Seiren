@@ -27,3 +27,7 @@ a {
   text-decoration-line: none;
   color: #EEEEEE;
 }
+
+* {
+  box-sizing: border-box;
+}

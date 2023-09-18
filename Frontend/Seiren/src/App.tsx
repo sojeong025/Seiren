@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import './App.css'
 
 // 메인 페이지
 import MainPage from "./pages/MainPage";
@@ -29,28 +30,32 @@ function App() {
   return (
     <Router>
       <NavBar />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+        </Routes>
 
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/about" element={<AboutPage />} />
+        <div className="content">
+          <Routes>
+            <Route path="/about" element={<AboutPage />} />
 
-        {/* 목소리 장터 페이지 */}
-        <Route path="/voice-market" element={<VoiceMarketPage />} />
-        <Route path="/voice/:id" element={<VoiceDetailPage />} />
+            {/* 목소리 장터 페이지 */}
+            <Route path="/voice-market" element={<VoiceMarketPage />} />
+            <Route path="/voice/:id" element={<VoiceDetailPage />} />
 
-        {/* 목소리 등록 페이지 */}
-        <Route path="/voice-study" element={<VoiceStudyPage />} />
-        <Route path="/Voice-Record" element={<VoiceRecordPage />} />
-        <Route path="/Voice-studying" element={<VoiceStudyingPage />} />
-        
-        {/* 마이페이지 */}
+            {/* 목소리 등록 페이지 */}
+            <Route path="/voice-study" element={<VoiceStudyPage />} />
+            <Route path="/Voice-Record" element={<VoiceRecordPage />} />
+            <Route path="/Voice-studying" element={<VoiceStudyingPage />} />
+            
+            {/* 마이페이지 */}
 
-        <Route path="/my-page" element={<MyPage />} />
-        <Route path="/buy-list" element={<BuyList />} />
-        <Route path="/sell-list" element={<SellList />} />
-        <Route path="/use-voice" element={<UseVoice />} />
-        <Route path="/detail/:index" element={<DetailPage />} />
-      </Routes>
+            <Route path="/my-page" element={<MyPage />} />
+            <Route path="/buy-list" element={<BuyList />} />
+            <Route path="/sell-list" element={<SellList />} />
+            <Route path="/use-voice" element={<UseVoice />} />
+            <Route path="/detail/:index" element={<DetailPage />} />
+          </Routes>
+        </div>
     </Router>
   );
 }
