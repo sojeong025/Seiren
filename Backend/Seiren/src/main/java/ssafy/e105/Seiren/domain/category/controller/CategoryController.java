@@ -15,7 +15,7 @@ import ssafy.e105.Seiren.global.utils.ApiUtils;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/category")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 @Tag(name = "카테고리 api")
 public class CategoryController {
@@ -23,20 +23,20 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @Operation(summary = "모든 카테고리 조회")
-    @GetMapping("/all")
+    @GetMapping("/categories")
     public ApiResult readAll(HttpServletRequest request){
         return ApiUtils.success(categoryService.readAll());
     }
 
     @Operation(summary = "카테고리 처음 생성")
-    @PostMapping("/start")
+    @PostMapping("/category")
     public ApiResult createCategoryFirst(){
         categoryService.createFirst();
         return ApiUtils.success(true);
     }
 
     @Operation(summary = "카테고리 추가")
-    @PostMapping("/regist")
+    @PostMapping("/categories")
     public ApiResult createCategory(@RequestBody @Valid CategoryCreateRequest req){
         categoryService.createCategory(req);
         return ApiUtils.success(true);
