@@ -1,12 +1,15 @@
 package ssafy.e105.Seiren.domain.product.service;
 
-import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.CREATE_PRODUCT_ERROR;
 import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.CREATE_WiSH_ERROR;
+import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.FAIL_DELETE_WISH;
 import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.NOT_EXIST_PRODUCT;
+import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.NOT_EXIST_WISH;
+import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.UNMACHED_WISH_USER;
 import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_USER;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ssafy.e105.Seiren.domain.product.entity.Product;
@@ -29,17 +32,39 @@ public class WishService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public boolean addWish(HttpServletRequest request, Long productId) {
+    public void addWish(HttpServletRequest request, Long productId) {
         User user = getUser(request);
         Product product = getProduct(productId);
         try {
             wishRepository.save(Wish.toEntity(user, product));
-            return true;
         } catch (Exception e) {
             e.printStackTrace();
             throw new BaseException(new ApiError(CREATE_WiSH_ERROR.getMessage(),
                     CREATE_WiSH_ERROR.getCode()));
         }
+    }
+
+    public void deleteWish(HttpServletRequest request, Long productId) {
+        User user = getUser(request);
+        Wish wish = getWish(productId, user.getId());
+        try {
+            if (wish.getUser() == user) {
+                wishRepository.delete(wish);
+                return;
+            }
+            throw new BaseException(
+                    new ApiError(UNMACHED_WISH_USER.getMessage(),
+                            UNMACHED_WISH_USER.getCode()));
+        } catch (Exception e) {
+            throw new BaseException(
+                    new ApiError(FAIL_DELETE_WISH.getMessage(), FAIL_DELETE_WISH.getCode()));
+        }
+    }
+
+    public List<Product> getAll(HttpServletRequest request) {
+        User user = getUser(request);
+        List<Product> WishList = wishRepository.findByUser_Id(user.getId());
+        return WishList;
     }
 
     public User getUser(HttpServletRequest request) {
@@ -54,4 +79,11 @@ public class WishService {
                 .orElseThrow(() -> new BaseException(
                         new ApiError(NOT_EXIST_PRODUCT.getMessage(), NOT_EXIST_PRODUCT.getCode())));
     }
+
+    public Wish getWish(Long productId, Long userId) {
+        return wishRepository.findByUser_IdAndProduct_ProductId(userId, productId)
+                .orElseThrow(() -> new BaseException(
+                        new ApiError(NOT_EXIST_WISH.getMessage(), NOT_EXIST_WISH.getCode())));
+    }
+
 }
