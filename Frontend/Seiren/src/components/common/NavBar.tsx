@@ -30,18 +30,25 @@ function NavBar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrollY, scrollDirection, setScrollDirection]);
-  console.log(scrollDirection);
-  console.log(scrollY);
+
+  const myPageDropdownItems = [
+    { text: "마이페이지", link: "/my-page" },
+    { text: "구매내역", link: "/buy-list" },
+    { text: "판매내역", link: "/sell-list" },
+    { text: "사용", link: "/use-voice" },
+  ];
 
   return (
-    <div className={`${scrollY !== 0 ? styles.opaque : styles.container} ${scrollDirection === "down" ? styles.scrollDown : ""}`}>
+    <div
+      className={`${scrollY !== 0 ? styles.opaque : styles.container} ${
+        scrollDirection === "down" ? styles.scrollDown : ""
+      }`}
+    >
       <div className={styles.content}>
-        {/* logo 자리  */}
         <NavLink to="/" className={styles.logo}>
           <img src={Logo} className={styles.logo} alt="" />
         </NavLink>
 
-        {/* 메뉴 자리 */}
         <div className={styles.btn} onClick={() => setIsOpen(!isOpen)}>
           <AiOutlineMenu />
         </div>
@@ -50,7 +57,17 @@ function NavBar() {
             <NavLink to="/about">프로그램 소개</NavLink>
             <NavLink to="/voice-market">목소리 장터</NavLink>
             <NavLink to="/voice-study">목소리 등록</NavLink>
-            <NavLink to="/my-page">마이페이지</NavLink>
+            {/* "마이페이지" 메뉴와 드롭다운을 추가합니다. */}
+            <div className={styles.dropdown}>
+              <NavLink to="/my-page">마이페이지</NavLink>
+              <div className={styles.dropdownContent}>
+                {myPageDropdownItems.map((item, index) => (
+                  <NavLink key={index} to={item.link}>
+                    {item.text}
+                  </NavLink>
+                ))}
+              </div>
+            </div>
           </div>
         )}
       </div>
