@@ -1,5 +1,6 @@
 package ssafy.e105.Seiren.domain.product.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ssafy.e105.Seiren.domain.product.dto.ProductCreateRequest;
-import ssafy.e105.Seiren.domain.user.entity.User;
+import ssafy.e105.Seiren.domain.product.dto.ProductUpdateDto;
 import ssafy.e105.Seiren.domain.voice.entity.Voice;
 
 @Data
@@ -28,6 +29,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "product_id")
     private Long productId;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -59,7 +61,18 @@ public class Product {
                 .summary(productCreateRequest.getSummary())
                 .price(productCreateRequest.getPrice())
                 .createAt(LocalDateTime.now())
+                .state(true)
                 .build();
     }
 
+    public void update(Boolean state) {
+        this.state = state;
+    }
+
+    public void update(ProductUpdateDto productUpdateDto) {
+        this.productTitle = productUpdateDto.getProductTitle();
+        this.summary = productUpdateDto.getSummary();
+        this.price = productUpdateDto.getPrice();
+        this.updatedAt = LocalDateTime.now();
+    }
 }
