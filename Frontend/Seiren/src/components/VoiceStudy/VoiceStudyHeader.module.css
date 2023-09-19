@@ -1,5 +1,21 @@
 .header {
   display: flex;
-  color: white;
-  justify-content: space-around;
+  justify-content: center;
+  padding: 0 10px;
+}
+.progressBarContainer {
+  width:70%;
+  height: 20px;
+  background-color:#f3f3f3;
+  border-radius: 10px;
+}
+.progressBar{
+  height:20px;
+  background-color:#3090C7;
+  border-radius: 10px;
+}
+.button_study {
+  width: 100px;
+  margin-left: 20px;
+  border-radius: 10px;
 }
