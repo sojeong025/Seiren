@@ -24,6 +24,10 @@ import SellList from "./pages/MyPages/SellList";
 import DetailPage from "./pages/MyPages/DetailPage";
 import UseVoice from "./pages/MyPages/UseVoice";
 
+// 로그인
+import LoginPage from "./pages/LoginPages/LoginPage";
+import OAuth2RedirectHandler from "./pages/LoginPages/OAuth2RedirectHandler";
+
 // 공통
 import NavBar from "./components/common/NavBar";
 
@@ -56,6 +60,11 @@ function App() {
             <Route path="/sell-list" element={<SellList />} />
             <Route path="/use-voice" element={<UseVoice />} />
             <Route path="/detail/:index" element={<DetailPage />} />
+
+            {/* 로그인 */}
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/oauth/callback/kakao" element={<OAuth2RedirectHandler />} />
+
           </Routes>
         </div>
     </Router>
