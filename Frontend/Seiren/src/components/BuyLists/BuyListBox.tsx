@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "./BuyListBox.module.css";
+import BuyCount from "./BuyCount";
 
-function Likes() {
+function BuyListBox() {
   // 예시 데이터 (나중에 API로 대체할 예정)
   const exampleData = [
     {
@@ -21,6 +22,8 @@ function Likes() {
     // 다른 구매 내역 데이터 추가
   ];
 
+  const [itemCount, setItemCount] = useState(exampleData.length);
+  
   return (
     <div className={styles.buyListBox}>
       <h2>구매내역</h2>
@@ -52,7 +55,7 @@ function Likes() {
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan="5" className={styles.totalLabel}>
+            <td colSpan={5} className={styles.totalLabel}>
               총 금액:
             </td>
             <td className={styles.totalAmount}>
@@ -71,5 +74,5 @@ function Likes() {
   );
 }
 
-export default Likes;
+export default BuyListBox;
   
