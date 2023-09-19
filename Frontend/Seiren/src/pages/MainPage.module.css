@@ -37,7 +37,10 @@
     right: 10px; /* 작은 화면에서도 오른쪽으로 10px 떨어진 위치로 유지 */
   }
 }
-
+.logoText{
+  font-size: 120px;
+  margin: 0;
+}
 .text {
   text-align: center;
 }

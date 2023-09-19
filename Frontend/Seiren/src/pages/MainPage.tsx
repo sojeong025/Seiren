@@ -38,10 +38,10 @@ export default function MainPage() {
       <div className={styles.textContainer}>
         <div style={textStyle} className={styles.text}>
           <p className={styles.title}>
-            AI Voice <br />
-            at Your Service
+            <p className={styles.logoText}>SEIREN</p>
+            AI VOICE
           </p>
-          <p className={styles.subtitle}>Experience Now!</p>
+          {/* <p className={styles.subtitle}>Experience Now!</p> */}
         </div>
       </div>
       <div className={styles.bottomTextContainer}>
