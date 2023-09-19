@@ -11,6 +11,7 @@ public class ProductCreateRequest {
     private Long voiceId;
     private String productTitle;
     private String summary;
+    private String productImageUrl;     // 실제론 파일 형식 입력 받아 s3에 저장 후 변경
     private Double price;
     private List<String> previewTexts;
     private List<Long> categoryList;

@@ -39,6 +39,8 @@ public class Product {
 
     private String summary;
 
+    private String productImageUrl;
+
     private Double price;
 
     private LocalDateTime createAt;
@@ -58,6 +60,7 @@ public class Product {
                 .voice(voice)
                 .productTitle(productCreateRequest.getProductTitle())
                 .summary(productCreateRequest.getSummary())
+                .productImageUrl(productCreateRequest.getProductImageUrl())
                 .price(productCreateRequest.getPrice())
                 .createAt(LocalDateTime.now())
                 .state(true)
@@ -71,6 +74,7 @@ public class Product {
     public void update(ProductUpdateDto productUpdateDto) {
         this.productTitle = productUpdateDto.getProductTitle();
         this.summary = productUpdateDto.getSummary();
+        this.productImageUrl = productUpdateDto.getProductImageUrl();
         this.price = productUpdateDto.getPrice();
         this.updatedAt = LocalDateTime.now();
     }

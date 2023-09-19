@@ -12,14 +12,14 @@ import ssafy.e105.Seiren.domain.voice.entity.Voice;
 public class ProductDetailDto {
 
     private String productTitle;
-    private String avatarUrl;
+    private String productImageUrl;
     private String summary;
     private String nickname;
     private List<String> productCategoryList;
 
-    public ProductDetailDto(Product product, Voice voice, User user, List<String> categoryList) {
+    public ProductDetailDto(Product product, User user, List<String> categoryList) {
         this.productTitle = product.getProductTitle();
-        this.avatarUrl = voice.getVoiceAvatarUrl();
+        this.productImageUrl = product.getProductImageUrl();
         this.summary = product.getSummary();
         this.nickname = user.getNickname();
         this.productCategoryList = categoryList;
