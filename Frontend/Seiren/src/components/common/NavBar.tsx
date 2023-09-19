@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import { AiOutlineMenu } from "react-icons/ai";
+import Logo from "../../assets/logo.png";
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +12,7 @@ function NavBar() {
       <div className={styles.content}>
         {/* logo 자리  */}
         <NavLink to="/" className={styles.logo}>
-          <div> Seiren </div>
+          <img src={Logo} className={styles.logo} alt="" />
         </NavLink>
 
         {/* 메뉴 자리 */}
