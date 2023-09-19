@@ -1,6 +1,13 @@
-.buyCountContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items:flex-start; 
+.buyCountContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.countInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px; /* 공간을 더 확보하기 위한 마진 추가 */
+  width: 100%;
 }
