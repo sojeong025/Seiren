@@ -3,6 +3,29 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  font-size: 1.5em;
+  padding: 40px 20px 20px;
+}
+.text_now, .text_next{
+  font-size: 20px;
+}
+.text_next {
+  color: gray;
+  padding-top: 10px;
+}
+
+.hr {
+  height: 2px;
+  width: 100%;
+  margin: 20px 0px;
+}
+
+.btn {
+  display: flex;
+  justify-content: space-between;
+}
+.record2, .next{
+  /* border: 1px solid white; */
+  width: 200px;
+  text-align: center;
+  font-size: 20px;
 }
