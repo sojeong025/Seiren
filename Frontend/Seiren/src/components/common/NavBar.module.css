@@ -1,11 +1,13 @@
 .container {
   background-color: transparent;
-  width: 100%;
+  width: calc(100% - 480px); /* 240px * 2 (좌우 마진의 합) */
   height: auto;
   position: fixed;
   z-index: 1;
-
+  margin-left: 240px; /* 왼쪽 마진 240px */
+  margin-right: 240px; /* 오른쪽 마진 240px */
 }
+
 .scrollDown {
   opacity: 0;
 }
