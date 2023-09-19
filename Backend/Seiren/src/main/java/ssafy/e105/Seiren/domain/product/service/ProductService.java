@@ -54,7 +54,8 @@ public class ProductService {
         User user = getUser(request);
         try {
             Product product = productRepository.save(Product.toEntity(productCreateRequest, voice));
-            // 목소리 상태 판매중으로 변경 필요
+            // 목소리 상태 판매중으로 변경
+            voice.update(1);
             // 미리듣기 등록 코드 추가 필요
             for (String text : productCreateRequest.getPreviewTexts()) {
                 // 미리듣기 생성을 위해 ai 서버에 api 요청 보내는 코드 추가
@@ -86,7 +87,7 @@ public class ProductService {
                     .get();
             categoryList.add(category.getName());
         }
-        ProductDetailDto productDetailDto = new ProductDetailDto(product, voice, user,
+        ProductDetailDto productDetailDto = new ProductDetailDto(product, user,
                 categoryList);
 
         return productDetailDto;
@@ -98,7 +99,10 @@ public class ProductService {
         User user = getUser(request);
         try {
             if (voice.getUser() == user) {
-                product.update(!product.getState());
+                product.update(product.getState() ? false : true);
+                productRepository.save(product);
+                voice.update(product.getState() ? 1 : 2);
+                voiceRepository.save(voice);
                 return;
             }
             throw new BaseException(
@@ -116,11 +120,9 @@ public class ProductService {
         User user = getUser(request);
         try {
             if (voice.getUser() == user) {
+                // productUpdateDto 속 productImage 파일을 productImageUrl 바꾸는 코드 추가 필요
                 product.update(productUpdateDto);
                 productRepository.save(product);
-                // productUpdateDto 속 voiceAvatar 파일을 voiceAvatarUrl로 바꾸는 코드 추가 필요
-                voice.update(productUpdateDto);
-                voiceRepository.save(voice);
                 return;
             }
             throw new BaseException(
