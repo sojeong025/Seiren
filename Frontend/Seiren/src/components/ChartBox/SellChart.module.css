@@ -1,32 +1,37 @@
 .allContainer {
+  text-align: center;
+  margin: 20px;
   width: 100%;
 }
+
 .sellChartContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
   width: 100%;
 }
 
 .sellChartBox {
-  border: 1px solid black;
-  margin-bottom: 5vh;
-}
-.sellAndLikes {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.totalSales,
-.productLikes {
-  font-size: 36px; /* 숫자 크기 조정 */
-  font-weight: bold; /* 숫자 굵게 표시 */
-  margin-bottom: 10px; /* 숫자와 제목 간격 조정 */
+  width: 100%;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
-.productLikes {
-  font-size: 18px; /* 제목 크기 조정 */
-  color: #888; /* 제목 색상 변경 (예: 회색) */
+.recharts-tooltip {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-size: 14px;
+}
+
+.recharts-legend {
+  margin-top: 20px;
 }
