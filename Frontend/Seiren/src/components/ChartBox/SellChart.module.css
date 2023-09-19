@@ -1,19 +1,37 @@
-.sellChartContainer{
-    border: 1px solid black;
-    margin-bottom: 5vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.allContainer {
+  text-align: center;
+  margin: 20px;
+  width: 100%;
 }
 
-.sellChartBox{
-    border: 1px solid black;
-    margin-bottom: 5vh;
-
+.sellChartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
 }
-.sellAndLikes{
-    border: 1px solid black;
-    margin-bottom: 5vh;
 
+.sellChartBox {
+  width: 100%;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.recharts-tooltip {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-size: 14px;
+}
+
+.recharts-legend {
+  margin-top: 20px;
 }
