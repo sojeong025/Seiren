@@ -1,3 +1,5 @@
+import { useRecoilState } from 'recoil';
+import { RecordState } from '../../recoil/RecordAtom';
 import styles from "./Script.module.css"
 
 interface ScriptProps {
@@ -9,8 +11,15 @@ const Script: React.FC<ScriptProps> = ({ index, setIndex }) => {
   // 더미 데이터 생성
   const scripts = Array.from({length: 10}, (_, i) => `스크립트 문장 ${i+1}`);
 
+  const [recordingStatus, setRecordingStatus] = useRecoilState(RecordState);
+
   const goNext = (): void => {
-    if (index < scripts.length-1) setIndex(index+1)
+    if (index < scripts.length-1) 
+      setIndex(index+1);
+      if(recordingStatus === "stopped"){
+        console.log("녹음이 완료되었습니다. 다음으로 넘어갑니다.")
+        setRecordingStatus("idle");
+      }
   }
 
   return (
@@ -23,7 +32,10 @@ const Script: React.FC<ScriptProps> = ({ index, setIndex }) => {
       <hr className={styles.hr} />
 
       <div className={styles.btn}>
-        <div className={styles.record2}>다시 녹음</div>
+        <div className={styles.record2} onClick={()=>{
+          console.log("다시 녹음 버튼 클릭");
+          setRecordingStatus("idle");
+        }}>다시 녹음</div>
         <div className={styles.next} onClick={goNext}>다음</div>
       </div>
     </div>

@@ -1,106 +1,121 @@
 import { useState, useCallback } from "react";
-import styles from "./VoiceRecord.module.css"
+import { useRecoilState } from 'recoil';
+import { RecordState } from '../../recoil/RecordAtom';
+import styles from "./VoiceRecord.module.css";
+import { BsFillMicFill, BsStopFill, BsPlayFill } from "react-icons/bs";
 
 const VoiceRecord = () => {
+  const [recordingStatus, setRecordingStatus] = useRecoilState(RecordState);
+
   const [stream, setStream] = useState<MediaStream | null>(null); // 오디오 스트림 저장
   const [media, setMedia] = useState<MediaRecorder | null>(null); // 인스턴스 저장
-  const [onRec, setOnRec] = useState<boolean>(true); // 녹음 중인지 아닌지
-  const [source, setSource] = useState<MediaStreamAudioSourceNode | null>(null); // 오디오 소스 정보 저장
-  const [analyser, setAnalyser] = useState<ScriptProcessorNode | null>(null); // 오디오 분석 정보 저장
-  const [audioUrl, setAudioUrl] = useState<Blob | string | ArrayBuffer | null>(null); // 녹음된 오디오 데이터의 Url 저장
+  const [analyser, setAnalyser] =  useState<ScriptProcessorNode | null>(null);
+  const [source, setSource] = useState<MediaStreamAudioSourceNode | null>(null); // 오디오 소스 저장
+  const [audioUrl, setAudioUrl] = useState<Blob | string | ArrayBuffer | null>(null);  // 녹음된 오디오 데이터의 Url 저장
   const [disabled, setDisabled] = useState<boolean>(true);
 
+  // 사용자가 음성 녹음을 시작했을 때
   const onRecAudio = () => {
+    setRecordingStatus('recording');
+    // Disable the stop button until recording starts
     setDisabled(true)
-    // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    // 자바스크립트를 통해 음원의 진행상태에 직접접근에 사용된다.
-    const analyser = audioCtx.createScriptProcessor(0, 1, 1);
-    setAnalyser(analyser);
-
+    // Create a ScriptProcessorNode for direct audio processing
+    const localAnalyser= audioCtx.createScriptProcessor(0,1 ,1 );
+    
     function makeSound(stream) {
-      // 내 컴퓨터의 마이크나 다른 소스를 통해 발생한 오디오 스트림의 정보를 보여준다.
-      const source = audioCtx.createMediaStreamSource(stream);
-      setSource(source);
-      source.connect(analyser);
-      analyser.connect(audioCtx.destination);
+      // Connect the source to the processor and the processor to the destination.
+      var source= audioCtx.createMediaStreamSource(stream); 
+      source.connect(localAnalyser);
+      localAnalyser.connect(audioCtx.destination);  
+      
+      return source;
     }
-    // 마이크 사용 권한 획득
-    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream: MediaStream) => {
-      const mediaRecorder = new MediaRecorder(stream);
-      mediaRecorder.start();
-      setStream(stream);
-      setMedia(mediaRecorder);
-      makeSound(stream);
 
-      analyser.onaudioprocess = function (e: AudioProcessingEvent) {
-        // 3분(180초) 지나면 자동으로 음성 저장 및 녹음 중지
-        if (e.playbackTime > 180) {
-          stream.getAudioTracks().forEach(function (track) {
-            track.stop();
-          });
-          mediaRecorder.stop();
-          // 메서드가 호출 된 노드 연결 해제
-          analyser.disconnect();
-          audioCtx.createMediaStreamSource(stream).disconnect();
+    navigator.mediaDevices.getUserMedia({audio: true}).then((stream: MediaStream) => {
+        var mediaRecorder= new MediaRecorder(stream); 
+        mediaRecorder.start(); 
+        
+        var source= makeSound(stream);
 
-          mediaRecorder.ondataavailable = function (e: BlobEvent) {
-            setAudioUrl(e.data);
-            setOnRec(true);
-          };
-        } else {
-          setOnRec(false);
-        }
-      };
+        setStream(stream);
+        setMedia(mediaRecorder); 
+        setSource(source); 
+        setAnalyser(localAnalyser);
+        
+        mediaRecorder.ondataavailable=function(e){
+          if(e.data.size>0){
+            console.log("Data available after MediaRecorder.stop() called.");
+            console.log(`This blob's size is ${e.data.size}`);
+            let blobURL= URL.createObjectURL(e.data)
+            console.log(blobURL)
+            // Save data to state variable for further use.
+            if(blobURL){
+              console.log("Blob url created.")
+              console.log(blobURL)
+              let data=new Blob([e.data],{type:"audio/wav"})
+              let fileReader=new FileReader();
+              
+              fileReader.onloadend=function(){
+                let arrayBuffer=fileReader.result as ArrayBuffer;
+                if(arrayBuffer){
+                  console.log("Array buffer created.")
+                  let buffer=new Uint8Array(arrayBuffer)
+                  if(buffer.byteLength==e.data.size){
+                    console.log("Buffer created.")
+                    setAudioUrl(buffer);
+                  }
+                }
+              }
+              fileReader.readAsArrayBuffer(data);
+            } 
+          }
+        };
     });
   };
 
   // 사용자가 음성 녹음을 중지했을 때
   const offRecAudio = () => {
-    // dataavailable 이벤트로 Blob 데이터에 대한 응답을 받을 수 있음
-    if(media){
-      media.ondataavailable = function (e) {
-        setAudioUrl(e.data);
-        setOnRec(true);
-      };
-    };
-
-    // 모든 트랙에서 stop()을 호출해 오디오 스트림을 정지
-    if(stream){
-      stream.getAudioTracks().forEach(function (track) {
-        track.stop();
-      });
-    }
-
-    // 미디어 캡처 중지
     if(media){
       media.stop();
-      // 메서드가 호출 된 노드 연결 해제
-      if(analyser){
-        analyser.disconnect();
-      }
-      if(source){
-        source.disconnect();
+      if(stream){
+        stream.getAudioTracks().forEach(function (track) {
+          track.stop();
+          console.log('멈췄다')
+        });
       }
     }
+
+    if(source){
+      source.disconnect();
+    }
+
+    if(analyser){
+      analyser.disconnect();
+    }
+
+    setDisabled(false);
+    setRecordingStatus('stopped');
   };
 
   const onSubmitAudioFile = useCallback(() => {
-    if (audioUrl) {
-      console.log(URL.createObjectURL(audioUrl)); // 출력된 링크에서 녹음된 오디오 확인 가능
+     // If audio data is available, create a URL and log it to the console.
+    if(audioUrl) {
+      let blob=new Blob([audioUrl],{type:"audio/wav"})
+      let url=URL.createObjectURL(blob)
+      console.log(url); 
     }
-    // File 생성자를 사용해 파일로 변환
-    const sound = new File([audioUrl], "soundBlob", { lastModified: new Date().getTime(), type: "audio" });
-
-    setDisabled(false);
-    console.log(sound); // File 정보 출력
   }, [audioUrl]);
 
   const play = () => {
-    const audio = new Audio(URL.createObjectURL(audioUrl));
-    audio.loop = false;
-    audio.volume = 1;
-    audio.play();
+    let blob=new Blob([audioUrl],{type:"audio/wav"})
+    let url=URL.createObjectURL(blob)
+    
+    var audio = new Audio(url);
+    audio.loop=false;
+    audio.volume=1;
+    
+    audio.play();  
   };
 
 
@@ -110,10 +125,22 @@ const VoiceRecord = () => {
         <div className={styles.MainText}>Record Your Voice</div>
         <div className={styles.RecordText}>가능한 주변 소음 없는 조용한 환경에서 녹음해 주세요.</div>
       </div>
+      
       <div className={styles.Btn}>
-        <button className={styles.Btn_record} onClick={onRec ? onRecAudio : offRecAudio}>녹음</button>
-        <button className={styles.Btn_listen} onClick={onSubmitAudioFile}>정지</button>
-        <button className={styles.Btn_play} onClick={play} disabled={disabled}>재생</button>
+        {(recordingStatus === 'idle') && (
+          <button className={styles.Btn_record} onClick={onRecAudio}><BsFillMicFill/></button> 
+        )}
+        
+        {(recordingStatus === 'recording') && (
+          <button className={styles.Btn_stop} onClick={offRecAudio}><BsStopFill /></button>  
+        )}
+        
+        {(recordingStatus === 'stopped') && (
+          <>
+            {/* <button onClick={onSubmitAudioFile}>저장</button>   */}
+            <button className={styles.Btn_play} onClick={play} disabled={!audioUrl}><BsPlayFill /></button>   
+          </>
+        )}
       </div>
     </div>
   );

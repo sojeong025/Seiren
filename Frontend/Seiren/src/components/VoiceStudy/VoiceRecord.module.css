@@ -16,5 +16,19 @@
 .Btn {
   display: flex;
   justify-content: center;
-  height: 200px;
+  align-items: center;
+  height: 180px;
+}
+.Btn_record, .Btn_stop, .Btn_play{
+  width: 130px;
+  height: 130px;
+  line-height: 130px;
+  font-size: 70px;
+  background-color: #BC7AF9;
+  color: white;
+  border: 8px solid #fff;
+  border-radius: 50%;
+}
+.Btn_record:hover , .Btn_stop:hover, .Btn_play:hover{
+  cursor: pointer;
 }

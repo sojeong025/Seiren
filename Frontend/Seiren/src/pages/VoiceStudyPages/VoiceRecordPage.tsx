@@ -10,9 +10,7 @@ function VoiceRecordPage() {
     <div>
       {/* currentIndex 값을 prop으로 전달 */}
       <VoiceStudyHeader currentIndex={currentIndex} totalIndex={10} /> 
-      
       <VoiceRecord/>
-      
       {/* Script에도 index와 setIndex prop 전달 */}
       <Script index={currentIndex} setIndex={setCurrentIndex}/>
     </div>
