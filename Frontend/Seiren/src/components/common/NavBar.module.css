@@ -1,9 +1,21 @@
 .container {
-  background-color: transparent;
+  background-color: transparent !important;
   width: 100%;
   height: auto;
   position: fixed;
   z-index: 1;
+
+}
+.scrollDown {
+  opacity: 0;
+}
+.opaque{
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  height: auto;
+  position: fixed;
+  z-index: 1;
+
 }
 .content {
   display: flex;
@@ -11,14 +23,17 @@
   justify-content: space-between;
   margin-left: 30px;
   margin-right: 30px;
+  transition: opacity 0.3s ease; /* opacity 속성에 대한 전환 효과 추가 */
+  opacity: 1; /* 초기에는 보이도록 설정 */
 }
+
 .nav {
   display: flex;
   padding-left: 10px;
 }
 
 .nav a:not(:last-child) {
-  margin-right:20px; 
+  margin-right: 20px;
 }
 
 .btn {
@@ -29,17 +44,28 @@
   width: 100px;
 }
 
-
 /* Add this for responsive design */
 @media (max-width: 768px) {
   .container {
-      flex-direction: column; 
+    flex-direction: column;
+    transition: transform 0.3s ease; /* transform 속성에 대한 전환 효과 추가 */
   }
 
-  .nav{
-    display :none; 
+  .content {
+    height: 0; /* 화면 크기가 작아질 때 네브바 숨김 */
+    opacity: 0; /* 화면 크기가 작아질 때 네브바 숨김 */
+    transition:
+      height 0.3s ease,
+      opacity 0.3s ease; /* 높이와 opacity에 대한 전환 효과 추가 */
   }
+
+  .nav {
+    display: none;
+  }
+
   .btn {
     display: block;
   }
 }
+
+/* 추가적인 스타일 및 스크롤 방향에 따른 스타일 변경을 여기에 추가하세요 */
