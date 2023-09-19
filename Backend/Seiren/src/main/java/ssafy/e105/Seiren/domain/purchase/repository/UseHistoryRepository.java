@@ -7,9 +7,10 @@ import ssafy.e105.Seiren.domain.purchase.entity.BuyPurpose;
 import ssafy.e105.Seiren.domain.purchase.entity.PurchaseProduct;
 import ssafy.e105.Seiren.domain.purchase.entity.UseHistory;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UseHistoryRepository extends JpaRepository<UseHistory, Long> {
 
-    Page<UseHistory> findAllByPurchaseProduct(PurchaseProduct purchaseProduct, Pageable pageable);
+    List<UseHistory> findAllByPurchaseProduct(PurchaseProduct purchaseProduct);
 }
