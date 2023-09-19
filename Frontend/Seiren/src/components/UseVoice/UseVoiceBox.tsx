@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./UseVoiceBox.module.css";
 import VoiceItem from "./VoiceItem"; // VoiceItem 컴포넌트 가져오기
+import voiceItemData from "./VoiceItemDummyData";
 
 function UseVoiceBox() {
   // VoiceItem 데이터 배열
@@ -22,12 +23,13 @@ function UseVoiceBox() {
     <div className={styles.UseVoiceContainer}>
       <div className={styles.textBox}>VoiceBox</div>
       <div className={styles.voiceItems}>
-        {voiceItems.map((item, index) => (
+        {voiceItemData.map(item => (
           <VoiceItem
-            key={index}
+            key={item.id}
             profileImage={item.profileImage}
             title={item.title}
             moodHashtag={item.moodHashtag}
+            author={item.author}
           />
         ))}
       </div>

@@ -1,0 +1,54 @@
+.voiceItem {
+    display: flex;
+    flex-direction: column;
+    background: rgba(159, 102, 102, 0.81);
+    border-radius: 34px;
+    width: 283px;
+    height: 180px;
+    padding: 10px;
+    position: relative;
+    gap: 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    margin: 10px 10px;
+}
+  
+  .profileImage {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+  
+  .content {
+    flex: 1;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+  
+  .moodHashtag {
+    font-size: 16px;
+    color: #000000;
+  }
+  
+  .authorDate {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+  }
+  
+  .playButton {
+    background-color: #42857D;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 15px;
+    cursor: pointer;
+  }
+  
+  .playButton:hover {
+    background-color: #75975B;
+  }
+  
