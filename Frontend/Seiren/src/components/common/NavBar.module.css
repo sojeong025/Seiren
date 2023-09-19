@@ -1,5 +1,5 @@
 .container {
-  background-color: transparent !important;
+  background-color: transparent;
   width: 100%;
   height: auto;
   position: fixed;
@@ -9,14 +9,16 @@
 .scrollDown {
   opacity: 0;
 }
-.opaque{
-  background-color: rgba(255, 255, 255, 0.9);
+.opaque {
+  background-color: rgba(255, 255, 255, 0.8);
   width: 100%;
   height: auto;
   position: fixed;
   z-index: 1;
 
+  backdrop-filter: blur(8px); /* 블러 효과 적용 */
 }
+
 .content {
   display: flex;
   align-items: center;
@@ -44,7 +46,34 @@
   width: 100px;
 }
 
-/* Add this for responsive design */
+/* 드롭다운 CSS*/
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: transparent;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdownContent {
+  display: block;
+}
+
+.dropdownContent a {
+  color: white;
+  margin-top: 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* 드롭다운 끝 */
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -67,5 +96,3 @@
     display: block;
   }
 }
-
-/* 추가적인 스타일 및 스크롤 방향에 따른 스타일 변경을 여기에 추가하세요 */
