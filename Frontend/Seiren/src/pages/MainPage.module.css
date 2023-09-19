@@ -2,14 +2,6 @@
   width: 100%;
   height: 100%;
 }
-.duck {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20%; /* 이미지의 너비 설정 */
-  height: auto; /* 이미지의 높이 자동으로 조정 */
-}
 
 .videoBackground{
   width: 100%; 
@@ -19,10 +11,10 @@
   position: fixed; /* 스크롤 생성 방지 */
 }
 .textContainer {
-  position: fixed;
-  bottom: 10px; /* 화면 아래에서 10px 떨어진 위치 */
-  right: 10px; /* 화면 오른쪽에서 10px 떨어진 위치 */
-  transform: translate(0, 0); /* 기존의 가운데 위치로 변경 */
+  position: absolute; /* absolute로 변경 */
+  top: 50%; /* 화면 상단에서 중앙으로 이동 */
+  left: 50%; /* 화면 왼쪽에서 중앙으로 이동 */
+  transform: translate(-50%, -50%); /* 중앙 정렬 */
   height: auto;
 }
 
@@ -32,8 +24,6 @@
     right: 10px; /* 작은 화면에서도 오른쪽으로 10px 떨어진 위치로 유지 */
   }
 }
-
-
 
 
 .text {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./MainPage.module.css";
 import danceduck from "../assets/duckdance.gif";
-import videoSource from "../assets/car_-_73405 (Original).mp4";
+import videoSource from "../assets/pexels-rostislav-uzunov-10613972 (Original).mp4";
 
 export default function MainPage() {
   const [rotateX, setRotateX] = useState(0);
@@ -36,13 +36,10 @@ export default function MainPage() {
         <source src={videoSource} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <img src={danceduck} className={styles.duck} alt="" />
-      <div style={textStyle} className={styles.textContainer}>
-        <div className={styles.text}>
-          <p className={styles.title}>예혰예혰 움직인댱 ㅋㅋㅋ</p>
-          <p className={styles.subtitle}>
-            Full freedom to sound like <br /> anyone in the metaverse
-          </p>
+      <div className={styles.textContainer}>
+        <div style={textStyle} className={styles.text}>
+          <p className={styles.title}>AI Voice <br />at Your Service</p>
+          <p className={styles.subtitle}>Experience Now!</p>
         </div>
       </div>
     </div>
