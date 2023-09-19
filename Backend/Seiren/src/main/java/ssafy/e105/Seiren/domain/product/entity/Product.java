@@ -29,7 +29,6 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "product_id")
     private Long productId;
 
     @OneToOne(fetch = FetchType.LAZY)

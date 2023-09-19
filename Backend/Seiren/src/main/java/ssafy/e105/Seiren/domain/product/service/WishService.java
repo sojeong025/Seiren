@@ -2,6 +2,7 @@ package ssafy.e105.Seiren.domain.product.service;
 
 import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.CREATE_WiSH_ERROR;
 import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.FAIL_DELETE_WISH;
+import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.FAIL_GET_WISHLIST;
 import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.NOT_EXIST_PRODUCT;
 import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.NOT_EXIST_WISH;
 import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.UNMACHED_WISH_USER;
@@ -10,8 +11,11 @@ import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_US
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ssafy.e105.Seiren.domain.product.dto.ProductDto;
+import ssafy.e105.Seiren.domain.product.dto.WishListDto;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.entity.Wish;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
@@ -61,10 +65,25 @@ public class WishService {
         }
     }
 
-    public List<Product> getAll(HttpServletRequest request) {
+    public WishListDto getAll(HttpServletRequest request) {
         User user = getUser(request);
-        List<Product> WishList = wishRepository.findByUser_Id(user.getId());
-        return WishList;
+        try {
+            WishListDto wishListDto = new WishListDto();
+            List<ProductDto> productDtoList = user.getWishes().stream()
+                    .map(wish -> {
+                        ProductDto productDto = new ProductDto();
+                        productDto.setProductId(wish.getProduct().getProductId());
+                        productDto.setTitle(wish.getProduct().getProductTitle());
+                        productDto.setPrice(wish.getProduct().getPrice());
+                        return productDto;
+                    })
+                    .collect(Collectors.toList());
+            wishListDto.setWishList(productDtoList);
+            return wishListDto;
+        } catch (Exception e) {
+            throw new BaseException(
+                    new ApiError(FAIL_GET_WISHLIST.getMessage(), FAIL_GET_WISHLIST.getCode()));
+        }
     }
 
     public User getUser(HttpServletRequest request) {
