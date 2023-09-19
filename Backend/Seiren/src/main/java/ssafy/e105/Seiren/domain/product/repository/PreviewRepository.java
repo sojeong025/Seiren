@@ -6,5 +6,6 @@ import ssafy.e105.Seiren.domain.product.entity.Preview;
 
 public interface PreviewRepository extends JpaRepository<Preview, Long> {
 
-    List<Preview> findAllByProductId(Long productId);
+    List<Preview> findByProduct_ProductId(Long productId);
+
 }
