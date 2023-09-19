@@ -11,7 +11,12 @@ public enum ProductErrorCode {
     NOT_EXIST_VOICE(4001, "존재하지 않는 Voice"),
     NOT_EXIST_PRODUCT(4002, "존재하지 않는 Product"),
     NOT_EXIST_CATEGORY(4003, "존재하지 않는 Category"),
-    CREATE_WiSH_ERROR(4004, "찜 등록 에러");
+    CREATE_WiSH_ERROR(4004, "찜 등록 에러"),
+    UNMACHED_PRODUCT_USER(4005, "상품 등록자, 상품 상태 변경 희망자 불일치"),
+    FAIL_UPDATE_PRODUCT(4006, "상품 업데이트 실패"),
+    NOT_EXIST_WISH(4007, "존재하지 않는 Wish"),
+    UNMACHED_WISH_USER(4008, "찜 등록자, 찜 취소 희망자 불일치"),
+    FAIL_DELETE_WISH(4009, "찜 취소 실패");
     private final int code;
     private final String message;
 

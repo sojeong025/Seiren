@@ -15,6 +15,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UpdateTimestamp;
+import ssafy.e105.Seiren.domain.product.dto.ProductUpdateDto;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.voice.dto.VoiceUpdateDto;
@@ -72,6 +73,10 @@ public class Voice {
         this.voiceTitle = voiceUpdateDto.getVoiceTitle();
         this.voiceAvatarUrl = voiceUpdateDto.getVoiceAvatarUrl();
         this.memo = voiceUpdateDto.getMemo();
+    }
+
+    public void update(ProductUpdateDto productUpdateDto) {
+        this.voiceAvatarUrl = productUpdateDto.getVoiceAvatarUrl();
     }
 
     public void delete() {
