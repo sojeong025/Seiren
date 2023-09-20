@@ -6,13 +6,13 @@ import { BsFillMicFill, BsStopFill, BsPlayFill } from "react-icons/bs";
 
 const VoiceRecord = () => {
   const [recordingStatus, setRecordingStatus] = useRecoilState(RecordState);
-
   const [stream, setStream] = useState<MediaStream | null>(null); // 오디오 스트림 저장
   const [media, setMedia] = useState<MediaRecorder | null>(null); // 인스턴스 저장
   const [analyser, setAnalyser] =  useState<ScriptProcessorNode | null>(null);
   const [source, setSource] = useState<MediaStreamAudioSourceNode | null>(null); // 오디오 소스 저장
   const [audioUrl, setAudioUrl] = useState<Blob | string | ArrayBuffer | null>(null);  // 녹음된 오디오 데이터의 Url 저장
   const [disabled, setDisabled] = useState<boolean>(true);
+
 
   // 사용자가 음성 녹음을 시작했을 때
   const onRecAudio = () => {
@@ -137,7 +137,7 @@ const VoiceRecord = () => {
         
         {(recordingStatus === 'stopped') && (
           <>
-            {/* <button onClick={onSubmitAudioFile}>저장</button>   */}
+            <button onClick={onSubmitAudioFile}>저장</button>  
             <button className={styles.Btn_play} onClick={play} disabled={!audioUrl}><BsPlayFill /></button>   
           </>
         )}
