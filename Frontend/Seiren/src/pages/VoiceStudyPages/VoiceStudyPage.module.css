@@ -36,3 +36,9 @@
 .btn:hover{
   background-color: #E5B8F4;
 }
+
+.icon {
+  height: 350px;
+  display: flex;
+  justify-content: center;
+}

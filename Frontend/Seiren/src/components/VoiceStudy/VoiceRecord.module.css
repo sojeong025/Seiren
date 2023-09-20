@@ -28,6 +28,10 @@
   color: white;
   border: 8px solid #fff;
   border-radius: 50%;
+  text-align: center;
+}
+.Btn_play{
+  padding-left: 15px;
 }
 .Btn_record:hover , .Btn_stop:hover, .Btn_play:hover{
   cursor: pointer;
