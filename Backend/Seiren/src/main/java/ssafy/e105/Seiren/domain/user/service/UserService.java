@@ -105,8 +105,9 @@ public class UserService {
 
         if(nickname.matches("^[0-9a-zA-Zㄱ-ㅎ가-힣]{2,8}$")){
             Optional<User> user = userRepository.findByNickname(nickname);
-            if(user.isEmpty()) return true;
-            throw new BaseException(new ApiError(EXIST_NICKNAME.getMessage(), EXIST_NICKNAME.getCode()));
+            if(!user.isEmpty()) throw new BaseException(new ApiError(EXIST_NICKNAME.getMessage(), EXIST_NICKNAME.getCode()));
+            return true;
+
         }
         throw new BaseException(new ApiError(NICKNAME_UNMATCHED_FORMAT.getMessage(), NICKNAME_UNMATCHED_FORMAT.getCode()));
 
@@ -114,14 +115,13 @@ public class UserService {
 
     @Transactional
     public boolean nicknameUpdate(HttpServletRequest request, NicknameReqDto nicknameReqDto){
-        try{
+
+        if(nicknameReqDto.getNickname().matches("^[0-9a-zA-Zㄱ-ㅎ가-힣]{2,8}$")){
             User user = getUser(request);
             user.updateNickname(nicknameReqDto.getNickname());
             return true;
-        }catch (Exception e){
-            e.printStackTrace();
-            throw new BaseException(new ApiError(UPDATE_NICKNAME_ERROR.getMessage(), UPDATE_NICKNAME_ERROR.getCode()));
         }
+        throw new BaseException(new ApiError(UPDATE_NICKNAME_ERROR.getMessage(), UPDATE_NICKNAME_ERROR.getCode()));
     }
 
     @Transactional

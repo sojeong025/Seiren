@@ -11,10 +11,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ssafy.e105.Seiren.global.common.BaseResponse;
 import ssafy.e105.Seiren.domain.oauth.kakao.service.KakaoService;
 import ssafy.e105.Seiren.domain.user.dto.token.TokenDto;
+import ssafy.e105.Seiren.global.utils.ApiError;
 import ssafy.e105.Seiren.global.utils.ApiResult;
 import ssafy.e105.Seiren.global.utils.ApiUtils;
 
 import java.nio.charset.StandardCharsets;
+
+import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_USER;
 
 @RestController
 @RequestMapping(value = "/api/login/oauth2", produces = "application/json")
@@ -27,7 +30,7 @@ public class kakaoController {
 
     @Operation(summary = "kakaologin")
     @GetMapping("/code/kakao")
-    public BaseResponse kakaoOauth(HttpServletResponse response
+    public ApiResult kakaoOauth(HttpServletResponse response
             , @RequestParam("code") String code
 //            , @PathVariable("registrationId") String registrationId
     ){
@@ -41,10 +44,10 @@ public class kakaoController {
 //                    .toUriString());
 //
 //            return BaseResponse.success(tokenDto);
-            return BaseResponse.success(kakaoService.getKakaoInfo(code));
+            return ApiUtils.success(kakaoService.getKakaoInfo(code));
         }catch (Exception e){
             e.printStackTrace();
-            return BaseResponse.error("OAUTH로그인에 실패하였습니다.");
+            return ApiUtils.error(new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode()));
         }
 
     }

@@ -60,9 +60,10 @@ public class User {
     /**
      * oauth 회원 가입 로직
      */
-    public static User toEntity(String email, String nickname, String profileImg) {
+    public static User toEntity(String email, String nickname, String profileImg, PasswordEncoder encoder) {
         return User.builder()
                 .email(email)
+                .password(encoder.encode(email))
                 .nickname(nickname)
                 .profileImg(profileImg)
                 .createAt(LocalDateTime.now())
