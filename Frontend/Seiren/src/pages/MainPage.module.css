@@ -1,0 +1,132 @@
+:root {
+  --bg: #3C465C;
+  --primary: #78FFCD;
+  --solid: #fff;
+  --btn-w: 10em;
+  --dot-w: calc(var(--btn-w)*.2);
+  --tr-X: calc(var(--btn-w) - var(--dot-w));
+}
+* {box-sizing: border-box;}
+*:before, *:after {box-sizing: border-box;}
+
+
+
+.mainPageContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.videoBackground {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 비디오를 화면에 맞추어 표시 */
+  object-position: center top; /* 화면 중앙 상단에 비디오 위치 */
+  position: fixed; /* 스크롤 생성 방지 */
+}
+.textContainer {
+  position: absolute; /* absolute로 변경 */
+  top: 50%; /* 화면 상단에서 중앙으로 이동 */
+  left: 50%; /* 화면 왼쪽에서 중앙으로 이동 */
+  transform: translate(-50%, -50%); /* 중앙 정렬 */
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .textContainer {
+    bottom: 10px; /* 작은 화면에서도 아래로 10px 떨어진 위치로 유지 */
+    right: 10px; /* 작은 화면에서도 오른쪽으로 10px 떨어진 위치로 유지 */
+  }
+}
+.logoText{
+  font-size: 120px;
+  margin: 0;
+}
+.text {
+  text-align: center;
+}
+
+.title {
+  font-size: calc(35px + 1vw);
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.subtitle {
+  font-size: calc(4px + 1.4vw);
+  font-family: "Montserrat", sans-serif;
+  font-weight: semi-bold;
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+.bottomTextContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto; /* 화면 높이에 맞게 컨테이너 높이 설정 */
+}
+.bottomText {
+  position: absolute;
+  bottom: 10%;
+  left: 50%-calc(10%);
+  display: flex;
+  flex-direction: row;
+}
+.toAbout{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+  font-size: 20px;
+}
+
+
+.voiceStudybtn{
+  position: relative;
+  margin: 0 auto;
+  width: var(--btn-w);
+  color: var(--primary);
+  border: .15em solid var(--primary);
+  border-radius: 5em;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.3em;
+  line-height: 2em;
+  cursor: pointer;  
+}
+.dot {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: var(--dot-w);
+  height: 100%;
+  border-radius: 100%;
+  transition: all 300ms ease;
+  display: none;
+}
+.dot:after {
+  content: '';
+  position: absolute;
+  left: calc(50% - .4em);
+  top: -.4em;
+  height: .8em;
+  width: .8em;
+  background: var(--primary);
+  border-radius: 1em;
+  border: .25em solid var(--solid);
+  box-shadow: 0 0 .7em var(--solid),
+        0 0 2em var(--primary);
+}
+.voiceStudybtn:hover .dot,
+.voiceStudybtn:focus .dot {
+  animation: atom 2s infinite linear;
+  display: block;
+}
+@keyframes atom {
+  0% {transform: translateX(0) rotate(0);}
+  30%{transform: translateX(var(--tr-X)) rotate(0);}
+  50% {transform: translateX(var(--tr-X)) rotate(180deg);}
+  80% {transform: translateX(0) rotate(180deg);}
+  100% {transform: translateX(0) rotate(360deg);}
+}

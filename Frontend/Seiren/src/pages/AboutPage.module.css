@@ -1,0 +1,12 @@
+.aboutpage {
+    background-color: #000000; /* 배경색 지정 */
+    padding: 20px; /* 패딩 추가 */
+    border-radius: 10px; /* 모서리를 둥글게 만듦 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    font-size: 24px; /* 폰트 크기 조정 */
+    margin: 20px auto; /* 가운데 정렬 */
+    max-width: 800px; /* 최대 너비 지정 */
+    
+  }
+  

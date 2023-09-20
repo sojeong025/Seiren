@@ -1,69 +1,59 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+@font-face {
+  font-family: 'SBAggroB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+@font-face {
+  font-family: 'SBAggroM';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
-a:hover {
-  color: #535bf2;
+@font-face {
+  font-family: 'SBAggroL';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
-
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  background-color: #000;
+  color: #EEEEEE;
+  font-family: 'SBAggroL', 'SBAggroM', 'SBAggroB';
+}
+a {
+  text-decoration-line: none;
+  color: #EEEEEE;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+* {
+  box-sizing: border-box;
+}
+/* 스크롤바 스타일링 */
+::-webkit-scrollbar {
+  width: 11px; /* 스크롤바 너비 */
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* 스크롤바 트랙 스타일링 */
+::-webkit-scrollbar-track {
+  background-color: #c1bcbc; /* 트랙 배경색 */
+  border-radius: 5px; /* 트랙의 모서리 둥글게 */
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* 스크롤바 핸들(썸) 스타일링 */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* 핸들 색상 */
+  border-radius: 5px; /* 핸들의 모서리 둥글게 */
+}
+
+/* 스크롤바 핸들을 클릭했을 때의 스타일링 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* 핸들 호버 시 색상 변경 */
+}
+
+/* 스크롤바를 드래그할 때의 스타일링 */
+::-webkit-scrollbar-thumb:active {
+  background-color: #333; /* 핸들 클릭 시 색상 변경 */
 }
