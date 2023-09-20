@@ -10,13 +10,16 @@ import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_US
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ssafy.e105.Seiren.domain.product.dto.ProductCategoryDto;
 import ssafy.e105.Seiren.domain.product.dto.ProductDto;
 import ssafy.e105.Seiren.domain.product.dto.WishListDto;
 import ssafy.e105.Seiren.domain.product.entity.Product;
+import ssafy.e105.Seiren.domain.product.entity.ProductCategory;
 import ssafy.e105.Seiren.domain.product.entity.Wish;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
 import ssafy.e105.Seiren.domain.product.repository.WishRepository;
@@ -72,9 +75,19 @@ public class WishService {
             List<ProductDto> productDtoList = user.getWishes().stream()
                     .map(wish -> {
                         ProductDto productDto = new ProductDto();
+                        List<ProductCategoryDto> productCategoryDtoList = new ArrayList<>();
+                        for (ProductCategory productCategory : wish.getProduct()
+                                .getProductCategories()) {
+                            ProductCategoryDto productCategoryDto = new ProductCategoryDto(
+                                    productCategory);
+                            productCategoryDtoList.add(productCategoryDto);
+                        }
                         productDto.setProductId(wish.getProduct().getProductId());
                         productDto.setTitle(wish.getProduct().getProductTitle());
+                        productDto.setSummary(wish.getProduct().getSummary());
+                        productDto.setProductImageUrl(wish.getProduct().getProductImageUrl());
                         productDto.setPrice(wish.getProduct().getPrice());
+                        productDto.setProductCategoryList(productCategoryDtoList);
                         return productDto;
                     })
                     .collect(Collectors.toList());

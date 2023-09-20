@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ssafy.e105.Seiren.domain.product.dto.ProductCreateRequest;
 import ssafy.e105.Seiren.domain.product.dto.ProductUpdateDto;
 import ssafy.e105.Seiren.domain.product.service.ProductService;
+import ssafy.e105.Seiren.domain.product.service.SearchService;
 import ssafy.e105.Seiren.global.utils.ApiResult;
 import ssafy.e105.Seiren.global.utils.ApiUtils;
 
@@ -19,6 +21,7 @@ import ssafy.e105.Seiren.global.utils.ApiUtils;
 public class ProductController {
 
     private final ProductService productService;
+    private final SearchService searchService;
 
     @PostMapping("/api/products")
     public ApiResult<?> productCreate(@RequestBody ProductCreateRequest productCreateRequest,
@@ -47,4 +50,9 @@ public class ProductController {
         return ApiUtils.success("성공적으로 상품 정보를 변경하였습니다.");
     }
 
+    @GetMapping("/api/products")
+    public ApiResult<?> searchProduct(@RequestParam String nickname,
+            HttpServletRequest request) {
+        return ApiUtils.success(searchService.searchProduct(nickname, request));
+    }
 }
