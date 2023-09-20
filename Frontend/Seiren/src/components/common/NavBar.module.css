@@ -22,6 +22,9 @@
   margin-right: 240px;
   width: calc(100% - 480px);
 }
+.opaque a{
+  color: #000;
+}
 
 .content {
   display: flex;
