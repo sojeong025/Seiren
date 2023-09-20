@@ -31,3 +31,29 @@ a {
 * {
   box-sizing: border-box;
 }
+/* 스크롤바 스타일링 */
+::-webkit-scrollbar {
+  width: 11px; /* 스크롤바 너비 */
+}
+
+/* 스크롤바 트랙 스타일링 */
+::-webkit-scrollbar-track {
+  background-color: #c1bcbc; /* 트랙 배경색 */
+  border-radius: 5px; /* 트랙의 모서리 둥글게 */
+}
+
+/* 스크롤바 핸들(썸) 스타일링 */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* 핸들 색상 */
+  border-radius: 5px; /* 핸들의 모서리 둥글게 */
+}
+
+/* 스크롤바 핸들을 클릭했을 때의 스타일링 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* 핸들 호버 시 색상 변경 */
+}
+
+/* 스크롤바를 드래그할 때의 스타일링 */
+::-webkit-scrollbar-thumb:active {
+  background-color: #333; /* 핸들 클릭 시 색상 변경 */
+}
