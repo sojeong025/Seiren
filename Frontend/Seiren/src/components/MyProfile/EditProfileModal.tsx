@@ -1,49 +1,34 @@
+// EditProfileModal.js
+
 import React, { useState } from 'react';
-import styles from './EditProfileModal.module.css'; // CSS 모듈을 불러옵니다.
 
-function EditProfileModal({ isOpen, onClose, onSave, userData }) {
-  const [editedUserData, setEditedUserData] = useState(userData);
+function EditProfileModal({ initialNickname, initialProfileImage, onSave, onClose }) {
+  const [nickname, setNickname] = useState(initialNickname);
+  const [profileImage, setProfileImage] = useState(initialProfileImage);
 
-  const handleNicknameChange = (e) => {
-    const { name, value } = e.target;
-    setEditedUserData({ ...editedUserData, [name]: value });
+  const handleSave = () => {
+    // 수정된 정보를 onSave 콜백 함수를 통해 부모 컴포넌트로 전달
+    onSave({ nickname, profileImage });
+    onClose(); // 모달 닫기
   };
-
-  const handleImageChange = (e) => {
-    // 이미지 업로드 로직 구현
-  };
-
-  const handleSubmit = () => {
-    onSave(editedUserData);
-    onClose();
-  };
-
-  if (!isOpen) return null;
 
   return (
-    <div className={styles.modalOverlay}> {/* CSS 모듈 클래스를 적용합니다. */}
-      <div className={styles.modalContent}> {/* CSS 모듈 클래스를 적용합니다. */}
-        <h2>Edit Profile</h2>
-        <label>
-          Nickname:
-          <input
-            type="text"
-            name="nickname"
-            value={editedUserData.nickname}
-            onChange={handleNicknameChange}
-          />
-        </label>
-        <label>
-          Profile Image:
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-        </label>
-        <button onClick={handleSubmit} className={styles.saveButton}>Save</button> {/* CSS 모듈 클래스를 적용합니다. */}
-        <button onClick={onClose} className={styles.cancelButton}>Cancel</button> {/* CSS 모듈 클래스를 적용합니다. */}
-      </div>
+    <div>
+      <h2>Edit Profile</h2>
+      <label>Nickname:</label>
+      <input
+        type="text"
+        value={nickname}
+        onChange={(e) => setNickname(e.target.value)}
+      />
+      <label>Profile Image URL:</label>
+      <input
+        type="text"
+        value={profileImage}
+        onChange={(e) => setProfileImage(e.target.value)}
+      />
+      <button onClick={handleSave}>Save</button>
+      <button onClick={onClose}>Cancel</button>
     </div>
   );
 }
