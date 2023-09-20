@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import { RecordState } from '../../recoil/RecordAtom';
 import styles from "./VoiceRecord.module.css";
 import { BsFillMicFill, BsStopFill, BsPlayFill } from "react-icons/bs";
+import axios from 'axios';
 
 const VoiceRecord = () => {
   const [recordingStatus, setRecordingStatus] = useRecoilState(RecordState);
@@ -103,7 +104,31 @@ const VoiceRecord = () => {
     if(audioUrl) {
       let blob=new Blob([audioUrl],{type:"audio/wav"})
       let url=URL.createObjectURL(blob)
-      console.log(url); 
+      console.log(url);
+
+      const formData = new FormData();
+      const accessToken = localStorage.getItem("accessToken");
+      formData.append('file', blob);
+
+      axios.post('http://192.168.40.134:8080/api/records', formData, {
+
+        headers: {
+          'Content-Type' : 'multipart/form-data',
+          'Authorization' : `Bearer ${accessToken}`,
+        }
+      })
+      .then((response) => {
+        console.log('성공했다!')
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error.messsage);
+        if(error.response){
+          console.error(error.response.data);
+          console.error(error.response.status);
+          console.error(error.response.headers);
+        }
+      });
     }
   }, [audioUrl]);
 
