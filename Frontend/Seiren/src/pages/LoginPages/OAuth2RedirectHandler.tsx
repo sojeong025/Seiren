@@ -6,23 +6,26 @@ const OAuth2RedirectHandler: React.FC = () => {
   let params = new URL(document.URL).searchParams;
   let code = params.get('code');
   let navigate = useNavigate();
+  
+  async function fetchToken() {
+    try {
+        const res = await AuthenticationService.kakaoLogin(code as string);
+        console.log('kakaoLogin 성공');
+        console.log(res);
+        AuthenticationService.registerSuccessfulLoginForJwt(res.data.response.accessToken);
+    } catch (error) {
+      console.log('kakaoLogin 실패');
+    }
+  }
+
 
   useEffect(() => {
-    async function fetchToken() {
-      try {
-        const response = await AuthenticationService.kakaoLogin(code as string);
-        console.log('kakaoLogin');
-        console.log(response.data.data.token);
-        console.log(response.data.data.userEmail);
-      } catch (error) {
-        console.log(code)
-        console.log('kakaoLogin 실패');
-      }
+    let act = localStorage.getItem("accessToken");
+    if(act === null){
+      fetchToken();
       navigate('/');
     }
-
-    fetchToken();
-  }, [navigate, code]);
+  }, []);
 
   return (
     <div>
