@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { AuthenticationService } from './AuthenticationService';
 
@@ -17,15 +17,18 @@ const OAuth2RedirectHandler: React.FC = () => {
       console.log('kakaoLogin 실패');
     }
   }
+  const [check, setCheck] = useState(false);
 
+  useEffect(()=>{
+    setCheck(true);
+  },[]);
 
   useEffect(() => {
-    let act = localStorage.getItem("accessToken");
-    if(act === null){
-      fetchToken();
-      navigate('/');
-    }
-  }, []);
+      if(check == true){
+        fetchToken();
+        navigate('/');
+      }
+  }, [check]);
 
   return (
     <div>
