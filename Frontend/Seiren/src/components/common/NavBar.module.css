@@ -1,11 +1,9 @@
 .container {
   background-color: transparent;
-  width: calc(100% - 480px); /* 240px * 2 (좌우 마진의 합) */
+  width: 100%;
   height: auto;
   position: fixed;
   z-index: 1;
-  margin-left: 240px;
-  margin-right: 240px;
 }
 
 .scrollDown {
@@ -18,9 +16,6 @@
   position: fixed;
   z-index: 1;
   backdrop-filter: blur(8px);
-  margin-left: 240px;
-  margin-right: 240px;
-  width: calc(100% - 480px);
 }
 .opaque a{
   color: #000;
@@ -30,10 +25,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-left: 30px;
-  margin-right: 30px;
   transition: opacity 0.3s ease; /* opacity 속성에 대한 전환 효과 추가 */
   opacity: 1; /* 초기에는 보이도록 설정 */
+  margin-left: 240px;
+  margin-right: 240px;
+  width: calc(100% - 480px);
 }
 
 .nav {
