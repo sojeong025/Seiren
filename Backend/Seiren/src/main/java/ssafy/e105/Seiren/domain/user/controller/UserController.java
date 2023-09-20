@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @Operation(summary = "닉네임 중복 체크")
-    @GetMapping("/nicknames/chcek")
+    @GetMapping("/nicknames/check")
     public ApiResult nicknameCheck(@RequestParam("nickname") String nickname){
         return ApiUtils.success(userService.nicknameCheck(nickname));
     }

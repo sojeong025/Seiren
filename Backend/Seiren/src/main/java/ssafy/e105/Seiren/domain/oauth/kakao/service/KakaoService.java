@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
@@ -34,6 +35,7 @@ public class KakaoService {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
+    private final PasswordEncoder passwordEncoder;
 
     @Value("${kakao.client.id}")
     private  String KAKAO_CLIENT_ID;
@@ -84,8 +86,8 @@ public class KakaoService {
             e.printStackTrace();
             throw new Exception("API call failed");
         }
-
         return getUserInfoWithToken(accessToken);
+
     }
 
     @Transactional
@@ -121,7 +123,7 @@ public class KakaoService {
         String nickname = generateUniqueNickname();
 
         if(user.isEmpty()){
-            userRepository.save(User.toEntity(email, nickname,profileImg));
+            userRepository.save(User.toEntity(email, nickname,profileImg, passwordEncoder));
             userRepository.flush();
         }
 
