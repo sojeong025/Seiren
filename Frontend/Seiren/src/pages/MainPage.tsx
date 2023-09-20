@@ -37,10 +37,10 @@ export default function MainPage() {
       </video>
       <div className={styles.textContainer}>
         <div style={textStyle} className={styles.text}>
-          <p className={styles.title}>
-            <p className={styles.logoText}>SEIREN</p>
+          <div className={styles.title}>
+            <div className={styles.logoText}>SEIREN</div>
             AI VOICE
-          </p>
+          </div>
           {/* <p className={styles.subtitle}>Experience Now!</p> */}
         </div>
       </div>
@@ -53,6 +53,7 @@ export default function MainPage() {
           <Link to="/about" className={styles.toAbout}> About >> </Link>
         </div>
       </div>
+      <div></div>
     </div>
   );
 }
