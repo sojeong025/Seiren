@@ -1,12 +1,52 @@
-.aboutpage {
-    background-color: #000000; /* 배경색 지정 */
-    padding: 20px; /* 패딩 추가 */
-    border-radius: 10px; /* 모서리를 둥글게 만듦 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
-    text-align: center; /* 텍스트 중앙 정렬 */
-    font-size: 24px; /* 폰트 크기 조정 */
-    margin: 20px auto; /* 가운데 정렬 */
-    max-width: 800px; /* 최대 너비 지정 */
-    
-  }
-  
+.container {
+  margin: 0px -220px;
+  overflow-x: hidden;
+}
+
+/* section1 */
+.section1 {
+  margin: 0px 220px;
+  display: flex;
+  flex-direction: column;
+}
+.section1 hr{
+  margin-top: 20px;
+}
+.main {
+  display: flex;
+}
+.main_txt {
+  margin-top: 160px;
+  font-size: 52px;
+  font-weight: bold;
+  line-height: 70px;
+}
+.main_txt span {
+  color: #E5B8F4;
+}
+
+/* section2 */
+.section2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #F0F0F0;
+}
+.section2_txt, .section2_txt2{
+  color: #9BA4B5;
+  display: flex;
+  justify-content: center;
+  font-size: 100px;
+  font-weight: bold;
+  line-height: 200px;
+}
+
+.section2_video{
+  position: absolute;;
+}
+
+/* section3 */
+.section3 {
+  background-color: #9BA4B5;
+}
