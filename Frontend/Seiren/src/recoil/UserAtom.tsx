@@ -5,6 +5,5 @@ export const UserState = atom({
   default: {
     nickname: "",
     profileImage: "",
-    email: "",
   }
 });

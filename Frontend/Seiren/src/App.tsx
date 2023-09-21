@@ -30,12 +30,12 @@ import OAuth2RedirectHandler from "./pages/LoginPages/OAuth2RedirectHandler";
 
 // 공통
 import NavBar from "./components/common/NavBar";
-import SideBar from "./components/common/SideBar";
+// import SideBar from "./components/common/SideBar";
 
 function App() {
   return (
     <Router>
-      <SideBar />
+      {/* <SideBar /> */}
       <NavBar />
         <Routes>
           <Route path="/" element={<MainPage />} />

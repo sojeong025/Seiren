@@ -6,7 +6,7 @@ function YourComponent() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjk1MjczNDAxLCJleHAiOjE2OTUyNzk0MDF9.y5G8BFF4fo9jxS1Q41tB1yG8W_AkTFFsjfEUjySBYcY'; // Replace with your access token
+  const accessToken = localStorage.getItem("accessToken");
   const apiUrl = 'http://192.168.40.134:8080/api/voices';
 
   useEffect(() => {

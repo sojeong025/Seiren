@@ -4,7 +4,7 @@ import styles from './Likes.module.css';
 
 function Likes() {
   const [wishList, setWishList] = useState([]);
-  const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjk1MjczNDAxLCJleHAiOjE2OTUyNzk0MDF9.y5G8BFF4fo9jxS1Q41tB1yG8W_AkTFFsjfEUjySBYcY'; // 여기에 액세스 토큰을 넣어주세요
+  const accessToken = localStorage.getItem("accessToken");
 
   useEffect(() => {
     const apiUrl = 'http://192.168.40.134:8080/api/wish'; // API 엔드포인트 URL
