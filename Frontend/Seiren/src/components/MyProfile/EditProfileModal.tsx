@@ -1,26 +1,17 @@
 import { useState } from 'react';
+import { useRecoilState } from "recoil";
+import { UserState } from '../../recoil/UserAtom';
 import styles from './EditProfileModal.module.css';
 import axios from 'axios';
 
-const accessToken = localStorage.getItem("accessToken");
-
-function EditProfileModal({ closeModal, updateProfile }) {
-  const [newNickname, setNewNickname] = useState('');
+function EditProfileModal({ closeModal }) {
+  const [userInfo, setUserInfo] = useRecoilState(UserState);
+  const [newNickname, setNewNickname] = useState(userInfo.nickname);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isNicknameAvailable, setIsNicknameAvailable] = useState<boolean | null>(null);
 
-  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setNewNickname(inputValue);
-    // 닉네임 유효성 검사: 2글자 이상 8글자 이하, 특수 문자와 공백 포함하지 않음
-    const isValid = /^[a-zA-Z0-9가-힣]{2,8}$/.test(inputValue);
-    if (isValid) {
-      setError(null); // 유효한 경우 에러 메시지를 지웁니다.
-    } else {
-      setError('닉네임은 2글자 이상 8글자 이하의 문자, 숫자, 한글만 허용됩니다.');
-    }
-  };
+  const accessToken = localStorage.getItem("accessToken");
 
   const checkNicknameAvailability = async () => {
     try {
@@ -46,9 +37,18 @@ function EditProfileModal({ closeModal, updateProfile }) {
       setError('닉네임 중복 검사 중 오류 발생');
     }
   };
-  
-  
-  
+
+  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setNewNickname(inputValue);
+    // 닉네임 유효성 검사: 2글자 이상 8글자 이하, 특수 문자와 공백 포함하지 않음
+    const isValid = /^[a-zA-Z0-9가-힣]{2,8}$/.test(inputValue);
+    if (isValid) {
+      setError(null); // 유효한 경우 에러 메시지를 지웁니다.
+    } else {
+      setError('닉네임은 2글자 이상 8글자 이하의 문자, 숫자, 한글만 허용됩니다.');
+    }
+  };
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
@@ -79,7 +79,7 @@ function EditProfileModal({ closeModal, updateProfile }) {
       });
 
       // 업데이트 성공 시 프로필 업데이트 후 모달 닫기
-      updateProfile({ nickname: newNickname });
+      setUserInfo(prev => ({...prev, nickname: newNickname})); 
       closeModal();
     } catch (error) {
       console.error('프로필 변경 중 오류 발생:', error);
