@@ -17,7 +17,7 @@ public class TransactionProductDetailResponse {
     private Long transactionId;
     private String productImageUrl;
     private String productTitle;
-    private List<ProductCategory> productCategories;
+    private List<String> productCategories;
     private String summary;
     private int remainLetter;
     private int totalCount;

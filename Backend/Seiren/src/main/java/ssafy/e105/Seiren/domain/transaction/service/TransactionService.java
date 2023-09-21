@@ -25,6 +25,7 @@ import ssafy.e105.Seiren.global.error.type.BaseException;
 import ssafy.e105.Seiren.global.jwt.JwtTokenProvider;
 import ssafy.e105.Seiren.global.utils.ApiError;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,10 +62,16 @@ public class TransactionService {
 
         // 상품 카테고리, 남은 글자수, 구매 글자수 셋팅
         for(int i=0; i<transactionPageSize; i++){
-            transactionProductResponseList.get(i)
-                    .setProductCategories(productCategoryRepository.findAllByProduct(transactionPage.get(i).getProduct()));
             transactionProductResponseList.get(i).setTotalCount(transactionPage.get(i).getTotalCount());
             transactionProductResponseList.get(i).setRemainLetter(transactionPage.get(i).getRestCount());
+        }
+        for(int i=0; i<transactionPageSize; i++){
+            List<ProductCategory> productCategories = transactionPage.get(i).getProduct().getProductCategories();
+            List<String> categoryList = new ArrayList<>();
+            for(ProductCategory productCategory: productCategories){
+                categoryList.add(productCategory.getCategory().getName());
+            }
+            transactionProductResponseList.get(i).setProductCategories(categoryList);
         }
         return transactionProductResponseList;
     }
@@ -77,11 +84,18 @@ public class TransactionService {
         Transaction transaction = transactionRepository.findByBuyerAndProduct(user.getId(), product.getProductId())
                 .orElseThrow(()->new BaseException(new ApiError(NOT_EXIST_TRANSACTION.getMessage(), NOT_EXIST_TRANSACTION.getCode())));
 
+        List<String> categoryList = new ArrayList<>();
+
+        for(ProductCategory productCategory: product.getProductCategories()){
+            categoryList.add(productCategory.getCategory().getName());
+        }
+
+
         return TransactionProductDetailResponse.builder()
                 .transactionId(transaction.getId())
                 .productImageUrl(product.getProductImageUrl())
                 .productTitle(product.getProductTitle())
-                .productCategories(product.getProductCategories())
+                .productCategories(categoryList)
                 .summary(product.getSummary())
                 .remainLetter(transaction.getRestCount())
                 .totalCount(transaction.getTotalCount())
