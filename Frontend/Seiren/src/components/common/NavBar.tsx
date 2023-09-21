@@ -4,6 +4,7 @@ import styles from "./NavBar.module.css";
 import { AiOutlineMenu } from "react-icons/ai";
 import Logo from "../../assets/logo.png";
 import useScrollDirection from "../../hooks/useScrollDirection";
+import { AuthenticationService } from "../../pages/LoginPages/AuthenticationService";
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,6 +39,10 @@ function NavBar() {
     { text: "사용", link: "/use-voice" },
   ];
 
+  const handleLogin = () => {
+    AuthenticationService.loginSocialKakao(); // 로그인 처리 함수 호출
+  };
+
   return (
     <div
       className={`${scrollY !== 0 ? styles.opaque : styles.container} ${
@@ -68,6 +73,7 @@ function NavBar() {
                 ))}
               </div>
             </div>
+            <div className={styles.login} onClick={handleLogin}>Log in</div>
           </div>
         )}
       </div>
