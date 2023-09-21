@@ -1,47 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { myVoiceState } from '../../recoil/UserAtom';
+import { customAxios } from '../../libs/axios';
+import styles from './YourVoice.module.css'
 
 function YourComponent() {
-  const [apiData, setApiData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  
-  const accessToken = localStorage.getItem("accessToken");
-  const apiUrl = 'http://192.168.40.134:8080/api/voices';
+  const [myVoice, setMyVoice] = useRecoilState(myVoiceState);
 
   useEffect(() => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-
-    axios.get(apiUrl, config)
+    customAxios.get("voices")
       .then((response) => {
-        setApiData(response.data.response);
-        setLoading(false); // Set loading to false when data is received
+        setMyVoice(response.data.response.myVoice);
       })
       .catch((error) => {
-        setError(error);
-        setLoading(false); // Set loading to false on error
+        console.log('내 목소리 API 호출 중 오류 발생:', error)
       });
-  }, [accessToken]);
-
-  // Render loading state while waiting for data
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  // Render error message if there's an error
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+    }, []);
 
   return (
-    <div>
+    <div className={styles.YourVoiceContainer}>
       <h1>Your Voice</h1>
       <ul>
-        {apiData.map((item) => (
+        {myVoice.map((item) => (
           <li key={item.voiceId}>{item.voiceTitle}</li>
         ))}
       </ul>

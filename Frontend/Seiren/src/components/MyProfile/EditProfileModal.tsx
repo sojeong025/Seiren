@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useRecoilState } from "recoil";
 import { UserState } from '../../recoil/UserAtom';
+import { customAxios } from '../../libs/axios';
 import styles from './EditProfileModal.module.css';
-import axios from 'axios';
 
 function EditProfileModal({ closeModal }) {
   const [userInfo, setUserInfo] = useRecoilState(UserState);
@@ -11,18 +11,11 @@ function EditProfileModal({ closeModal }) {
   const [error, setError] = useState<string | null>(null);
   const [isNicknameAvailable, setIsNicknameAvailable] = useState<boolean | null>(null);
 
-  const accessToken = localStorage.getItem("accessToken");
-
-  const checkNicknameAvailability = async () => {
+  
+  // 닉네임 중복 체크
+  const checkNicknameAvailability = async (nickname :string) => {
     try {
-      const checkNicknameUrl = 'http://192.168.40.134:8080/api/user/nicknames/check';
-      const response = await axios.get(checkNicknameUrl, {
-        params: { nickname: newNickname }, // params로 닉네임 전달
-        headers: {
-          Authorization: `Bearer ${accessToken}` // 액세스 토큰을 헤더에 추가
-        }
-      });
-      
+      const response = await customAxios.get('/user/nicknames/check', { params: { nickname } });
       const { apiError, response: isAvailable } = response.data;
   
       if (apiError) {
@@ -38,47 +31,37 @@ function EditProfileModal({ closeModal }) {
     }
   };
 
+  // 닉네임 유효성 검사(중복제거 위해)
+  const validateNickname = (nickname : string) => {
+    const isValid = /^[a-zA-Z0-9가-힣]{2,8}$/.test(nickname);
+    if(!isValid) {
+      setError('닉네임은 2글자 이상 8글자 이하의 문자, 숫자, 한글만 허용됩니다.');
+      return false;
+    }
+    return true;
+  }
+
+   // 1. 사용자가 입력 변경할 때마다 실행 => 실시간으로 사용자에게 입력 값의 유효성 피드백
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setNewNickname(inputValue);
-    // 닉네임 유효성 검사: 2글자 이상 8글자 이하, 특수 문자와 공백 포함하지 않음
-    const isValid = /^[a-zA-Z0-9가-힣]{2,8}$/.test(inputValue);
-    if (isValid) {
-      setError(null); // 유효한 경우 에러 메시지를 지웁니다.
-    } else {
-      setError('닉네임은 2글자 이상 8글자 이하의 문자, 숫자, 한글만 허용됩니다.');
-    }
+
+    validateNickname(inputValue);
   };
 
+  // 2. 사용자가 폼 제출할 때 실행 => 서버에 전송하기 전에 한번 더 검증
   const handleSubmit = async () => {
     setIsSubmitting(true);
     setError(null);
 
-    const nicknameUpdateUrl = 'http://192.168.40.134:8080/api/user/nicknames';
-
     try {
-      // 닉네임 유효성 검사
-      const isValid = /^[a-zA-Z0-9가-힣]{2,8}$/.test(newNickname);
-      if (!isValid) {
-        setError('닉네임은 2글자 이상 8글자 이하의 문자, 숫자, 한글만 허용됩니다.');
-        return;
-      }
-
-      // 닉네임 중복 검사
-      await checkNicknameAvailability();
+      if (!validateNickname(newNickname)) return;
+      await checkNicknameAvailability(newNickname);
       if (!isNicknameAvailable) {
         setError('이미 사용 중인 닉네임입니다.');
         return;
       }
-
-      // 닉네임 업데이트 요청
-      await axios.put(nicknameUpdateUrl, { nickname: newNickname }, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      // 업데이트 성공 시 프로필 업데이트 후 모달 닫기
+      await customAxios.put('/user/nicknames', { nickname: newNickname });
       setUserInfo(prev => ({...prev, nickname: newNickname})); 
       closeModal();
     } catch (error) {
@@ -88,6 +71,7 @@ function EditProfileModal({ closeModal }) {
       setIsSubmitting(false);
     }
   };
+
 
   const handleCancel = () => {
     closeModal();
@@ -105,7 +89,7 @@ function EditProfileModal({ closeModal }) {
           id="newNickname"
           value={newNickname}
           onChange={handleNicknameChange}
-          onBlur={checkNicknameAvailability} // 입력 완료 후 중복 검사
+          onBlur={(e) => checkNicknameAvailability(e.target.value)}
           disabled={isSubmitting}
           className={styles.inputField}
         />

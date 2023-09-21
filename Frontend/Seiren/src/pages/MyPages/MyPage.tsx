@@ -6,9 +6,14 @@ import YourVoice from "../../components/MyProfile/YourVoice";
 function MyPage() {
   return (
     <div className={styles.myPageContainer}>
-      <MyInfo />
-      <Likes />
-      <YourVoice />
+      <div>
+        <MyInfo />
+      </div>
+
+      <div>
+        <Likes />
+        <YourVoice />
+      </div>
     </div>
   );
 }

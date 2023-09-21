@@ -1,32 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { likeListState } from '../../recoil/UserAtom';
+import { customAxios } from '../../libs/axios';
 import styles from './Likes.module.css';
 
 function Likes() {
-  const [wishList, setWishList] = useState([]);
-  const accessToken = localStorage.getItem("accessToken");
+  const [wishList, setWishList] = useRecoilState(likeListState);
 
   useEffect(() => {
-    const apiUrl = 'http://192.168.40.134:8080/api/wish'; // API 엔드포인트 URL
-
-    // API 호출 설정
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`, // 액세스 토큰 추가
-      },
-    };
-
-    // API 호출
-    axios.get(apiUrl, config)
+    customAxios.get("wish")
       .then((response) => {
-        // API 응답 데이터에서 'wishList' 필드를 추출하여 상태에 저장
         setWishList(response.data.response.wishList);
       })
       .catch((error) => {
-        // 오류 처리
         console.error('API 호출 중 오류 발생:', error);
       });
-  }, [accessToken]);
+  }, []);
 
   return (
     <div className={styles.LikesContainer}>
