@@ -17,11 +17,11 @@ public class ProductDetailDto {
     private String nickname;
     private List<String> productCategoryList;
 
-    public ProductDetailDto(Product product, User user, List<String> categoryList) {
+    public ProductDetailDto(Product product, Voice voice, List<String> categoryList) {
         this.productTitle = product.getProductTitle();
         this.productImageUrl = product.getProductImageUrl();
         this.summary = product.getSummary();
-        this.nickname = user.getNickname();
+        this.nickname = voice.getUser().getNickname();
         this.productCategoryList = categoryList;
     }
 }

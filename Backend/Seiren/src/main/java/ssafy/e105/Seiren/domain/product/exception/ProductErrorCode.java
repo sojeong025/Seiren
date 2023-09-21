@@ -17,7 +17,8 @@ public enum ProductErrorCode {
     NOT_EXIST_WISH(4007, "존재하지 않는 Wish"),
     UNMACHED_WISH_USER(4008, "찜 등록자, 찜 취소 희망자 불일치"),
     FAIL_DELETE_WISH(4009, "찜 취소 실패"),
-    FAIL_GET_WISHLIST(4010, "찜 록록 불러오기 실패");
+    FAIL_GET_WISHLIST(4010, "찜 록록 불러오기 실패"),
+    FAIL_SEARCH_PRODUCT(4011, "상품 검색 실패");
     private final int code;
     private final String message;
 
