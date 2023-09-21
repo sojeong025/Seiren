@@ -35,4 +35,8 @@ public class Transaction {
 
     private int restCount;
 
+    public void minusRestCount(int textLength){
+        this.restCount = this.restCount - textLength;
+    }
+
 }
