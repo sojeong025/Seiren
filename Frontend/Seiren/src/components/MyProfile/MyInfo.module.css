@@ -1,29 +1,18 @@
 .profileContainer {
-  margin-bottom: 5vh;
+  border: 1px solid white;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
-  width: 100%;
 }
 
 .profileImage {
-
-  width: 25vh;
-  height: auto;
-  margin-right: 2vh;
+  width: 200px;
 }
 
 .nickName{
-  font-size: 60px;
+  font-size: 30px;
   font-weight: bold;
 }
-
-.feel{
-  text-align: center;
-  font-weight: bold;
-  font-size: 20px;
-}
-
 
 /* "Edit" 버튼 스타일 */
 .editButton {
