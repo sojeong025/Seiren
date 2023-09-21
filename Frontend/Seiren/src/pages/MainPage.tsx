@@ -50,7 +50,7 @@ export default function MainPage() {
             <span>목소리 등록</span>
             <div className={styles.dot}></div>
           </Link>
-          <Link to="/about" className={styles.toAbout}> About >> </Link>
+          <Link to="/about" className={styles.toAbout}> About {'>>'} </Link>
         </div>
       </div>
       <div></div>

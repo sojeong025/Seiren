@@ -1,94 +1,73 @@
-import React, { useState, useEffect } from 'react';
-import styles from './MyInfo.module.css';
-import avatar from '../../assets/preview.png';
-import EditProfileModal from './EditProfileModal';
+import React, { useState, useEffect } from "react";
+import styles from "./MyInfo.module.css";
+import avatar from "../../assets/preview.png";
+import Edit from "./EditProfileModal";
 
 function MyInfo() {
-  const [nickname, setNickname] = useState('');
-  const [profileImage, setProfileImage] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 추가
+  const [userInfo, setUserInfo] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 변수
 
   useEffect(() => {
-    // Access Token 값을 가져온다고 가정
-    const accessToken = 'YOUR_ACCESS_TOKEN'; // 실제 Access Token 값으로 대체
+    // API 엔드포인트 URL 및 액세스 토큰 설정
+    const apiUrl = "http://192.168.40.134:8080/api/user";
+    const accessToken =
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjk1MjU2MDE5LCJleHAiOjE2OTUyNjIwMTl9.0kdhfY7hAgED-kSkmERl0vyLtrEQBTBSDKcY5JWB2Qo";
 
-    // API 호출 예시 (실제 API 엔드포인트 및 데이터 형식에 따라 수정 필요)
-    fetch('http://192.168.40.134:8080/api/user', {
+    // API 호출을 위한 옵션 설정
+    const requestOptions = {
+      method: "GET",
       headers: {
-        'Authorization': `Bearer ${accessToken}`, // Access Token을 헤더에 추가
+        Authorization: `Bearer ${accessToken}`, // 액세스 토큰을 헤더에 추가
       },
-    })
-      .then((response) => {
+    };
+
+    // API 호출
+    fetch(apiUrl, requestOptions)
+      .then(response => {
         if (!response.ok) {
-          // API 호출이 실패하면 로그인을 유도하는 문구를 표시하고 로그인 상태를 변경
-          setIsLoggedIn(false);
-          throw new Error('API 호출 실패');
+          throw new Error("API 호출 실패");
         }
         return response.json();
       })
-      .then((data) => {
-        setNickname(data.nickname);
-        setProfileImage(data.profileImage);
-        setIsLoading(false);
-        setIsLoggedIn(true); // API 호출 성공 시 로그인 상태 변경
+      .then(data => {
+        // API에서 받은 데이터를 userInfo 상태에 저장
+        setUserInfo(data.response);
+        setLoading(false); // 로딩 상태를 false로 설정
       })
-      .catch((error) => {
-        console.error('API 호출 오류:', error);
-        setError(error);
-        setIsLoading(false);
-        setIsLoggedIn(false);
+      .catch(error => {
+        console.error("API 호출 중 오류 발생:", error);
+        setLoading(false); // 오류 발생 시 로딩 상태를 false로 설정
       });
   }, []);
 
-  // 모달 열기 함수
-  const openEditModal = () => {
-    setIsEditing(true);
+  // 모달 열기/닫기 핸들러
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
-  // 모달 닫기 함수
-  const closeEditModal = () => {
-    setIsEditing(false);
-  };
-
-  // 모달에서 수정된 정보 저장 함수
-  const saveProfileChanges = ({ nickname, profileImage }) => {
-    // API 호출 또는 상태 업데이트를 통해 수정된 정보를 저장
-    // 예: API 호출 또는 setNickname, setProfileImage 호출
-    setNickname(nickname);
-    setProfileImage(profileImage);
+  // 프로필 업데이트 후 상태를 업데이트하는 함수
+  const updateProfile = newProfileData => {
+    // 새로운 프로필 데이터를 userInfo 상태로 업데이트
+    setUserInfo(newProfileData);
   };
 
   return (
     <div className={styles.profileContainer}>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : error ? (
-        <div>Error: {error.message}</div>
-      ) : isLoggedIn ? ( // 로그인 상태를 확인하여 표시할 내용 변경
-        <>
-          <img className={styles.profileImage} src={profileImage} alt="Profile" />
-          <div>
-            <div className={styles.nickName}>{nickname}</div>
-            <div className={styles.feel}>#뭘보노 #보노보노야 #앙?</div>
-            <button onClick={openEditModal}>Edit</button>
+      <img className={styles.profileImage} src={userInfo.profileImg || avatar} alt="Profile" />
+      <div>
+        <div className={styles.nickName}>{userInfo.nickname || "Loading..."}</div>
+        <div className={styles.feel}>#뭘보노 #보노보노야 #앙?</div>
+        <button onClick={toggleModal}>Edit Profile</button> {/* 모달 열기 버튼 */}
+        {isModalOpen && (
+          <div className={styles.modalOverlay}>
+            <div className={styles.modalContent}>
+              {/* 모달 컴포넌트에 프로필 업데이트 함수 전달 */}
+              <Edit closeModal={toggleModal} updateProfile={updateProfile} />
+            </div>
           </div>
-        </>
-      ) : (
-        <div>Please log in to see your profile.</div> // 로그인을 유도하는 문구
-      )}
-
-      {/* 모달 열기/닫기 상태에 따라 모달을 렌더링 */}
-      {isEditing && (
-        <EditProfileModal
-          initialNickname={nickname}
-          initialProfileImage={profileImage}
-          onSave={saveProfileChanges}
-          onClose={closeEditModal}
-        />
-      )}
+        )}
+      </div>
     </div>
   );
 }
