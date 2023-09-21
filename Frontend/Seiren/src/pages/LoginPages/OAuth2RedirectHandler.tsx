@@ -12,6 +12,7 @@ const OAuth2RedirectHandler: React.FC = () => {
         const res = await AuthenticationService.kakaoLogin(code as string);
         console.log('kakaoLogin 성공');
         console.log(res);
+
         AuthenticationService.registerSuccessfulLoginForJwt(res.data.response.accessToken);
     } catch (error) {
       console.log('kakaoLogin 실패');

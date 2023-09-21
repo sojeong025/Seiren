@@ -1,45 +1,45 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./MyInfo.module.css";
 import avatar from "../../assets/preview.png";
 import Edit from "./EditProfileModal";
+import { useRecoilState } from 'recoil';  
+import { UserState } from '../../recoil/UserAtom';
+import axios from 'axios';
 
 function MyInfo() {
-  const [userInfo, setUserInfo] = useState({});
-  const [loading, setLoading] = useState(true);
+  // Recoil로 회원 저장
+  const [userInfo, setUserInfo] = useRecoilState(UserState);
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 변수
 
-  useEffect(() => {
-    // API 엔드포인트 URL 및 액세스 토큰 설정
-    const apiUrl = "http://192.168.40.134:8080/api/user";
-    const accessToken =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjk1MjczNDAxLCJleHAiOjE2OTUyNzk0MDF9.y5G8BFF4fo9jxS1Q41tB1yG8W_AkTFFsjfEUjySBYcY";
 
-    // API 호출을 위한 옵션 설정
-    const requestOptions = {
-      method: "GET",
+  // accessToken 받아오기
+  const accessToken = localStorage.getItem("accessToken");
+
+  useEffect(() => {
+    const apiUrl = "http://192.168.40.134:8080/api/user";
+        const requestOptions = {
       headers: {
-        Authorization: `Bearer ${accessToken}`, // 액세스 토큰을 헤더에 추가
+        Authorization: `Bearer ${accessToken}`,
       },
     };
 
     // API 호출
-    fetch(apiUrl, requestOptions)
+    axios.get(apiUrl, requestOptions)
       .then(response => {
-        if (!response.ok) {
+        if (response.status !== 200) {
           throw new Error("API 호출 실패");
         }
-        return response.json();
+        let userData = response.data.response;
+        
+        let updatedUserData = {
+          nickname: userData.nickname,
+          profileImage: userData.profileImage,
+        };
+        
+        setUserInfo(updatedUserData);
       })
-      .then(data => {
-        // API에서 받은 데이터를 userInfo 상태에 저장
-        setUserInfo(data.response);
-        setLoading(false); // 로딩 상태를 false로 설정
-      })
-      .catch(error => {
-        console.error("API 호출 중 오류 발생:", error);
-        setLoading(false); // 오류 발생 시 로딩 상태를 false로 설정
-      });
-  }, []);
+      .catch(error => console.error("API 호출 중 오류 발생:", error));
+        }, []);
 
   // 모달 열기/닫기 핸들러
   const toggleModal = () => {
@@ -54,7 +54,7 @@ function MyInfo() {
 
   return (
     <div className={styles.profileContainer}>
-      <img className={styles.profileImage} src={userInfo.profileImg || avatar} alt="Profile" />
+      <img className={styles.profileImage} src={userInfo.profileImage || avatar} alt="Profile" />
       <div>
         <div className={styles.nickName}>{userInfo.nickname || "Loading..."}</div>
         <div className={styles.feel}>#뭘보노 #보노보노야 #앙?</div>

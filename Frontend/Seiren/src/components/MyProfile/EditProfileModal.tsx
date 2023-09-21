@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './EditProfileModal.module.css';
 import axios from 'axios';
 
-const ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjk1MjYyMjMyLCJleHAiOjE2OTUyNjgyMzJ9.LC5rwDLYVZtF_rTor327rHBxbREIQe5I-RZKREf1XlA'; // 액세스 토큰을 여기에 추가하세요
+const accessToken = localStorage.getItem("accessToken");
 
 function EditProfileModal({ closeModal, updateProfile }) {
   const [newNickname, setNewNickname] = useState('');
@@ -28,7 +28,7 @@ function EditProfileModal({ closeModal, updateProfile }) {
       const response = await axios.get(checkNicknameUrl, {
         params: { nickname: newNickname }, // params로 닉네임 전달
         headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}` // 액세스 토큰을 헤더에 추가
+          Authorization: `Bearer ${accessToken}` // 액세스 토큰을 헤더에 추가
         }
       });
       
@@ -74,7 +74,7 @@ function EditProfileModal({ closeModal, updateProfile }) {
       // 닉네임 업데이트 요청
       await axios.put(nicknameUpdateUrl, { nickname: newNickname }, {
         headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       });
 

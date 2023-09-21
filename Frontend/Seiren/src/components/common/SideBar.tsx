@@ -3,8 +3,6 @@ import styles from './SideBar.module.css'; // 모듈 CSS 파일 import
 
 const menuItems = [
     { text: "홈", link: "/" },
-    { text: "프로필", link: "/profile" },
-    { text: "문의하기", link: "/contact" },
     { text: "마이페이지", link: "/my-page" },
     { text: "구매내역", link: "/buy-list" },
     { text: "판매내역", link: "/sell-list" },
