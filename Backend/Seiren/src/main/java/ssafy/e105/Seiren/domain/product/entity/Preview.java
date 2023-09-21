@@ -22,8 +22,7 @@ public class Preview {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "preview_id")
-    private Long id;
+    private Long previewId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
