@@ -87,7 +87,7 @@ public class ProductService {
                     .get();
             categoryList.add(category.getName());
         }
-        ProductDetailDto productDetailDto = new ProductDetailDto(product, user,
+        ProductDetailDto productDetailDto = new ProductDetailDto(product, voice,
                 categoryList);
 
         return productDetailDto;
