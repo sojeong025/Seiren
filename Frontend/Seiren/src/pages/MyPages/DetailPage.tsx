@@ -13,8 +13,7 @@ const DetailPage: React.FC = () => {
 
   useEffect(() => {
     // Access Token을 여기에 설정
-    const accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjk1MjYyMjMyLCJleHAiOjE2OTUyNjgyMzJ9.LC5rwDLYVZtF_rTor327rHBxbREIQe5I-RZKREf1XlA";
-
+    const accessToken = localStorage.getItem("accessToken");
     // API 호출을 수행하는 함수
     async function fetchProductData() {
       try {
