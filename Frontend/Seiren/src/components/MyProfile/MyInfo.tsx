@@ -12,7 +12,7 @@ function MyInfo() {
     // API 엔드포인트 URL 및 액세스 토큰 설정
     const apiUrl = "http://192.168.40.134:8080/api/user";
     const accessToken =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjk1MjU2MDE5LCJleHAiOjE2OTUyNjIwMTl9.0kdhfY7hAgED-kSkmERl0vyLtrEQBTBSDKcY5JWB2Qo";
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjk1MjYyMjMyLCJleHAiOjE2OTUyNjgyMzJ9.LC5rwDLYVZtF_rTor327rHBxbREIQe5I-RZKREf1XlA";
 
     // API 호출을 위한 옵션 설정
     const requestOptions = {
@@ -58,7 +58,9 @@ function MyInfo() {
       <div>
         <div className={styles.nickName}>{userInfo.nickname || "Loading..."}</div>
         <div className={styles.feel}>#뭘보노 #보노보노야 #앙?</div>
-        <button onClick={toggleModal}>Edit Profile</button> {/* 모달 열기 버튼 */}
+        <button onClick={toggleModal} className={styles.editButton}>
+          닉네임 수정
+        </button>
         {isModalOpen && (
           <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>

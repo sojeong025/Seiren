@@ -101,3 +101,17 @@
 .modalButton.save {
   background-color: #28a745;
 }
+
+.editButton {
+  background-color: #007bff; /* 버튼 배경색 */
+  color: white; /* 버튼 텍스트 색상 */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* 배경색 변경 시 부드럽게 전환 */
+}
+
+.editButton:hover {
+  background-color: #0056b3; /* 호버 시 배경색 변경 */
+}
