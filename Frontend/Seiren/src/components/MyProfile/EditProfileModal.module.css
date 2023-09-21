@@ -1,5 +1,3 @@
-/* EditProfileModal.module.css */
-
 .modalContainer {
     width: 300px;
     background-color: #fff;
@@ -9,57 +7,57 @@
     text-align: center;
   }
   
-  .modalTitle {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .formGroup {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    font-weight: bold;
-  }
-  
-  .inputField {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-  }
-  
-  .submitButton {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  .submitButton:hover {
-    background-color: #0056b3;
-  }
-  
-  .cancelButton {
-    background-color: #ccc;
-    color: #333;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  .cancelButton:hover {
-    background-color: #999;
-    color: #fff;
-  }
+.modalTitle {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+}
+
+.inputField {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.submitButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}
+
+.cancelButton {
+  background-color: #ccc;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.cancelButton:hover {
+  background-color: #999;
+  color: #fff;
+}
   
