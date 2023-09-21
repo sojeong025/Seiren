@@ -1,29 +1,39 @@
 import React, { useState, useEffect } from "react";
 import styles from "./BuyListBox.module.css";
 import BuyCount from "./BuyCount";
+import axios from "axios";
 
 function BuyListBox() {
-  // 예시 데이터 (나중에 API로 대체할 예정)
-  const exampleData = [
-    {
-      seller: "판매자1",
-      voiceTitle: "목소리 제목 1",
-      date: "2023-09-13",
-      purchaseAmountPerCharacter: 10,
-      purchaseCharacterCount: 150,
-    },
-    {
-      seller: "판매자2",
-      voiceTitle: "목소리 제목 2",
-      date: "2023-09-14",
-      purchaseAmountPerCharacter: 8,
-      purchaseCharacterCount: 100,
-    },
-    // 다른 구매 내역 데이터 추가
-  ];
+  const [purchaseData, setPurchaseData] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
 
-  const [itemCount, setItemCount] = useState(exampleData.length);
-  
+  useEffect(() => {
+    const apiUrl = "http://192.168.40.134:8080/api/transaction?page=1";
+    const accessToken = localStorage.getItem("accessToken");
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+
+    axios
+      .get(apiUrl, config)
+      .then((response) => {
+        setPurchaseData(response.data.response);
+        const total = response.data.response.reduce(
+          (total, item) =>
+            total +
+            item.purchaseAmountPerCharacter * item.purchaseCharacterCount,
+          0
+        );
+        setTotalAmount(total);
+      })
+      .catch((error) => {
+        console.error("API 호출 중 오류 발생:", error);
+      });
+  }, []);
+
   return (
     <div className={styles.buyListBox}>
       <h2>구매내역</h2>
@@ -39,8 +49,9 @@ function BuyListBox() {
           </tr>
         </thead>
         <tbody>
-          {exampleData.map((item, index) => {
-            const totalAmount = item.purchaseAmountPerCharacter * item.purchaseCharacterCount;
+          {purchaseData.map((item, index) => {
+            const totalAmount =
+              item.purchaseAmountPerCharacter * item.purchaseCharacterCount;
             return (
               <tr key={index}>
                 <td>{item.seller}</td>
@@ -58,15 +69,7 @@ function BuyListBox() {
             <td colSpan={5} className={styles.totalLabel}>
               총 금액:
             </td>
-            <td className={styles.totalAmount}>
-              {exampleData.reduce(
-                (total, item) =>
-                  total +
-                  item.purchaseAmountPerCharacter * item.purchaseCharacterCount,
-                0
-              )}
-              원
-            </td>
+            <td className={styles.totalAmount}>{totalAmount}원</td>
           </tr>
         </tfoot>
       </table>
@@ -75,4 +78,3 @@ function BuyListBox() {
 }
 
 export default BuyListBox;
-  
