@@ -50,7 +50,7 @@ public class TransactionService {
         User user = getUser(request);
 
         Pageable pageable = PageRequest.of(page, size);
-        List<Transaction> transactionPage = transactionRepository.findAllByBuyer(user, pageable).getContent();
+        List<Transaction> transactionPage = transactionRepository.findAllByBuyer(user.getId(), pageable).getContent();
         // 상품 사진, 상품 타이틀 셋팅
         List<TransactionProductResponse> transactionProductResponseList = transactionPage
                 .stream()
@@ -74,7 +74,7 @@ public class TransactionService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new BaseException(new ApiError(NOT_EXIST_PRODUCT.getMessage(), NOT_EXIST_PRODUCT.getCode())));
 
-        Transaction transaction = transactionRepository.findByBuyerAndProduct(user, product)
+        Transaction transaction = transactionRepository.findByBuyerAndProduct(user.getId(), product.getProductId())
                 .orElseThrow(()->new BaseException(new ApiError(NOT_EXIST_TRANSACTION.getMessage(), NOT_EXIST_TRANSACTION.getCode())));
 
         return TransactionProductDetailResponse.builder()
