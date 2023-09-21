@@ -1,8 +1,19 @@
 package ssafy.e105.Seiren.domain.transaction.entity;
 
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import ssafy.e105.Seiren.domain.payment.dto.PurchaseDto;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.user.entity.User;
 
@@ -35,4 +46,19 @@ public class Transaction {
 
     private int restCount;
 
+    public static Transaction toEntity(Product product, User seller, User buyer,
+            PurchaseDto purchaseDto) {
+        return Transaction.builder()
+                .product(product)
+                .seller(seller)
+                .buyer(buyer)
+                .totalCount(purchaseDto.getBuyLetterCount())
+                .totalCount(purchaseDto.getBuyLetterCount())
+                .build();
+    }
+
+    public void update(Transaction transaction, PurchaseDto purchaseDto) {
+        this.totalCount = transaction.totalCount + purchaseDto.getBuyLetterCount();
+        this.restCount = transaction.restCount + purchaseDto.getBuyLetterCount();
+    }
 }
