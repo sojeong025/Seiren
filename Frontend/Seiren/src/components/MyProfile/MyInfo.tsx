@@ -15,10 +15,10 @@ function MyInfo() {
       .get("user")
       .then(response => {
         let userData = response.data.response;
-
+        
         let updatedUserData = {
           nickname: userData.nickname,
-          profileImage: userData.profileImage,
+          profileImage: userData.profileImg,
         };
         setUserInfo(updatedUserData);
       })
