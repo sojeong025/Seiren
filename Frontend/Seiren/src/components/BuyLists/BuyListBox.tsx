@@ -36,7 +36,7 @@ function BuyListBox() {
 
   return (
     <div className={styles.buyListBox}>
-      <h2>구매내역</h2>
+      <div className={styles.buyListText}>구매내역</div>
       <table className={styles.purchaseTable}>
         <thead>
           <tr>

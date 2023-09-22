@@ -59,7 +59,7 @@ function Likes() {
   return (
     <div className={styles.LikesContainer}>
       <div className={styles.likesText}>Likes</div>
-      <ul>
+      <ul className={styles.likesItems}>
         {wishList.map((item) => (
           <li key={item.productId}>
             <div>{item.title}</div>
