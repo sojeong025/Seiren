@@ -15,7 +15,7 @@ function EditProfileModal({ closeModal }) {
   // 닉네임 중복 체크
   const checkNicknameAvailability = async (nickname :string) => {
     try {
-      const response = await customAxios.get('/user/nicknames/check', { params: { nickname } });
+      const response = await customAxios.get('user/nicknames/check', { params: { nickname } });
       const { apiError, response: isAvailable } = response.data;
   
       if (apiError) {
@@ -61,7 +61,7 @@ function EditProfileModal({ closeModal }) {
         setError('이미 사용 중인 닉네임입니다.');
         return;
       }
-      await customAxios.put('/user/nicknames', { nickname: newNickname });
+      await customAxios.put('user/nicknames', { nickname: newNickname });
       setUserInfo(prev => ({...prev, nickname: newNickname})); 
       closeModal();
     } catch (error) {
