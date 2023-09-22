@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ssafy.e105.Seiren.domain.transaction.entity.Purpose;
 import ssafy.e105.Seiren.domain.transaction.entity.Transaction;
+import ssafy.e105.Seiren.domain.transaction.entity.TransactionDescription;
 
 import java.time.LocalDateTime;
 
@@ -27,5 +28,14 @@ public class TransactionProductReceiptResponse {
     private int buyLetterCount;
 
     private Double totalPrice;
+
+    public static TransactionProductReceiptResponse toDto(TransactionDescription transactionDescription){
+        return TransactionProductReceiptResponse.builder()
+                .productTitle(transactionDescription.getProductTitle())
+                .price(transactionDescription.getPrice())
+                .buyDate(transactionDescription.getBuyDate())
+                .buyLetterCount(transactionDescription.getBuyLetterCount())
+                .build();
+    }
 
 }

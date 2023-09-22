@@ -53,4 +53,10 @@ public class TransactionController {
     public ApiResult getTransactionTotal(HttpServletRequest request){
         return ApiUtils.success(transactionService.getTransactionTotal(request));
     }
+
+    @Operation(description = "목소리 구 목록 영수증")
+    @GetMapping("/receipt")
+    public ApiResult getTransactionProductReceipt(HttpServletRequest request, @RequestParam("page") int page){
+        return ApiUtils.success(transactionService.getTransactionProductReceipt(request, page, 10));
+    }
 }

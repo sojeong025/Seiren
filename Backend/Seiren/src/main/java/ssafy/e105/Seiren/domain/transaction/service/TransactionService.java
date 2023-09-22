@@ -12,12 +12,11 @@ import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.entity.ProductCategory;
 import ssafy.e105.Seiren.domain.product.repository.ProductCategoryRepository;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
-import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductDetailResponse;
-import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductHistoryResponse;
-import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductResponse;
-import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductTTSRequest;
+import ssafy.e105.Seiren.domain.transaction.dto.*;
 import ssafy.e105.Seiren.domain.transaction.entity.Transaction;
+import ssafy.e105.Seiren.domain.transaction.entity.TransactionDescription;
 import ssafy.e105.Seiren.domain.transaction.entity.UseHistory;
+import ssafy.e105.Seiren.domain.transaction.repository.TransactionDescriptionRepository;
 import ssafy.e105.Seiren.domain.transaction.repository.TransactionRepository;
 import ssafy.e105.Seiren.domain.transaction.repository.UseHistoryRepository;
 import ssafy.e105.Seiren.domain.user.entity.User;
@@ -43,10 +42,10 @@ public class TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final ProductRepository productRepository;
-    private final ProductCategoryRepository productCategoryRepository;
     private final UseHistoryRepository useHistoryRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
+    private final TransactionDescriptionRepository transactionDescriptionRepository;
 
     public List<TransactionProductResponse> getTransactionProductList(HttpServletRequest request, int page, int size){
         User user = getUser(request);
@@ -113,6 +112,9 @@ public class TransactionService {
         }
         UseHistory useHistory = UseHistory.toDto(transaction, transactionProductTTSRequest.getText());
         useHistoryRepository.save(useHistory);
+        /**
+         * 글자수 빼기
+         */
         transaction.minusRestCount(transactionProductTTSRequest.getText().length());
         return true;
     }
@@ -122,7 +124,9 @@ public class TransactionService {
 
         Transaction transaction = transactionRepository.findById(transactionId)
                 .orElseThrow(()-> new BaseException(new ApiError(NOT_EXIST_TRANSACTION.getMessage(), NOT_EXIST_TRANSACTION.getCode())));
-
+        /**
+         * 사용 내역
+         */
         List<TransactionProductHistoryResponse> transactionProductHistoryResponseList = useHistoryRepository.findAllByTransaction(transaction, pageable)
                 .getContent()
                 .stream()
@@ -134,6 +138,35 @@ public class TransactionService {
     public int getTransactionTotal(HttpServletRequest request){
         User user = getUser(request);
         return transactionRepository.findByBuyer(user.getId());
+    }
+
+    public List<TransactionProductReceiptResponse> getTransactionProductReceipt(HttpServletRequest request, int page, int size){
+        User user = getUser(request);
+        Pageable pageable = PageRequest.of(page, size);
+        List<TransactionDescription> transactionDescriptionList = transactionDescriptionRepository.findAllByTransaction(user.getId(), pageable).getContent();
+        /**
+         * 거래 설명 셋팅
+         */
+        List<TransactionProductReceiptResponse> transactionProductReceiptResponseList = transactionDescriptionList
+                .stream()
+                .map(TransactionProductReceiptResponse::toDto)
+                .collect(Collectors.toList());
+        int transactionDescriptionListSize = transactionDescriptionList.size();
+        /**
+         * seller 구하기
+         */
+        for(int i=0; i<transactionDescriptionListSize; i++){
+            transactionProductReceiptResponseList.get(i).setSeller(transactionDescriptionList.get(i).getTransaction().getSeller().getNickname());
+        }
+        /**
+         * total가격
+         */
+        for(int i=0; i<transactionDescriptionListSize; i++){
+            Double totalPrice = transactionProductReceiptResponseList.get(i).getPrice() * transactionProductReceiptResponseList.get(i).getBuyLetterCount();
+            transactionProductReceiptResponseList.get(i).setTotalPrice(totalPrice);
+        }
+
+        return transactionProductReceiptResponseList;
     }
 
 
