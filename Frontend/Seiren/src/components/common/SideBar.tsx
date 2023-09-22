@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import styles from "./SideBar.module.css";
 import MyInfo from "../MyProfile/MyInfo";
+import EditIcon from "../../assets/icon/edit.png"
 
 const menuItems = [
   { text: "홈", link: "/" },
@@ -16,7 +17,8 @@ function SideBar() {
   return (
     <div className={styles.sidebar}>
       <MyInfo />
-      <div className={styles["sidebar-list"]}>
+      <span></span>
+      <div className={styles.sidebarlist}>
         {menuItems.map((item, index) => (
           <div key={index}>
             <Link className={` ${location.pathname === item.link ? styles.active : ""}`} to={item.link}>

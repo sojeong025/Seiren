@@ -5,6 +5,7 @@ import { customAxios } from "../../libs/axios";
 import styles from "./MyInfo.module.css";
 import avatar from "../../assets/preview.png";
 import Edit from "../MyProfile/EditProfile";
+import EditIcon from "../../assets/icon/edit.png";
 
 function MyInfo() {
   const [userInfo, setUserInfo] = useRecoilState(UserState);
@@ -15,7 +16,7 @@ function MyInfo() {
       .get("user")
       .then(response => {
         let userData = response.data.response;
-        
+
         let updatedUserData = {
           nickname: userData.nickname,
           profileImage: userData.profileImg,
@@ -32,17 +33,16 @@ function MyInfo() {
   return (
     <div className={styles.profileContainer}>
       <div className={styles.profileLeft}>
-        <img
-          className={styles.profileImage}
-          src={userInfo.profileImage || avatar}
-          alt="Profile"
-          onClick={handleImageClick}
-        />
-        {isEditing && (
-          <div className={styles.editModal}>
-            <Edit />
-          </div>
-        )}
+        <div className={styles.imageContainer}>
+          <img
+            className={styles.profileImage}
+            src={userInfo.profileImage || avatar}
+            alt="Profile"
+            onClick={handleImageClick}
+          />
+          <img src={EditIcon} className={styles.editIcon} alt="Edit Icon" onClick={handleImageClick} />
+          {isEditing && <Edit />}
+        </div>
       </div>
       <div>
         <div className={styles.nickName}>{userInfo.nickname || "닉네임"}</div>
