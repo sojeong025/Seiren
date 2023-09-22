@@ -20,6 +20,10 @@
 .opaque a{
   color: #000;
 }
+.opaque-login{
+  color: #000;
+  border: 2px solid #000;
+}
 
 .content {
   display: flex;
@@ -81,6 +85,14 @@
 .login {
   font-size: 16px;
   border: 2px solid #fff;
+  padding: 5px 10px;
+  border-radius: 10%;
+  transition: transform 0.2s;
+}
+.opaque-login{
+  color: #000;
+  border: 2px solid #000;
+  font-size: 16px;
   padding: 5px 10px;
   border-radius: 10%;
   transition: transform 0.2s;
