@@ -3,7 +3,7 @@ import axios from "axios";
 const SERVER_ADDRESS = `http://192.168.40.134:8080/`;
 
 export const customAxios = axios.create({
-  baseURL: `${SERVER_ADDRESS}/api`,
+  baseURL: `${SERVER_ADDRESS}/api/`,
   headers: {
     "Content-Type": "application/json",
   },
