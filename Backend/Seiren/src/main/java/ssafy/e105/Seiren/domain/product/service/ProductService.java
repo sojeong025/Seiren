@@ -87,8 +87,7 @@ public class ProductService {
                     .get();
             categoryList.add(category.getName());
         }
-        ProductDetailDto productDetailDto = new ProductDetailDto(product, voice,
-                categoryList);
+        ProductDetailDto productDetailDto = new ProductDetailDto(product, voice, categoryList);
 
         return productDetailDto;
     }
@@ -105,9 +104,8 @@ public class ProductService {
                 voiceRepository.save(voice);
                 return;
             }
-            throw new BaseException(
-                    new ApiError(UNMACHED_PRODUCT_USER.getMessage(),
-                            UNMACHED_PRODUCT_USER.getCode()));
+            throw new BaseException(new ApiError(UNMACHED_PRODUCT_USER.getMessage(),
+                    UNMACHED_PRODUCT_USER.getCode()));
         } catch (Exception e) {
             throw new BaseException(
                     new ApiError(FAIL_UPDATE_PRODUCT.getMessage(), FAIL_UPDATE_PRODUCT.getCode()));
@@ -125,9 +123,8 @@ public class ProductService {
                 productRepository.save(product);
                 return;
             }
-            throw new BaseException(
-                    new ApiError(UNMACHED_PRODUCT_USER.getMessage(),
-                            UNMACHED_PRODUCT_USER.getCode()));
+            throw new BaseException(new ApiError(UNMACHED_PRODUCT_USER.getMessage(),
+                    UNMACHED_PRODUCT_USER.getCode()));
         } catch (Exception e) {
             throw new BaseException(
                     new ApiError(FAIL_UPDATE_PRODUCT.getMessage(), FAIL_UPDATE_PRODUCT.getCode()));
@@ -136,27 +133,23 @@ public class ProductService {
 
     public User getUser(HttpServletRequest request) {
         String userEmail = jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request));
-        return userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new BaseException(
-                        new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode())));
+        return userRepository.findByEmail(userEmail).orElseThrow(() -> new BaseException(
+                new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode())));
     }
 
     public Voice getVoice(Long voiceId) {
-        return voiceRepository.findById(voiceId)
-                .orElseThrow(() -> new BaseException(
-                        new ApiError(NOT_EXIST_VOICE.getMessage(), NOT_EXIST_VOICE.getCode())));
+        return voiceRepository.findById(voiceId).orElseThrow(() -> new BaseException(
+                new ApiError(NOT_EXIST_VOICE.getMessage(), NOT_EXIST_VOICE.getCode())));
     }
 
     public Category getCategory(Long categoryId) {
-        return categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new BaseException(new ApiError(NOT_EXIST_CATEGORY.getMessage(),
-                        NOT_EXIST_CATEGORY.getCode())));
+        return categoryRepository.findById(categoryId).orElseThrow(() -> new BaseException(
+                new ApiError(NOT_EXIST_CATEGORY.getMessage(), NOT_EXIST_CATEGORY.getCode())));
     }
 
     public Product getProduct(Long productId) {
-        return productRepository.findById(productId)
-                .orElseThrow(() -> new BaseException(
-                        new ApiError(NOT_EXIST_PRODUCT.getMessage(), NOT_EXIST_PRODUCT.getCode())));
+        return productRepository.findById(productId).orElseThrow(() -> new BaseException(
+                new ApiError(NOT_EXIST_PRODUCT.getMessage(), NOT_EXIST_PRODUCT.getCode())));
     }
 
 }

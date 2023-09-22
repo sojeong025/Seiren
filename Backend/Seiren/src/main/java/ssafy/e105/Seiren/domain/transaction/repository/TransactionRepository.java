@@ -15,6 +15,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     @Query(value = "SELECT t FROM Transaction t WHERE t.buyer.id = :userId")
     Page<Transaction> findAllByBuyer(@Param("userId") Long userId, Pageable pageable);
+    Transaction findTransactionByProduct_ProductIdAndSeller_Id(Long productId, Long sellerId);
     @Query(value = "SELECT t FROM Transaction t WHERE t.buyer.id = :userId AND t.product.productId = :productId")
     Optional<Transaction> findByBuyerAndProduct(@Param("userId") Long userId, @Param("productId") Long productId);
 
