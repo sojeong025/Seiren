@@ -21,6 +21,6 @@ public class ProductCreateRequest {
     private Double price;
     @Schema(description = "미리듣기 텍스트 3문장", example = "[\"문장1\", \"문장2\", \"문장3\"]")
     private List<String> previewTexts;
-    @Schema(description = "카테고리 id 목록", example = "5, 8")
+    @Schema(description = "카테고리 id 목록", example = "[5, 8]")
     private List<Long> categoryList;
 }

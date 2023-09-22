@@ -88,6 +88,7 @@ public class WishService {
                         productDto.setProductImageUrl(wish.getProduct().getProductImageUrl());
                         productDto.setPrice(wish.getProduct().getPrice());
                         productDto.setProductCategoryList(productCategoryDtoList);
+                        productDto.setWish(true);
                         return productDto;
                     })
                     .collect(Collectors.toList());

@@ -63,7 +63,7 @@ public class ProductController {
             HttpServletRequest request) {
         return ApiUtils.success(searchService.searchProduct(searchRequest, request));
     }
-
+}
 //    @Operation(summary = "상품 검색")
 //    @GetMapping("/api/products")
 //    public ApiResult<?> searchProducts(@RequestParam("nickname") String nickname,
@@ -73,4 +73,3 @@ public class ProductController {
 //        return ApiUtils.success(
 //                searchService.searchProduct(nickname, categoryIdList, sortType, request));
 //    }
-}
