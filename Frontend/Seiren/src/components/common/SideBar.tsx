@@ -1,5 +1,7 @@
 import React from 'react';
-import styles from './SideBar.module.css'; // 모듈 CSS 파일 import
+import { Link, useLocation } from 'react-router-dom';
+import styles from './SideBar.module.css';
+import MyInfo from '../MyProfile/MyInfo';
 
 const menuItems = [
     { text: "홈", link: "/" },
@@ -10,13 +12,21 @@ const menuItems = [
 ];
 
 function SideBar() {
+    // 현재 경로 가져오기
+    const location = useLocation();
+
     return (
         <div className={styles.sidebar}>
-            <h2 className={styles.h2}>메뉴</h2>
+            <MyInfo/>
             <ul className={styles['sidebar-list']}>
                 {menuItems.map((item, index) => (
                     <li key={index} className={styles.li}>
-                        <a className={styles.a} href={item.link}>{item.text}</a>
+                        <Link
+                            className={` ${location.pathname === item.link ? styles.active : ''}`}
+                            to={item.link}
+                        >
+                            {item.text}
+                        </Link>
                     </li>
                 ))}
             </ul>

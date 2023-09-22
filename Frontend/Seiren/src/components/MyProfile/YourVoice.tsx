@@ -4,7 +4,7 @@ import { myVoiceState } from '../../recoil/UserAtom';
 import { customAxios } from '../../libs/axios';
 import styles from './YourVoice.module.css'
 
-function YourComponent() {
+function YourVoice() {
   const [myVoice, setMyVoice] = useRecoilState(myVoiceState);
 
   useEffect(() => {
@@ -29,4 +29,4 @@ function YourComponent() {
   );
 }
 
-export default YourComponent;
+export default YourVoice;

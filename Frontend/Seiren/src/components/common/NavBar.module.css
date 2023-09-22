@@ -20,6 +20,10 @@
 .opaque a{
   color: #000;
 }
+.opaque-login{
+  color: #000;
+  border: 2px solid #000;
+}
 
 .content {
   display: flex;
@@ -35,6 +39,10 @@
 .nav {
   display: flex;
   padding-left: 10px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav a:not(:last-child) {
@@ -74,6 +82,27 @@
   text-decoration: none;
   display: block;
 }
+.login {
+  font-size: 16px;
+  border: 2px solid #fff;
+  padding: 5px 10px;
+  border-radius: 10%;
+  transition: transform 0.2s;
+}
+.opaque-login{
+  color: #000;
+  border: 2px solid #000;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 10%;
+  transition: transform 0.2s;
+}
+
+.login:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
 
 /* 드롭다운 끝 */
 
