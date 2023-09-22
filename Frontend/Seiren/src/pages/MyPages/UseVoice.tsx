@@ -6,7 +6,9 @@ function SellList() {
   return (
     <div className={styles.useVoiceContainer}>
       <SideBar />
-      <UseVoiceBox />
+      <div className={styles.useVoiceBox}>
+        <UseVoiceBox />
+      </div>
     </div>
   );
 }

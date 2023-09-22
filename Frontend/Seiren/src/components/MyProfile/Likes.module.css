@@ -1,9 +1,17 @@
 .LikesContainer {
-  border: 1px solid white;
+  width: 100%;
 }
 
 
 .likesText {
   font-size: 30px;
   font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.likesItems{
+  background-color: white;
+  border: 1px solid white;
+  height: 250px;
+  border-radius: 5rem;
 }

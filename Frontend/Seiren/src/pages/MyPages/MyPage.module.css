@@ -1,4 +1,21 @@
 .myPageContainer {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  flex-grow: 1;
+  overflow: hidden;
+}
+.myPageBox {
+  display: block;
+  flex-direction: row;
+  width: 100%;
+  flex-grow: 1;
+  overflow: hidden;
+  margin-left: 20px;
+}
+.likesContainer {
+  margin-bottom: 30px;
+}
+.yourVoiceContainer {
+  margin-bottom: 30px;
 }

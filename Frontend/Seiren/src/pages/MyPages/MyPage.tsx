@@ -3,13 +3,17 @@ import Likes from "../../components/MyProfile/Likes";
 import YourVoice from "../../components/MyProfile/YourVoice";
 import SideBar from "../../components/common/SideBar";
 
-function MyPage({ isNavBarVisible }) {
+function MyPage() {
   return (
     <div className={styles.myPageContainer}>
       <SideBar />
       <div className={styles.myPageBox}>
-        <Likes />
-        <YourVoice />
+        <div className={styles.likesContainer}>
+          <Likes />
+        </div>
+        <div className={styles.yourVoiceContainer}>
+          <YourVoice />
+        </div>
       </div>
     </div>
   );
