@@ -23,7 +23,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  border: 2px solid white;
+  border: 2px solid #BC6FF1;
   border-radius: 2.5rem;
 }
 

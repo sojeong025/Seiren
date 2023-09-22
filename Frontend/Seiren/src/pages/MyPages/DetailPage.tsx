@@ -44,7 +44,7 @@ const DetailPage: React.FC = () => {
 
   // API 데이터를 사용하여 페이지를 렌더링
   return (
-    <div className={styles["detail-container"]}>
+    <div className={styles.detailContainer}>
       <h1>Detail Page</h1>
       <h2>상품 제목: {productData.productTitle}</h2>
       <img src={productData.productImageUrl} alt={`상품 이미지 ${index}`} />
