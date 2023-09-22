@@ -61,4 +61,9 @@ public class Transaction {
         this.totalCount = transaction.totalCount + purchaseDto.getBuyLetterCount();
         this.restCount = transaction.restCount + purchaseDto.getBuyLetterCount();
     }
+
+    public void minusRestCount(int textLength){
+        this.restCount = this.restCount - textLength;
+    }
+
 }

@@ -29,4 +29,16 @@ public class UseHistory {
     private int characterCount;
 
     private LocalDateTime createAt;
+
+    /**
+     * DTO 만들기
+     */
+    public static UseHistory toDto(Transaction transaction, String text){
+        return UseHistory.builder()
+                .transaction(transaction)
+                .text(text)
+                .characterCount(text.length())
+                .createAt(LocalDateTime.now())
+                .build();
+    }
 }
