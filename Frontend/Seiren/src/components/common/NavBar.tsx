@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -10,6 +10,7 @@ function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrollDirection, setScrollDirection] = useScrollDirection("up");
   const [scrollY, setScrollY] = useState(0);
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,10 +18,8 @@ function NavBar() {
       setScrollY(newScrollY);
 
       if (newScrollY > scrollY) {
-        // 스크롤 방향이 아래로 스크롤됨
         setScrollDirection("down");
       } else if (newScrollY < scrollY) {
-        // 스크롤 방향이 위로 스크롤됨
         setScrollDirection("up");
       }
     };

@@ -1,16 +1,13 @@
 import styles from "./MyPage.module.css";
-import MyInfo from "../../components/MyProfile/MyInfo";
 import Likes from "../../components/MyProfile/Likes";
 import YourVoice from "../../components/MyProfile/YourVoice";
+import SideBar from "../../components/common/SideBar";
 
-function MyPage() {
+function MyPage({ isNavBarVisible }) {
   return (
     <div className={styles.myPageContainer}>
-      <div>
-        <MyInfo />
-      </div>
-
-      <div>
+      <SideBar />
+      <div className={styles.myPageBox}>
         <Likes />
         <YourVoice />
       </div>
