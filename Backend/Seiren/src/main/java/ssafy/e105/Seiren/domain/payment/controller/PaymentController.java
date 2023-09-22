@@ -1,5 +1,7 @@
 package ssafy.e105.Seiren.domain.payment.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +16,12 @@ import ssafy.e105.Seiren.global.utils.ApiUtils;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "결제 API")
 public class PaymentController {
 
     private final PaymentService paymentService;
 
+    @Operation(summary = "상품 구매")
     @PostMapping("/api/purchase")
     public ApiResult<?> purchaseProduct(HttpServletRequest request,
             @RequestBody PurchaseDto purchaseDto) {
