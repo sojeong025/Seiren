@@ -20,11 +20,11 @@ function YourComponent() {
   return (
     <div className={styles.YourVoiceContainer}>
       <h1>Your Voice</h1>
-      <ul>
+      {/* <ul>
         {myVoice.map((item) => (
           <li key={item.voiceId}>{item.voiceTitle}</li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }
