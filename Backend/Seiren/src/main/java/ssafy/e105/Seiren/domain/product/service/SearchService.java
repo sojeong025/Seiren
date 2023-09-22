@@ -31,26 +31,27 @@ public class SearchService {
             // 닉네임 x 목록
             if (searchRequest.getNickname().isEmpty()) {
                 // 최신순 정렬
-                if (searchRequest.getSortType().equals("Latest")) {
-                    // 필터 선택 x 됨
+                if (searchRequest.getSortType().equals("Latest") || searchRequest.getSortType()
+                        .isEmpty()) {
+                    // 필터 선택 x
                     if (searchRequest.getCategoryIdList().isEmpty()) {
                         List<Product> productList = productRepository.findAllProductsOrderByCreateAtDesc();
                         return new ProductSearchResponse(getProductDtoList(productList));
                     }
-                    // 필터 선택 o 됨
+                    // 필터 선택 o
                     List<Product> productList = productRepository.findProductsByCategoryIdsOrderByCreateAtDesc(
                             searchRequest.getCategoryIdList());
                     return new ProductSearchResponse(getProductDtoList(productList));
                 }
                 // 판매순 정렬
                 else if (searchRequest.getSortType().equals("Sales")) {
-                    // 필터 선택 x -> 정렬 방법 수정 필요
+                    // 필터 선택 x
                     if (searchRequest.getCategoryIdList().isEmpty()) {
-                        List<Product> productList = productRepository.findAllProductsOrderByCreateAtDesc();
+                        List<Product> productList = productRepository.findProductsSortedByTotalCountSum();
                         return new ProductSearchResponse(getProductDtoList(productList));
                     }
-                    // 필터 선택 o -> 정렬 방법 수정 필요
-                    List<Product> productList = productRepository.findProductsByCategoryIdsOrderByCreateAtDesc(
+                    // 필터 선택 o
+                    List<Product> productList = productRepository.findProductsByCategoryAndSortByTotalCountSum(
                             searchRequest.getCategoryIdList());
                     return new ProductSearchResponse(getProductDtoList(productList));
                 }
@@ -61,28 +62,29 @@ public class SearchService {
             // 닉네임 o 목록
             else if (searchRequest.getNickname() != null) {
                 // 최신순 정렬
-                if (searchRequest.getSortType().equals("Latest")) {
-                    // 필터 선택 x 됨
+                if (searchRequest.getSortType().equals("Latest") || searchRequest.getSortType()
+                        .isEmpty()) {
+                    // 필터 선택 x
                     if (searchRequest.getCategoryIdList().isEmpty()) {
                         List<Product> productList = productRepository.findAllProductByUserNickname(
                                 searchRequest.getNickname());
                         return new ProductSearchResponse(getProductDtoList(productList));
                     }
-                    // 필터 선택 o 됨
+                    // 필터 선택 o
                     List<Product> productList = productRepository.findProductsByCategoryIdsAndNicknameOrderByCreateAtDesc(
                             searchRequest.getCategoryIdList(), searchRequest.getNickname());
                     return new ProductSearchResponse(getProductDtoList(productList));
                 }
                 // 판매순 정렬
                 else if (searchRequest.getSortType().equals("Sales")) {
-                    // 필터 선택 x -> 정렬 방법 수정 필요
+                    // 필터 선택 x
                     if (searchRequest.getCategoryIdList().isEmpty()) {
-                        List<Product> productList = productRepository.findAllProductByUserNickname(
+                        List<Product> productList = productRepository.findProductsByNicknameSortedByTotalCountSum(
                                 searchRequest.getNickname());
                         return new ProductSearchResponse(getProductDtoList(productList));
                     }
-                    // 필터 선택 o -> 정렬 방법 수정 필요
-                    List<Product> productList = productRepository.findProductsByCategoryIdsAndNicknameOrderByCreateAtDesc(
+                    // 필터 선택 o
+                    List<Product> productList = productRepository.findProductsByCategoryIdsAndNicknameSortedByTotalCountSum(
                             searchRequest.getCategoryIdList(), searchRequest.getNickname());
                     return new ProductSearchResponse(getProductDtoList(productList));
                 }
