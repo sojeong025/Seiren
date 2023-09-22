@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import ssafy.e105.Seiren.domain.payment.dto.PurchaseDto;
+import ssafy.e105.Seiren.domain.product.entity.Product;
 
 @Builder
 @Entity
@@ -37,7 +39,16 @@ public class TransactionDescription {
     private int buyLetterCount;
 
 
-
-
-
+    public static TransactionDescription toEntity(PurchaseDto purchaseDto, Transaction transaction,
+            Purpose purpose, Product product) {
+        return TransactionDescription.builder()
+                .transaction(transaction)
+                .purpose(purpose)
+                .productTitle(product.getProductTitle())
+                .summary(product.getSummary())
+                .price(product.getPrice())
+                .buyDate(LocalDateTime.now())
+                .buyLetterCount(purchaseDto.getBuyLetterCount())
+                .build();
+    }
 }
