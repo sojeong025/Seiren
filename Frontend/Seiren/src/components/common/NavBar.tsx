@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom"; // useNavigate 추가
 import styles from "./NavBar.module.css";
 import { AiOutlineMenu } from "react-icons/ai";
 import Logo from "../../assets/logo.png";
 import useScrollDirection from "../../hooks/useScrollDirection";
 import { UserState } from '../../recoil/UserAtom';
 import { useRecoilValue } from 'recoil';
-import Login from "../../pages/LoginPages/LoginPage";
-
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +13,7 @@ function NavBar() {
   const [scrollY, setScrollY] = useState(0);
   const userInfo = useRecoilValue(UserState);
   const isKakaoLoggedIn = localStorage.getItem('kakaoLogin') === 'true';
+  const navigate = useNavigate(); // useNavigate 훅을 사용하여 이동을 처리할 수 있게 추가
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,6 +41,10 @@ function NavBar() {
     { text: "사용", link: "/use-voice" },
   ];
 
+  // Login 클릭 시 /login 페이지로 이동하는 함수
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
 
   return (
     <div
@@ -78,7 +81,7 @@ function NavBar() {
             {isKakaoLoggedIn ? (
               <img className={styles.proImg} src={userInfo.profileImage} alt="Profile" />
             ) : (
-              <div className={styles.login}>Login</div>
+              <div className={styles.login} onClick={handleLoginClick}>Login</div>
             )}
           </div>
         )}
