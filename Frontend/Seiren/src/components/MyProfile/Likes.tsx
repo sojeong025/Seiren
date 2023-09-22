@@ -6,6 +6,45 @@ import styles from './Likes.module.css';
 
 function Likes() {
   const [wishList, setWishList] = useRecoilState(likeListState);
+    // 더미 데이터 설정
+    // const wishList = [
+    //   {
+    //     "productId": 1,
+    //     "title": "제목1",
+    //     "summary": "요약1",
+    //     "productImageUrl": "/path/to/image1.jpg",
+    //     "price": 12000,
+    //     "productCategoryList": [
+    //       {
+    //         "categoryId": 5,
+    //         "categoryName": "경직된"
+    //       },
+    //       {
+    //         "categoryId": 10,
+    //         "categoryName": "청년"
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     "productId": 2,
+    //     "title": "제목2",
+    //     'summary': '요약2',
+    //     'productImageUrl': '/path/to/image2.jpg',
+    //     'price': 14000,
+    //     'productCategoryList': [
+    //       {
+    //         'categoryId': 6,
+    //         'categoryName': '활발한'
+    //       },
+    //       {
+    //         'categoryId': 8,
+    //         'categoryName': '유아'
+    //       }
+    //     ]
+    //   }
+    // ];
+
+    // setWishList(dummyData);
 
   useEffect(() => {
     customAxios.get("wish")
