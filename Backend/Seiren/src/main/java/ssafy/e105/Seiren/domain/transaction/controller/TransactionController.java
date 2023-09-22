@@ -16,7 +16,7 @@ import ssafy.e105.Seiren.global.utils.ApiUtils;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("api/transaction")
+@RequestMapping("api/transactions")
 @Tag(name = "거래 API")
 public class TransactionController {
 
@@ -42,4 +42,15 @@ public class TransactionController {
         return ApiUtils.success(transactionService.registTTS(request, transactionProductTTSRequest));
     }
 
+    @Operation(description = "구매 상품 사용 기록 리스트")
+    @GetMapping("/history")
+    public ApiResult getTransactionProductHistroy(@RequestParam("transactionid") Long transactionId, @RequestParam("page") int page){
+        return ApiUtils.success(transactionService.getTransactionProductHistory(transactionId, page, 10));
+    }
+
+    @Operation(description = "총 구매 목소리 갯수")
+    @GetMapping("/totalcount")
+    public ApiResult getTransactionTotal(HttpServletRequest request){
+        return ApiUtils.success(transactionService.getTransactionTotal(request));
+    }
 }

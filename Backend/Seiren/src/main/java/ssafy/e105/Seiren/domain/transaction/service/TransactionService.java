@@ -13,6 +13,7 @@ import ssafy.e105.Seiren.domain.product.entity.ProductCategory;
 import ssafy.e105.Seiren.domain.product.repository.ProductCategoryRepository;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
 import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductDetailResponse;
+import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductHistoryResponse;
 import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductResponse;
 import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductTTSRequest;
 import ssafy.e105.Seiren.domain.transaction.entity.Transaction;
@@ -116,6 +117,24 @@ public class TransactionService {
         return true;
     }
 
+    public List<TransactionProductHistoryResponse> getTransactionProductHistory(Long transactionId, int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+
+        Transaction transaction = transactionRepository.findById(transactionId)
+                .orElseThrow(()-> new BaseException(new ApiError(NOT_EXIST_TRANSACTION.getMessage(), NOT_EXIST_TRANSACTION.getCode())));
+
+        List<TransactionProductHistoryResponse> transactionProductHistoryResponseList = useHistoryRepository.findAllByTransaction(transaction, pageable)
+                .getContent()
+                .stream()
+                .map(TransactionProductHistoryResponse::toDto)
+                .collect(Collectors.toList());
+        return transactionProductHistoryResponseList;
+    }
+
+    public int getTransactionTotal(HttpServletRequest request){
+        User user = getUser(request);
+        return transactionRepository.findByBuyer(user.getId());
+    }
 
 
 

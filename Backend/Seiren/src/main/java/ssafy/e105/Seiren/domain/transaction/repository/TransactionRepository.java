@@ -19,5 +19,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     @Query(value = "SELECT t FROM Transaction t WHERE t.buyer.id = :userId AND t.product.productId = :productId")
     Optional<Transaction> findByBuyerAndProduct(@Param("userId") Long userId, @Param("productId") Long productId);
 
+    @Query(value = "SELECT COUNT(t) FROM Transaction t WHERE t.buyer.id = :userId")
+    int findByBuyer(@Param("userId") Long userId);
+
 
 }
