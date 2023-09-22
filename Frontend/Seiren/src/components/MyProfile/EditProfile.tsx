@@ -84,7 +84,7 @@ function EditProfileModal() {
     <MyModal
       content={
         <div className={styles.modalContainer}>
-          <h2 className={styles.modalTitle}>Edit Profile</h2>
+          <h2 className={styles.modalTitle}>프로필 수정</h2>
           {error && <div className={styles.error}>{error}</div>}
           {isNicknameAvailable === false && <div className={styles.error}>이미 사용 중인 닉네임입니다.</div>}
           <div className={styles.formGroup}>
@@ -101,10 +101,10 @@ function EditProfileModal() {
           </div>
           <div className={styles.buttons}>
             <button onClick={handleSubmit} disabled={isSubmitting} className={styles.submitButton}>
-              {isSubmitting ? "Submitting..." : "Submit"}
+              {isSubmitting ? "변경중.." : "변경"}
             </button>
             <button onClick={handleCancel} disabled={isSubmitting} className={styles.cancelButton}>
-              Cancel
+              취소
             </button>
           </div>
         </div>
