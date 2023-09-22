@@ -1,8 +1,6 @@
 .buyCountContainer {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
 }
 .countInfo {
   display: flex;
@@ -11,6 +9,6 @@
   justify-content: center;
   margin-bottom: 20px; /* 공간을 더 확보하기 위한 마진 추가 */
   width: 100%;
-  margin-left: 20px;
+  margin-left: 240px;
 
 }

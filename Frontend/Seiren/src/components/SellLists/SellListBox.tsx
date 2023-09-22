@@ -11,8 +11,10 @@ function SellListBox() {
       <div className={styles.sellList}>
         {buyItems.map((item, index) => (
           <Link to={`/detail/${index}`} key={index} className={styles.sellListItem}>
-            <img src="프로필 이미지 경로" alt="프로필 이미지" />
-            <p>{item}</p>
+            <div>
+              <img src="프로필 이미지 경로" alt="프로필 이미지" />
+            </div>
+            <div className={styles.itemText}>{item}</div>
           </Link>
         ))}
       </div>
