@@ -54,7 +54,6 @@ function App() {
             <Route path="/voice-custom" element={<VoiceCustomPage />} />
             
             {/* 마이페이지 */}
-
             <Route path="/my-page" element={<MyPage />} />
             <Route path="/buy-list" element={<BuyList />} />
             <Route path="/sell-list" element={<SellList />} />
