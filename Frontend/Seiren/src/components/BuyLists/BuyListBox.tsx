@@ -1,38 +1,35 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./BuyListBox.module.css";
-import BuyCount from "./BuyCount";
-import axios from "axios";
+import { customAxios } from "../../libs/axios";
+import { buyListState } from "../../recoil/UserAtom";
+import { useRecoilState } from "recoil";
+import { useParams } from "react-router-dom";
+
 
 function BuyListBox() {
-  const [purchaseData, setPurchaseData] = useState([]);
+  const [purchaseData, setPurchaseData] = useRecoilState(buyListState);
   const [totalAmount, setTotalAmount] = useState(0);
+  const { page } = useParams();
 
   useEffect(() => {
-    const apiUrl = "http://192.168.40.134:8080/api/transaction?page=1";
-    const accessToken = localStorage.getItem("accessToken");
+    customAxios
+      .get("transations/receipt?page=${page}")
+      .then(response => {
+        const data = response.data.response;
+        setPurchaseData(data); // Recoil 상태 업데이트
 
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-
-    axios
-      .get(apiUrl, config)
-      .then((response) => {
-        setPurchaseData(response.data.response);
-        const total = response.data.response.reduce(
-          (total, item) =>
-            total +
-            item.purchaseAmountPerCharacter * item.purchaseCharacterCount,
-          0
-        );
+        // 총 금액 계산
+        const total = data.reduce((acc, item) => {
+          const totalAmountPerItem =
+            item.purchaseAmountPerCharacter * item.purchaseCharacterCount;
+          return acc + totalAmountPerItem;
+        }, 0);
         setTotalAmount(total);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("API 호출 중 오류 발생:", error);
       });
-  }, []);
+  }, [setPurchaseData, page]);
 
   return (
     <div className={styles.buyListBox}>
@@ -50,8 +47,7 @@ function BuyListBox() {
         </thead>
         <tbody>
           {purchaseData.map((item, index) => {
-            const totalAmount =
-              item.purchaseAmountPerCharacter * item.purchaseCharacterCount;
+            const totalAmount = item.purchaseAmountPerCharacter * item.purchaseCharacterCount;
             return (
               <tr key={index}>
                 <td>{item.seller}</td>
