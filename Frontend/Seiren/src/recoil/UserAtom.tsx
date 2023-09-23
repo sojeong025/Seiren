@@ -21,3 +21,14 @@ export const myVoiceState = atom({
   default: [],
 })
 
+// BuyCount
+export const buyCountState = atom({
+  key: "buyCount",
+  default: [],
+})
+
+// BuyList
+export const buyListState = atom({
+  key: "buylist",
+  default: [],
+})

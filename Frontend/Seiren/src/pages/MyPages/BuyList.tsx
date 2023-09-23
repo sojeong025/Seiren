@@ -8,7 +8,7 @@ function BuyList() {
     <div className={styles.buyCountContainer}>
       <SideBar />
       <div className={styles.countInfo}>
-        {/* <BuyCount /> */}
+        <BuyCount />
         <BuyListBox />
       </div>
     </div>
