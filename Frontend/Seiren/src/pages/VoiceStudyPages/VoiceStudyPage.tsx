@@ -12,6 +12,7 @@ function VoiceStudyPage() {
   const setRecordState = useSetRecoilState(RecordState);
   const setVoiceId = useSetRecoilState(VoiceIdState);
 
+  // 가장 최신의 목소리의 id와 상태
   useEffect(() => {
     customAxios.get("progressingVoices")
       .then((res) => {
