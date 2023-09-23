@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SERVER_ADDRESS = `http://192.168.30.130:8080`;
+const SERVER_ADDRESS = `http://172.30.1.12:8080`;
 
 export const customAxios = axios.create({
   baseURL: `${SERVER_ADDRESS}/api/`,
