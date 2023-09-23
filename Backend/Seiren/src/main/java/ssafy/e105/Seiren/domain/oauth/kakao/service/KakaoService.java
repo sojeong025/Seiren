@@ -49,6 +49,7 @@ public class KakaoService {
     private final static String KAKAO_AUTH_URI = "https://kauth.kakao.com";
     private final static String KAKAO_API_URI = "https://kapi.kakao.com";
 
+    @Transactional
     public TokenDto getKakaoInfo(String code) throws Exception{
         if(code == null) throw  new Exception("코드를 가져오는데 오류가 발생했습니다.");
 
