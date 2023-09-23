@@ -552,5 +552,5 @@ remove      : 파일을 삭제하는 작업만 수행한 경우
 
  ### 번다운 차트
 
-![Alt text](4weeks_Fri.png)
+![Alt text](assets/4weeks_Fri.png)
 
