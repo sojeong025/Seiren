@@ -1,5 +1,8 @@
-import { useRecoilState } from 'recoil';
-import { RecordState } from '../../recoil/RecordAtom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { RecordingState, VoiceIdState } from '../../recoil/RecordAtom';
+import { customAxios } from '../../libs/axios';
+import { useState, useEffect } from 'react';
+
 import styles from "./Script.module.css"
 
 interface ScriptProps {
@@ -8,10 +11,23 @@ interface ScriptProps {
 }
 
 const Script: React.FC<ScriptProps> = ({ index, setIndex }) => {
-  // 더미 데이터 생성
-  const scripts = Array.from({length: 10}, (_, i) => `스크립트 문장 ${i+1}`);
+  const [scripts, setScripts] = useState<string[]>([]);
+  const [recordingStatus, setRecordingStatus] = useRecoilState(RecordingState);
+  const voiceId = useRecoilValue(VoiceIdState);
 
-  const [recordingStatus, setRecordingStatus] = useRecoilState(RecordState);
+  // 최신 스크립트 get
+  useEffect(() => {
+    customAxios.get(`records/recent/${voiceId}`)
+      .then((res) => {
+        console.log(res);
+        console.log('스크립트 get 요청 성공')
+      })
+      .catch((err) => {
+        console.error('스크립트 get 요청 에러', err)
+      });
+  }, []);
+
+  //
 
   const goNext = (): void => {
     if (index < scripts.length-1) 
