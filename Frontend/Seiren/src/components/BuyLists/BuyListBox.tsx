@@ -13,8 +13,9 @@ function BuyListBox() {
 
   useEffect(() => {
     customAxios
-      .get("transations/receipt?page=${page}")
+      .get("transactions/receipt?page=0")
       .then(response => {
+        console.log(response.data)
         const data = response.data.response;
         setPurchaseData(data); // Recoil 상태 업데이트
 
