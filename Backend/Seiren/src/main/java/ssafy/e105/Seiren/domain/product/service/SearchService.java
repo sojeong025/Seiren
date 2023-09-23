@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ssafy.e105.Seiren.domain.product.dto.ProductCategoryDto;
 import ssafy.e105.Seiren.domain.product.dto.ProductDto;
@@ -35,8 +37,9 @@ public class SearchService {
     private final WishRepository wishRepository;
 
     public ProductSearchResponse searchProduct(ProductSearchRequest searchRequest,
-            HttpServletRequest request) {
+            HttpServletRequest request, Pageable pageable) {
         User user = getUser(request);
+
         try {
             // 닉네임 x 목록
             if (searchRequest.getNickname().isEmpty()) {
@@ -45,25 +48,31 @@ public class SearchService {
                         || searchRequest.getSortType().isEmpty()) {
                     // 필터 선택 x
                     if (searchRequest.getCategoryIdList().isEmpty()) {
-                        List<Product> productList = productRepository.findAllProductsOrderByCreateAtDesc();
-                        return new ProductSearchResponse(getProductDtoList(productList, user));
+                        System.out.println("1");
+                        Page<Product> productPage = productRepository.findAllProductsOrderByCreateAtDesc(
+                                pageable);
+                        return new ProductSearchResponse(getProductDtoList(productPage, user));
                     }
                     // 필터 선택 o
-                    List<Product> productList = productRepository.findProductsByCategoryIdsOrderByCreateAtDesc(
-                            searchRequest.getCategoryIdList());
-                    return new ProductSearchResponse(getProductDtoList(productList, user));
+                    System.out.println("2");
+                    Page<Product> productPage = productRepository.findProductsByCategoryIdsOrderByCreateAtDesc(
+                            searchRequest.getCategoryIdList(), pageable);
+                    return new ProductSearchResponse(getProductDtoList(productPage, user));
                 }
                 // 판매순 정렬
                 else if (searchRequest.getSortType().equals("Sales")) {
                     // 필터 선택 x
                     if (searchRequest.getCategoryIdList().isEmpty()) {
-                        List<Product> productList = productRepository.findProductsSortedByTotalCountSum();
-                        return new ProductSearchResponse(getProductDtoList(productList, user));
+                        System.out.println("3");
+                        Page<Product> productPage = productRepository.findProductsSortedByTotalCountSum(
+                                pageable);
+                        return new ProductSearchResponse(getProductDtoList(productPage, user));
                     }
                     // 필터 선택 o
-                    List<Product> productList = productRepository.findProductsByCategoryAndSortByTotalCountSum(
-                            searchRequest.getCategoryIdList());
-                    return new ProductSearchResponse(getProductDtoList(productList, user));
+                    System.out.println("4");
+                    Page<Product> productPage = productRepository.findProductsByCategoryAndSortByTotalCountSum(
+                            searchRequest.getCategoryIdList(), pageable);
+                    return new ProductSearchResponse(getProductDtoList(productPage, user));
                 }
             }
             // 닉네임 o 목록
@@ -73,27 +82,33 @@ public class SearchService {
                         .isEmpty()) {
                     // 필터 선택 x
                     if (searchRequest.getCategoryIdList().isEmpty()) {
-                        List<Product> productList = productRepository.findAllProductByUserNickname(
-                                searchRequest.getNickname());
-                        return new ProductSearchResponse(getProductDtoList(productList, user));
+                        System.out.println("5");
+                        Page<Product> productPage = productRepository.findAllProductByUserNickname(
+                                searchRequest.getNickname(), pageable);
+                        return new ProductSearchResponse(getProductDtoList(productPage, user));
                     }
                     // 필터 선택 o
-                    List<Product> productList = productRepository.findProductsByCategoryIdsAndNicknameOrderByCreateAtDesc(
-                            searchRequest.getCategoryIdList(), searchRequest.getNickname());
-                    return new ProductSearchResponse(getProductDtoList(productList, user));
+                    System.out.println("6");
+                    Page<Product> productPage = productRepository.findProductsByCategoryIdsAndNicknameOrderByCreateAtDesc(
+                            searchRequest.getCategoryIdList(), searchRequest.getNickname(),
+                            pageable);
+                    return new ProductSearchResponse(getProductDtoList(productPage, user));
                 }
                 // 판매순 정렬
                 else if (searchRequest.getSortType().equals("Sales")) {
                     // 필터 선택 x
                     if (searchRequest.getCategoryIdList().isEmpty()) {
-                        List<Product> productList = productRepository.findProductsByNicknameSortedByTotalCountSum(
-                                searchRequest.getNickname());
-                        return new ProductSearchResponse(getProductDtoList(productList, user));
+                        System.out.println("7");
+                        Page<Product> productPage = productRepository.findProductsByNicknameSortedByTotalCountSum(
+                                searchRequest.getNickname(), pageable);
+                        return new ProductSearchResponse(getProductDtoList(productPage, user));
                     }
                     // 필터 선택 o
-                    List<Product> productList = productRepository.findProductsByCategoryIdsAndNicknameSortedByTotalCountSum(
-                            searchRequest.getCategoryIdList(), searchRequest.getNickname());
-                    return new ProductSearchResponse(getProductDtoList(productList, user));
+                    System.out.println("8");
+                    Page<Product> productPage = productRepository.findProductsByCategoryIdsAndNicknameSortedByTotalCountSum(
+                            searchRequest.getCategoryIdList(), searchRequest.getNickname(),
+                            pageable);
+                    return new ProductSearchResponse(getProductDtoList(productPage, user));
                 }
             }
             throw new BaseException(
@@ -104,9 +119,9 @@ public class SearchService {
         }
     }
 
-    public List<ProductDto> getProductDtoList(List<Product> productList, User user) {
+    public List<ProductDto> getProductDtoList(Page<Product> productPage, User user) {
         List<ProductDto> productDtoList = new ArrayList<>();
-        for (Product product : productList) {
+        for (Product product : productPage) {
             List<ProductCategoryDto> productCategoryDtoList = new ArrayList<>();
             for (ProductCategory productCategory : product.getProductCategories()) {
                 ProductCategoryDto productCategoryDto = new ProductCategoryDto(
@@ -117,6 +132,8 @@ public class SearchService {
             if (wish != null) {
                 ProductDto productDto = new ProductDto(product, productCategoryDtoList, true);
                 productDtoList.add(productDto);
+                System.out.println("null 추가");
+                continue;
             }
             ProductDto productDto = new ProductDto(product, productCategoryDtoList, false);
             productDtoList.add(productDto);

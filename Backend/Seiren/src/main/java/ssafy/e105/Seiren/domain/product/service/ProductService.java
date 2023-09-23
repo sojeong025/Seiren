@@ -92,6 +92,7 @@ public class ProductService {
         return productDetailDto;
     }
 
+    @Transactional
     public void changeState(Long productId, HttpServletRequest request) {
         Product product = getProduct(productId);
         Voice voice = getVoice(product.getVoice().getVoiceId());
@@ -112,6 +113,7 @@ public class ProductService {
         }
     }
 
+    @Transactional
     public void updateProduct(ProductUpdateDto productUpdateDto, HttpServletRequest request) {
         Product product = getProduct(productUpdateDto.getProductId());
         Voice voice = getVoice(product.getVoice().getVoiceId());

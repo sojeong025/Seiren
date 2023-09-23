@@ -51,6 +51,7 @@ public class WishService {
         }
     }
 
+    @Transactional
     public void deleteWish(HttpServletRequest request, Long productId) {
         User user = getUser(request);
         Wish wish = getWish(productId, user.getId());
