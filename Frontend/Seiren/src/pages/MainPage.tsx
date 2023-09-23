@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./MainPage.module.css";
 import videoSource from "../assets/pexels-rostislav-uzunov-10613972 (Original).mp4";
 import { Link } from "react-router-dom";
+import { customAxios } from '../libs/axios'
+import { UserState } from "../recoil/UserAtom";
+import { useRecoilState } from "recoil";
+
 
 export default function MainPage() {
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
+  const [userInfo, setUserInfo] = useRecoilState(UserState);
+  const accessToken = localStorage.getItem("accessToken");
 
   const handleMouseMove = e => {
     const mouseX = e.clientX;
@@ -29,6 +35,25 @@ export default function MainPage() {
   const textStyle = {
     transform: `perspective(4000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1, 1, 1)`,
   };
+
+
+  // 유저 정보 get 요청
+  useEffect(() => {
+    if(accessToken !== null){
+      customAxios.get('user')
+        .then(response => {
+          let userData = response.data.response;
+          
+          let updatedUserData = {
+            nickname: userData.nickname,
+            profileImage: userData.profileImg,
+          };
+          setUserInfo(updatedUserData); // Recoil 상태 업데이트
+          console.log(updatedUserData.nickname);
+          console.log("recoil 저장 성공");
+        })
+    }
+  }, [accessToken]);
 
   return (
     <div className={styles.mainPageContainer}>
