@@ -1,7 +1,11 @@
 .sellCountContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: row;
   width: 100%;
+  
+}
+.chart{
+  width: 100%;
+  margin-left: 240px;
+
 }

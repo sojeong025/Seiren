@@ -1,18 +1,19 @@
 import styles from "./MyPage.module.css";
-import MyInfo from "../../components/MyProfile/MyInfo";
 import Likes from "../../components/MyProfile/Likes";
 import YourVoice from "../../components/MyProfile/YourVoice";
+import SideBar from "../../components/common/SideBar";
 
 function MyPage() {
   return (
     <div className={styles.myPageContainer}>
-      <div>
-        <MyInfo />
-      </div>
-
-      <div>
-        <Likes />
-        <YourVoice />
+      <SideBar />
+      <div className={styles.myPageBox}>
+        <div className={styles.likesContainer}>
+          <Likes />
+        </div>
+        <div className={styles.yourVoiceContainer}>
+          <YourVoice />
+        </div>
       </div>
     </div>
   );

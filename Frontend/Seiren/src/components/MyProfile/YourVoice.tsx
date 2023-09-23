@@ -19,12 +19,14 @@ function YourVoice() {
 
   return (
     <div className={styles.YourVoiceContainer}>
-      <h1>Your Voice</h1>
+      <div className={styles.YourVoiceText}>Your Voice</div>
+      <div className={styles.VoiceItems}>
       {/* <ul>
         {myVoice.map((item) => (
           <li key={item.voiceId}>{item.voiceTitle}</li>
         ))}
       </ul> */}
+      </div>
     </div>
   );
 }
