@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ssafy.e105.Seiren.domain.user.service.UserService;
 import ssafy.e105.Seiren.domain.voice.dto.RecordRequest;
 import ssafy.e105.Seiren.domain.voice.dto.RecordResponse;
@@ -19,6 +20,7 @@ import ssafy.e105.Seiren.global.utils.ApiError;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class RecordService {
 
     private final RecordRepository recordRepository;
@@ -52,6 +54,7 @@ public class RecordService {
         return new RecordResponse(recordCount, totalCount);
     }
 
+    @Transactional
     public void insertRecord(HttpServletRequest request, RecordRequest record) {
         Voice voice = voiceRepository.findOneByUser_IdAndVoiceId(
                 userService.getUser(request).getId(), record.getVoiceId()).orElseThrow(
