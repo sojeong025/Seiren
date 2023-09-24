@@ -9,7 +9,7 @@ public class PurchaseDto {
     @Schema(description = "상품 id", example = "1")
     private Long productId;
     @Schema(description = "구매 글자수", example = "1000")
-    private Integer buyLetterCount;
+    private int buyLetterCount;
     @Schema(description = "구매 목적 id", example = "1")
     private Long purposeId;
 

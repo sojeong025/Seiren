@@ -42,17 +42,20 @@ public class PaymentService {
         User seller = getSeller(product.getVoice().getUser().getId());
         User buyer = getUser(request);
         Purpose purpose = getPurpose(purchaseDto.getPurposeId());
-        Transaction transaction = getTransaction(purchaseDto, seller);
-        if (transaction != null) {
-            transaction.update(transaction, purchaseDto);
+        Transaction transaction = getTransaction(purchaseDto, seller, buyer);
+        if (transaction == null) {
+            System.out.println("null 인 경우");
+            Transaction new_transaction = transactionRepository.save(
+                    Transaction.toEntity(product, seller, buyer, purchaseDto));
             transactionDescriptionRepository.save(
-                    TransactionDescription.toEntity(purchaseDto, transaction, purpose, product));
+                    TransactionDescription.toEntity(purchaseDto, new_transaction, purpose,
+                            product));
+            return;
         }
-        Transaction new_transaction = transactionRepository.save(
-                Transaction.toEntity(product, seller, buyer, purchaseDto));
+        System.out.println("null아닌 경우");
+        transaction.update(transaction, purchaseDto);
         transactionDescriptionRepository.save(
-                TransactionDescription.toEntity(purchaseDto, new_transaction, purpose,
-                        product));
+                TransactionDescription.toEntity(purchaseDto, transaction, purpose, product));
     }
 
     private Purpose getPurpose(Long purposeId) {
@@ -76,10 +79,10 @@ public class PaymentService {
                 new ApiError(NOT_EXIST_PRODUCT.getMessage(), NOT_EXIST_PRODUCT.getCode())));
     }
 
-    public Transaction getTransaction(PurchaseDto purchaseDto, User seller) {
+    public Transaction getTransaction(PurchaseDto purchaseDto, User seller, User buyer) {
         Optional<Transaction> transactionOptional = Optional.ofNullable(
-                transactionRepository.findTransactionByProduct_ProductIdAndSeller_Id(
-                        purchaseDto.getProductId(), seller.getId()));
+                transactionRepository.findTransactionBySellerBuyerAndProductIds(
+                        purchaseDto.getProductId(), seller.getId(), buyer.getId()));
         // Transaction를 찾았을 경우에 대한 처리
         if (transactionOptional.isPresent()) {
             return transactionOptional.get();
