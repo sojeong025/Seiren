@@ -3,6 +3,7 @@ package ssafy.e105.Seiren.domain.product.service;
 import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_USER;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ssafy.e105.Seiren.domain.product.dto.TestTTSRequest;
@@ -22,6 +23,7 @@ public class TestHistoryService {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
 
+    @Transactional
     public String createTestFile(TestTTSRequest testTTSRequestDto, HttpServletRequest request) {
         // 학습된 모델 API 호출
         // 입력받은 testTTSRequestDto의 테스트 문장으로 음성 파일 생성

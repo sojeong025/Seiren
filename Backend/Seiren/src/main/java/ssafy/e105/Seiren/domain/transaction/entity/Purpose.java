@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.*;
+import ssafy.e105.Seiren.domain.transaction.dto.PurposeCreateRequest;
 
 @Entity
 @Getter
@@ -21,4 +22,10 @@ public class Purpose {
     private Long id;
 
     private String purposeName;
+
+    public static Purpose toEntity(PurposeCreateRequest purposeCreateDto) {
+        return Purpose.builder()
+                .purposeName(purposeCreateDto.getPurposeName())
+                .build();
+    }
 }

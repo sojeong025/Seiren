@@ -55,7 +55,7 @@ public class ProductService {
         try {
             Product product = productRepository.save(Product.toEntity(productCreateRequest, voice));
             // 목소리 상태 판매중으로 변경
-            voice.update(1);
+            voice.update(3);
             // 미리듣기 등록 코드 추가 필요
             for (String text : productCreateRequest.getPreviewTexts()) {
                 // 미리듣기 생성을 위해 ai 서버에 api 요청 보내는 코드 추가
@@ -87,12 +87,12 @@ public class ProductService {
                     .get();
             categoryList.add(category.getName());
         }
-        ProductDetailDto productDetailDto = new ProductDetailDto(product, user,
-                categoryList);
+        ProductDetailDto productDetailDto = new ProductDetailDto(product, voice, categoryList);
 
         return productDetailDto;
     }
 
+    @Transactional
     public void changeState(Long productId, HttpServletRequest request) {
         Product product = getProduct(productId);
         Voice voice = getVoice(product.getVoice().getVoiceId());
@@ -101,19 +101,19 @@ public class ProductService {
             if (voice.getUser() == user) {
                 product.update(product.getState() ? false : true);
                 productRepository.save(product);
-                voice.update(product.getState() ? 1 : 2);
+                voice.update(product.getState() ? 2 : 3);
                 voiceRepository.save(voice);
                 return;
             }
-            throw new BaseException(
-                    new ApiError(UNMACHED_PRODUCT_USER.getMessage(),
-                            UNMACHED_PRODUCT_USER.getCode()));
+            throw new BaseException(new ApiError(UNMACHED_PRODUCT_USER.getMessage(),
+                    UNMACHED_PRODUCT_USER.getCode()));
         } catch (Exception e) {
             throw new BaseException(
                     new ApiError(FAIL_UPDATE_PRODUCT.getMessage(), FAIL_UPDATE_PRODUCT.getCode()));
         }
     }
 
+    @Transactional
     public void updateProduct(ProductUpdateDto productUpdateDto, HttpServletRequest request) {
         Product product = getProduct(productUpdateDto.getProductId());
         Voice voice = getVoice(product.getVoice().getVoiceId());
@@ -125,9 +125,8 @@ public class ProductService {
                 productRepository.save(product);
                 return;
             }
-            throw new BaseException(
-                    new ApiError(UNMACHED_PRODUCT_USER.getMessage(),
-                            UNMACHED_PRODUCT_USER.getCode()));
+            throw new BaseException(new ApiError(UNMACHED_PRODUCT_USER.getMessage(),
+                    UNMACHED_PRODUCT_USER.getCode()));
         } catch (Exception e) {
             throw new BaseException(
                     new ApiError(FAIL_UPDATE_PRODUCT.getMessage(), FAIL_UPDATE_PRODUCT.getCode()));
@@ -136,27 +135,23 @@ public class ProductService {
 
     public User getUser(HttpServletRequest request) {
         String userEmail = jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request));
-        return userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new BaseException(
-                        new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode())));
+        return userRepository.findByEmail(userEmail).orElseThrow(() -> new BaseException(
+                new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode())));
     }
 
     public Voice getVoice(Long voiceId) {
-        return voiceRepository.findById(voiceId)
-                .orElseThrow(() -> new BaseException(
-                        new ApiError(NOT_EXIST_VOICE.getMessage(), NOT_EXIST_VOICE.getCode())));
+        return voiceRepository.findById(voiceId).orElseThrow(() -> new BaseException(
+                new ApiError(NOT_EXIST_VOICE.getMessage(), NOT_EXIST_VOICE.getCode())));
     }
 
     public Category getCategory(Long categoryId) {
-        return categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new BaseException(new ApiError(NOT_EXIST_CATEGORY.getMessage(),
-                        NOT_EXIST_CATEGORY.getCode())));
+        return categoryRepository.findById(categoryId).orElseThrow(() -> new BaseException(
+                new ApiError(NOT_EXIST_CATEGORY.getMessage(), NOT_EXIST_CATEGORY.getCode())));
     }
 
     public Product getProduct(Long productId) {
-        return productRepository.findById(productId)
-                .orElseThrow(() -> new BaseException(
-                        new ApiError(NOT_EXIST_PRODUCT.getMessage(), NOT_EXIST_PRODUCT.getCode())));
+        return productRepository.findById(productId).orElseThrow(() -> new BaseException(
+                new ApiError(NOT_EXIST_PRODUCT.getMessage(), NOT_EXIST_PRODUCT.getCode())));
     }
 
 }
