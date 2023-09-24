@@ -44,7 +44,6 @@ public class PaymentService {
         Purpose purpose = getPurpose(purchaseDto.getPurposeId());
         Transaction transaction = getTransaction(purchaseDto, seller, buyer);
         if (transaction == null) {
-            System.out.println("null 인 경우");
             Transaction new_transaction = transactionRepository.save(
                     Transaction.toEntity(product, seller, buyer, purchaseDto));
             transactionDescriptionRepository.save(
@@ -52,8 +51,7 @@ public class PaymentService {
                             product));
             return;
         }
-        System.out.println("null아닌 경우");
-        transaction.update(transaction, purchaseDto);
+        transaction.update(purchaseDto);
         transactionDescriptionRepository.save(
                 TransactionDescription.toEntity(purchaseDto, transaction, purpose, product));
     }

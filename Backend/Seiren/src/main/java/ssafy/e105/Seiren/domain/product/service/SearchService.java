@@ -1,6 +1,7 @@
 package ssafy.e105.Seiren.domain.product.service;
 
 import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.FAIL_SEARCH_PRODUCT;
+import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.FAIL_SEARCH_PRODUCT2;
 import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.NOT_EXIST_WISH;
 import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_USER;
 
@@ -10,7 +11,9 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ssafy.e105.Seiren.domain.product.dto.ProductCategoryDto;
 import ssafy.e105.Seiren.domain.product.dto.ProductDto;
@@ -37,15 +40,17 @@ public class SearchService {
     private final WishRepository wishRepository;
 
     public ProductSearchResponse searchProduct(ProductSearchRequest searchRequest,
-            HttpServletRequest request, Pageable pageable) {
+            HttpServletRequest request, int page) {
         User user = getUser(request);
-
+        int size = 10;
         try {
             // 닉네임 x 목록
             if (searchRequest.getNickname().isEmpty()) {
                 // 최신순 정렬
                 if (searchRequest.getSortType().equals("Latest")
                         || searchRequest.getSortType().isEmpty()) {
+                    Pageable pageable = PageRequest.of(page - 1, size,
+                            Sort.by(Sort.Direction.DESC, "createAt"));
                     // 필터 선택 x
                     if (searchRequest.getCategoryIdList().isEmpty()) {
                         System.out.println("1");
@@ -61,12 +66,19 @@ public class SearchService {
                 }
                 // 판매순 정렬
                 else if (searchRequest.getSortType().equals("Sales")) {
+                    Pageable pageable = PageRequest.of(page - 1, size,
+                            Sort.by(Sort.Direction.DESC, "total_count_sum"));
                     // 필터 선택 x
                     if (searchRequest.getCategoryIdList().isEmpty()) {
                         System.out.println("3");
                         Page<Product> productPage = productRepository.findProductsSortedByTotalCountSum(
                                 pageable);
-                        return new ProductSearchResponse(getProductDtoList(productPage, user));
+                        System.out.println(productPage);
+                        System.out.println("productPage 이후");
+                        ProductSearchResponse response = new ProductSearchResponse(
+                                getProductDtoList(productPage, user));
+                        System.out.println("response 받아옴");
+                        return response;
                     }
                     // 필터 선택 o
                     System.out.println("4");
@@ -80,6 +92,8 @@ public class SearchService {
                 // 최신순 정렬
                 if (searchRequest.getSortType().equals("Latest") || searchRequest.getSortType()
                         .isEmpty()) {
+                    Pageable pageable = PageRequest.of(page - 1, size,
+                            Sort.by(Sort.Direction.DESC, "createAt"));
                     // 필터 선택 x
                     if (searchRequest.getCategoryIdList().isEmpty()) {
                         System.out.println("5");
@@ -96,6 +110,8 @@ public class SearchService {
                 }
                 // 판매순 정렬
                 else if (searchRequest.getSortType().equals("Sales")) {
+                    Pageable pageable = PageRequest.of(page - 1, size,
+                            Sort.by(Sort.Direction.DESC, "total_count_sum"));
                     // 필터 선택 x
                     if (searchRequest.getCategoryIdList().isEmpty()) {
                         System.out.println("7");
@@ -112,7 +128,8 @@ public class SearchService {
                 }
             }
             throw new BaseException(
-                    new ApiError(FAIL_SEARCH_PRODUCT.getMessage(), FAIL_SEARCH_PRODUCT.getCode()));
+                    new ApiError(FAIL_SEARCH_PRODUCT2.getMessage(),
+                            FAIL_SEARCH_PRODUCT2.getCode()));
         } catch (Exception e) {
             throw new BaseException(
                     new ApiError(FAIL_SEARCH_PRODUCT.getMessage(), FAIL_SEARCH_PRODUCT.getCode()));
@@ -120,24 +137,34 @@ public class SearchService {
     }
 
     public List<ProductDto> getProductDtoList(Page<Product> productPage, User user) {
+        System.out.println("진입");
         List<ProductDto> productDtoList = new ArrayList<>();
-        for (Product product : productPage) {
+        List<Product> productList = productPage.getContent();
+        System.out.println(productList.get(0).getProductId());
+        for (Product product : productList) {
+            System.out.println("!!!!!!!!Product!!!!!!!");
+            System.out.println("product : " + product);
             List<ProductCategoryDto> productCategoryDtoList = new ArrayList<>();
             for (ProductCategory productCategory : product.getProductCategories()) {
+                System.out.println("!!!!!!!!ProductCategory!!!!!!!");
+                System.out.println("productCategory : " + productCategory);
                 ProductCategoryDto productCategoryDto = new ProductCategoryDto(
                         productCategory);
                 productCategoryDtoList.add(productCategoryDto);
             }
             Wish wish = getWish(product.getProductId(), user.getId());
             if (wish != null) {
+                System.out.println("!!!!!!!!wish == null!!!!!!!");
+                System.out.println("productCategory : " + wish);
                 ProductDto productDto = new ProductDto(product, productCategoryDtoList, true);
                 productDtoList.add(productDto);
-                System.out.println("null 추가");
                 continue;
             }
             ProductDto productDto = new ProductDto(product, productCategoryDtoList, false);
             productDtoList.add(productDto);
+            System.out.println("for문 한번 끝남");
         }
+        System.out.println("for문 끝남");
         return productDtoList;
     }
 

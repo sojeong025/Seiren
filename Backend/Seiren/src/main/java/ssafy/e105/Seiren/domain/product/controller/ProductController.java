@@ -65,8 +65,7 @@ public class ProductController {
     @PostMapping("/api/products")
     public ApiResult<?> searchProducts(@RequestBody ProductSearchRequest searchRequest,
             HttpServletRequest request, @RequestParam("page") int page) {
-        Pageable pageable = PageRequest.of(page - 1, 10);
-        return ApiUtils.success(searchService.searchProduct(searchRequest, request, pageable));
+        return ApiUtils.success(searchService.searchProduct(searchRequest, request, page));
     }
 }
 //    @Operation(summary = "상품 검색")
