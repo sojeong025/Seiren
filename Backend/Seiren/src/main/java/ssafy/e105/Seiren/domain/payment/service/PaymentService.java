@@ -6,10 +6,12 @@ import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_US
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ssafy.e105.Seiren.domain.payment.dto.PurchaseDto;
 import ssafy.e105.Seiren.domain.product.entity.Product;
+import ssafy.e105.Seiren.domain.product.entity.Wish;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
 import ssafy.e105.Seiren.domain.transaction.entity.Purpose;
 import ssafy.e105.Seiren.domain.transaction.entity.Transaction;
@@ -40,19 +42,18 @@ public class PaymentService {
         User seller = getSeller(product.getVoice().getUser().getId());
         User buyer = getUser(request);
         Purpose purpose = getPurpose(purchaseDto.getPurposeId());
-        Transaction transaction = transactionRepository.findTransactionByProduct_ProductIdAndSeller_Id(
-                purchaseDto.getProductId(), seller.getId());
+        Transaction transaction = getTransaction(purchaseDto, seller, buyer);
         if (transaction == null) {
             Transaction new_transaction = transactionRepository.save(
                     Transaction.toEntity(product, seller, buyer, purchaseDto));
             transactionDescriptionRepository.save(
                     TransactionDescription.toEntity(purchaseDto, new_transaction, purpose,
                             product));
+            return;
         }
-        transaction.update(transaction, purchaseDto);
+        transaction.update(purchaseDto);
         transactionDescriptionRepository.save(
                 TransactionDescription.toEntity(purchaseDto, transaction, purpose, product));
-
     }
 
     private Purpose getPurpose(Long purposeId) {
@@ -74,5 +75,16 @@ public class PaymentService {
     public Product getProduct(Long productId) {
         return productRepository.findById(productId).orElseThrow(() -> new BaseException(
                 new ApiError(NOT_EXIST_PRODUCT.getMessage(), NOT_EXIST_PRODUCT.getCode())));
+    }
+
+    public Transaction getTransaction(PurchaseDto purchaseDto, User seller, User buyer) {
+        Optional<Transaction> transactionOptional = Optional.ofNullable(
+                transactionRepository.findTransactionBySellerBuyerAndProductIds(
+                        purchaseDto.getProductId(), seller.getId(), buyer.getId()));
+        // Transaction를 찾았을 경우에 대한 처리
+        if (transactionOptional.isPresent()) {
+            return transactionOptional.get();
+        }
+        return null;
     }
 }

@@ -51,6 +51,7 @@ public class WishService {
         }
     }
 
+    @Transactional
     public void deleteWish(HttpServletRequest request, Long productId) {
         User user = getUser(request);
         Wish wish = getWish(productId, user.getId());
@@ -88,6 +89,7 @@ public class WishService {
                         productDto.setProductImageUrl(wish.getProduct().getProductImageUrl());
                         productDto.setPrice(wish.getProduct().getPrice());
                         productDto.setProductCategoryList(productCategoryDtoList);
+                        productDto.setWish(true);
                         return productDto;
                     })
                     .collect(Collectors.toList());

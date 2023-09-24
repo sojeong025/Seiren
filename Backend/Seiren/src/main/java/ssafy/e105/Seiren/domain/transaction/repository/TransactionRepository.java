@@ -15,9 +15,14 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     @Query(value = "SELECT t FROM Transaction t WHERE t.buyer.id = :userId")
     Page<Transaction> findAllByBuyer(@Param("userId") Long userId, Pageable pageable);
-    Transaction findTransactionByProduct_ProductIdAndSeller_Id(Long productId, Long sellerId);
+
+    @Query("SELECT t FROM Transaction t WHERE t.product.productId = :productId AND t.seller.id = :sellerId AND t.buyer.id = :buyerId")
+    Transaction findTransactionBySellerBuyerAndProductIds(Long productId, Long sellerId,
+            Long buyerId);
+
     @Query(value = "SELECT t FROM Transaction t WHERE t.buyer.id = :userId AND t.product.productId = :productId")
-    Optional<Transaction> findByBuyerAndProduct(@Param("userId") Long userId, @Param("productId") Long productId);
+    Optional<Transaction> findByBuyerAndProduct(@Param("userId") Long userId,
+            @Param("productId") Long productId);
 
     @Query(value = "SELECT COUNT(t) FROM Transaction t WHERE t.buyer.id = :userId")
     int findByBuyer(@Param("userId") Long userId);

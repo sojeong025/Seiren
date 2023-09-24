@@ -57,12 +57,12 @@ public class Transaction {
                 .build();
     }
 
-    public void update(Transaction transaction, PurchaseDto purchaseDto) {
-        this.totalCount = transaction.totalCount + purchaseDto.getBuyLetterCount();
-        this.restCount = transaction.restCount + purchaseDto.getBuyLetterCount();
+    public void update(PurchaseDto purchaseDto) {
+        this.totalCount += purchaseDto.getBuyLetterCount();
+        this.restCount += purchaseDto.getBuyLetterCount();
     }
 
-    public void minusRestCount(int textLength){
+    public void minusRestCount(int textLength) {
         this.restCount = this.restCount - textLength;
     }
 

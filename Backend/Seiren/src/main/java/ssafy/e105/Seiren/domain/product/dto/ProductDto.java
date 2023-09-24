@@ -22,14 +22,18 @@ public class ProductDto {
     private Double price;
     @Schema(description = "상품 카테고리 목록", example = "딱딱한, 청년")
     private List<ProductCategoryDto> productCategoryList;
+    @Schema(description = "찜 여부", example = "true")
+    private boolean wish;
 
-    public ProductDto(Product product, List<ProductCategoryDto> productCategoryDtoList) {
+    public ProductDto(Product product, List<ProductCategoryDto> productCategoryDtoList,
+            boolean wish) {
         this.productId = product.getProductId();
         this.title = product.getProductTitle();
         this.summary = product.getSummary();
         this.productImageUrl = product.getProductImageUrl();
         this.price = product.getPrice();
         this.productCategoryList = productCategoryDtoList;
+        this.wish = wish;
     }
 
 }

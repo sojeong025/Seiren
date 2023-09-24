@@ -55,7 +55,7 @@ public class ProductService {
         try {
             Product product = productRepository.save(Product.toEntity(productCreateRequest, voice));
             // 목소리 상태 판매중으로 변경
-            voice.update(1);
+            voice.update(3);
             // 미리듣기 등록 코드 추가 필요
             for (String text : productCreateRequest.getPreviewTexts()) {
                 // 미리듣기 생성을 위해 ai 서버에 api 요청 보내는 코드 추가
@@ -92,6 +92,7 @@ public class ProductService {
         return productDetailDto;
     }
 
+    @Transactional
     public void changeState(Long productId, HttpServletRequest request) {
         Product product = getProduct(productId);
         Voice voice = getVoice(product.getVoice().getVoiceId());
@@ -100,7 +101,7 @@ public class ProductService {
             if (voice.getUser() == user) {
                 product.update(product.getState() ? false : true);
                 productRepository.save(product);
-                voice.update(product.getState() ? 1 : 2);
+                voice.update(product.getState() ? 2 : 3);
                 voiceRepository.save(voice);
                 return;
             }
@@ -112,6 +113,7 @@ public class ProductService {
         }
     }
 
+    @Transactional
     public void updateProduct(ProductUpdateDto productUpdateDto, HttpServletRequest request) {
         Product product = getProduct(productUpdateDto.getProductId());
         Voice voice = getVoice(product.getVoice().getVoiceId());

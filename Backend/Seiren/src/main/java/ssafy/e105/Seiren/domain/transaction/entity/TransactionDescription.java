@@ -24,7 +24,7 @@ public class TransactionDescription {
     @JoinColumn(name = "transaction_id")
     private Transaction transaction;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purpose_id")
     private Purpose purpose;
 
