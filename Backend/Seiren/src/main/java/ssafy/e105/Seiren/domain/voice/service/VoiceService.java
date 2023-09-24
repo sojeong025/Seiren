@@ -69,6 +69,7 @@ public class VoiceService {
         return new VoiceUpdateDto(voice);
     }
 
+    @Transactional
     public Long addVoice(HttpServletRequest request) {
         User user = userService.getUser(request);
         try {

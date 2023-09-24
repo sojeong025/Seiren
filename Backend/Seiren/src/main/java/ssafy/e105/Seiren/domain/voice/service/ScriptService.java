@@ -17,6 +17,7 @@ import ssafy.e105.Seiren.global.utils.ApiError;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ScriptService {
 
     private final ScriptRepository scriptRepository;
@@ -29,6 +30,7 @@ public class ScriptService {
         return new ScriptResponse(script);
     }
 
+    @Transactional
     public void insertScript(String script) {
         try {
             scriptRepository.save(Script.builder().text(script).build());
