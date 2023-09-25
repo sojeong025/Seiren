@@ -64,7 +64,7 @@ function App() {
           <Route path="/detail/:index" element={<DetailPage />} />
 
           {/* 로그인 */}
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage setIsNavBarVisible={setIsNavBarVisible} />} />
           <Route path="/oauth/callback/kakao" element={<OAuth2RedirectHandler />} />
         </Routes>
       </div>  
