@@ -24,11 +24,12 @@ function UseVoiceBox() {
       <div className={styles.voiceItems}>
         {useVoiceList.map(item => (
           <VoiceItem
-            key={item.id}
-            profileImage={item.profileImage}
-            title={item.title}
-            moodHashtag={item.moodHashtag}
-            author={item.author}
+            key={item.productId} // 적절한 키를 사용하세요.
+            productImageUrl={item.productImageUrl}
+            productTitle={item.productTitle}
+            remainCount={item.remainLetter}
+            totalCount={item.totalCount}
+            productCategories={item.productCategories}
           />
         ))}
       </div>

@@ -7,16 +7,16 @@ function SellListBox() {
   const [sellList, setSellList] = useState();
   
 
-  useEffect(() => {
-    customAxios
-      .get("")
-      .then(response => {
-        let sellData = response.data.response;
-        console.log(sellData)
+  // useEffect(() => {
+  //   customAxios
+  //     .get("Statistics/products")
+  //     .then(response => {
+  //       let sellData = response.data.response;
+  //       console.log(sellData)
 
-      })
-      .catch(error => console.error("API 호출 중 오류 발생:", error));
-  }, []);
+  //     })
+  //     .catch(error => console.error("API 호출 중 오류 발생:", error));
+  // }, []);
 
   return (
     <div className={styles.sellListBoxContainer}>
