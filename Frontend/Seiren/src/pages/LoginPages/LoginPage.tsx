@@ -9,7 +9,10 @@ const LoginPage: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = 
 
   useEffect(() => {
     setIsNavBarVisible(false);
-  }, []);
+    return() => {
+      setIsNavBarVisible(true);
+    }
+  }, [setIsNavBarVisible]);
 
   return (
     <div className={styles.container}>

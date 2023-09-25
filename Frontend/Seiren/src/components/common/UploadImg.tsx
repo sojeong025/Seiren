@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
 import AWS, { AlexaForBusiness } from "aws-sdk";
 
-function UploadImg(){
-  const [imgUrl, setImgUrl] = useState(null);
+function UploadImg({imgUrl, setImgUrl}){
+ 
   const imgRef = useRef();
 
   AWS.config.update({

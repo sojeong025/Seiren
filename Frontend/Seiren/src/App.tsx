@@ -11,6 +11,7 @@ import AboutPage from "./pages/AboutPage";
 // 목소리 장터 페이지
 import VoiceMarketPage from "./pages/VoiceMarketPage/VoiceMarketPage";
 import VoiceDetailPage from "./pages/VoiceMarketPage/VoiceDetailPage";
+import ProductCustomPage from "./pages/VoiceMarketPage/ProductCustomPage";
 
 // 목소리 학습 페이지
 import VoiceStudyPage from "./pages/VoiceStudyPages/VoiceStudyPage";
@@ -52,6 +53,7 @@ function App() {
           {/* 목소리 장터 페이지 */}
           <Route path="/voice-market" element={<VoiceMarketPage />} />
           <Route path="/voice/:id" element={<VoiceDetailPage />} />
+          <Route path="/product-custom" element={<ProductCustomPage />} />
 
           {/* 목소리 등록 페이지 */}
           <Route path="/voice-study" element={<VoiceStudyPage />} />
