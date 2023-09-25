@@ -33,7 +33,7 @@
     color: #000000;
   }
   
-  .authorDate {
+  .count {
     display: flex;
     justify-content: space-between;
     font-size: 11px;
