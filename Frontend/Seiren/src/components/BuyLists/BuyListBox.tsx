@@ -23,17 +23,17 @@ function BuyListBox() {
         setPurchaseData(data); // Recoil 상태 업데이트
 
         // 총 금액 계산
-        const total = data.reduce((acc, item) => {
-          const totalAmountPerItem =
-            item.purchaseAmountPerCharacter * item.purchaseCharacterCount;
-          return acc + totalAmountPerItem;
+        const totalPurchasePrice = data.reduce((acc, item) => {
+          return acc + item.totalPrice;
         }, 0);
-        setTotalAmount(total);
+        setTotalAmount(totalPurchasePrice);
+      
       })
       .catch(error => {
         console.error("API 호출 중 오류 발생:", error);
       });
   }, [setPurchaseData, page]);
+
 
   return (
     <div className={styles.buyListBox}>
