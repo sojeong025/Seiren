@@ -24,7 +24,7 @@ function VoiceStudyPage() {
       .catch((error) => {
         console.error('목소리 상태 호출 중 오류:', error);
       });
-  }, []);
+  }, [success]);
 
   // 로딩화면 걸어두기
   if(success === null) return null;

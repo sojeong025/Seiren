@@ -16,7 +16,7 @@ import VoiceDetailPage from "./pages/VoiceMarketPage/VoiceDetailPage";
 import VoiceStudyPage from "./pages/VoiceStudyPages/VoiceStudyPage";
 import VoiceRecordPage from "./pages/VoiceStudyPages/VoiceRecordPage";
 import VoiceStudyingPage from "./pages/VoiceStudyPages/VoiceStudyingPage";
-import VoiceCustomPage from "./pages/VoiceStudyPages/VoiceCustomPage";
+import VoiceFinishPage from "./pages/VoiceStudyPages/VoiceFinishPage";
 
 // 마이 페이지
 import MyPage from "./pages/MyPages/MyPage";
@@ -56,7 +56,7 @@ function App() {
           <Route path="/voice-study" element={<VoiceStudyPage />} />
           <Route path="/voice-record" element={<VoiceRecordPage />} />
           <Route path="/voice-studying" element={<VoiceStudyingPage />} />
-          <Route path="/voice-custom" element={<VoiceCustomPage />} />
+          <Route path="/voice-finish" element={<VoiceFinishPage />} />
 
           {/* 마이페이지 */}
           <Route path="/my-page" element={<MyPage setIsNavBarVisible={setIsNavBarVisible} />} />
