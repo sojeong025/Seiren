@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { customAxios } from "../../libs/axios";
 import styles from "./UseVoiceDetail.module.css";
 import SideBar from "../../components/common/SideBar";
+import UseList from "../UseVoice/UseList";
 
 const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({ setIsNavBarVisible }) => {
   useEffect(() => {
@@ -80,6 +81,7 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
         placeholder="텍스트를 입력하세요"
       />
       <button onClick={sendPostRequest}>POST 요청 보내기</button>
+      <UseList/>
       </div>
     </div>
   );
