@@ -1,29 +1,28 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { customAxios } from "../../libs/axios";
 import styles from "./UseVoiceBox.module.css";
 import VoiceItem from "./VoiceItem"; // VoiceItem 컴포넌트 가져오기
-import voiceItemData from "./VoiceItemDummyData";
 
 function UseVoiceBox() {
-  // VoiceItem 데이터 배열
-  const voiceItems = [
-    {
-      profileImage: "url_to_profile_image1.jpg",
-      title: "Voice 1 제목",
-      moodHashtag: "#분위기1",
-    },
-    {
-      profileImage: "url_to_profile_image2.jpg",
-      title: "Voice 2 제목",
-      moodHashtag: "#분위기2",
-    },
-    // 다른 VoiceItem들을 추가할 수 있습니다.
-  ];
+  const [useVoiceList, setUseVoiceList] = useState([]);
 
+  useEffect(() => {
+    customAxios
+      .get("transactions?page=0")
+      .then(response => {
+        let voiceData = response.data.response;
+
+        console.log("리스트 : ", voiceData);
+        setUseVoiceList(voiceData);
+      })
+      .catch(error => console.error("API 호출 중 오류 발생:", error));
+  }, []);
+  console.log(useVoiceList);
   return (
     <div className={styles.UseVoiceContainer}>
       <div className={styles.textBox}>VoiceBox</div>
       <div className={styles.voiceItems}>
-        {voiceItemData.map(item => (
+        {useVoiceList.map(item => (
           <VoiceItem
             key={item.id}
             profileImage={item.profileImage}

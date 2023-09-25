@@ -12,22 +12,25 @@ function YourVoice() {
       .get("voices")
       .then(response => {
         const responseData = response.data.response;
-        setMyVoice(responseData)
+        console.log("yourVoice : ", responseData);
+        setMyVoice(responseData);
       })
       .catch(error => {
         console.log("내 목소리 API 호출 중 오류 발생:", error);
       });
   }, []);
-  console.log(setMyVoice);
+  console.log(myVoice);
   return (
     <div className={styles.YourVoiceContainer}>
       <div className={styles.YourVoiceText}>Your Voice</div>
       <div className={styles.VoiceItems}>
         <ul>
           {myVoice.map(item => (
-            <li key={item.voiceId}>{item.voiceTitle}</li>
+            <li key={item.voiceId}>
+              {item.voiceTitle}
+              <img className={styles.pimg} src={item.voiceAvatarUrl} alt={item.title} />
+            </li>
           ))}
-          //{" "}
         </ul>
       </div>
     </div>

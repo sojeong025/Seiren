@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./VoiceItem.module.css";
 
 function VoiceItem({ profileImage, title, moodHashtag, author }) {
