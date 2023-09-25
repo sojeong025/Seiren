@@ -8,7 +8,7 @@ function UseList() {
 
   useEffect(() => {
     customAxios
-      .get(`transactions/history?transactionid=${transactionid}&page=0`) // 원하는 API 경로로 변경하세요.
+      .get(`transactions/history?transactionid=${transactionid}&page=0`) 
       .then(response => {
         const responseData = response.data.response;
 
