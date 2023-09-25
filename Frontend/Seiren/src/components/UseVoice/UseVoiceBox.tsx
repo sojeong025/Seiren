@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { customAxios } from "../../libs/axios";
 import styles from "./UseVoiceBox.module.css";
 import VoiceItem from "./VoiceItem"; // VoiceItem 컴포넌트 가져오기
@@ -23,6 +24,7 @@ function UseVoiceBox() {
       <div className={styles.textBox}>VoiceBox</div>
       <div className={styles.voiceItems}>
         {useVoiceList.map(item => (
+          <Link to={`/voice-detail/${item.productId}`} key={item.productId}>
           <VoiceItem
             key={item.productId} // 적절한 키를 사용하세요.
             productImageUrl={item.productImageUrl}
@@ -31,6 +33,7 @@ function UseVoiceBox() {
             totalCount={item.totalCount}
             productCategories={item.productCategories}
           />
+          </Link>
         ))}
       </div>
     </div>
