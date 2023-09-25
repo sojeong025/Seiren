@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import ssafy.e105.Seiren.domain.product.entity.Product;
+import ssafy.e105.Seiren.domain.user.entity.User;
+import ssafy.e105.Seiren.domain.voice.entity.Voice;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
@@ -57,4 +59,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findProductsByCategoryIdsAndNicknameSortedByTotalCountSum(
             @Param("categoryIdList") List<Long> categoryIdList, @Param("nickname") String nickname,
             Pageable pageable);
+
+    Product findByProductId(Long productId);
 }

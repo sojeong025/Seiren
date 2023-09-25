@@ -53,7 +53,7 @@ public class Transaction {
                 .seller(seller)
                 .buyer(buyer)
                 .totalCount(purchaseDto.getBuyLetterCount())
-                .totalCount(purchaseDto.getBuyLetterCount())
+                .restCount(purchaseDto.getBuyLetterCount())
                 .build();
     }
 
