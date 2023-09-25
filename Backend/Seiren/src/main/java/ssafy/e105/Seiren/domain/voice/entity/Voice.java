@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UpdateTimestamp;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.user.entity.User;
-import ssafy.e105.Seiren.domain.voice.dto.VoiceUpdateDto;
+import ssafy.e105.Seiren.domain.voice.dto.VoiceInsertUpdateDto;
 
 @Builder
 @Getter
@@ -54,9 +54,12 @@ public class Voice {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public static Voice toEntity(User user) {
+    public static Voice toEntity(User user, VoiceInsertUpdateDto voiceDto) {
         return Voice.builder()
                 .user(user)
+                .voiceTitle(voiceDto.getVoiceTitle())
+                .voiceAvatarUrl(voiceDto.getVoiceAvatarUrl())
+                .memo(voiceDto.getMemo())
                 .build();
     }
 
@@ -68,10 +71,10 @@ public class Voice {
         this.state = state;
     }
 
-    public void update(VoiceUpdateDto voiceUpdateDto) {
-        this.voiceTitle = voiceUpdateDto.getVoiceTitle();
-        this.voiceAvatarUrl = voiceUpdateDto.getVoiceAvatarUrl();
-        this.memo = voiceUpdateDto.getMemo();
+    public void update(VoiceInsertUpdateDto voiceInsertUpdateDto) {
+        this.voiceTitle = voiceInsertUpdateDto.getVoiceTitle();
+        this.voiceAvatarUrl = voiceInsertUpdateDto.getVoiceAvatarUrl();
+        this.memo = voiceInsertUpdateDto.getMemo();
     }
 
     public void delete() {

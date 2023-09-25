@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import ssafy.e105.Seiren.domain.voice.dto.VoiceInsertUpdateDto;
 import ssafy.e105.Seiren.domain.voice.dto.VoiceMemoUpdateRequest;
-import ssafy.e105.Seiren.domain.voice.dto.VoiceUpdateDto;
 import ssafy.e105.Seiren.domain.voice.service.VoiceService;
 import ssafy.e105.Seiren.global.utils.ApiResult;
 import ssafy.e105.Seiren.global.utils.ApiUtils;
@@ -41,15 +41,16 @@ public class VoiceController {
     }
 
     @PostMapping("/api/voices")
-    public ApiResult<?> addVoice(HttpServletRequest request) {
+    public ApiResult<?> addVoice(HttpServletRequest request,
+            @RequestBody VoiceInsertUpdateDto voiceDto) {
         return ApiUtils.success(
-                voiceService.addVoice(request)); // 현재 녹음중인 음성(0, 1)이 없으면 음성 생성 호출 필요
+                voiceService.addVoice(request, voiceDto)); // 현재 녹음중인 음성(0, 1)이 없으면 음성 생성 호출 가능
     }
 
     @PutMapping("/api/voices")
     public ApiResult<?> modifyVoiceInfo(HttpServletRequest request,
-            @RequestBody VoiceUpdateDto voiceUpdateDto) {
-        voiceService.updateVoice(request, voiceUpdateDto);
+            @RequestBody VoiceInsertUpdateDto voiceInsertUpdateDto) {
+        voiceService.updateVoice(request, voiceInsertUpdateDto);
         return ApiUtils.success("목소리 정보 수정 완료");
     }
 

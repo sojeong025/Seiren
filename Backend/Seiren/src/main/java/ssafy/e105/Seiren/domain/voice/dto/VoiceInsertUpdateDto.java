@@ -8,14 +8,14 @@ import ssafy.e105.Seiren.domain.voice.entity.Voice;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class VoiceUpdateDto {
+public class VoiceInsertUpdateDto {
 
     private Long voiceId;
     private String voiceTitle;
     private String memo;
     private String voiceAvatarUrl;
 
-    public VoiceUpdateDto(Voice voice) {
+    public VoiceInsertUpdateDto(Voice voice) {
         this.voiceId = voice.getVoiceId();
         this.voiceTitle = voice.getVoiceTitle();
         this.memo = voice.getMemo();

@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.service.UserService;
 import ssafy.e105.Seiren.domain.voice.dto.VoiceDto;
+import ssafy.e105.Seiren.domain.voice.dto.VoiceInsertUpdateDto;
 import ssafy.e105.Seiren.domain.voice.dto.VoiceMemoUpdateRequest;
-import ssafy.e105.Seiren.domain.voice.dto.VoiceUpdateDto;
 import ssafy.e105.Seiren.domain.voice.entity.Voice;
 import ssafy.e105.Seiren.domain.voice.repository.VoiceRepository;
 import ssafy.e105.Seiren.global.error.type.BaseException;
@@ -61,20 +61,20 @@ public class VoiceService {
                 .collect(Collectors.toList());  // voice table에 state column을 넣은 이후의 코드
     }
 
-    public VoiceUpdateDto getVoiceDetail(HttpServletRequest request, Long voiceId) {
+    public VoiceInsertUpdateDto getVoiceDetail(HttpServletRequest request, Long voiceId) {
         Voice voice = voiceRepository.findOneByUser_IdAndVoiceId(
                 userService.getUser(request).getId(),
                 voiceId).orElseThrow(() -> new BaseException(new ApiError(
                 NOT_EXIST_VOICE.getMessage(), NOT_EXIST_VOICE.getCode())));
-        return new VoiceUpdateDto(voice);
+        return new VoiceInsertUpdateDto(voice);
     }
 
     @Transactional
-    public Long addVoice(HttpServletRequest request) {
+    public Long addVoice(HttpServletRequest request, VoiceInsertUpdateDto voiceDto) {
         User user = userService.getUser(request);
         try {
             if (voiceRepository.findByUser_IdAndStateLessThan(user.getId(), 2).isEmpty()) {
-                Voice voice = Voice.toEntity(user);
+                Voice voice = Voice.toEntity(user, voiceDto);
                 return voiceRepository.save(voice).getVoiceId();
             }
             throw new BaseException(new ApiError(EXIST_PROCESSING_VOICE.getMessage(),
@@ -88,12 +88,12 @@ public class VoiceService {
     }
 
     @Transactional
-    public void updateVoice(HttpServletRequest request, VoiceUpdateDto voiceUpdateDto) {
+    public void updateVoice(HttpServletRequest request, VoiceInsertUpdateDto voiceInsertUpdateDto) {
         User user = userService.getUser(request);
-        Voice voice = getVoice(voiceUpdateDto.getVoiceId());
+        Voice voice = getVoice(voiceInsertUpdateDto.getVoiceId());
         try {
             if (voice.getUser() == user) {
-                voice.update(voiceUpdateDto);
+                voice.update(voiceInsertUpdateDto);
                 return;
             }
             // voice 보유 유저 id와 업데이트 요청을 한 유저 id가 일치하지 않을 시 에러 처리
