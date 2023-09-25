@@ -35,6 +35,8 @@ import NavBar from "./components/common/NavBar";
 function App() {
   const [isNavBarVisible, setIsNavBarVisible] = useState(true);
 
+  
+
   return (
     <Router>
       {isNavBarVisible && <NavBar />}
@@ -57,11 +59,11 @@ function App() {
           <Route path="/voice-custom" element={<VoiceCustomPage />} />
 
           {/* 마이페이지 */}
-          <Route path="/my-page" element={<MyPage isNavBarVisible={false} />} />
-          <Route path="/buy-list" element={<BuyList />} />
-          <Route path="/sell-list" element={<SellList />} />
-          <Route path="/use-voice" element={<UseVoice />} />
-          <Route path="/detail/:index" element={<DetailPage />} />
+          <Route path="/my-page" element={<MyPage setIsNavBarVisible={setIsNavBarVisible} />} />
+          <Route path="/buy-list" element={<BuyList setIsNavBarVisible={setIsNavBarVisible} />} />
+          <Route path="/sell-list" element={<SellList setIsNavBarVisible={setIsNavBarVisible} />} />
+          <Route path="/use-voice" element={<UseVoice setIsNavBarVisible={setIsNavBarVisible} />} />
+          <Route path="/detail/:index" element={<DetailPage setIsNavBarVisible={setIsNavBarVisible} />} />
 
           {/* 로그인 */}
           <Route path="/login" element={<LoginPage setIsNavBarVisible={setIsNavBarVisible} />} />
