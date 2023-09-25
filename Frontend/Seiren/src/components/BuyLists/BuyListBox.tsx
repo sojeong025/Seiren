@@ -52,18 +52,18 @@ function BuyListBox() {
             return (
               <tr key={index}>
                 <td>{item.seller}</td>
-                <td>{item.voiceTitle}</td>
-                <td>{item.date}</td>
-                <td>{item.purchaseAmountPerCharacter}원</td>
-                <td>{item.purchaseCharacterCount}글자</td>
-                <td>{totalAmount}원</td>
+                <td>{item.productTitle}</td>
+                <td>{item.buyDate.substring(0, 10)}</td>
+                <td>{item.price}원 / {item.buyLetterCount}개 </td>
+                <td>{item.buyLetterCount}글자</td>
+                <td>{item.totalPrice}원</td>
               </tr>
             );
           })}
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan={5} className={styles.totalLabel}>
+            <td colSpan={5} className={styles.totalPrice}>
               총 금액:
             </td>
             <td className={styles.totalAmount}>{totalAmount}원</td>

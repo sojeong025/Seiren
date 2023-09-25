@@ -13,7 +13,6 @@ function Likes() {
       .then(response => {
         const responseData = response.data;
         const likeslist = responseData && responseData.response.wishList ? responseData.response.wishList : [];
-
         // API 응답 데이터를 Recoil 상태에 설정
         setWishList(likeslist);
       })
@@ -30,7 +29,7 @@ function Likes() {
           <li key={item.productId}>
             <div>{item.title}</div>
             <div>{item.price}</div>
-            <img src={item.productImageUrl} alt={item.title} />
+            <img className={styles.pimg} src={item.productImageUrl} alt={item.title} />
           </li>
         ))}
       </ul>
