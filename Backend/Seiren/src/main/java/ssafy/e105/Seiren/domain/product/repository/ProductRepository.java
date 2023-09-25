@@ -60,5 +60,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("categoryIdList") List<Long> categoryIdList, @Param("nickname") String nickname,
             Pageable pageable);
 
-    List<Product> findByVoiceIn(List<Voice> userCreatedVoices);
+    Product findByProductId(Long productId);
 }

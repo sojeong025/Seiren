@@ -22,4 +22,10 @@ public class StatisticsController {
     public ApiResult<?> totalWishCount(HttpServletRequest request) {
         return ApiUtils.success(statisticsService.countWish(request));
     }
+
+    @Operation(summary = "상품_통계")
+    @GetMapping("api/Statistics/products")
+    public ApiResult<?> getAllProductStatistics(HttpServletRequest request) {
+        return ApiUtils.success(statisticsService.getAllProductStatisticsList(request));
+    }
 }

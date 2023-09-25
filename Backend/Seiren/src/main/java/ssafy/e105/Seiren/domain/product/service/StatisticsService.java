@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ssafy.e105.Seiren.domain.product.dto.ProductStatisticsDto;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.entity.Wish;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
 import ssafy.e105.Seiren.domain.product.repository.WishRepository;
+import ssafy.e105.Seiren.domain.transaction.repository.TransactionRepository;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.repository.UserRepository;
 import ssafy.e105.Seiren.domain.voice.entity.Voice;
@@ -25,9 +27,9 @@ public class StatisticsService {
 
     private final WishRepository wishRepository;
     private final ProductRepository productRepository;
-    private final VoiceRepository voiceRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
+    private final TransactionRepository transactionRepository;
 
 
     public int countWish(HttpServletRequest request) {
@@ -43,24 +45,28 @@ public class StatisticsService {
             }
         }
         return wishCount;
+    }
 
-//        List<Voice> userCreatedVoices = voiceRepository.findByUserIdAndStateGreaterThanEqual(
-//                user.getId(), 3);
-//        if (!userCreatedVoices.isEmpty()) {
-//            System.out.println("크기 : " + userCreatedVoices.size());
-//            List<Long> userCreatedVoiceProducts = new ArrayList<>();
-//            for (Voice voice : userCreatedVoices) {
-//                userCreatedVoiceProducts.add(voice.getProduct().getProductId());
-//            }
-//            int wishCount = 0;
-//            for (Long productId : userCreatedVoiceProducts) {
-//                List<Wish> matchingWishes = wishRepository.findByProduct_ProductId(productId);
-//                wishCount += matchingWishes.size();
-//            }
-//            return wishCount;
+    public List<ProductStatisticsDto> getAllProductStatisticsList(HttpServletRequest request) {
+        User user = getUser(request);
+        List<Long> productIdList = transactionRepository.findAllBySellerId(user.getId());
+        List<ProductStatisticsDto> productStatisticsDtoList = new ArrayList<>();
+        for (Long productId : productIdList) {
+            Product product = productRepository.findByProductId(productId);
+            int totalSumCount = transactionRepository.sumTotalCountByProductIdAndSellerId(
+                    user.getId(), productId);
+            ProductStatisticsDto productStatisticsDto = new ProductStatisticsDto(product,
+                    totalSumCount);
+            productStatisticsDtoList.add(productStatisticsDto);
+        }
+        return productStatisticsDtoList;
+
+//        Page<ProductStatisticsDto> productStatisticsDtoList = transactionRepository.findAllBySeller(
+//                user.getId(), pageable);
+//        List<ProductStatisticsDto> productStatisticsDtoList = new ArrayList<>();
+//        for (Transaction transaction : transactionPage) {
+//            ProductStatisticsDto productStatisticsDto = new ProductStatisticsDto(transaction);
 //        }
-//        return 0;
-
     }
 
     public User getUser(HttpServletRequest request) {
