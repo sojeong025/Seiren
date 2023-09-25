@@ -32,3 +32,4 @@ export const buyListState = atom({
   key: "buylist",
   default: [],
 })
+
