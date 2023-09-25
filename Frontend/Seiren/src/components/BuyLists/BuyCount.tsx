@@ -6,18 +6,6 @@ import { buyCountState } from "../../recoil/UserAtom";
 
 function BuyCount() {
   const [buyCount, setBuyCount] = useRecoilState(buyCountState);
-
-  useEffect(() => {
-    customAxios
-      .get("transactions/totalcount")
-      .then(response => {
-        let count = response.data.response;
-        setBuyCount(count);
-      })
-      .catch(error => {
-        console.error("API 호출 중 오류 발생:", error);
-      });
-  }, []);
   
   return (
     <div className={styles.buyCountBox}>
