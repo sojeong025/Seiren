@@ -16,12 +16,20 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'LeferiPoint-SpecialA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 body {
   margin: 0;
   padding: 0;
-  background-color: #000;
+  background-color: #303841;
   color: #EEEEEE;
-  font-family: 'SBAggroL', 'SBAggroM', 'SBAggroB';
+  font-family: 'SBAggroL', 'SBAggroM', 'SBAggroB', 'LeferiPoint-SpecialA';
 }
 a {
   text-decoration-line: none;

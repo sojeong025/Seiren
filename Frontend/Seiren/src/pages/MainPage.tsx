@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./MainPage.module.css";
-import videoSource from "../assets/pexels-rostislav-uzunov-10613972 (Original).mp4";
+// import videoSource from "../assets/pexels-rostislav-uzunov-10613972 (Original).mp4";
 import { Link } from "react-router-dom";
 import { customAxios } from '../libs/axios'
 import { UserState } from "../recoil/UserAtom";
@@ -57,9 +57,9 @@ export default function MainPage() {
 
   return (
     <div className={styles.mainPageContainer}>
-      <video className={styles.videoBackground} autoPlay loop muted>
+      {/* <video className={styles.videoBackground} autoPlay loop muted>
         <source src={videoSource} type="video/mp4" />
-      </video>
+      </video> */}
       <div className={styles.textContainer}>
         <div style={textStyle} className={styles.text}>
           <div className={styles.title}>

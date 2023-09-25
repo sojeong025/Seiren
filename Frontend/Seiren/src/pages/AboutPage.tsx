@@ -1,5 +1,5 @@
 import styles from './AboutPage.module.css';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import YouTube from 'react-youtube';
@@ -16,6 +16,11 @@ function AboutPage() {
       duration: 2,
       ease: "power1.inOut"
     });
+  };
+
+  const [sideTab, setSideTab] = useState('Store');
+  const handleTabClick = (tabName) => {
+    setSideTab(tabName);
   };
 
   useEffect(() => {
@@ -59,12 +64,35 @@ function AboutPage() {
       <section className={styles.section2}>
         <div className={`${styles.section2_txt} ${styles.animatedText}`}>SHOW SHOW SHOW SHOW SHOW SHOW SHOW SHOW SHOW SHOW SHOW SHOW</div>
         <div className={`${styles.section2_txt} ${styles.animatedText2}`}>SHOW SHOW SHOW SHOW SHOW SHOW SHOW SHOW SHOW SHOW SHOW SHOW</div>
-        <div className={styles.section2_video}><YouTube videoId="K6fHSb87aAM" /></div>
+        {/* <div className={styles.section2_video}><YouTube videoId="K6fHSb87aAM" /></div> */}
       </section>
 
       {/* section3: 사이드 탭에 따라 설명 */}
-      <section className={styles.section3}>
-        <div>그냥 설명</div>
+      <section className={styles.section3} style={{ display: 'flex' }}>
+        <div className={styles.left} >
+          <div className={styles.menu} onClick={() => handleTabClick('Store')}>Voice Store</div>
+          <div className={styles.menu} onClick={() => handleTabClick('Record')}>Voice Record</div>
+          <div className={styles.menu} onClick={() => handleTabClick('Mypage')}>MyPage</div>
+        </div>
+
+        <hr />
+
+        <div className={styles.right} >
+          {sideTab === 'Store' && (
+            // Store 설명
+            <div>Store : Lorem ipsum dolor sit amet...</div>
+          )}
+          
+          {sideTab === 'Record' && (
+            // Record 설명
+            <div>Record : Lorem ipsum dolor sit amet...</div>
+          )}
+
+          {sideTab === 'Mypage' && (
+            // Mypage 설명
+            <div>My page: Lorem ipsum dolor sit amet...</div>
+          )}
+        </div>
       </section>
     </div>
   );

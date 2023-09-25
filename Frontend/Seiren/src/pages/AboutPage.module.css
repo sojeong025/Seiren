@@ -22,7 +22,7 @@
   line-height: 70px;
 }
 .main_txt span {
-  color: #E5B8F4;
+  color: #22D1EE;
 }
 
 /* section2 */
@@ -75,5 +75,22 @@
 
 /* section3 */
 .section3 {
-  background-color: #9BA4B5;
+  background-color: #E2F3F5;
+  color: #000;
+}
+.left{
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 30px;
+  padding: 100px;
+}
+.menu{
+  margin: 50px 0;
+  text-align: end;
+}
+.right{
+  /* border: 1px solid black; */
+  width: 70%;
 }
