@@ -23,7 +23,5 @@ public class PreviewController {
     public ApiResult<?> productPreview(@PathVariable Long productId,
             HttpServletRequest request) {
         return ApiUtils.success(previewService.getProductPreview(productId, request));
-
     }
-
 }

@@ -36,9 +36,12 @@ public class TestHistoryService {
     public int countTest(Long productId, HttpServletRequest request) {
         User user = getUser(request);
         TestHistory testHistory = testHistoryRepository.findCountByUser_IdAndProduct_ProductId(
-                user.getId(),
-                productId);
-        int count = testHistory.getCount();
+                user.getId(), productId);
+        int count;
+        if (testHistory == null) {
+            return count = 3;
+        }
+        count = testHistory.getCount();
         return count;
     }
 

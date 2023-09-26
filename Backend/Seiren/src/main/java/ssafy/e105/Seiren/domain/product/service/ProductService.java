@@ -120,7 +120,6 @@ public class ProductService {
         User user = getUser(request);
         try {
             if (voice.getUser() == user) {
-                // productUpdateDto 속 productImage 파일을 productImageUrl 바꾸는 코드 추가 필요
                 product.update(productUpdateDto);
                 productRepository.save(product);
                 return;
