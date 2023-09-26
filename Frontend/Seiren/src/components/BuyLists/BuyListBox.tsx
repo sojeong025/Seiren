@@ -4,6 +4,7 @@ import { customAxios } from "../../libs/axios";
 import { buyListState, buyCountState } from "../../recoil/UserAtom";
 import { useRecoilState } from "recoil";
 import { useParams } from "react-router-dom";
+import Pagination from "../common/Pagination";
 
 
 function BuyListBox() {
@@ -11,6 +12,8 @@ function BuyListBox() {
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalBuyCount, setTotalBuyCount] = useRecoilState(buyCountState);
   const { page } = useParams();
+  const [currentPage, setCurrentPage] = useState(page || 1); // 현재 페이지 상태 추가
+  const itemsPerPage = 10;
 
   useEffect(() => {
     customAxios
@@ -34,6 +37,9 @@ function BuyListBox() {
       });
   }, [setPurchaseData, page]);
 
+  const onPageChange = pageNumber => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div className={styles.buyListBox}>
@@ -72,6 +78,12 @@ function BuyListBox() {
           </tr>
         </tfoot>
       </table>
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={totalBuyCount}
+        currentPage={currentPage}
+        onPageChange={onPageChange}
+      />
     </div>
   );
 }
