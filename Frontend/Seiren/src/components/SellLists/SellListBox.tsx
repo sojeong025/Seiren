@@ -23,14 +23,13 @@ function SellListBox() {
       <div className={styles.sellList}>
         {sellList.map((item, index) => (
           <div key={index} className={styles.sellItem}>
+            <Link to={`/sell-list/detail/${item.productId}`} className={styles.productLink}>
             <img src={item.productImageUrl} alt={item.productTitle} className={styles.productImage} />
             <div className={styles.productInfo}>
               <h2 className={styles.productTitle}>{item.productTitle}</h2>
               <p>Total Sales: {item.totalSumCount}</p>
-              <Link to={`/product/${item.productId}`} className={styles.productLink}>
-                View Details
-              </Link>
             </div>
+            </Link>
           </div>
         ))}
       </div> 
