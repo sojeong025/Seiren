@@ -1,0 +1,30 @@
+/* SellDetailList.module.css */
+
+/* Styles for the container div */
+.sellDetailTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  /* Styles for the table */
+  .sellDetailTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+  
+  /* Styles for table headers */
+  .sellDetailTable th {
+    background-color: #2e2d2d;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  /* Styles for table data rows */
+  .sellDetailTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    background-color: #3b3636; /* Set background color for all rows */
+  }
+  

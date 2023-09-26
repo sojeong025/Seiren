@@ -9,7 +9,8 @@ function SellListBox() {
   const [totalSales, setTotalSales] = useState(0);
   const [myProductLikes, setMyProductLikes] = useState(0);
   const [salesData, setSalesData] = useState([]);
-  const [selectedMonth, setSelectedMonth] = useState(month || "");
+  const currentDate = new Date(); // 현재 날짜 객체를 생성합니다.
+  const [selectedMonth, setSelectedMonth] = useState(currentDate.getMonth() + 1); // 현재 월을 초기값으로 설정합니다.
 
   useEffect(() => {
     if (selectedMonth) {
@@ -23,13 +24,12 @@ function SellListBox() {
           const responseData = response.data.response;
           console.log(responseData);
 
-          // 리스폰스 데이터를 배열로 변환
+          // 리스폰스 데이터를 배열로 변환하고 날짜 오름차순으로 정렬
           const salesDataArray = Object.keys(responseData)
             .map(date => ({
               date: date,
-              sales: responseData[date],
+              sales: parseFloat(responseData[date]),
             }))
-            //@ts-ignore
             .sort((a, b) => new Date(a.date) - new Date(b.date));
 
           setTotalSales(responseData.totalSales);
