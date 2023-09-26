@@ -39,7 +39,7 @@ public class SearchService {
     public ProductSearchResponse searchProduct(ProductSearchRequest searchRequest,
             HttpServletRequest request, int page) {
         User user = getUser(request);
-        int size = 10;
+        int size = 12;
         try {
             // 닉네임 x 목록
             if (searchRequest.getNickname().isEmpty()) {
