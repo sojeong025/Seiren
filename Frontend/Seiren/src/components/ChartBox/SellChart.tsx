@@ -1,36 +1,79 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./SellChart.module.css";
 import { customAxios } from "../../libs/axios";
+import { useParams } from "react-router-dom";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 function SellListBox() {
+  const { month } = useParams();
   const [totalSales, setTotalSales] = useState(0);
   const [myProductLikes, setMyProductLikes] = useState(0);
-  const [salesData, setSalesData] = useState([]); // 날짜와 판매량 데이터를 저장할 상태
+  const [salesData, setSalesData] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState(month || "");
 
   useEffect(() => {
-    customAxios
-      .get("statistics/products") // 원하는 API 경로로 변경하세요.
-      .then(response => {
-        const responseData = response.data;
-        console.log(responseData)
+    if (selectedMonth) {
+      console.log(selectedMonth);
 
+      const requestData = { month: selectedMonth };
 
-      })
-      .catch(error => {
-        console.error("API 호출 중 오류 발생:", error);
-      });
-  }, []);
+      customAxios
+        .get(`statistics/month`, { params: requestData })
+        .then(response => {
+          const responseData = response.data.response;
+          console.log(responseData);
+
+          // 리스폰스 데이터를 배열로 변환
+          const salesDataArray = Object.keys(responseData)
+            .map(date => ({
+              date: date,
+              sales: responseData[date],
+            }))
+            //@ts-ignore
+            .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+          setTotalSales(responseData.totalSales);
+          setMyProductLikes(responseData.myProductLikes);
+          setSalesData(salesDataArray);
+        })
+        .catch(error => {
+          console.error("API 호출 중 오류 발생:", error);
+        });
+    }
+  }, [selectedMonth]);
+
+  const handleMonthChange = event => {
+    const selectedMonth = event.target.value;
+    setSelectedMonth(selectedMonth);
+  };
 
   return (
     <div className={styles.allContainer}>
       <h1>판매통계차트</h1>
+      <div className={styles.monthDropdown}>
+        <label htmlFor="month">월 선택: </label>
+        <select id="month" value={selectedMonth} onChange={handleMonthChange}>
+          <option value="">전체</option>
+          <option value="1">1월</option>
+          <option value="2">2월</option>
+          <option value="3">3월</option>
+          <option value="4">4월</option>
+          <option value="5">5월</option>
+          <option value="6">6월</option>
+          <option value="7">7월</option>
+          <option value="8">8월</option>
+          <option value="9">9월</option>
+          <option value="10">10월</option>
+          <option value="11">11월</option>
+          <option value="12">12월</option>
+        </select>
+      </div>
       <div className={styles.sellChartContainer}>
         <div className={styles.sellChartBox}>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={salesData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-              <XAxis dataKey="date" />
-              <YAxis />
+              <XAxis dataKey="date" type="category" />
+              <YAxis dataKey="sales" />
               <CartesianGrid strokeDasharray="3 3" />
               <Tooltip />
               <Legend />

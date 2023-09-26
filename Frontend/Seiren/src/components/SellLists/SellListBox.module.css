@@ -38,3 +38,11 @@
 .itemText{
   width: 100%;
 }
+
+.sellItem{
+  border: 2px solid #fff;
+}
+.productImage{
+  width: 70px;
+  height: auto;
+}
