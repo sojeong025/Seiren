@@ -14,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ssafy.e105.Seiren.domain.product.dto.ProductCategoryDto;
 import ssafy.e105.Seiren.domain.product.dto.ProductDto;
-import ssafy.e105.Seiren.domain.product.dto.ProductSearchRequest;
 import ssafy.e105.Seiren.domain.product.dto.ProductSearchResponse;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.entity.ProductCategory;
@@ -36,12 +35,19 @@ public class SearchService {
     private final UserRepository userRepository;
     private final WishRepository wishRepository;
 
-    public ProductSearchResponse searchProduct(String nickname, List<Long> categoryIdList,
+    public ProductSearchResponse searchProduct(String nickname, Long age, Long mood, Long gender,
             String sortType, HttpServletRequest request, int page) {
         User user = getUser(request);
-        System.out.println("nickname : " + nickname);
-        System.out.println("categoryIdList : " + categoryIdList);
-        System.out.println("sortType : " + sortType);
+        List<Long> categoryIdList = new ArrayList<>();
+        if (age != null) {
+            categoryIdList.add(age);
+        }
+        if (mood != null) {
+            categoryIdList.add(mood);
+        }
+        if (mood != null) {
+            categoryIdList.add(gender);
+        }
         int size = 12;
         try {
             // 닉네임 x 목록
