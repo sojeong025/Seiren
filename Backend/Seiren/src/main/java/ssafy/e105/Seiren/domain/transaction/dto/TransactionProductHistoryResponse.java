@@ -1,13 +1,11 @@
 package ssafy.e105.Seiren.domain.transaction.dto;
 
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ssafy.e105.Seiren.domain.transaction.entity.Transaction;
 import ssafy.e105.Seiren.domain.transaction.entity.UseHistory;
-
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -32,7 +30,7 @@ public class TransactionProductHistoryResponse {
     /**
      * toDto
      */
-    public static TransactionProductHistoryResponse toDto(UseHistory useHistory){
+    public static TransactionProductHistoryResponse toDto(UseHistory useHistory) {
         return TransactionProductHistoryResponse.builder()
                 .text(useHistory.getText())
                 .mp3Url(useHistory.getFileUrl())

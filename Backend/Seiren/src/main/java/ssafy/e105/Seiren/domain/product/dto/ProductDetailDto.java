@@ -5,7 +5,6 @@ import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ssafy.e105.Seiren.domain.product.entity.Product;
-import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.voice.entity.Voice;
 
 @Data

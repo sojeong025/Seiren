@@ -1,6 +1,5 @@
 package ssafy.e105.Seiren.domain.product.entity;
 
-import jakarta.persistence.IdClass;
 import java.io.Serializable;
 import lombok.Data;
 
