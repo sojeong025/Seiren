@@ -27,7 +27,7 @@ import DetailPage from "./pages/MyPages/DetailPage";
 import UseVoice from "./pages/MyPages/UseVoice";
 import UseVoiceDetail from "./components/UseVoice/UseVoiceDetail";
 import YourVoiceDetail from "./components/MyProfile/YourVoiceDetail";
-import SellDetail from "./components/SellLists/SellDetailList";
+import SellDetail from "./components/SellLists/SellDetail";
 
 // 로그인
 import LoginPage from "./pages/LoginPages/LoginPage";
