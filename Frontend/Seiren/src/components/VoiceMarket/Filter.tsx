@@ -1,20 +1,47 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import styles from "./Filter.module.css"
+import { customAxios } from '../../libs/axios';
 
 function Filter() {
-  const [gender, setGender] = useState<string | "">('');
-  const [age, setAge] = useState<string | "">('');
-  const [mood, setMood] = useState<string | "">('');
+  const [gender, setGender] = useState<GetData[]>([]);
+  const [age, setAge] = useState<GetData[]>([]);
+  const [mood, setMood] = useState<GetData[]>([]);
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setGender(event.target.value === undefined ? '' : event.target.value);
-    setAge(event.target.value === undefined ? '' : event.target.value);
-    setMood(event.target.value === undefined ? '' : event.target.value);
+  const [selectGender, setSelectGender] = useState<string|number>();
+  const [selectAge, setSelectAge] = useState<string|number>();
+  const [selectMood, setSelectMood] = useState<string|number>();
+
+  interface GetData{
+    id:number;
+    name:string;
+  }
+
+  const handleChangeGender = (event: SelectChangeEvent) => {
+    const target = event.target as HTMLInputElement;
+    setSelectGender(target.value === "-1" ? '' : target.value);
   };
+  const handleChangeAge = (event: SelectChangeEvent) =>{
+    const target = event.target as HTMLInputElement;
+    setSelectAge(target.value === "-1" ? '' : target.value);
+  }
+  const handleChangeMood = (event: SelectChangeEvent) =>{
+    const target = event.target as HTMLInputElement;
+    setSelectMood(target.value === "-1" ? '' : target.value);
+  }
+
+  useEffect(()=>{
+    customAxios.get("categories")
+    .then((res)=>{
+      console.log(res.data.response[0].children[0]);
+      setGender(res.data.response[0].children[0].children);
+      setAge(res.data.response[0].children[1].children);
+      setMood(res.data.response[0].children[2].children);
+    })
+  },[])
 
   return (
     <div className={styles.filter}>
@@ -24,15 +51,18 @@ function Filter() {
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
-          value={gender}
-          onChange={handleChange}
+          value={selectGender === ''?-1:selectGender}
+          onChange={handleChangeGender}
           label="gender"
         >
-          <MenuItem value="">
+          <MenuItem value="-1">
             <em>All</em>
           </MenuItem>
-          <MenuItem value={'Male'}>Male</MenuItem>
-          <MenuItem value={'Female'}>Female</MenuItem>
+          {
+            gender && gender.map((data, i)=>
+            <MenuItem key={i}  value={data.id}>{data.name}</MenuItem>
+            )
+          }
         </Select>
       </FormControl>
 
@@ -41,15 +71,18 @@ function Filter() {
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
-          value={age}
-          onChange={handleChange}
+          value={selectAge=== ''?-1:selectAge}
+          onChange={handleChangeAge}
           label="age"
         >
-          <MenuItem value="">
+          <MenuItem value="-1">
             <em>All</em>
           </MenuItem>
-          <MenuItem value={'Children'}>Children</MenuItem>
-          <MenuItem value={'Female'}></MenuItem>
+          {
+            age && age.map((data, i)=>
+            <MenuItem key={i} value={data.id}>{data.name}</MenuItem>
+            )
+          }
         </Select>
       </FormControl>
 
@@ -58,15 +91,18 @@ function Filter() {
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
-          value={mood}
-          onChange={handleChange}
+          value={selectMood === ''?-1:selectMood}
+          onChange={handleChangeMood}
           label="mood"
         >
-          <MenuItem value="">
+          <MenuItem value="-1">
             <em>All</em>
           </MenuItem>
-          <MenuItem value={'Male'}>Male</MenuItem>
-          <MenuItem value={'Female'}>Female</MenuItem>
+          {
+            mood && mood.map((data, i)=>
+            <MenuItem key={i} value={data.id}>{data.name}</MenuItem>
+            )
+          }
         </Select>
       </FormControl>
       <div>
