@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./SellChart.module.css";
 import { customAxios } from "../../libs/axios";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
@@ -8,19 +8,19 @@ function SellListBox() {
   const [myProductLikes, setMyProductLikes] = useState(0);
   const [salesData, setSalesData] = useState([]); // 날짜와 판매량 데이터를 저장할 상태
 
-  // useEffect(() => {
-  //   customAxios
-  //     .get("Statistics/products") // 원하는 API 경로로 변경하세요.
-  //     .then(response => {
-  //       const responseData = response.data;
-  //       console.log(responseData)
+  useEffect(() => {
+    customAxios
+      .get("statistics/products") // 원하는 API 경로로 변경하세요.
+      .then(response => {
+        const responseData = response.data;
+        console.log(responseData)
 
 
-  //     })
-  //     .catch(error => {
-  //       console.error("API 호출 중 오류 발생:", error);
-  //     });
-  // }, []);
+      })
+      .catch(error => {
+        console.error("API 호출 중 오류 발생:", error);
+      });
+  }, []);
 
   return (
     <div className={styles.allContainer}>

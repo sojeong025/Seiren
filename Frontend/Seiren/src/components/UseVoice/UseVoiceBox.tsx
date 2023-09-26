@@ -26,7 +26,7 @@ function UseVoiceBox() {
         {useVoiceList.map(item => (
           <Link to={`/voice-detail/${item.productId}`} key={item.productId}>
           <VoiceItem
-            key={item.productId} // 적절한 키를 사용하세요.
+            key={item.productId}
             productImageUrl={item.productImageUrl}
             productTitle={item.productTitle}
             remainCount={item.remainLetter}
