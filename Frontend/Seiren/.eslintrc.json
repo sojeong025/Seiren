@@ -22,6 +22,7 @@
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",
+        "@typescrip-eslint/no-unused-vars": "off", 
         "prettier/prettier": [
             "error",
                 {

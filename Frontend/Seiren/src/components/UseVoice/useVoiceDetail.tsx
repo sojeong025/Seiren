@@ -22,8 +22,8 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
     customAxios
       .get(`transactions/detail/${productId}`)
       .then(response => {
-        const voiceDetailData = response.data.response;
-        console.log(voiceDetailData);
+        const voiceDetailData =  response.data.response;
+        
         setVoiceDetail(voiceDetailData);
       })
       .catch(error => {
@@ -40,7 +40,6 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
     customAxios
       .post("transactions", requestData)
       .then((response) => {
-        // POST 요청이 성공하면 여기에서 응답을 처리할 수 있습니다.
         console.log("POST 요청 성공:", response.data);
       })
       .catch((error) => {
