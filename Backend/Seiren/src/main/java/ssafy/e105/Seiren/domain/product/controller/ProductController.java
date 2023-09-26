@@ -4,9 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,12 +65,3 @@ public class ProductController {
         return ApiUtils.success(searchService.searchProduct(searchRequest, request, page));
     }
 }
-//    @Operation(summary = "상품 검색")
-//    @GetMapping("/api/products")
-//    public ApiResult<?> searchProducts(@RequestParam("nickname") String nickname,
-//            @RequestParam("categoryId") List<Long> categoryIdList,
-//            @RequestParam("sortType") String sortType,
-//            HttpServletRequest request) {
-//        return ApiUtils.success(
-//                searchService.searchProduct(nickname, categoryIdList, sortType, request));
-//    }

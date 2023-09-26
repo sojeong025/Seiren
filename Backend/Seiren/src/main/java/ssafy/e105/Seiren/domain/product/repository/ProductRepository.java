@@ -32,29 +32,29 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             Pageable pageable);
 
     // Product 목록을 판매순으로 가져오는 쿼리
-    @Query("SELECT p, COALESCE(SUM(t.totalCount), 0) AS total_count_sum FROM Product p " +
-            "LEFT JOIN Transaction t ON p.productId = t.product.productId GROUP BY p.productId")
-    Page<Product> findProductsSortedByTotalCountSum(Pageable pageable);
+    @Query("SELECT p FROM Product p LEFT JOIN Transaction t ON p.productId = t.product.productId " +
+            "GROUP BY p ORDER BY COUNT(t) DESC")
+    Page<Product> findAllOrderByTransactionCountDesc(Pageable pageable);
 
     // nickname에 해당하는 Product 목록을 판매순으로 가져오는 쿼리
-    @Query("SELECT p, COALESCE(SUM(t.totalCount), 0) AS total_count_sum FROM Product p " +
-            "LEFT JOIN p.voice.user u LEFT JOIN Transaction t ON p.productId = t.product.productId "
-            + "WHERE u.nickname = :nickname GROUP BY p.productId ")
-    Page<Product> findProductsByNicknameSortedByTotalCountSum(@Param("nickname") String nickname,
+    @Query("SELECT p FROM Product p LEFT JOIN p.voice.user u LEFT JOIN Transaction t ON p.productId = t.product.productId "
+            + "WHERE u.nickname = :nickname GROUP BY p ORDER BY COUNT(t) DESC")
+    Page<Product> findAllByNicknameOrderByTransactionCountDesc(@Param("nickname") String nickname,
             Pageable pageable);
 
     // categoryIdList에 해당하는 Product 목록을 판매순으로 가져오는 쿼리
-    @Query("SELECT p, COALESCE(SUM(t.totalCount), 0) AS total_count_sum FROM Product p " +
-            "LEFT JOIN p.productCategories pc LEFT JOIN Transaction t ON p.productId = t.product.productId "
-            + "WHERE pc.category.id IN :categoryIdList GROUP BY p.productId ")
-    Page<Product> findProductsByCategoryAndSortByTotalCountSum(
+    @Query("SELECT p FROM Product p LEFT JOIN p.productCategories pc LEFT JOIN Transaction t ON p.productId = t.product.productId "
+            + "WHERE pc.category.id IN :categoryIdList GROUP BY p ORDER BY COUNT(t) DESC")
+    Page<Product> findAllByCategoryOrderByTransactionCountDesc(
             @Param("categoryIdList") List<Long> categoryIdList, Pageable pageable);
 
     // categoryIdList와 nickname에 해당하는 Product 목록을 판매순으로 가져오는 쿼리
-    @Query("SELECT p, COALESCE(SUM(t.totalCount), 0) AS total_count_sum FROM Product p " +
-            "LEFT JOIN p.productCategories pc LEFT JOIN p.voice.user u LEFT JOIN Transaction t ON p.productId = t.product.productId "
-            + "WHERE u.nickname = :nickname AND pc.category.id IN :categoryIdList GROUP BY p.productId ")
-    Page<Product> findProductsByCategoryIdsAndNicknameSortedByTotalCountSum(
+    @Query("SELECT p FROM Product p LEFT JOIN p.productCategories pc LEFT JOIN p.voice.user u LEFT JOIN Transaction t ON p.productId = t.product.productId "
+            + "WHERE u.nickname = :nickname AND pc.category.id IN :categoryIdList GROUP BY p ORDER BY COUNT(t) DESC")
+    Page<Product> findAllByCategoryIdsAndNicknameOrderByTransactionCountDesc(
             @Param("categoryIdList") List<Long> categoryIdList, @Param("nickname") String nickname,
             Pageable pageable);
+
+    Product findByProductId(Long productId);
+
 }
