@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Pagination.module.css";
 
 function Pagination({ itemsPerPage, totalItems, currentPage, onPageChange }) {
   const pageNumbers = [];
@@ -9,14 +10,10 @@ function Pagination({ itemsPerPage, totalItems, currentPage, onPageChange }) {
 
   return (
     <nav>
-      <ul className="pagination">
+      <ul className={styles.pagination}>
         {pageNumbers.map(number => (
-          <li key={number} className="page-item">
-            <a
-              onClick={() => onPageChange(number)}
-              href="#!"
-              className={`page-link ${currentPage === number ? 'active' : ''}`}
-            >
+          <li key={number} className={`page-item ${currentPage === number ? styles.active : ""}`}>
+            <a onClick={() => onPageChange(number)} href="#!" className={`page-link ${styles.pageLink}`}>
               {number}
             </a>
           </li>
