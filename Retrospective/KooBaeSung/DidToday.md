@@ -36,3 +36,8 @@
 ### 2023-09-22
 - CI/CD
 - Docker, Jenkins, Nginx ...
+
+### 2023-09-26
+- CI/CD
+- HTTPS (certbot ssl)
+- React
