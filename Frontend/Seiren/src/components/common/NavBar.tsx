@@ -21,8 +21,10 @@ function NavBar() {
       setScrollY(newScrollY);
 
       if (newScrollY > scrollY) {
+        //@ts-ignore
         setScrollDirection("down");
       } else if (newScrollY < scrollY) {
+        //@ts-ignore
         setScrollDirection("up");
       }
     };
