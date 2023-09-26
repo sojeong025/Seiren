@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { myVoiceState } from "../../recoil/UserAtom";
 import { customAxios } from "../../libs/axios";
 import styles from "./YourVoice.module.css";
+import { Link } from "react-router-dom";
 
 function YourVoice() {
   const [myVoice, setMyVoice] = useRecoilState(myVoiceState);
@@ -27,8 +28,10 @@ function YourVoice() {
         <ul>
           {myVoice.map(item => (
             <li key={item.voiceId}>
+              <Link to={`/your-voice-detail/${item.voiceId}`}>
               {item.voiceTitle}
               <img className={styles.pimg} src={item.voiceAvatarUrl} alt={item.title} />
+              </Link>
             </li>
           ))}
         </ul>
