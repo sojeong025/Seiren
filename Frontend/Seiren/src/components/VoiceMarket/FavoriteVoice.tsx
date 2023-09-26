@@ -40,7 +40,7 @@ function VoiceCard({ voice }: { voice : Voice }) {
 function FavoriteVoice() {
   return (
     <div className={styles.container}>
-        <div className={styles.FavText}>좋아요 누른 목소리</div>
+        <div className={styles.FavText}>좋아요 누른 목소리나 캐러샐을 통한 광고 느낌</div>
         <div className={styles.cards}>
           {voices.map((voice, index) => (
             <VoiceCard key={index} voice={voice} />
