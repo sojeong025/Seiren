@@ -61,6 +61,7 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/user/signup")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/user/login")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/api/products")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/h2-console/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("https://kauth.kakao.com/oauth/token"))
                         .permitAll()

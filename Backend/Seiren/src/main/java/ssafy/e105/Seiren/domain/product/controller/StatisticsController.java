@@ -48,7 +48,6 @@ public class StatisticsController {
         Map<LocalDate, Double> monthlyStatistics = statisticsService.getStatistics(request, month);
         Map<YearMonth, Double> monthlyRevenue = statisticsService.calculateMonthlyRevenue(
                 monthlyStatistics);
-
         return ApiUtils.success(monthlyRevenue);
     }
 }

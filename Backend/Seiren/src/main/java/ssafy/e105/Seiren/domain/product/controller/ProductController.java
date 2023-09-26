@@ -65,12 +65,3 @@ public class ProductController {
         return ApiUtils.success(searchService.searchProduct(searchRequest, request, page));
     }
 }
-//    @Operation(summary = "상품 검색")
-//    @GetMapping("/api/products")
-//    public ApiResult<?> searchProducts(@RequestParam("nickname") String nickname,
-//            @RequestParam("categoryId") List<Long> categoryIdList,
-//            @RequestParam("sortType") String sortType,
-//            HttpServletRequest request) {
-//        return ApiUtils.success(
-//                searchService.searchProduct(nickname, categoryIdList, sortType, request));
-//    }
