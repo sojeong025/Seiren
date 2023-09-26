@@ -36,33 +36,36 @@ public class SearchService {
     private final UserRepository userRepository;
     private final WishRepository wishRepository;
 
-    public ProductSearchResponse searchProduct(ProductSearchRequest searchRequest,
-            HttpServletRequest request, int page) {
+    public ProductSearchResponse searchProduct(String nickname, List<Long> categoryIdList,
+            String sortType, HttpServletRequest request, int page) {
         User user = getUser(request);
+        System.out.println("nickname : " + nickname);
+        System.out.println("categoryIdList : " + categoryIdList);
+        System.out.println("sortType : " + sortType);
         int size = 12;
         try {
             // 닉네임 x 목록
-            if (searchRequest.getNickname().isEmpty()) {
+            if (nickname.isEmpty()) {
                 // 최신순 정렬
-                if (searchRequest.getSortType().equals("Latest")
-                        || searchRequest.getSortType().isEmpty()) {
+                if (sortType.equals("Latest")
+                        || sortType.isEmpty()) {
                     Pageable pageable = PageRequest.of(page - 1, size);
                     // 필터 선택 x
-                    if (searchRequest.getCategoryIdList().size() == 0) {
+                    if (categoryIdList.size() == 0) {
                         Page<Product> productPage = productRepository.findAllProductsOrderByCreateAtDesc(
                                 pageable);
                         return new ProductSearchResponse(getProductDtoList(productPage, user));
                     }
                     // 필터 선택 o
                     Page<Product> productPage = productRepository.findProductsByCategoryIdsOrderByCreateAtDesc(
-                            searchRequest.getCategoryIdList(), pageable);
+                            categoryIdList, pageable);
                     return new ProductSearchResponse(getProductDtoList(productPage, user));
                 }
                 // 판매순 정렬
-                else if (searchRequest.getSortType().equals("Sales")) {
+                else if (sortType.equals("Sales")) {
                     Pageable pageable = PageRequest.of(page - 1, size);
                     // 필터 선택 x
-                    if (searchRequest.getCategoryIdList().size() == 0) {
+                    if (categoryIdList.size() == 0) {
                         Page<Product> productPage = productRepository.findAllOrderByTransactionCountDesc(
                                 pageable);
 
@@ -74,41 +77,38 @@ public class SearchService {
                     }
                     // 필터 선택 o
                     Page<Product> productPage = productRepository.findAllByCategoryOrderByTransactionCountDesc(
-                            searchRequest.getCategoryIdList(), pageable);
+                            categoryIdList, pageable);
                     return new ProductSearchResponse(getProductDtoList(productPage, user));
                 }
             }
             // 닉네임 o 목록
-            else if (searchRequest.getNickname() != null) {
+            else if (nickname != null) {
                 // 최신순 정렬
-                if (searchRequest.getSortType().equals("Latest") || searchRequest.getSortType()
-                        .isEmpty()) {
+                if (sortType.equals("Latest") || sortType.isEmpty()) {
                     Pageable pageable = PageRequest.of(page - 1, size);
                     // 필터 선택 x
-                    if (searchRequest.getCategoryIdList().size() == 0) {
+                    if (categoryIdList.size() == 0) {
                         Page<Product> productPage = productRepository.findAllProductByUserNickname(
-                                searchRequest.getNickname(), pageable);
+                                nickname, pageable);
                         return new ProductSearchResponse(getProductDtoList(productPage, user));
                     }
                     // 필터 선택 o
                     Page<Product> productPage = productRepository.findProductsByCategoryIdsAndNicknameOrderByCreateAtDesc(
-                            searchRequest.getCategoryIdList(), searchRequest.getNickname(),
-                            pageable);
+                            categoryIdList, nickname, pageable);
                     return new ProductSearchResponse(getProductDtoList(productPage, user));
                 }
                 // 판매순 정렬
-                else if (searchRequest.getSortType().equals("Sales")) {
+                else if (sortType.equals("Sales")) {
                     Pageable pageable = PageRequest.of(page - 1, size);
                     // 필터 선택 x
-                    if (searchRequest.getCategoryIdList().size() == 0) {
+                    if (categoryIdList.size() == 0) {
                         Page<Product> productPage = productRepository.findAllByNicknameOrderByTransactionCountDesc(
-                                searchRequest.getNickname(), pageable);
+                                nickname, pageable);
                         return new ProductSearchResponse(getProductDtoList(productPage, user));
                     }
                     // 필터 선택 o
                     Page<Product> productPage = productRepository.findAllByCategoryIdsAndNicknameOrderByTransactionCountDesc(
-                            searchRequest.getCategoryIdList(), searchRequest.getNickname(),
-                            pageable);
+                            categoryIdList, nickname, pageable);
                     return new ProductSearchResponse(getProductDtoList(productPage, user));
                 }
             }

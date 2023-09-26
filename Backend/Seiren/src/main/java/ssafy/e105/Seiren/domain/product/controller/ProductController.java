@@ -3,6 +3,8 @@ package ssafy.e105.Seiren.domain.product.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,9 +62,13 @@ public class ProductController {
 
     @Operation(summary = "상품 검색")
     @PostMapping("/api/products")
-    public ApiResult<?> searchProducts(@RequestBody ProductSearchRequest searchRequest,
+    public ApiResult<?> searchProducts(
+            @RequestParam(value = "nickname", required = false, defaultValue = "") String nickname,
+            @RequestParam(value = "categoryIdList", required = false, defaultValue = "") List<Long> categoryIdList,
+            @RequestParam(value = "sortType", required = false, defaultValue = "") String sortType,
             HttpServletRequest request, @RequestParam("page") int page) {
-        return ApiUtils.success(searchService.searchProduct(searchRequest, request, page));
+        return ApiUtils.success(
+                searchService.searchProduct(nickname, categoryIdList, sortType, request, page));
     }
 
     @Operation(summary = "상품 목록 보기")
@@ -71,3 +77,9 @@ public class ProductController {
         return ApiUtils.success(productService.getAllProducts(request, page));
     }
 }
+//    @Operation(summary = "상품 검색")
+//    @PostMapping("/api/products")
+//    public ApiResult<?> searchProducts(@RequestBody ProductSearchRequest searchRequest,
+//            HttpServletRequest request, @RequestParam("page") int page) {
+//        return ApiUtils.success(searchService.searchProduct(searchRequest, request, page));
+//    }
