@@ -1,7 +1,12 @@
 .useVoiceContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-
+  flex-direction: row;
+  width: 100%;
+  
+}
+.useVoiceBox{
+  margin-left: 20px;
+  width: 100%;
+  flex-grow: 1;
+  margin-left: 240px;
 }

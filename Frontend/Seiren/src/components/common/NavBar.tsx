@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom"; // useNavigate 추가
 import styles from "./NavBar.module.css";
 import { AiOutlineMenu } from "react-icons/ai";
-import Logo from "../../assets/logo.png";
+// import Logo from "../../assets/logo.png";
 import useScrollDirection from "../../hooks/useScrollDirection";
+import { UserState } from '../../recoil/UserAtom';
+import { useRecoilValue } from 'recoil';
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrollDirection, setScrollDirection] = useScrollDirection("up");
   const [scrollY, setScrollY] = useState(0);
+  const userInfo = useRecoilValue(UserState);
+  const isKakaoLoggedIn = localStorage.getItem('kakaoLogin') === 'true';
+  const navigate = useNavigate(); // useNavigate 훅을 사용하여 이동을 처리할 수 있게 추가
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,10 +21,10 @@ function NavBar() {
       setScrollY(newScrollY);
 
       if (newScrollY > scrollY) {
-        // 스크롤 방향이 아래로 스크롤됨
+        //@ts-ignore
         setScrollDirection("down");
       } else if (newScrollY < scrollY) {
-        // 스크롤 방향이 위로 스크롤됨
+        //@ts-ignore
         setScrollDirection("up");
       }
     };
@@ -31,12 +36,9 @@ function NavBar() {
     };
   }, [scrollY, scrollDirection, setScrollDirection]);
 
-  const myPageDropdownItems = [
-    { text: "마이페이지", link: "/my-page" },
-    { text: "구매내역", link: "/buy-list" },
-    { text: "판매내역", link: "/sell-list" },
-    { text: "사용", link: "/use-voice" },
-  ];
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
 
   return (
     <div
@@ -45,31 +47,24 @@ function NavBar() {
       }`}
     >
       <div className={styles.content}>
+        {/* 로고자리 */}
         <NavLink to="/" className={styles.logo}>
-          <img src={Logo} className={styles.logo} alt="" />
+          Serien
         </NavLink>
 
-        <div className={styles.btn} onClick={() => setIsOpen(!isOpen)}>
-          <AiOutlineMenu />
+        <div className={styles.nav}>
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/voice-market">Store</NavLink>
+          <NavLink to="/voice-study">Record</NavLink>
+          <NavLink to="/my-page">MyPage</NavLink>
+
+          {isKakaoLoggedIn ? (
+            <img className={styles.proImg} src={userInfo.profileImage} alt="Profile" />
+          ) : (
+            <div className={styles.login} onClick={handleLoginClick}>LOGIN</div>
+          )}
         </div>
-        {(window.innerWidth > 768 || isOpen) && (
-          <div className={styles.nav}>
-            <NavLink to="/about">프로그램 소개</NavLink>
-            <NavLink to="/voice-market">목소리 장터</NavLink>
-            <NavLink to="/voice-study">목소리 등록</NavLink>
-            {/* "마이페이지" 메뉴와 드롭다운을 추가합니다. */}
-            <div className={styles.dropdown}>
-              <NavLink to="/my-page">마이페이지</NavLink>
-              <div className={styles.dropdownContent}>
-                {myPageDropdownItems.map((item, index) => (
-                  <NavLink key={index} to={item.link}>
-                    {item.text}
-                  </NavLink>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+
       </div>
     </div>
   );

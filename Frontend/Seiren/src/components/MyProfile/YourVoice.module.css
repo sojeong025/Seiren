@@ -1,10 +1,18 @@
 .YourVoiceContainer {
-  border: 1px solid black;
-  margin-bottom: 5vh;
+  
 }
 
 .YourVoiceText{
-    font-size: 60px;
-    font-weight: bold;
-  }
-  
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.VoiceItems{
+  border: 2px solid #52057B;
+  height: 250px;
+  border-radius: 5rem;
+}
+.pimg{
+  width: 70px;
+  height: auto;
+}

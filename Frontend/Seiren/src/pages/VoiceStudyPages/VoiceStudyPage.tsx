@@ -1,40 +1,37 @@
-import styles from "./VoiceStudyPage.module.css"
-import { NavLink } from "react-router-dom";
-import Lottie from "lottie-react";
-import record from "../../assets/lottie/record.json"
-import programming from "../../assets/lottie/programming.json"
-import finish from "../../assets/lottie/finish.json"
+import { customAxios } from "../../libs/axios";
+import { useSetRecoilState } from 'recoil';
+import { RecordState, VoiceIdState } from "../../recoil/RecordAtom";
+import { useEffect, useState } from "react";
+
+import NoVoice from "../../components/VoiceStudy/NoVoice";
+import VoiceState from "../../components/VoiceStudy/VoiceState";
+
 
 function VoiceStudyPage() {
+  const [success, setSuccess] = useState<boolean | null>(null);
+  const setRecordState = useSetRecoilState(RecordState);
+  const setVoiceId = useSetRecoilState(VoiceIdState);
+
+  // 가장 최신의 목소리의 id와 상태
+  useEffect(() => {
+    customAxios.get("progressingVoices")
+      .then((res) => {
+        console.log('목소리 상태 호출', res)
+        setSuccess(res.data.success);
+        setRecordState(res.data.response.state);
+        setVoiceId(res.data.response.voiceId);
+      })
+      .catch((error) => {
+        console.error('목소리 상태 호출 중 오류:', error);
+      });
+  }, [success]);
+
+  // 로딩화면 걸어두기
+  if(success === null) return null;
+
   return (
     <div>
-      <div className={styles.Maintext}>Register your voice</div>
-      <div className={styles.MainState}>
-        <div className={styles.MainState_record}>
-          <div className={styles.icon}>
-            <Lottie animationData={record} style={{width: '300px', height: '300px'}} />
-          </div>
-          <NavLink to='/voice-record'>
-            <div className={styles.btn}>녹음하기</div>
-          </NavLink>
-        </div>
-        <div className={styles.MainState_record}>
-          <div className={styles.icon}>
-            <Lottie animationData={programming} style={{width: '350px', height: '350px'}} />
-          </div>
-          <NavLink to='/voice-studying'>
-            <div className={styles.btn}>학습하기</div>
-          </NavLink>
-        </div>
-        <div className={styles.MainState_record}>
-        <div className={styles.icon}>
-        <Lottie animationData={finish} style={{width: '350px', height: '350px'}} />
-          </div>
-          <NavLink to='/voice-custom'>
-            <div className={styles.btn}>학습완료</div>
-          </NavLink>
-        </div>
-      </div>
+      { success? <VoiceState/> : <NoVoice/>}
     </div>
   );
 }

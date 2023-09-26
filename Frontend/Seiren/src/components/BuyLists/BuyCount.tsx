@@ -1,20 +1,17 @@
-import React, { useState, useEffect } from "react";
+
 import styles from "./BuyCount.module.css";
 
+import { useRecoilState } from "recoil";
+import { buyCountState } from "../../recoil/UserAtom";
 
 function BuyCount() {
-  // 예시 데이터 (나중에 API로 대체할 예정)
-  const exampleData = [
-    // 데이터 내용 생략
-  ];
-
-  const itemCount = exampleData.length; // 데이터의 아이템 수를 가져옵니다.
-
+  const [buyCount] = useRecoilState(buyCountState);
+  
   return (
     <div className={styles.buyCountBox}>
       <div className={styles.itemCount}>
-        <p className={styles.textText}>BUY</p> 
-        <p className={styles.countText}>{itemCount}</p>
+        <p className={styles.textText}>BUY</p>
+        <p className={styles.countText}>{buyCount}</p>
       </div>
     </div>
   );

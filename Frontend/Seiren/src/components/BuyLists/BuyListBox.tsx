@@ -1,32 +1,43 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./BuyListBox.module.css";
-import BuyCount from "./BuyCount";
+import { customAxios } from "../../libs/axios";
+import { buyListState, buyCountState } from "../../recoil/UserAtom";
+import { useRecoilState } from "recoil";
+import { useParams } from "react-router-dom";
+
 
 function BuyListBox() {
-  // 예시 데이터 (나중에 API로 대체할 예정)
-  const exampleData = [
-    {
-      seller: "판매자1",
-      voiceTitle: "목소리 제목 1",
-      date: "2023-09-13",
-      purchaseAmountPerCharacter: 10,
-      purchaseCharacterCount: 150,
-    },
-    {
-      seller: "판매자2",
-      voiceTitle: "목소리 제목 2",
-      date: "2023-09-14",
-      purchaseAmountPerCharacter: 8,
-      purchaseCharacterCount: 100,
-    },
-    // 다른 구매 내역 데이터 추가
-  ];
+  const [purchaseData, setPurchaseData] = useRecoilState(buyListState);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalBuyCount, setTotalBuyCount] = useRecoilState(buyCountState);
+  const { page } = useParams();
 
-  const [itemCount, setItemCount] = useState(exampleData.length);
-  
+  useEffect(() => {
+    customAxios
+      .get("transactions/receipt?page=0")
+      .then(response => {
+        console.log(response.data)
+        const data = response.data.response;
+        const numberOfItems = response.data.response.length;
+        setTotalBuyCount(numberOfItems);
+        setPurchaseData(data); // Recoil 상태 업데이트
+
+        // 총 금액 계산
+        const totalPurchasePrice = data.reduce((acc, item) => {
+          return acc + item.totalPrice;
+        }, 0);
+        setTotalAmount(totalPurchasePrice);
+      
+      })
+      .catch(error => {
+        console.error("API 호출 중 오류 발생:", error);
+      });
+  }, [setPurchaseData, page]);
+
+
   return (
     <div className={styles.buyListBox}>
-      <h2>구매내역</h2>
+      <div className={styles.buyListText}>구매내역</div>
       <table className={styles.purchaseTable}>
         <thead>
           <tr>
@@ -39,34 +50,25 @@ function BuyListBox() {
           </tr>
         </thead>
         <tbody>
-          {exampleData.map((item, index) => {
-            const totalAmount = item.purchaseAmountPerCharacter * item.purchaseCharacterCount;
+          {purchaseData.map((item, index) => {
             return (
               <tr key={index}>
                 <td>{item.seller}</td>
-                <td>{item.voiceTitle}</td>
-                <td>{item.date}</td>
-                <td>{item.purchaseAmountPerCharacter}원</td>
-                <td>{item.purchaseCharacterCount}글자</td>
-                <td>{totalAmount}원</td>
+                <td>{item.productTitle}</td>
+                <td>{item.buyDate.substring(0, 10)}</td>
+                <td>{item.price}원 / {item.buyLetterCount}개 </td>
+                <td>{item.buyLetterCount}글자</td>
+                <td>{item.totalPrice}원</td>
               </tr>
             );
           })}
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan={5} className={styles.totalLabel}>
+            <td colSpan={5} className={styles.totalPrice}>
               총 금액:
             </td>
-            <td className={styles.totalAmount}>
-              {exampleData.reduce(
-                (total, item) =>
-                  total +
-                  item.purchaseAmountPerCharacter * item.purchaseCharacterCount,
-                0
-              )}
-              원
-            </td>
+            <td className={styles.totalAmount}>{totalAmount}원</td>
           </tr>
         </tfoot>
       </table>
@@ -75,4 +77,3 @@ function BuyListBox() {
 }
 
 export default BuyListBox;
-  

@@ -1,14 +1,32 @@
+import { useEffect } from 'react';
 import styles from "./MyPage.module.css";
-import MyInfo from "../../components/MyProfile/MyInfo";
 import Likes from "../../components/MyProfile/Likes";
 import YourVoice from "../../components/MyProfile/YourVoice";
+import SideBar from "../../components/common/SideBar";
 
-function MyPage() {
+const MyPage: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({ setIsNavBarVisible }) => {
+
+  useEffect(() => {
+    setIsNavBarVisible(false);
+
+    return()=>{
+      setIsNavBarVisible(true)
+    }
+    
+  }, [setIsNavBarVisible]);
+
+
   return (
     <div className={styles.myPageContainer}>
-      <MyInfo />
-      <Likes />
-      <YourVoice />
+      <SideBar />
+      <div className={styles.myPageBox}>
+        <div className={styles.likesContainer}>
+          <Likes />
+        </div>
+        <div className={styles.yourVoiceContainer}>
+          <YourVoice />
+        </div>
+      </div>
     </div>
   );
 }

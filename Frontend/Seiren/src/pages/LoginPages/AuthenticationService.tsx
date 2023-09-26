@@ -10,7 +10,7 @@ loginSocialKakao: function(): void {
 
 kakaoLogin: async function(code: string): Promise<AxiosResponse> {
   console.log(code)
-  return await axios.get(`http://192.168.40.134:8080/api/login/oauth2/code/kakao?code=${code}`);
+  return await axios.get(`http://j9e105.p.ssafy.io:8080/api/login/oauth2/code/kakao?code=${code}`);
 },
 
 registerSuccessfulLoginForJwt: function( accessToken: string) {

@@ -1,13 +1,28 @@
 import styles from "./SellList.module.css";
+import { useEffect } from 'react';
 import SellListBox from "../../components/SellLists/SellListBox";
 import SellChart from "../../components/ChartBox/SellChart";
+import SideBar from "../../components/common/SideBar";
 
-function SellList() {
+const SellList: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({ setIsNavBarVisible }) => {
+
+  useEffect(() => {
+    setIsNavBarVisible(false);
+
+    return()=>{
+      setIsNavBarVisible(true)
+    }
+    
+  }, [setIsNavBarVisible]);
+
   return (
-      <div className={styles.sellCountContainer}>
+    <div className={styles.sellCountContainer}>
+      <SideBar />
+      <div className={styles.chart}>
         <SellChart />
         <SellListBox />
       </div>
+    </div>
   );
 }
 

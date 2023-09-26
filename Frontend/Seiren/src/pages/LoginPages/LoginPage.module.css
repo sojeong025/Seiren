@@ -1,0 +1,25 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainTxt{
+  margin-top: 60px;
+  font-size: 100px;
+}
+
+
+.kakao_btn {
+  margin-top: 66px;
+  background-color: #ffe500;
+  display: block;
+  height: 60px;
+  width: 390px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 16px;
+  padding-top: 17px;
+  color: #191919;
+}
