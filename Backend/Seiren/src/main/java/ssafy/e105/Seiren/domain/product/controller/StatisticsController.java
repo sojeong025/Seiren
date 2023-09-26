@@ -46,8 +46,6 @@ public class StatisticsController {
     public ApiResult<?> getStatisticsAboutMonth(HttpServletRequest request,
             @RequestParam int month) {
         Map<LocalDate, Double> monthlyStatistics = statisticsService.getStatistics(request, month);
-        Map<YearMonth, Double> monthlyRevenue = statisticsService.calculateMonthlyRevenue(
-                monthlyStatistics);
-        return ApiUtils.success(monthlyRevenue);
+        return ApiUtils.success(monthlyStatistics);
     }
 }

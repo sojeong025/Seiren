@@ -4,7 +4,6 @@ import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_US
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -102,18 +101,6 @@ public class StatisticsService {
                 ));
 
         return totalPriceByDate;
-    }
-
-    public Map<YearMonth, Double> calculateMonthlyRevenue(
-            Map<LocalDate, Double> monthlyStatistics) {
-        // 월별로 그룹화하여 월별 수익을 계산합니다.
-        Map<YearMonth, Double> monthlyRevenue = monthlyStatistics.entrySet().stream()
-                .collect(Collectors.groupingBy(
-                        entry -> YearMonth.from(entry.getKey()),
-                        Collectors.summingDouble(Map.Entry::getValue)
-                ));
-
-        return monthlyRevenue;
     }
 
     public User getUser(HttpServletRequest request) {
