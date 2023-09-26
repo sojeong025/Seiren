@@ -1,3 +1,25 @@
 .filter {
-  color: #fff
+  margin: 0 -220px;
+  padding: 20px 80px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+.searchbar{
+  height: 50px;
+  width: 40vw;
+  border-radius: 8px;
+  border: 0.8px solid gray;
+  font-size: 16px;
+  font-style: italic;
+  padding: 10px;
+}
+.search_btn{
+  background-color: #ddd;
+  margin-left: 30px;
+  width: 100px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
 }

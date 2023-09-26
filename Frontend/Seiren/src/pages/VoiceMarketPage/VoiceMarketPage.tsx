@@ -6,6 +6,7 @@ function VoiceMarketPage() {
     <div>
       <FavoriteVoice/>
       <Filter />
+      
     </div>
   );
 }

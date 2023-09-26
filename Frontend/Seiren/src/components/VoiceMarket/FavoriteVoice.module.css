@@ -1,14 +1,15 @@
 .container {
-  background-color: #EEE;
+  background-color: #3A4750;
   margin-left: -220px;
   margin-right: -220px;
   padding: 30px 0px;
   box-sizing :border-box;
+  height: 350px;
 }
 .FavText{
   margin: 0px 220px;
   padding: 0;
-  color: #000;
+  color: #fff;
 }
 
 .cards{
@@ -19,7 +20,7 @@
 
 .card{
   border: 1px solid black;
-  color: #000;
+  color: #fff;
   width :calc(50% -10px);  
   border-radius :10px;  
   padding :20px;  
