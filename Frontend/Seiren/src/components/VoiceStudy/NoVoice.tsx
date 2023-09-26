@@ -59,8 +59,8 @@ function NoVoice() {
             <textarea 
             name="memo" 
             id="memo" 
-            cols="30" 
-            rows="10"
+            cols={30} 
+            rows={10}
             value={memo}
             onChange={(e)=>voiceMemoChange(e)}
             ></textarea>

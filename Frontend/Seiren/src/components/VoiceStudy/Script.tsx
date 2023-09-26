@@ -5,8 +5,12 @@ import { useState, useEffect } from 'react';
 
 import styles from "./Script.module.css"
 
+interface ScriptHeaderProps {
+  setIndex: React.Dispatch<React.SetStateAction<number>>;
+  index: number;
+}
 
-const Script = () => {
+const Script: React.FC<ScriptHeaderProps> = ({ index, setIndex }) => {
   // 스크립트 state설정
   const [scriptId, setScriptId] = useState();
   const [nextScriptId, setNextScriptId] = useState();

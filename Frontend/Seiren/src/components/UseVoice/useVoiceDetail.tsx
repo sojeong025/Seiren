@@ -80,7 +80,7 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
         placeholder="텍스트를 입력하세요"
       />
       <button onClick={sendPostRequest}>POST 요청 보내기</button>
-      <UseList transactionid={voiceDetail.transactionId} />
+      <UseList transactionid={voiceDetail.transactionId.toString()} />
       </div>
     </div>
   );

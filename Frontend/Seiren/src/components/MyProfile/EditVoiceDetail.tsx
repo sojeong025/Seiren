@@ -5,10 +5,14 @@ import styles from "./YourVoiceDetail.module.css";
 
 function EditVoiceDetail() {
   const { voiceId } = useParams();
-  const [voiceDetail, setVoiceDetail] = useState({});
+  const [voiceDetail, setVoiceDetail] = useState<{ voiceTitle: string, memo: string, voiceAvatarUrl: string }>({
+    voiceTitle: "",
+    memo: "",
+    voiceAvatarUrl: "",
+  });
   const [isEditing, setIsEditing] = useState(false);
-  const voiceTitleRef = useRef(null);
-  const memoRef = useRef(null);
+  const voiceTitleRef = useRef<HTMLInputElement | null>(null);
+  const memoRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
     customAxios
@@ -28,8 +32,8 @@ function EditVoiceDetail() {
 
   const handleSaveClick = () => {
     const updatedData = {
-      voiceTitle: voiceTitleRef.current.value,
-      memo: memoRef.current.value,
+      voiceTitle: voiceTitleRef.current?.value || "",
+      memo: memoRef.current?.value || "",
     };
 
     customAxios

@@ -3,7 +3,7 @@ import AWS, { AlexaForBusiness } from "aws-sdk";
 
 function UploadImg({imgUrl, setImgUrl}){
  
-  const imgRef = useRef();
+  const imgRef = useRef<HTMLInputElement | null>(null);
 
   AWS.config.update({
     region: import.meta.env.VITE_PUBLIC_REGION,
@@ -12,12 +12,16 @@ function UploadImg({imgUrl, setImgUrl}){
   });
 
   // 파일 올리는 곳
-  const onChangeTrack = () => {
-    const file = imgRef.current.files[0];
+ const onChangeTrack = () => {
+  if (!imgRef.current) {
+    return;
+  }
 
-    if (!file) {
-      return;
-    }
+  const file = imgRef.current.files[0];
+
+  if (!file) {
+    return;
+  }
 
     // setTrackName(file.name);
     const upload = new AWS.S3.ManagedUpload({

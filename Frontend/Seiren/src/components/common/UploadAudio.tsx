@@ -3,7 +3,7 @@ import AWS, { AlexaForBusiness } from "aws-sdk";
 
 function UploadAudio(){
   const [audioUrl, setAudioUrl] = useState(null);
-  const audioRef = useRef();
+  const audioRef = useRef<HTMLInputElement | null>(null);
 
   AWS.config.update({
     region: import.meta.env.VITE_PUBLIC_REGION,
