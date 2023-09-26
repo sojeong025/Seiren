@@ -84,6 +84,8 @@ public class WishService {
                             productCategoryDtoList.add(productCategoryDto);
                         }
                         productDto.setProductId(wish.getProduct().getProductId());
+                        productDto.setNickname(
+                                wish.getProduct().getVoice().getUser().getNickname());
                         productDto.setTitle(wish.getProduct().getProductTitle());
                         productDto.setSummary(wish.getProduct().getSummary());
                         productDto.setProductImageUrl(wish.getProduct().getProductImageUrl());

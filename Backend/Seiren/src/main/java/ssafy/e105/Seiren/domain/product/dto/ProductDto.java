@@ -12,6 +12,8 @@ public class ProductDto {
 
     @Schema(description = "상품 id", example = "1")
     private Long productId;
+    @Schema(description = "판매자 닉네임", example = "재키")
+    private String nickname;
     @Schema(description = "상품명", example = "김밤")
     private String title;
     @Schema(description = "상품 요약", example = "참치 김밥")
@@ -28,6 +30,7 @@ public class ProductDto {
     public ProductDto(Product product, List<ProductCategoryDto> productCategoryDtoList,
             boolean wish) {
         this.productId = product.getProductId();
+        this.nickname = product.getVoice().getUser().getNickname();
         this.title = product.getProductTitle();
         this.summary = product.getSummary();
         this.productImageUrl = product.getProductImageUrl();
@@ -35,5 +38,4 @@ public class ProductDto {
         this.productCategoryList = productCategoryDtoList;
         this.wish = wish;
     }
-
 }
