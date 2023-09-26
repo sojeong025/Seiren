@@ -25,7 +25,7 @@ import BuyList from "./pages/MyPages/BuyList";
 import SellList from "./pages/MyPages/SellList";
 import DetailPage from "./pages/MyPages/DetailPage";
 import UseVoice from "./pages/MyPages/UseVoice";
-// import UseVoiceDetail from "./components/UseVoice/UseVoiceDetail";
+import UseVoiceDetail from "./components/UseVoice/UseVoiceDetail";
 import YourVoiceDetail from "./components/MyProfile/YourVoiceDetail";
 
 // 로그인
@@ -68,7 +68,7 @@ function App() {
           <Route path="/sell-list" element={<SellList setIsNavBarVisible={setIsNavBarVisible} />} />
           <Route path="/use-voice" element={<UseVoice setIsNavBarVisible={setIsNavBarVisible} />} />
           <Route path="/detail/:index" element={<DetailPage />} />
-          {/* <Route path="/voice-detail/:productId" element={<UseVoiceDetail setIsNavBarVisible={setIsNavBarVisible} />} /> */}
+          <Route path="/voice-detail/:productId" element={<UseVoiceDetail setIsNavBarVisible={setIsNavBarVisible} />} />
           <Route path="/your-voice-detail/:voiceId" element={<YourVoiceDetail />} />
 
           {/* 로그인 */}
