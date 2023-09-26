@@ -12,20 +12,27 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ssafy.e105.Seiren.domain.category.entity.Category;
 import ssafy.e105.Seiren.domain.category.repository.CategoryRepository;
 import ssafy.e105.Seiren.domain.product.dto.ProductCreateRequest;
 import ssafy.e105.Seiren.domain.product.dto.ProductDetailDto;
+import ssafy.e105.Seiren.domain.product.dto.ProductDto;
 import ssafy.e105.Seiren.domain.product.dto.ProductUpdateDto;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.entity.ProductCategory;
 import ssafy.e105.Seiren.domain.product.entity.TestHistory;
+import ssafy.e105.Seiren.domain.product.entity.Wish;
 import ssafy.e105.Seiren.domain.product.repository.PreviewRepository;
 import ssafy.e105.Seiren.domain.product.repository.ProductCategoryRepository;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
 import ssafy.e105.Seiren.domain.product.repository.TestHistoryRepository;
+import ssafy.e105.Seiren.domain.product.repository.WishRepository;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.repository.UserRepository;
 import ssafy.e105.Seiren.domain.voice.entity.Voice;
@@ -46,6 +53,8 @@ public class ProductService {
     private final TestHistoryRepository testHistoryRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
+    private final WishRepository wishRepository;
+    private final SearchService searchService;
 
     @Transactional
     public boolean createProduct(ProductCreateRequest productCreateRequest,
@@ -132,6 +141,14 @@ public class ProductService {
         }
     }
 
+    public List<ProductDto> getAllProducts(HttpServletRequest request, int page) {
+        User user = isUser(request);
+        int size = 12;
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Product> productPage = productRepository.findAllProductsOrderByCreateAtDesc(pageable);
+        return searchService.getProductDtoList(productPage, user);
+    }
+
     public User getUser(HttpServletRequest request) {
         String userEmail = jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request));
         return userRepository.findByEmail(userEmail).orElseThrow(() -> new BaseException(
@@ -153,4 +170,12 @@ public class ProductService {
                 new ApiError(NOT_EXIST_PRODUCT.getMessage(), NOT_EXIST_PRODUCT.getCode())));
     }
 
+    public User isUser(HttpServletRequest request) {
+        if (jwtTokenProvider.resolveToken(request) != null) {
+            String userEmail = jwtTokenProvider.getUserEmail(
+                    jwtTokenProvider.resolveToken(request));
+            return userRepository.findByEmail(userEmail).get();
+        }
+        return null;
+    }
 }

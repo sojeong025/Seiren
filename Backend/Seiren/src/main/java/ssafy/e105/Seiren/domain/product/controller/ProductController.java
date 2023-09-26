@@ -64,4 +64,10 @@ public class ProductController {
             HttpServletRequest request, @RequestParam("page") int page) {
         return ApiUtils.success(searchService.searchProduct(searchRequest, request, page));
     }
+
+    @Operation(summary = "상품 목록 보기")
+    @GetMapping("/api/productList")
+    public ApiResult<?> getAllProducts(HttpServletRequest request, @RequestParam("page") int page) {
+        return ApiUtils.success(productService.getAllProducts(request, page));
+    }
 }
