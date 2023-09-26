@@ -15,6 +15,13 @@ function Filter() {
   const [selectAge, setSelectAge] = useState<string|number>();
   const [selectMood, setSelectMood] = useState<string|number>();
 
+  const [productList, setProductList] = useState();
+  const [page, setPage] = useState(1);
+  const [categoryList, setCategoryList] = useState([selectGender, selectAge, selectMood]);
+
+  const [search, setSearch] = useState('');
+  const [sortType, setSortType] = useState("Latest");
+
   interface GetData{
     id:number;
     name:string;
@@ -42,6 +49,21 @@ function Filter() {
       setMood(res.data.response[0].children[2].children);
     })
   },[])
+
+  useEffect(()=>{
+    console.log(categoryList);
+    customAxios.get(`products?nickname=${search}&categoryIdList=${[mood, age, gender]}&sortType=${sortType}&page=${page}`)
+    .then((res)=>{
+      console.log(res.data.response);
+      setProductList(res.data.response);
+    })
+  },[search, mood, age, gender, sortType])
+
+  const searchChange = (e) =>{
+    console.log(e.target.value);
+      setSearch(e.target.value);
+  }
+
 
   return (
     <div className={styles.filter}>
@@ -106,7 +128,7 @@ function Filter() {
         </Select>
       </FormControl>
       <div>
-        <input className={styles.searchbar} placeholder='seach user nickname' type="text" />
+        <input className={styles.searchbar} placeholder='seach user nickname' type="text" value={search} onChange={(e)=>searchChange(e)}/>
         <button type="submit" className={styles.search_btn}>검색</button>
       </div>
     </div>
