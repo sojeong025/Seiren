@@ -5,6 +5,12 @@ import static ssafy.e105.Seiren.domain.voice.exception.VoiceErrorCode.NO_MORE_SC
 import static ssafy.e105.Seiren.domain.voice.exception.VoiceErrorCode.SCRIPT_DELETE_ERROR;
 import static ssafy.e105.Seiren.domain.voice.exception.VoiceErrorCode.SCRIPT_INSERT_ERROR;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,5 +68,26 @@ public class ScriptService {
     public Script getScript(Long scriptId) {
         return scriptRepository.findById(scriptId).orElseThrow(() -> new BaseException(
                 new ApiError(NOT_EXIST_SCRIPT.getMessage(), NOT_EXIST_SCRIPT.getCode())));
+    }
+
+    public void creteScriptList(String filePath) {
+        List<String> sentences = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split("\\|");  // '|' 문자로 분할
+                if (parts.length >= 4) {  // 최소 4개 필드가 있어야 함
+                    String sentence = parts[1].trim();  // 두 번째 필드(인덱스 1) 추출 및 공백 제거
+                    sentences.add(sentence);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // 1/1 세트가 0~1040까지라 그 정도만 먼저 저장
+        for (int i = 0; i <= 1040; i++) {
+            System.out.println(i + " : " + sentences.get(i));
+            scriptRepository.save(Script.builder().text(sentences.get(i)).build());
+        }
     }
 }
