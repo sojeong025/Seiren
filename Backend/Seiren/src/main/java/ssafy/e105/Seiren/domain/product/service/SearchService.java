@@ -35,18 +35,18 @@ public class SearchService {
     private final UserRepository userRepository;
     private final WishRepository wishRepository;
 
-    public ProductSearchResponse searchProduct(String nickname, Long age, Long mood, Long gender,
+    public ProductSearchResponse searchProduct(String nickname, Long gender, Long age, Long mood,
             String sortType, HttpServletRequest request, int page) {
         User user = getUser(request);
         List<Long> categoryIdList = new ArrayList<>();
+        if (gender != null) {
+            categoryIdList.add(gender);
+        }
         if (age != null) {
             categoryIdList.add(age);
         }
         if (mood != null) {
             categoryIdList.add(mood);
-        }
-        if (mood != null) {
-            categoryIdList.add(gender);
         }
         int size = 12;
         try {
