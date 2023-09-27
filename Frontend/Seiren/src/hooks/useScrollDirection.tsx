@@ -23,9 +23,9 @@ const useScrollDirection = (initialValue: string) => {
       window.removeEventListener("scroll", updateScrollDirection);
     };
     
-  }, [scrollDirection]); // 여기서 scrollDirection을 의존성으로 사용하지 않습니다.
+  }, [scrollDirection]);
 
-  return scrollDirection; // setScrollDirection 함수를 반환하지 않고, 상태만 반환합니다.
+  return setScrollDirection; // setScrollDirection 함수를 반환하도록 수정
 };
 
 export default useScrollDirection;
