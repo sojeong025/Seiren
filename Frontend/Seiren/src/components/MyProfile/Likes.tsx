@@ -24,15 +24,14 @@ function Likes() {
   return (
     <div className={styles.LikesContainer}>
       <div className={styles.likesText}>Likes</div>
-      <ul className={styles.likesItems}>
+      <div className={styles.likesItems}>
         {wishList.map(item => (
-          <li key={item.productId}>
-            <div>{item.title}</div>
-            <div>{item.price}</div>
+          <div key={item.productId} className={styles.item}>
             <img className={styles.pimg} src={item.productImageUrl} alt={item.title} />
-          </li>
+            <div className={styles.title}>{item.title}</div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
