@@ -1,18 +1,117 @@
-.UseVoiceDetailContainer{
+/* .UseVoiceDetailContainer */
+.UseVoiceDetailContainer {
     padding-top: 100px;
     margin-left: 220px;
     margin-right: 220px;
-}
-.content{
+  }
+  
+  /* .content */
+  .content {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    background-color: #9f6666;
     justify-content: center;
     margin-bottom: 20px;
     margin-left: 240px;
-    border: 2px solid #fff;
-}
-.pimg{
-    width: 70px;
-    height: auto;
-}
+    border: 2px solid #000;
+    border-radius: 2.5rem;
+    padding: 20px;
+  }
+  
+  /* .upSide */
+  .upSide {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  
+  /* .texts */
+  .texts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* .mood */
+  .mood {
+    font-size: 20px;
+    color: #fff;
+    display: inline-block;
+    padding: 2px 5px;
+    background-color: #75975b;
+    border-radius: 5rem;
+    max-width: 100%;
+  }
+  
+  /* .summary */
+  .summary {
+    margin: 20px;
+  }
+  
+  /* .title */
+  .title {
+    font-size: 60px;
+  }
+  
+  /* .pimg */
+  .pimg {
+    width: 250px;
+    height: 250px;
+    border-radius: 100%;
+  }
+  
+  /* .inputContainer */
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  /* .textBox */
+  .textBox {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: baseline;
+  }
+  
+  /* .inputTitle */
+  .inputTitle {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px;
+  }
+  
+  /* .input */
+  .input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 80%;
+    height: 180px;
+    margin-bottom: 10px;
+  }
+  
+  /* .button */
+  .button {
+    background-color: #ffffff;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 5px solid #000000;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px;
+  }
+  
+  /* .button:hover */
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
