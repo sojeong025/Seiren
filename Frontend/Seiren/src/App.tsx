@@ -44,14 +44,10 @@ function App() {
   return (
     <Router>
       {isNavBarVisible && <NavBar />}
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/about" element={<AboutPage />} />
-      </Routes>
-
-      <div className="content">
         <Routes>
 
+          <Route path="/" element={<MainPage />} />
+          <Route path="/about" element={<AboutPage />} />
           {/* 목소리 장터 페이지 */}
           <Route path="/voice-market" element={<VoiceMarketPage />} />
           <Route path="/voice/:id" element={<VoiceDetailPage />} />
@@ -77,7 +73,6 @@ function App() {
           <Route path="/login" element={<LoginPage setIsNavBarVisible={setIsNavBarVisible} />} />
           <Route path="/oauth/callback/kakao" element={<OAuth2RedirectHandler />} />
         </Routes>
-      </div>  
     </Router>
   );
 }
