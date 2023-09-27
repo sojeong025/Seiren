@@ -24,7 +24,7 @@ import BuyList from "./pages/MyPages/BuyList";
 import SellList from "./pages/MyPages/SellList";
 import DetailPage from "./pages/MyPages/DetailPage";
 import UseVoice from "./pages/MyPages/UseVoice";
-import UseVoiceDetail from "./components/UseVoice/UseVoiceDetail";
+import UseVoiceDetail from "./components/UseVoice/useVoiceDetail";
 import YourVoiceDetail from "./components/MyProfile/YourVoiceDetail";
 
 // 로그인
@@ -33,6 +33,7 @@ import OAuth2RedirectHandler from "./pages/LoginPages/OAuth2RedirectHandler";
 
 // 공통
 import NavBar from "./components/common/NavBar";
+
 
 function App() {
   const [isNavBarVisible, setIsNavBarVisible] = useState(true);
