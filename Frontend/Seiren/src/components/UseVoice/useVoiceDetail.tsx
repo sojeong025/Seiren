@@ -22,8 +22,8 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
     customAxios
       .get(`transactions/detail/${productId}`)
       .then(response => {
-        const voiceDetailData =  response.data.response;
-        
+        const voiceDetailData = response.data.response;
+
         setVoiceDetail(voiceDetailData);
       })
       .catch(error => {
@@ -39,15 +39,15 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
 
     customAxios
       .post("transactions", requestData)
-      .then((response) => {
+      .then(response => {
         console.log("POST 요청 성공:", response.data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("POST 요청 중 오류 발생:", error);
       });
   };
 
-  const handleTextChange = (event) => {
+  const handleTextChange = event => {
     setText(event.target.value);
   };
 
@@ -60,27 +60,43 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
     <div className={styles.UseVoiceDetailContainer}>
       <SideBar />
       <div className={styles.content}>
-        <h1>{voiceDetail.productTitle}</h1>
+        <div className={styles.upSide}>
+          <div>
+            <img className={styles.pimg} src={voiceDetail.productImageUrl} alt={voiceDetail.productTitle} />
+          </div>
+          <div className={styles.texts}>
+            <div className={styles.title}>{voiceDetail.productTitle}</div>
+            {voiceDetail.productCategories && voiceDetail.productCategories.length > 0 && (
+              <div className={styles.mood}>
+                {voiceDetail.productCategories.map(category => `#${category}`).join(", ")}
+              </div>
+            )}
 
-        <img className={styles.pimg} src={voiceDetail.productImageUrl} alt={voiceDetail.productTitle} />
+            <div className={styles.summary}>{voiceDetail.summary}</div>
+          </div>
+        </div>
 
-        {voiceDetail.productCategories && voiceDetail.productCategories.length > 0 && (
-          <p>카테고리: {voiceDetail.productCategories.join(", ")}</p>
-        )}
+        <div className={styles.inputContainer}>
+          <div className={styles.textBox}>
+            <div className={styles.inputTitle}>Text Input</div>
+            <div>
+              {voiceDetail.remainLetter} / {voiceDetail.totalCount}
+            </div>
+          </div>
+          <input
+            type="text"
+            value={text}
+            onChange={handleTextChange}
+            placeholder="텍스트를 입력하세요"
+            className={styles.input}
+          />
+          <div className={styles.characterCount}>{text.length} 글자</div> {/* 글자 수 표시 */}
+          <button onClick={sendPostRequest} className={styles.button}>
+            SEND
+          </button>
+        </div>
 
-        <p>요약: {voiceDetail.summary}</p>
-        <p>남은 수량: {voiceDetail.remainLetter}</p>
-        <p>총 수량: {voiceDetail.totalCount}</p>
-        <p>거래 ID: {voiceDetail.transactionId}</p>
-
-        <input
-        type="text"
-        value={text}
-        onChange={handleTextChange}
-        placeholder="텍스트를 입력하세요"
-      />
-      <button onClick={sendPostRequest}>POST 요청 보내기</button>
-      <UseList transactionid={voiceDetail.transactionId.toString()} />
+        <UseList transactionid={voiceDetail.transactionId.toString()} />
       </div>
     </div>
   );
