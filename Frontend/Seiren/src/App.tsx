@@ -46,11 +46,11 @@ function App() {
       {isNavBarVisible && <NavBar />}
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
 
       <div className="content">
         <Routes>
-          <Route path="/about" element={<AboutPage />} />
 
           {/* 목소리 장터 페이지 */}
           <Route path="/voice-market" element={<VoiceMarketPage />} />
