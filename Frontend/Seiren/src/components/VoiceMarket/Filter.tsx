@@ -36,6 +36,10 @@ function Filter({products, setProducts}) {
     const target = event.target as HTMLInputElement;
     setSelectMood(target.value === "-1" ? '' : target.value);
   }
+  const handleChangeSort = (event: SelectChangeEvent) =>{
+    const target = event.target as HTMLInputElement;
+    setSortType(target.value === "-1" ? '' : target.value);
+  }
 
   useEffect(()=>{
     customAxios.get("categories")
@@ -53,7 +57,7 @@ function Filter({products, setProducts}) {
       console.log(res.data.response.productDtoList);
       setProducts(res.data.response.productDtoList);
     })
-  },[selectMood, selectAge, selectGender, sortType])
+  },[selectMood, selectAge, selectGender, sortType, page])
 
   const searchChange = (e) =>{
     console.log(e.target.value);
@@ -130,10 +134,34 @@ function Filter({products, setProducts}) {
           }
         </Select>
       </FormControl>
-      <div>
+      <div className={styles.search}>
         <input className={styles.searchbar} placeholder='seach user nickname' type="text" value={search} onChange={(e)=>searchChange(e)}/>
         <button type="submit" className={styles.search_btn} onClick={getProductNickname}>검색</button>
       </div>
+
+
+      {/* 정렬 */}
+      <div className={styles.sort}>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">Sort</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          value={sortType}
+          onChange={handleChangeSort}
+          label="sort"
+        >
+        <MenuItem value={'Latest'}>
+          <em>최신순</em>
+        </MenuItem>
+        <MenuItem value={'Sales'}>
+          <em>판매순</em>
+        </MenuItem>
+        </Select>
+      </FormControl>
+    </div>
+
+
     </div>
   );
 }
