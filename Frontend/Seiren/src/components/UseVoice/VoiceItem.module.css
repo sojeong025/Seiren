@@ -1,54 +1,68 @@
 .voiceItem {
-    display: flex;
-    flex-direction: column;
-    background: rgba(159, 102, 102, 0.81);
-    border-radius: 34px;
-    width: 250px;
-    height: 180px;
-    padding: 10px;
-    position: relative;
-    gap: 10px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    margin: 10px 10px;
+  display: flex;
+  flex-direction: row;
+  background: rgba(142, 133, 133, 0.85);
+  border-radius: 10px;
+  width: 250px;
+  height: auto;
+  padding: 15px;
+  position: relative;
+  gap: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 10px;
+  color: #fff;
 }
-  
-  .profileImage {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-  }
-  
-  .content {
-    flex: 1;
-  }
-  
-  .title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #FFFFFF;
-  }
-  
-  .moodHashtag {
-    font-size: 16px;
-    color: #000000;
-  }
-  
-  .count {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-  }
-  
-  .playButton {
-    background-color: #42857D;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 8px;
-    padding: 5px 15px;
-    cursor: pointer;
-  }
-  
-  .playButton:hover {
-    background-color: #75975B;
-  }
-  
+
+.profileImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+}
+
+.content {
+  flex: 1;
+}
+
+.title {
+  font-size: 20px; /* 제목 폰트 크기 조정 */
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.moodHashtag {
+  font-size: 12px;
+  color: #fff;
+  display: inline-block;
+  padding: 2px 5px;
+  background-color: #75975b;
+  border-radius: 5rem;
+  max-width: 100%;
+}
+.under {
+  display: flex;
+  justify-content: flex-end;
+}
+.count {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: bold;
+  color: #EEEEEE;
+}
+
+.playButton {
+  background-color: #42857d; /* 버튼 배경색 변경 */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.playButton:hover {
+  background-color: #75975b; /* 호버 시 버튼 색상 변경 */
+}
