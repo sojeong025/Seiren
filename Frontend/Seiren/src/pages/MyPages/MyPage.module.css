@@ -12,6 +12,9 @@
   flex-grow: 1;
   overflow: hidden;
   margin-left: 240px;
+  border-radius: 1.5rem;
+  /* color: #defe52; */
+  padding: 30px;
 }
 .likesContainer {
   margin-bottom: 30px;
