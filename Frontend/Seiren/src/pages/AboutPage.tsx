@@ -14,14 +14,8 @@ function AboutPage() {
   };
 
   useEffect(() => {
-      const section1 = document.querySelector(`.${styles.section1}`);
-      const section2 = document.querySelector(`.${styles.section2}`);
-      const section3 = document.querySelector(`.${styles.section3}`);
       const videoContainer = document.querySelector(`.${styles.section2_video}`);
-      const text = document.querySelector(`.${styles.section2_txt}`)
-  
-      gsap.set([section1, section3], { height: "100vh" });
-      gsap.set([section2], { height: "100vh" });
+      const text = document.querySelector(`.${styles.section2_txt}`);
 
       // 비디오 컨테이너 확대 애니메이션 설정
       const videoTimeline = gsap.timeline();
@@ -29,6 +23,7 @@ function AboutPage() {
   
       // 비디오 컨테이너 확대 애니메이션 설정
       ScrollTrigger.create({
+        id:"videoTimeLine",
         animation: videoTimeline,
         trigger:"#section2",
         start:"top top", 
@@ -43,6 +38,7 @@ function AboutPage() {
       textani.to(text, {scale: 2, x:200, duration:1})
 
       ScrollTrigger.create({
+        id: "textani",
         animation: textani,
         trigger: "#section2",
         start: "top top",
@@ -51,8 +47,12 @@ function AboutPage() {
         pin: true,
         markers: true,
       })
-  }, []);
-
+      return() => {
+        ScrollTrigger.getById("videoTimeLine").kill(true);
+        ScrollTrigger.getById("textani").kill(true);
+      }
+    }, []);
+    
   return (
     <div className={styles.container}>
       {/* section1: 프로그램 소개 */}
