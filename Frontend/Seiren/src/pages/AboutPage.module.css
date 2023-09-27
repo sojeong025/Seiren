@@ -8,6 +8,7 @@
   color: #000;
   display: flex;
   padding: 0 220px;
+  height: 100vh;
 }
 .section1_left{
   width: 30%;
@@ -47,6 +48,7 @@
   justify-content: center;
   align-items: center;
   background-color: #000;
+  height: 100vh;
 }
 .section2_txt, .section2_txt2{
   color: #fff;
@@ -74,6 +76,7 @@
   background-color: #3A4750;
   color: #fff;
   display: flex;
+  height: 100vh;
 }
 .left{
   width: 30%;

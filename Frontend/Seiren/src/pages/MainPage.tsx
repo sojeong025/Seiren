@@ -20,15 +20,9 @@ function MainPage() {
     });
   };
 
-  useEffect(() => {
-    let section1 = document.querySelector(`.${styles.section1}`);
-
-    gsap.set([section1], { height: "100vh" });
-  }, []);
-
   return (
     <div className={styles.container}>
-      <section className={styles.section1}>
+      <section className={styles.section}>
         <div className={styles.main}>
         <div className={styles.main_txt}>From <span>Recording</span> your voice to <span>Selling</span> yours <br/> all at once</div>
           <ScrollLink to='about' smooth={true} duration={500}>

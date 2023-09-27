@@ -4,12 +4,13 @@
 }
 
 /* section1 */
-.section1 {
+.section {
   margin: 0px 220px;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
-.section1 hr{
+.section hr{
   margin-top: 20px;
 }
 .main {
