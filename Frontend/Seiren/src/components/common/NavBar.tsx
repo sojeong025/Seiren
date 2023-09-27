@@ -2,31 +2,29 @@ import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import useScrollDirection from "../../hooks/useScrollDirection";
-import { UserState } from '../../recoil/UserAtom';
-import { customAxios } from '../../libs/axios'
+import { UserState } from "../../recoil/UserAtom";
+import { customAxios } from "../../libs/axios";
 import { useRecoilState } from "recoil";
 
-
 function NavBar() {
-  const [scrollDirection, setScrollDirection] = useScrollDirection("up");
+  const [scrollDirection, setScrollDirection] = useState<string | ((prevState: string) => string)>("up");
   const [scrollY, setScrollY] = useState(0);
-  const isKakaoLoggedIn = localStorage.getItem('kakaoLogin') === 'true';
+  const isKakaoLoggedIn = localStorage.getItem("kakaoLogin") === "true";
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useRecoilState(UserState);
 
   useEffect(() => {
-      customAxios.get('user')
-        .then(response => {
-          let userData = response.data.response;
-          
-          let updatedUserData = {
-            nickname: userData.nickname,
-            profileImage: userData.profileImg,
-          };
-          setUserInfo(updatedUserData); 
-          console.log(updatedUserData.nickname);
-          console.log("recoil 저장 성공");
-        })
+    customAxios.get("user").then(response => {
+      let userData = response.data.response;
+
+      let updatedUserData = {
+        nickname: userData.nickname,
+        profileImage: userData.profileImg,
+      };
+      setUserInfo(updatedUserData);
+      console.log(updatedUserData.nickname);
+      console.log("recoil 저장 성공");
+    });
   }, []);
 
   useEffect(() => {
@@ -35,10 +33,8 @@ function NavBar() {
       setScrollY(newScrollY);
 
       if (newScrollY > scrollY) {
-
         setScrollDirection("down");
       } else if (newScrollY < scrollY) {
-
         setScrollDirection("up");
       }
     };
@@ -51,7 +47,7 @@ function NavBar() {
   }, [scrollY, scrollDirection, setScrollDirection]);
 
   const handleLoginClick = () => {
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
@@ -75,10 +71,11 @@ function NavBar() {
           {isKakaoLoggedIn ? (
             <img className={styles.proImg} src={userInfo.profileImage} alt="Profile" />
           ) : (
-            <div className={styles.login} onClick={handleLoginClick}>LOGIN</div>
+            <div className={styles.login} onClick={handleLoginClick}>
+              LOGIN
+            </div>
           )}
         </div>
-
       </div>
     </div>
   );
