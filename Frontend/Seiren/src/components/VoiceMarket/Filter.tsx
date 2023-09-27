@@ -6,19 +6,16 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import styles from "./Filter.module.css"
 import { customAxios } from '../../libs/axios';
 
-function Filter() {
+function Filter({products, setProducts}) {
   const [gender, setGender] = useState<GetData[]>([]);
   const [age, setAge] = useState<GetData[]>([]);
   const [mood, setMood] = useState<GetData[]>([]);
 
-  const [selectGender, setSelectGender] = useState<string|number>();
-  const [selectAge, setSelectAge] = useState<string|number>();
-  const [selectMood, setSelectMood] = useState<string|number>();
-
+  const [selectGender, setSelectGender] = useState<string|number>('');
+  const [selectAge, setSelectAge] = useState<string|number>('');
+  const [selectMood, setSelectMood] = useState<string|number>('');
   const [productList, setProductList] = useState();
   const [page, setPage] = useState(1);
-  const [categoryList, setCategoryList] = useState([selectGender, selectAge, selectMood]);
-
   const [search, setSearch] = useState('');
   const [sortType, setSortType] = useState("Latest");
 
@@ -51,19 +48,25 @@ function Filter() {
   },[])
 
   useEffect(()=>{
-    console.log(categoryList);
-    customAxios.get(`products?nickname=${search}&categoryIdList=${[mood, age, gender]}&sortType=${sortType}&page=${page}`)
+    customAxios.get(`products?nickname=&age=${selectAge}&mood=${selectMood}&gender=${selectGender}&sortType=${sortType}&page=${page}`)
     .then((res)=>{
-      console.log(res.data.response);
-      setProductList(res.data.response);
+      console.log(res.data.response.productDtoList);
+      setProducts(res.data.response.productDtoList);
     })
-  },[search, mood, age, gender, sortType])
+  },[selectMood, selectAge, selectGender, sortType])
 
   const searchChange = (e) =>{
     console.log(e.target.value);
       setSearch(e.target.value);
   }
 
+  const getProductNickname = () =>{
+    customAxios.get(`products?nickname=${search}&age=${selectAge}&mood=${selectMood}&gender=${selectGender}&sortType=${sortType}&page=${page}`)
+    .then((res)=>{
+      console.log(res.data.response.productDtoList);
+      setProducts(res.data.response.productDtoList);
+    })
+  }
 
   return (
     <div className={styles.filter}>
@@ -129,7 +132,7 @@ function Filter() {
       </FormControl>
       <div>
         <input className={styles.searchbar} placeholder='seach user nickname' type="text" value={search} onChange={(e)=>searchChange(e)}/>
-        <button type="submit" className={styles.search_btn}>검색</button>
+        <button type="submit" className={styles.search_btn} onClick={getProductNickname}>검색</button>
       </div>
     </div>
   );

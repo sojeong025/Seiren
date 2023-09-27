@@ -6,21 +6,28 @@ import { Link } from 'react-router-dom';
 import { customAxios } from "../../libs/axios";
 
 interface Product {
-  id: number;
-  avatar: string;
-  title: string;
-  seller: string;
-  category: string[];
+  nickname:string;
+  price:number;
+  categoryList: ProductCategory[];
+  productId:number;
+  productImageUrl:string;
+  summary:string;
+  title:string;
+  wish:boolean;
+}
+interface ProductCategory{
+  categoryId:number;
+  categoryName:string;
 }
 
 function ProductCard({ product }: { product : Product }) {
   return (
-    <Link to={`/product/${product.id}`} className={styles.card}>
-      <img src={product.avatar} alt="Avatar" width={"100px"} />
+    <Link to={`/product/${product.productId}`} className={styles.card}>
+      <img src={product.productImageUrl} alt="Avatar" width={"100px"} />
       <h3>{product.title}</h3>
-      <p>{product.seller}</p>
-      {product.category.map((category) => (
-        <p key={category}>{category}</p>
+      <p>{product.nickname}</p>
+      {product.categoryList && product.categoryList.map((category, index) => (
+        <p key={index}>{category.categoryName}</p>
       ))}
     </Link>
   );
@@ -29,37 +36,14 @@ function ProductCard({ product }: { product : Product }) {
 function VoiceMarketPage() {
   const [products, setProducts] = useState<Product[]>([]);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await customAxios.post('/products', {
-        "nickname": "재키",
-        "categoryIdList": [6,8],
-        "sortType": "Latest"
-      });
-
-      
-      if(response.data.success) {
-        const productsData = response.data.response.productDtoList.map((product:any) => ({
-          id: product.productId,
-          avatar: product.productImageUrl,
-          title: product.title,
-          seller:"",
-          category: product.productCategoryList.map((category:any)=>category.categoryName)
-        }));
-        setProducts(productsData);
-      }
-    };
-    fetchProducts();
-  }, []); 
-
 return (
   <div>
     <FavoriteVoice/>
-    <Filter />
+    <Filter products={products} setProducts={setProducts}/>
     <div className={styles.container}>
       <div className={styles.cards}>
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+        {products && products.map((product) => (
+          <ProductCard key={product.productId} product={product} />
         ))}
       </div>
     </div>
