@@ -4,6 +4,9 @@
   width: 100%;
   flex-grow: 1;
   overflow: hidden;
+  padding-top: 100px;
+  margin-left: 220px;
+  margin-right: 220px;
 }
 .myPageBox {
   display: block;

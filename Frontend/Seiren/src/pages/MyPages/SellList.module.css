@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  
+  padding-top: 100px;
+  margin-left: 220px;
+  margin-right: 220px;
 }
 .chart{
+  margin-left: 220px;
+  margin-right: 440px;
   width: 100%;
-  margin-left: 240px;
-
 }
