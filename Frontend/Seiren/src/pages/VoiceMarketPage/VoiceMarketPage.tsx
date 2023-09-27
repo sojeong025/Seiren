@@ -37,7 +37,7 @@ function VoiceMarketPage() {
   const [products, setProducts] = useState<Product[]>([]);
 
 return (
-  <div>
+  <div className={styles.total}>
     <FavoriteVoice/>
     <Filter products={products} setProducts={setProducts}/>
     <div className={styles.container}>

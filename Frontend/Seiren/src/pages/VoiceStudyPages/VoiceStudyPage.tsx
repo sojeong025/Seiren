@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import NoVoice from "../../components/VoiceStudy/NoVoice";
 import VoiceState from "../../components/VoiceStudy/VoiceState";
-
+import styles from './VoiceStudyPage.module.css'
 
 function VoiceStudyPage() {
   const [success, setSuccess] = useState<boolean | null>(null);
@@ -30,7 +30,7 @@ function VoiceStudyPage() {
   if(success === null) return null;
 
   return (
-    <div>
+    <div className={styles.total}>
       { success? <VoiceState/> : <NoVoice/>}
     </div>
   );

@@ -58,17 +58,9 @@
   font-weight: bold;
   line-height: 250px;
 }
-.animatedText {
-  white-space: nowrap;
-  will-change: transform; 
-  animation-name: marqueeLeft; 
-  animation-duration :50s; 
-  animation-timing-function :linear; 
-  animation-iteration-count :infinite;
-}
 
 .section2_video{
-  position: absolute;;
+  /* position: absolute; */
 }
 
 /* section3 */
@@ -77,6 +69,7 @@
   color: #fff;
   display: flex;
   height: 100vh;
+  padding-bottom: -150px;
 }
 .left{
   width: 30%;

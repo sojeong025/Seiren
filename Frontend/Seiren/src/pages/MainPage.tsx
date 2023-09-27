@@ -27,7 +27,7 @@ function MainPage() {
         <div className={styles.main_txt}>From <span>Recording</span> your voice to <span>Selling</span> yours <br/> all at once</div>
           <ScrollLink to='about' smooth={true} duration={500}>
             <div className={styles.go_about}>
-              <div className={styles.go_about_txt}> about</div>  
+              <div className={styles.go_about_txt}> ABOUT</div>  
             </div>
           </ScrollLink>
         <div className={styles.main_img}><img ref={imgRef} src="src/assets/img/about.png" alt="img" onLoad={handleImageLoad} /></div>   

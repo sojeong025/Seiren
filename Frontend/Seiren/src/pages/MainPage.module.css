@@ -40,6 +40,12 @@
   align-items: center;
   margin-top: 320px;
   margin-left: -100px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.go_about:hover{
+  background-color: #defe52;
+  color:#000
 }
 .hr {
   width: 100%;

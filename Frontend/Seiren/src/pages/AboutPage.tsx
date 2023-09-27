@@ -27,9 +27,9 @@ function AboutPage() {
         animation: videoTimeline,
         trigger:"#section2",
         start:"top top", 
-        end:"+=800", 
+        end:"+=1000", 
         scrub:true,
-        pin: true,
+        pin:true,
         markers: true,
       })
 
@@ -42,9 +42,9 @@ function AboutPage() {
         animation: textani,
         trigger: "#section2",
         start: "top top",
-        end: "+=800",
+        end: "+=1000",
         scrub: true,
-        pin: true,
+        pin:true,
         markers: true,
       })
       return() => {
@@ -56,11 +56,8 @@ function AboutPage() {
   return (
     <div className={styles.container}>
       {/* section1: 프로그램 소개 */}
-      <section className={styles.section1}>
-        <div className={styles.section1_left}>
-
-        </div>
-
+      <section id="section1" className={styles.section1}>
+        <div className={styles.section1_left}></div>
         <div className={styles.section1_right}>
           <div className={styles.section_right_txt}> Serien 목소리 학습 및 거래 플랫폼</div>
           <hr />
@@ -76,16 +73,19 @@ function AboutPage() {
               and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. 
             </div>
           </div>
-
         </div>
       </section>
+      
 
       {/* section2: 전체적 소개 영상 */}
       <section id="section2" className={styles.section2}>
         <div className={styles.section2_txt}>SHOW SHOW </div>
         {/* <div className={styles.section2_txt}>SHOW SHOW </div> */}
-        <div className={styles.section2_video}><YouTube videoId="K6fHSb87aAM" /></div>
+        {/* <div className={styles.section2_video}><YouTube videoId="K6fHSb87aAM" /></div> */}
       </section>
+
+
+
 
       {/* section3: 사이드 탭에 따라 설명 */}
       <section id="section3" className={styles.section3}>
