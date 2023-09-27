@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class TransactionProductDetailResponse {
 
     private Long transactionId;
+    private Long voiceId;
     private String productImageUrl;
     private String productTitle;
     private List<String> productCategories;

@@ -103,6 +103,7 @@ public class TransactionService {
 
         return TransactionProductDetailResponse.builder()
                 .transactionId(transaction.getId())
+                .voiceId(product.getVoice().getVoiceId())
                 .productImageUrl(product.getProductImageUrl())
                 .productTitle(product.getProductTitle())
                 .productCategories(categoryList)
