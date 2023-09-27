@@ -20,7 +20,7 @@ function SellDetail() {
   }, [productId]);
 
   return (
-    <div>
+    <div className={styles.sellDetailContainer}>
       <div>
         <h1>{product.productTitle}</h1>
         <div >
