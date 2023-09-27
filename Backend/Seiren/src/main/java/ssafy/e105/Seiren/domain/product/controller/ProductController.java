@@ -3,8 +3,6 @@ package ssafy.e105.Seiren.domain.product.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ssafy.e105.Seiren.domain.product.dto.ProductCreateRequest;
-import ssafy.e105.Seiren.domain.product.dto.ProductSearchRequest;
 import ssafy.e105.Seiren.domain.product.dto.ProductUpdateDto;
 import ssafy.e105.Seiren.domain.product.service.ProductService;
 import ssafy.e105.Seiren.domain.product.service.SearchService;
@@ -61,14 +58,16 @@ public class ProductController {
     }
 
     @Operation(summary = "상품 검색")
-    @PostMapping("/api/products")
+    @GetMapping("/api/products")
     public ApiResult<?> searchProducts(
             @RequestParam(value = "nickname", required = false, defaultValue = "") String nickname,
-            @RequestParam(value = "categoryIdList", required = false, defaultValue = "") List<Long> categoryIdList,
+            @RequestParam(value = "age", required = false, defaultValue = "") Long age,
+            @RequestParam(value = "mood", required = false, defaultValue = "") Long mood,
+            @RequestParam(value = "gender", required = false, defaultValue = "") Long gender,
             @RequestParam(value = "sortType", required = false, defaultValue = "") String sortType,
             HttpServletRequest request, @RequestParam("page") int page) {
         return ApiUtils.success(
-                searchService.searchProduct(nickname, categoryIdList, sortType, request, page));
+                searchService.searchProduct(nickname, age, mood, gender, sortType, request, page));
     }
 
     @Operation(summary = "상품 목록 보기")
@@ -77,9 +76,3 @@ public class ProductController {
         return ApiUtils.success(productService.getAllProducts(request, page));
     }
 }
-//    @Operation(summary = "상품 검색")
-//    @PostMapping("/api/products")
-//    public ApiResult<?> searchProducts(@RequestBody ProductSearchRequest searchRequest,
-//            HttpServletRequest request, @RequestParam("page") int page) {
-//        return ApiUtils.success(searchService.searchProduct(searchRequest, request, page));
-//    }

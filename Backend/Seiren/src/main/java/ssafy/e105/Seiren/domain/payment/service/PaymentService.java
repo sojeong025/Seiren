@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ssafy.e105.Seiren.domain.payment.dto.PurchaseDto;
 import ssafy.e105.Seiren.domain.product.entity.Product;
-import ssafy.e105.Seiren.domain.product.entity.Wish;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
 import ssafy.e105.Seiren.domain.transaction.entity.Purpose;
 import ssafy.e105.Seiren.domain.transaction.entity.Transaction;
