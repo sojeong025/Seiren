@@ -23,7 +23,7 @@ interface ProductCategory{
 function ProductCard({ product }: { product : Product }) {
   return (
     <Link to={`/product/${product.productId}`} className={styles.card}>
-      <img src={product.productImageUrl} alt="Avatar" width={"100px"} />
+      <img src={product.productImageUrl} alt="Avatar"/>
       <h3>{product.title}</h3>
       <p>{product.nickname}</p>
       {product.categoryList && product.categoryList.map((category, index) => (
