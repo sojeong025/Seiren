@@ -61,13 +61,13 @@ public class ProductController {
     @GetMapping("/api/products")
     public ApiResult<?> searchProducts(
             @RequestParam(value = "nickname", required = false, defaultValue = "") String nickname,
+            @RequestParam(value = "gender", required = false, defaultValue = "") Long gender,
             @RequestParam(value = "age", required = false, defaultValue = "") Long age,
             @RequestParam(value = "mood", required = false, defaultValue = "") Long mood,
-            @RequestParam(value = "gender", required = false, defaultValue = "") Long gender,
             @RequestParam(value = "sortType", required = false, defaultValue = "") String sortType,
             HttpServletRequest request, @RequestParam("page") int page) {
         return ApiUtils.success(
-                searchService.searchProduct(nickname, age, mood, gender, sortType, request, page));
+                searchService.searchProduct(nickname, gender, age, mood, sortType, request, page));
     }
 
     @Operation(summary = "상품 목록 보기")
