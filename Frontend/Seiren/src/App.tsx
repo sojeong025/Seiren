@@ -9,7 +9,7 @@ import AboutPage from "./pages/AboutPage";
 
 // 목소리 장터 페이지
 import VoiceMarketPage from "./pages/VoiceMarketPage/VoiceMarketPage";
-import VoiceDetailPage from "./pages/VoiceMarketPage/VoiceDetailPage";
+import ProductDetailPage from "./pages/VoiceMarketPage/ProductDetailPage";
 import ProductCustomPage from "./pages/VoiceMarketPage/ProductCustomPage";
 
 // 목소리 학습 페이지
@@ -22,10 +22,10 @@ import VoiceFinishPage from "./pages/VoiceStudyPages/VoiceFinishPage";
 import MyPage from "./pages/MyPages/MyPage";
 import BuyList from "./pages/MyPages/BuyList";
 import SellList from "./pages/MyPages/SellList";
-import SellDetail from "./components/SellLists/sellDetail";
+import SellDetail from "./components/SellLists/SellDetail";
 import DetailPage from "./pages/MyPages/DetailPage";
 import UseVoice from "./pages/MyPages/UseVoice";
-import UseVoiceDetail from "./components/UseVoice/useVoiceDetail";
+import UseVoiceDetail from "./components/UseVoice/UseVoiceDetail";
 import YourVoiceDetail from "./components/MyProfile/YourVoiceDetail";
 
 // 로그인
@@ -50,7 +50,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           {/* 목소리 장터 페이지 */}
           <Route path="/voice-market" element={<VoiceMarketPage />} />
-          <Route path="/voice/:id" element={<VoiceDetailPage />} />
+          <Route path="/product/:productId" element={<ProductDetailPage />} />
           <Route path="/product-custom" element={<ProductCustomPage />} />
 
           {/* 목소리 등록 페이지 */}
