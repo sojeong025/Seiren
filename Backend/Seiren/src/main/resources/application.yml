@@ -69,6 +69,16 @@ management:
     web:
       base-path: /api/actuator
 
+cloud:
+  aws:
+    s3:
+      bucket: ${bucket}
+      stack.auto: false
+    region.static: ap-northeast-2
+    credentials:
+      accessKey: ${s3.accessKey}
+      secretKey: ${s3.secretKey}
+
 ---
 
 spring:
