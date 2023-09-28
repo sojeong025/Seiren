@@ -14,4 +14,6 @@ public interface RecordRepository extends JpaRepository<Record, Long> {
     Integer countByVoice_User_IdAndVoice_VoiceId(Long userId, Long voiceId);
 
     List<Record> findAllByVoice_VoiceId(Long voiceId);
+
+    Optional<Record> findByVoice_VoiceIdAndScript_ScriptId(Long voiceId, Long scriptId);
 }
