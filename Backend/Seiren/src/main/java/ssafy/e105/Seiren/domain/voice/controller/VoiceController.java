@@ -86,7 +86,7 @@ public class VoiceController {
             @RequestParam Long scriptId,
             @RequestPart MultipartFile file) {
         recordService.insertRecordTest(userId, voiceId, scriptId,
-                s3Service.uploadWavFileManual(file));
+                s3Service.uploadWavFileManual(voiceId, file));
         return ApiUtils.success("녹음 파일 추가 완료");
     }
 }
