@@ -6,7 +6,6 @@ import static ssafy.e105.Seiren.domain.voice.exception.VoiceErrorCode.SCRIPT_DEL
 import static ssafy.e105.Seiren.domain.voice.exception.VoiceErrorCode.SCRIPT_INSERT_ERROR;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +33,10 @@ public class ScriptService {
                 .orElseThrow(() -> new BaseException(
                         new ApiError(NO_MORE_SCRIPT.getMessage(), NO_MORE_SCRIPT.getCode())));
         return new ScriptResponse(script);
+    }
+
+    public String getScriptText(Long scriptId) {
+        return scriptRepository.findById(scriptId).orElseThrow().getText();
     }
 
     @Transactional
