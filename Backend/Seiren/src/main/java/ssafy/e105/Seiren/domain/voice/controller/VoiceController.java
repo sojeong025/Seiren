@@ -3,6 +3,7 @@ package ssafy.e105.Seiren.domain.voice.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,10 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import ssafy.e105.Seiren.domain.voice.dto.VoiceInsertUpdateDto;
 import ssafy.e105.Seiren.domain.voice.dto.VoiceMemoUpdateRequest;
+import ssafy.e105.Seiren.domain.voice.service.RecordService;
 import ssafy.e105.Seiren.domain.voice.service.VoiceService;
+import ssafy.e105.Seiren.global.config.S3Service;
 import ssafy.e105.Seiren.global.utils.ApiResult;
 import ssafy.e105.Seiren.global.utils.ApiUtils;
 
@@ -23,6 +28,8 @@ import ssafy.e105.Seiren.global.utils.ApiUtils;
 public class VoiceController {
 
     private final VoiceService voiceService;
+    private final S3Service s3Service;
+    private final RecordService recordService;
 
     // 녹음 페이지 처음 접속 시 호출
     @GetMapping("/api/progressingVoices")
@@ -64,13 +71,22 @@ public class VoiceController {
 
     @GetMapping("/api/voices/zip")
     public ApiResult<?> createAiModel(HttpServletRequest request, @RequestParam Long voiceId) {
-        
-        return ApiUtils.success("학습 요청 성공");
+        return ApiUtils.success(voiceService.getZipUrl(request, voiceId));
     }
 
     @DeleteMapping("/api/voices/{voiceId}")
     public ApiResult<?> deleteVoice(HttpServletRequest request, @PathVariable Long voiceId) {
         voiceService.deleteVoice(request, voiceId);
         return ApiUtils.success("목소리 삭제 상태로 변경");
+    }
+
+    @PostMapping(value = "/api/inputVoiceFileTest", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    // 테스트 데이터 수동 추가
+    public ApiResult<?> inputVoiceFileTest(@RequestParam Long userId, @RequestParam Long voiceId,
+            @RequestParam Long scriptId,
+            @RequestPart MultipartFile file) {
+        recordService.insertRecordTest(userId, voiceId, scriptId,
+                s3Service.uploadWavFileManual(file));
+        return ApiUtils.success("녹음 파일 추가 완료");
     }
 }
