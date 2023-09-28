@@ -2,7 +2,6 @@ package ssafy.e105.Seiren.global.config;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import java.io.ByteArrayInputStream;
@@ -69,14 +68,13 @@ public class S3Service {
         }
     }
 
-    public String uploadWavFileManual(MultipartFile file) {
+    public String uploadWavFileManual(Long voiceId, MultipartFile file) {
         try {
-            String fileName = "records/" + file.getName();
+            String fileName = "records/" + voiceId + "-" + file.getOriginalFilename();
             ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentType(file.getContentType());
             InputStream inputStream = file.getInputStream();
-            amazonS3Client.putObject(
-                    new PutObjectRequest(bucket, fileName, inputStream, objectMetadata));
+            amazonS3Client.putObject(bucket, fileName, inputStream, objectMetadata);
             return amazonS3Client.getResourceUrl(bucket, fileName);
         } catch (Exception e) {
             e.printStackTrace();
