@@ -71,9 +71,13 @@ public class RecordService {
 
     // 수동 입력을 위한 메서드
     @Transactional
-    public void insertRecordTest(Long userId, Long voiceId, Long scriptId, String recordUrl) {
+    public void insertRecordTest(HttpServletRequest request, Long voiceId, Long scriptId,
+            String recordUrl) {
+        if (recordRepository.findByVoice_VoiceIdAndScript_ScriptId(voiceId, scriptId).isPresent()) {
+            throw new BaseException(new ApiError("해당 scriptId의 녹음파일은 이미 저장되어있습니다.", 0));
+        }
         Voice voice = voiceRepository.findOneByUser_IdAndVoiceId(
-                        userId, voiceId)
+                        userService.getUser(request).getId(), voiceId)
                 .orElseThrow(() -> new BaseException(new ApiError("record insert error", 0)));
         recordRepository.save(Record.toEntity(voice, scriptService.getScript(scriptId), recordUrl));
     }
