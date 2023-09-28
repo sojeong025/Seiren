@@ -9,8 +9,12 @@ import static ssafy.e105.Seiren.domain.voice.exception.VoiceErrorCode.NOT_EXSIT_
 import static ssafy.e105.Seiren.domain.voice.exception.VoiceErrorCode.UNMACHED_VOICE_USER;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.io.ByteArrayOutputStream;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +23,10 @@ import ssafy.e105.Seiren.domain.user.service.UserService;
 import ssafy.e105.Seiren.domain.voice.dto.VoiceDto;
 import ssafy.e105.Seiren.domain.voice.dto.VoiceInsertUpdateDto;
 import ssafy.e105.Seiren.domain.voice.dto.VoiceMemoUpdateRequest;
+import ssafy.e105.Seiren.domain.voice.entity.Record;
 import ssafy.e105.Seiren.domain.voice.entity.Voice;
 import ssafy.e105.Seiren.domain.voice.repository.VoiceRepository;
+import ssafy.e105.Seiren.global.config.S3Service;
 import ssafy.e105.Seiren.global.error.type.BaseException;
 import ssafy.e105.Seiren.global.utils.ApiError;
 
@@ -31,6 +37,9 @@ public class VoiceService {
 
     private final VoiceRepository voiceRepository;
     private final UserService userService;
+    private final S3Service s3Service;
+    private final RecordService recordService;
+    private final ScriptService scriptService;
 
     public VoiceDto getCurrentVoiceId(HttpServletRequest request) {
         List<Voice> list = voiceRepository.findByUser_IdAndStateLessThanOrderByCreatedAtDesc(
@@ -141,4 +150,70 @@ public class VoiceService {
         return voiceRepository.findById(voiceId).orElseThrow(() -> new BaseException(
                 new ApiError(NOT_EXSIT_VOICE.getMessage(), NOT_EXSIT_VOICE.getCode())));
     }
+
+    public String getZipUrl(HttpServletRequest request, Long voiceId) {
+        User user = userService.getUser(request);
+        Voice voice = getVoice(voiceId);
+        if (voice.getUser() == user) {
+            return s3Service.uploadZipFile(createZipFile(voiceId), String.valueOf(voiceId));
+        }
+        throw new BaseException(
+                new ApiError(UNMACHED_VOICE_USER.getMessage(), UNMACHED_VOICE_USER.getCode()));
+    }
+
+    // zip file 생성
+    public ByteArrayOutputStream createZipFile(Long voiceId) {
+        List<Record> recordList = recordService.getRecordList(voiceId);
+        try {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            ZipOutputStream zipOut = new ZipOutputStream(byteArrayOutputStream);
+
+            // text 파일 추가
+            addToZip(zipOut, "output.txt", createScriptsText(voiceId, recordList).getBytes());
+
+            // wav 음성 파일 추가
+            int i = 0;
+            for (Record record : recordList) {
+                String key = (new URI(record.getRecordUrl())).getPath().substring(1);
+                System.out.println(key);
+                addToZip(zipOut, String.valueOf(i++) + ".wav", s3Service.downloadWavFile(key));
+            }
+            zipOut.close();
+            return byteArrayOutputStream;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BaseException(new ApiError("zip 파일 생성 실패", 0));
+        }
+    }
+
+    // 스크립트들을 모아 양식에 맞게 하나의 문자열로 생성
+    public String createScriptsText(Long voiceId, List<Record> recordList) {
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        for (Record record : recordList) {
+            sb.append("data123/")
+                    .append(voiceId)
+                    .append("/wavs/")
+                    .append(i++)
+                    .append(".wav|")
+                    .append(scriptService.getScriptText(record.getScript().getScriptId()))
+                    .append("\n");
+        }
+        return sb.toString();
+    }
+
+    // zip 파일에 byte 데이터(파일) 추가
+    private void addToZip(ZipOutputStream zipOut, String fileName, byte[] content) {
+        try {
+            ZipEntry zipEntry = new ZipEntry(fileName);
+            zipOut.putNextEntry(zipEntry);
+            zipOut.write(content);
+            zipOut.closeEntry();
+        } catch (Exception e) {
+            throw new BaseException(new ApiError("zip 파일에 파일 추가 실패", 0));
+        }
+    }
+
+
 }
