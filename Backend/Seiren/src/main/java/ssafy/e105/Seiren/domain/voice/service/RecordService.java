@@ -3,6 +3,7 @@ package ssafy.e105.Seiren.domain.voice.service;
 import static ssafy.e105.Seiren.domain.voice.exception.VoiceErrorCode.WRONG_USER;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,19 @@ public class RecordService {
                         new ApiError(WRONG_USER.getMessage(), WRONG_USER.getCode())));
         recordRepository.save(Record.toEntity(voice, scriptService.getScript(record.getScriptId()),
                 record.getRecordUrl()));
+    }
+
+    public List<Record> getRecordList(Long voiceId) {
+        return recordRepository.findAllByVoice_VoiceId(voiceId);
+    }
+
+    // 수동 입력을 위한 메서드
+    @Transactional
+    public void insertRecordTest(Long userId, Long voiceId, Long scriptId, String recordUrl) {
+        Voice voice = voiceRepository.findOneByUser_IdAndVoiceId(
+                        userId, voiceId)
+                .orElseThrow(() -> new BaseException(new ApiError("record insert error", 0)));
+        recordRepository.save(Record.toEntity(voice, scriptService.getScript(scriptId), recordUrl));
     }
 
 }
