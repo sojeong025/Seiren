@@ -6,9 +6,8 @@ import lombok.Data;
 
 @Data
 public class TestTTSRequest {
-
-    @Schema(description = "테스트 TTS 문장", example = "오늘 점심 메뉴는 뭐야?")
-    @Size(min = 1, max = 20, message = "테스트 문장은 1자 이상 20자 이하여야합니다.")
-    private String text;
+    
+    @Schema(description = "상품 id", example = "1")
+    private Long productId;
 
 }
