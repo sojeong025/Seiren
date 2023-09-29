@@ -155,7 +155,10 @@ public class VoiceService {
         User user = userService.getUser(request);
         Voice voice = getVoice(voiceId);
         if (voice.getUser() == user) {
-            return s3Service.uploadZipFile(createZipFile(voiceId), String.valueOf(voiceId));
+            String zipUrl = s3Service.uploadZipFile(createZipFile(voiceId),
+                    String.valueOf(voiceId));
+            voice.update(1); // state:1 학습중 상태로 전환
+            return zipUrl;
         }
         throw new BaseException(
                 new ApiError(UNMACHED_VOICE_USER.getMessage(), UNMACHED_VOICE_USER.getCode()));
