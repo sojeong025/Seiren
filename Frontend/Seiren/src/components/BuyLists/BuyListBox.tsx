@@ -62,7 +62,7 @@ function BuyListBox() {
                 <td>{item.seller}</td>
                 <td>{item.productTitle}</td>
                 <td>{item.buyDate.substring(0, 10)}</td>
-                <td>{item.price}원 / {item.buyLetterCount}개 </td>
+                <td className={styles.text4}>{item.price}원 / {item.buyLetterCount}개 </td>
                 <td>{item.buyLetterCount}글자</td>
                 <td>{item.totalPrice}원</td>
               </tr>

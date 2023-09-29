@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { useRecoilState } from "recoil";
 import { likeListState } from "../../recoil/UserAtom";
 import { customAxios } from "../../libs/axios";
@@ -27,12 +28,14 @@ function Likes() {
       <div className={styles.likesItems}>
         {wishList.map(item => (
           <div key={item.productId} className={styles.item}>
+            <Link to={`/product/${item.productId}`}>
             <div className={styles.card}>
               <img className={styles.pimg} src={item.productImageUrl} alt={item.title} />
               <div className={styles.titleOverlay}>
                 <div className={styles.title}>{item.title}</div>
               </div>
             </div>
+            </Link>
           </div>
         ))}
       </div>
