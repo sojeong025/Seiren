@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductTTSRequest;
 import ssafy.e105.Seiren.domain.transaction.service.TransactionService;
 import ssafy.e105.Seiren.global.utils.ApiResult;
@@ -56,9 +57,11 @@ public class TransactionController {
     @Operation(description = "TTS 등록")
     @PostMapping(value = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResult registTTS(
-            @RequestPart @Valid TransactionProductTTSRequest transactionProductTTSRequest) {
+            @RequestBody @Valid TransactionProductTTSRequest transactionProductTTSRequest,
+            @RequestPart MultipartFile file
+    ) {
         return ApiUtils.success(
-                transactionService.registTTS(transactionProductTTSRequest));
+                transactionService.registTTS(transactionProductTTSRequest, file));
     }
 
     @Operation(description = "구매 상품 사용 기록 리스트")

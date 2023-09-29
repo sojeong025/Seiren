@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.entity.ProductCategory;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
@@ -128,7 +129,8 @@ public class TransactionService {
     }
 
     @Transactional
-    public boolean registTTS(TransactionProductTTSRequest transactionProductTTSRequest) {
+    public boolean registTTS(TransactionProductTTSRequest transactionProductTTSRequest,
+            MultipartFile file) {
         Transaction transaction = transactionRepository.findById(
                         transactionProductTTSRequest.getTransactionId())
                 .orElseThrow(() -> new BaseException(
@@ -138,7 +140,7 @@ public class TransactionService {
             throw new BaseException(
                     new ApiError(OVER_RESTCOUNT.getMessage(), OVER_RESTCOUNT.getCode()));
         }
-        String s3Url = s3Service.uploadTTSFile(transactionProductTTSRequest.getFile());
+        String s3Url = s3Service.uploadTTSFile(file);
 
         UseHistory useHistory = UseHistory.toDto(transaction,
                 transactionProductTTSRequest.getText(), s3Url);
