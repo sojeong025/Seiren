@@ -19,5 +19,4 @@ public class TransactionProductTTSRequest {
     @Pattern(regexp = "[가-힣]{1,200}", message = "한글로 200글자 이하의 문자열만 가능합니다.")
     private String text;
 
-    private MultipartFile file;
 }

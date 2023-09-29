@@ -23,7 +23,6 @@ import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductDetailResponse
 import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductHistoryResponse;
 import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductReceiptResponse;
 import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductResponse;
-import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductTTSRequest;
 import ssafy.e105.Seiren.domain.transaction.entity.Transaction;
 import ssafy.e105.Seiren.domain.transaction.entity.TransactionDescription;
 import ssafy.e105.Seiren.domain.transaction.entity.UseHistory;
@@ -116,39 +115,39 @@ public class TransactionService {
                 .build();
     }
 
-    public boolean checkRegistTTS(TransactionProductTTSRequest transactionProductTTSRequest) {
+    public boolean checkRegistTTS(Long transactionId, String text) {
         Transaction transaction = transactionRepository.findById(
-                        transactionProductTTSRequest.getTransactionId())
+                        transactionId)
                 .orElseThrow(() -> new BaseException(
                         new ApiError(NOT_EXIST_TRANSACTION.getMessage(),
                                 NOT_EXIST_TRANSACTION.getCode())));
-        if (transaction.getRestCount() < transactionProductTTSRequest.getText().length()) {
+        if (transaction.getRestCount() < text.length()) {
             return false;
         }
         return true;
     }
 
     @Transactional
-    public boolean registTTS(TransactionProductTTSRequest transactionProductTTSRequest,
+    public boolean registTTS(Long transationId, String text,
             MultipartFile file) {
         Transaction transaction = transactionRepository.findById(
-                        transactionProductTTSRequest.getTransactionId())
+                        transationId)
                 .orElseThrow(() -> new BaseException(
                         new ApiError(NOT_EXIST_TRANSACTION.getMessage(),
                                 NOT_EXIST_TRANSACTION.getCode())));
-        if (transaction.getRestCount() < transactionProductTTSRequest.getText().length()) {
+        if (transaction.getRestCount() < text.length()) {
             throw new BaseException(
                     new ApiError(OVER_RESTCOUNT.getMessage(), OVER_RESTCOUNT.getCode()));
         }
         String s3Url = s3Service.uploadTTSFile(file);
 
         UseHistory useHistory = UseHistory.toDto(transaction,
-                transactionProductTTSRequest.getText(), s3Url);
+                text, s3Url);
         useHistoryRepository.save(useHistory);
         /**
          * 글자수 빼기
          */
-        transaction.minusRestCount(transactionProductTTSRequest.getText().length());
+        transaction.minusRestCount(text.length());
         return true;
     }
 
