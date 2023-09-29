@@ -42,10 +42,11 @@ public class UseHistory {
     /**
      * DTO 만들기
      */
-    public static UseHistory toDto(Transaction transaction, String text) {
+    public static UseHistory toDto(Transaction transaction, String text, String fileUrl) {
         return UseHistory.builder()
                 .transaction(transaction)
                 .text(text)
+                .fileUrl(fileUrl)
                 .characterCount(text.length())
                 .createAt(LocalDateTime.now())
                 .build();
