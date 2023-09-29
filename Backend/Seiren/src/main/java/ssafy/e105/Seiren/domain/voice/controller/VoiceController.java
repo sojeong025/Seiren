@@ -67,6 +67,12 @@ public class VoiceController {
         return ApiUtils.success(voiceService.getZipUrl(request, voiceId));
     }
 
+    @PutMapping("/api/voices/state")
+    public ApiResult<?> modifyVoiceState2(HttpServletRequest request, @RequestParam Long voiceId) {
+        voiceService.updateVoiceState2(request, voiceId);
+        return ApiUtils.success("voice state 1에서 2로 변경");
+    }
+
     @DeleteMapping("/api/voices/{voiceId}")
     public ApiResult<?> deleteVoice(HttpServletRequest request, @PathVariable Long voiceId) {
         voiceService.deleteVoice(request, voiceId);

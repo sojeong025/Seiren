@@ -136,6 +136,19 @@ public class VoiceService {
     }
 
     @Transactional
+    public void updateVoiceState2(HttpServletRequest request, Long voiceId) {
+        Voice voice = voiceRepository.findOneByUser_IdAndVoiceId(
+                userService.getUser(request).getId(), voiceId).orElseThrow(() -> new BaseException(
+                new ApiError(UNMACHED_VOICE_USER.getMessage(), UNMACHED_VOICE_USER.getCode())));
+        try {
+            voice.update(2);
+        } catch (Exception e) {
+            throw new BaseException(
+                    new ApiError(FAIL_UPDATE_VOICE.getMessage(), FAIL_UPDATE_VOICE.getCode()));
+        }
+    }
+
+    @Transactional
     public void deleteVoice(HttpServletRequest request, Long voiceId) {
         User user = userService.getUser(request);
         Voice voice = getVoice(voiceId);
