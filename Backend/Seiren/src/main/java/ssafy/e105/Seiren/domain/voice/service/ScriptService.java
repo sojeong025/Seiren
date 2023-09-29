@@ -73,6 +73,7 @@ public class ScriptService {
                 new ApiError(NOT_EXIST_SCRIPT.getMessage(), NOT_EXIST_SCRIPT.getCode())));
     }
 
+    @Transactional
     public void creteScriptList(String filePath) {
         List<String> sentences = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -80,7 +81,7 @@ public class ScriptService {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\\|");  // '|' 문자로 분할
                 if (parts.length >= 4) {  // 최소 4개 필드가 있어야 함
-                    String sentence = parts[1].trim();  // 두 번째 필드(인덱스 1) 추출 및 공백 제거
+                    String sentence = parts[2].trim();  // 두 번째 필드(인덱스 1) 추출 및 공백 제거
                     sentences.add(sentence);
                 }
             }
@@ -89,7 +90,6 @@ public class ScriptService {
         }
         // 1/1 세트가 0~1040까지라 그 정도만 먼저 저장
         for (int i = 0; i <= 1040; i++) {
-            System.out.println(i + " : " + sentences.get(i));
             scriptRepository.save(Script.builder().text(sentences.get(i)).build());
         }
     }

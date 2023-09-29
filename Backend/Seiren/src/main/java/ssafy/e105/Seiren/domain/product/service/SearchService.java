@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ssafy.e105.Seiren.domain.product.dto.ProductCategoryDto;
 import ssafy.e105.Seiren.domain.product.dto.ProductDto;
 import ssafy.e105.Seiren.domain.product.dto.ProductSearchResponse;
@@ -28,6 +29,7 @@ import ssafy.e105.Seiren.global.utils.ApiError;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class SearchService {
 
     private final ProductRepository productRepository;
@@ -35,6 +37,7 @@ public class SearchService {
     private final UserRepository userRepository;
     private final WishRepository wishRepository;
 
+    @Transactional
     public ProductSearchResponse searchProduct(String nickname, Long gender, Long age, Long mood,
             String sortType, HttpServletRequest request, int page) {
         User user = getUser(request);
@@ -127,6 +130,7 @@ public class SearchService {
         }
     }
 
+    @Transactional
     public List<ProductDto> getProductDtoList(Page<Product> productPage, User user) {
         List<ProductDto> productDtoList = new ArrayList<>();
         List<Product> productList = productPage.getContent();
@@ -163,6 +167,7 @@ public class SearchService {
         return null;
     }
 
+    @Transactional
     public Wish getWish(Long productId, Long userId) {
         Optional<Wish> wishOptional = wishRepository.findByUser_IdAndProduct_ProductId(userId,
                 productId);

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ssafy.e105.Seiren.domain.product.dto.ProductStatisticsDetailDto;
 import ssafy.e105.Seiren.domain.product.dto.ProductStatisticsDto;
 import ssafy.e105.Seiren.domain.product.entity.Product;
@@ -28,6 +29,7 @@ import ssafy.e105.Seiren.global.utils.ApiError;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class StatisticsService {
 
     private final WishRepository wishRepository;
@@ -37,7 +39,7 @@ public class StatisticsService {
     private final TransactionRepository transactionRepository;
     private final TransactionDescriptionRepository transactionDescriptionRepository;
 
-
+    @Transactional
     public int countWish(HttpServletRequest request) {
         User user = getUser(request);
 
@@ -53,6 +55,7 @@ public class StatisticsService {
         return wishCount;
     }
 
+    @Transactional
     public List<ProductStatisticsDto> getAllProductStatisticsList(HttpServletRequest request) {
         User user = getUser(request);
         List<Long> productIdList = transactionRepository.findAllBySellerId(user.getId());
@@ -68,6 +71,7 @@ public class StatisticsService {
         return productStatisticsDtoList;
     }
 
+    @Transactional
     public List<ProductStatisticsDetailDto> getStatisticsDetail(HttpServletRequest request,
             Long productId) {
         User user = getUser(request);
@@ -83,6 +87,7 @@ public class StatisticsService {
         return productStatisticsDetailDtoList;
     }
 
+    @Transactional
     public Map<LocalDate, Double> getStatistics(HttpServletRequest request, int month) {
         User user = getUser(request);
 
@@ -91,6 +96,7 @@ public class StatisticsService {
         return calculateTotalPriceByDate(transactionDescriptionList);
     }
 
+    @Transactional
     public Map<LocalDate, Double> calculateTotalPriceByDate(
             List<TransactionDescription> transactionDescriptions) {
         // LocalDateTime을 LocalDate로 변환하고 일자(day) 별로 그룹화하여 수익을 계산합니다.

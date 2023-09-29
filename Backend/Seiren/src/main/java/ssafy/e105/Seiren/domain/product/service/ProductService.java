@@ -9,7 +9,6 @@ import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.UNMACH
 import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_USER;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ssafy.e105.Seiren.domain.category.entity.Category;
 import ssafy.e105.Seiren.domain.category.repository.CategoryRepository;
 import ssafy.e105.Seiren.domain.product.dto.ProductCreateRequest;
@@ -41,6 +41,7 @@ import ssafy.e105.Seiren.global.utils.ApiError;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ProductService {
 
     private final ProductRepository productRepository;
@@ -51,7 +52,6 @@ public class ProductService {
     private final TestHistoryRepository testHistoryRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
-    private final WishRepository wishRepository;
     private final SearchService searchService;
 
     @Transactional
@@ -81,6 +81,7 @@ public class ProductService {
 
     }
 
+    @Transactional
     public ProductDetailDto getProductDetail(Long productId, HttpServletRequest request) {
         Product product = getProduct(productId);
         Voice voice = product.getVoice();
@@ -139,6 +140,7 @@ public class ProductService {
         }
     }
 
+    @Transactional
     public List<ProductDto> getAllProducts(HttpServletRequest request, int page) {
         User user = isUser(request);
         int size = 12;
@@ -168,6 +170,7 @@ public class ProductService {
                 new ApiError(NOT_EXIST_PRODUCT.getMessage(), NOT_EXIST_PRODUCT.getCode())));
     }
 
+    @Transactional
     public User isUser(HttpServletRequest request) {
         if (jwtTokenProvider.resolveToken(request) != null) {
             String userEmail = jwtTokenProvider.getUserEmail(
