@@ -9,12 +9,12 @@ import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.UNMACH
 import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_USER;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ssafy.e105.Seiren.domain.product.dto.ProductCategoryDto;
 import ssafy.e105.Seiren.domain.product.dto.ProductDto;
 import ssafy.e105.Seiren.domain.product.dto.WishListDto;
@@ -31,6 +31,7 @@ import ssafy.e105.Seiren.global.utils.ApiError;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class WishService {
 
     private final WishRepository wishRepository;
