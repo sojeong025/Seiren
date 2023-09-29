@@ -3,9 +3,9 @@ package ssafy.e105.Seiren.domain.product.service;
 import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_USER;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ssafy.e105.Seiren.domain.product.dto.TestTTSRequest;
 import ssafy.e105.Seiren.domain.product.entity.TestHistory;
 import ssafy.e105.Seiren.domain.product.repository.TestHistoryRepository;
@@ -17,6 +17,7 @@ import ssafy.e105.Seiren.global.utils.ApiError;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class TestHistoryService {
 
     private final TestHistoryRepository testHistoryRepository;
@@ -33,6 +34,7 @@ public class TestHistoryService {
         return testFileUrl;
     }
 
+    @Transactional
     public int countTest(Long productId, HttpServletRequest request) {
         User user = getUser(request);
         TestHistory testHistory = testHistoryRepository.findCountByUser_IdAndProduct_ProductId(
