@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { customAxios } from "../../libs/axios";
 import styles from "./YourVoiceDetail.module.css";
 
@@ -9,6 +9,8 @@ function EditVoiceDetail() {
   const [isEditing, setIsEditing] = useState(false);
   const voiceTitleRef = useRef(null);
   const memoRef = useRef(null);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     customAxios
@@ -50,6 +52,16 @@ function EditVoiceDetail() {
         // 오류 처리 추가 가능
       });
   };
+
+  const handleDeleteClick = () => {
+    customAxios
+      .delete(`voices/${voiceId}`)
+      .then(res => {
+        console.log("내 목소리 삭제 성공", res);
+        navigate('/my-page')
+      })
+      .catch(err => console.log(err));
+  };
   
 
   if (voiceDetail === null) {
@@ -70,6 +82,7 @@ function EditVoiceDetail() {
           <div>{voiceDetail.voiceTitle}</div>
           <div>Memo: {voiceDetail.memo}</div>
           <button onClick={handleEditClick}>수정</button>
+          <button onClick={handleDeleteClick}>삭제</button>
         </div>
       )}
       <img src={voiceDetail.voiceAvatarUrl} alt={voiceDetail.voiceTitle} />
