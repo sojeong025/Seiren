@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.entity.ProductCategory;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
@@ -31,6 +32,7 @@ import ssafy.e105.Seiren.domain.transaction.repository.TransactionRepository;
 import ssafy.e105.Seiren.domain.transaction.repository.UseHistoryRepository;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.repository.UserRepository;
+import ssafy.e105.Seiren.global.config.S3Service;
 import ssafy.e105.Seiren.global.error.type.BaseException;
 import ssafy.e105.Seiren.global.jwt.JwtTokenProvider;
 import ssafy.e105.Seiren.global.utils.ApiError;
@@ -47,6 +49,7 @@ public class TransactionService {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
     private final TransactionDescriptionRepository transactionDescriptionRepository;
+    private final S3Service s3Service;
 
     public List<TransactionProductResponse> getTransactionProductList(HttpServletRequest request,
             int page, int size) {
@@ -113,10 +116,20 @@ public class TransactionService {
                 .build();
     }
 
+    public boolean checkRegistTTS(TransactionProductTTSRequest transactionProductTTSRequest) {
+        Transaction transaction = transactionRepository.findById(
+                        transactionProductTTSRequest.getTransactionId())
+                .orElseThrow(() -> new BaseException(
+                        new ApiError(NOT_EXIST_TRANSACTION.getMessage(),
+                                NOT_EXIST_TRANSACTION.getCode())));
+        if (transaction.getRestCount() < transactionProductTTSRequest.getText().length()) {
+            return false;
+        }
+        return true;
+    }
+
     @Transactional
-    public boolean registTTS(HttpServletRequest request,
-            TransactionProductTTSRequest transactionProductTTSRequest) {
-        User user = getUser(request);
+    public boolean registTTS(TransactionProductTTSRequest transactionProductTTSRequest, MultipartFile file) {
         Transaction transaction = transactionRepository.findById(
                         transactionProductTTSRequest.getTransactionId())
                 .orElseThrow(() -> new BaseException(
@@ -126,8 +139,10 @@ public class TransactionService {
             throw new BaseException(
                     new ApiError(OVER_RESTCOUNT.getMessage(), OVER_RESTCOUNT.getCode()));
         }
+        String s3Url = s3Service.uploadTTSFile(file);
+
         UseHistory useHistory = UseHistory.toDto(transaction,
-                transactionProductTTSRequest.getText());
+                transactionProductTTSRequest.getText(), s3Url);
         useHistoryRepository.save(useHistory);
         /**
          * 글자수 빼기
