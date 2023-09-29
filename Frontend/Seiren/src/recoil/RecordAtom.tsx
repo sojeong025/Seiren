@@ -15,3 +15,8 @@ export const VoiceIdState = atom({
   key: 'VoiceIdState',
   default: '',
 })
+
+export const AudioDataState = atom({
+  key: 'audioDataState',
+  default: null,
+});

@@ -17,9 +17,14 @@ function VoiceStudyPage() {
     customAxios.get("progressingVoices")
       .then((res) => {
         console.log('목소리 상태 호출', res)
-        setSuccess(res.data.success);
-        setRecordState(res.data.response.state);
-        setVoiceId(res.data.response.voiceId);
+        if (res.data.response) { // response 객체가 있는지 확인
+          console.log(`voiceId:`, res.data.response.voiceId)
+          setSuccess(res.data.success);
+          setRecordState(res.data.response.state);
+          setVoiceId(res.data.response.voiceId);
+        } else {
+          setSuccess(false);
+        }
       })
       .catch((error) => {
         console.error('목소리 상태 호출 중 오류:', error);
@@ -31,7 +36,7 @@ function VoiceStudyPage() {
 
   return (
     <div className={styles.total}>
-      { success? <VoiceState/> : <NoVoice/>}
+      { success? <VoiceState/> : <NoVoice setSuccess={setSuccess}/>}
     </div>
   );
 }
