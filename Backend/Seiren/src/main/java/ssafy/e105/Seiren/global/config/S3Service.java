@@ -68,6 +68,22 @@ public class S3Service {
         }
     }
 
+    // tts 음성 파일 s3에 저장
+    public String uploadTTSFile(MultipartFile file) {
+        try {
+            String fileName = "tts/" + file.getOriginalFilename();
+            ObjectMetadata objectMetadata = new ObjectMetadata();
+            objectMetadata.setContentType(file.getContentType());
+            InputStream inputStream = file.getInputStream();
+            amazonS3Client.putObject(bucket, fileName, inputStream, objectMetadata);
+            return amazonS3Client.getResourceUrl(bucket, fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BaseException(new ApiError("upload tts file 실패", 0));
+        }
+    }
+
+    // 음성 파일 수동 저장
     public String uploadWavFileManual(Long voiceId, MultipartFile file) {
         try {
             String fileName = "records/" + voiceId + "-" + file.getOriginalFilename();

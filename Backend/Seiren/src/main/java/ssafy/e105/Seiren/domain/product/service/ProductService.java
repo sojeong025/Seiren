@@ -23,6 +23,7 @@ import ssafy.e105.Seiren.domain.product.dto.ProductCreateRequest;
 import ssafy.e105.Seiren.domain.product.dto.ProductDetailDto;
 import ssafy.e105.Seiren.domain.product.dto.ProductDto;
 import ssafy.e105.Seiren.domain.product.dto.ProductUpdateDto;
+import ssafy.e105.Seiren.domain.product.entity.Preview;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.entity.ProductCategory;
 import ssafy.e105.Seiren.domain.product.entity.TestHistory;
@@ -30,7 +31,6 @@ import ssafy.e105.Seiren.domain.product.repository.PreviewRepository;
 import ssafy.e105.Seiren.domain.product.repository.ProductCategoryRepository;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
 import ssafy.e105.Seiren.domain.product.repository.TestHistoryRepository;
-import ssafy.e105.Seiren.domain.product.repository.WishRepository;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.repository.UserRepository;
 import ssafy.e105.Seiren.domain.voice.entity.Voice;
@@ -59,13 +59,16 @@ public class ProductService {
             HttpServletRequest request) {
         Voice voice = getVoice(productCreateRequest.getVoiceId());
         User user = getUser(request);
+        List<String> textList = productCreateRequest.getPreviewTexts();
+        List<String> previewUrlList = productCreateRequest.getPreviewUrls();
         try {
             Product product = productRepository.save(Product.toEntity(productCreateRequest, voice));
             // 목소리 상태 판매중으로 변경
             voice.update(3);
             // 미리듣기 등록 코드 추가 필요
-            for (String text : productCreateRequest.getPreviewTexts()) {
-                // 미리듣기 생성을 위해 ai 서버에 api 요청 보내는 코드 추가
+            for (int i = 0; i < 3; i++) {
+                previewRepository.save(
+                        Preview.toEntity(product, textList.get(i), previewUrlList.get(i)));
             }
             // 상품 카테고리 등록
             for (Long categoryId : productCreateRequest.getCategoryList()) {
