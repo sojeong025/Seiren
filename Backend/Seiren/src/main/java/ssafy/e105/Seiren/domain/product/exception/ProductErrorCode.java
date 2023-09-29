@@ -19,7 +19,8 @@ public enum ProductErrorCode {
     FAIL_DELETE_WISH(4009, "찜 취소 실패"),
     FAIL_GET_WISHLIST(4010, "찜 록록 불러오기 실패"),
     FAIL_SEARCH_PRODUCT(4011, "상품 검색 실패"),
-    FAIL_SEARCH_PRODUCT2(4012, "상품 검색 실패2");
+    FAIL_SEARCH_PRODUCT2(4012, "상품 검색 실패2"),
+    OVER_RESTCOUNT(4013, "Test TTS 기회 초과");
     private final int code;
     private final String message;
 

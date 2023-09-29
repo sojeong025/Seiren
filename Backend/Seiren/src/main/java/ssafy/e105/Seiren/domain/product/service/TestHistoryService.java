@@ -1,12 +1,13 @@
 package ssafy.e105.Seiren.domain.product.service;
 
+import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.OVER_RESTCOUNT;
 import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_USER;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ssafy.e105.Seiren.domain.product.dto.TestTTSRequest;
+import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.entity.TestHistory;
 import ssafy.e105.Seiren.domain.product.repository.TestHistoryRepository;
 import ssafy.e105.Seiren.domain.user.entity.User;
@@ -23,28 +24,32 @@ public class TestHistoryService {
     private final TestHistoryRepository testHistoryRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
+    private final ProductService productService;
 
     @Transactional
-    public String createTestFile(TestTTSRequest testTTSRequestDto, HttpServletRequest request) {
-        // 학습된 모델 API 호출
-        // 입력받은 testTTSRequestDto의 테스트 문장으로 음성 파일 생성
-        // 해당 음성 파일을 반환
-        // 해당 유저의 본 상품에 대한 테스트 카운트 감소
-        String testFileUrl = "";
-        return testFileUrl;
+    public boolean checkTestCount(Long productId, HttpServletRequest request) {
+        User user = getUser(request);
+        if (countTest(productId, request) > 0) {
+            TestHistory testHistory = testHistoryRepository.findCountByUser_IdAndProduct_ProductId(
+                    user.getId(), productId);
+            testHistory.update();
+            return true;
+        }
+        throw new BaseException(
+                new ApiError(OVER_RESTCOUNT.getMessage(), OVER_RESTCOUNT.getCode()));
     }
 
     @Transactional
     public int countTest(Long productId, HttpServletRequest request) {
         User user = getUser(request);
+        Product product = productService.getProduct(productId);
         TestHistory testHistory = testHistoryRepository.findCountByUser_IdAndProduct_ProductId(
                 user.getId(), productId);
-        int count;
-        if (testHistory == null) {
-            return count = 3;
+        if (testHistory != null) {
+            return testHistory.getCount();
         }
-        count = testHistory.getCount();
-        return count;
+        testHistoryRepository.save(TestHistory.toEntity(user, product));
+        return 3;
     }
 
     public User getUser(HttpServletRequest request) {

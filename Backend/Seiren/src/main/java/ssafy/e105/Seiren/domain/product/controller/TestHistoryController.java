@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ssafy.e105.Seiren.domain.product.dto.TestTTSRequest;
 import ssafy.e105.Seiren.domain.product.service.TestHistoryService;
@@ -22,10 +24,11 @@ public class TestHistoryController {
     private final TestHistoryService testHistoryService;
 
     @Operation(summary = "체험판 TTS")
-    @PostMapping("/api/tts")
-    public ApiResult<?> testTTS(@RequestBody TestTTSRequest testTTSRequestDto,
+    @PutMapping("/api/tts")
+    public ApiResult<?> testTTS(@RequestParam Long productId,
             HttpServletRequest request) {
-        return ApiUtils.success(testHistoryService.createTestFile(testTTSRequestDto, request));
+        testHistoryService.checkTestCount(productId, request);
+        return ApiUtils.success("체험판 TTS를 들었습니다.");
     }
 
     @Operation(summary = "체험판 TTS 남은 횟수 확인")
