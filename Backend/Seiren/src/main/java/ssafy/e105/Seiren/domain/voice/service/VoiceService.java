@@ -52,7 +52,8 @@ public class VoiceService {
     }
 
     public List<VoiceDto> getVoiceList(HttpServletRequest request) {
-        List<Voice> voiceList = voiceRepository.findByUser_Id(userService.getUser(request).getId());
+        List<Voice> voiceList = voiceRepository.findByUser_IdAndIsDeleteFalse(
+                userService.getUser(request).getId());
 //        return voiceList.stream()
 //                .map(voice -> {
 //                    Integer state = Optional.ofNullable(voice.getProduct())
