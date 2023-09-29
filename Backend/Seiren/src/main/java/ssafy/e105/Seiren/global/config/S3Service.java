@@ -79,7 +79,7 @@ public class S3Service {
             return amazonS3Client.getResourceUrl(bucket, fileName);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new BaseException(new ApiError("uploadWavFileManual 실패", 0));
+            throw new BaseException(new ApiError("upload tts file 실패", 0));
         }
     }
 
