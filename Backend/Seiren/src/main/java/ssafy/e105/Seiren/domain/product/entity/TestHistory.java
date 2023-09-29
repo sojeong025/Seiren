@@ -41,4 +41,8 @@ public class TestHistory {
                 .count(3)
                 .build();
     }
+
+    public void update() {
+        this.count -= 1;
+    }
 }
