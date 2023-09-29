@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ssafy.e105.Seiren.domain.product.dto.ProductCreateRequest;
 
 @Data
 @Entity
@@ -30,4 +31,12 @@ public class Preview {
     private String previewUrl;
 
     private String previewText;
+
+    public static Preview toEntity(Product product, String previewText, String previewUrl) {
+        return Preview.builder()
+                .product(product)
+                .previewUrl(previewUrl)
+                .previewText(previewText)
+                .build();
+    }
 }
