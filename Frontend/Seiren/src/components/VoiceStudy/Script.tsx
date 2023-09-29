@@ -1,19 +1,16 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { RecordingState, VoiceIdState } from '../../recoil/RecordAtom';
+import { RecordingState, VoiceIdState, AudioDataState } from '../../recoil/RecordAtom';
 import { customAxios } from '../../libs/axios';
 import { useState, useEffect } from 'react';
-
 import styles from "./Script.module.css"
+import * as AWS from 'aws-sdk';
 
-interface ScriptHeaderProps {
-  setIndex: React.Dispatch<React.SetStateAction<number>>;
-  index: number;
-}
 
-const Script: React.FC<ScriptHeaderProps> = ({ index, setIndex }) => {
+const Script: React.FC = () => {
   // 스크립트 state설정
   const [scriptId, setScriptId] = useState();
   const [nextScriptId, setNextScriptId] = useState();
+  const audioUrl = useRecoilValue(AudioDataState);
 
 
   const [recordingStatus, setRecordingStatus] = useRecoilState(RecordingState);
@@ -60,10 +57,43 @@ const Script: React.FC<ScriptHeaderProps> = ({ index, setIndex }) => {
 
 
   const goNext = () => {
+    if (recordingStatus === "stopped") {
+      let blob = new Blob([audioUrl], { type: "audio/wav" });
+      let url = URL.createObjectURL(blob);
+      console.log(url);
+
+      const formData = new FormData();
+      formData.append("file", blob);
+
+      AWS.config.update({
+        region: import.meta.env.VITE_PUBLIC_REGION,
+        accessKeyId: import.meta.env.VITE_PUBLIC_ACCESSKEY,
+        secretAccessKey: import.meta.env.VITE_PUBLIC_SECRETKEY,
+      });
+
+      const upload = new AWS.S3.ManagedUpload({
+        params: {
+          Bucket: import.meta.env.VITE_PUBLIC_BUCKET,
+          Key: "testTrack/" + new Date().toISOString() + ".wav",
+        },
+      });
+
+      const promise = upload.promise();
+
+      promise.then(
+        function (data) {
+          console.log("File uploaded successfully");
+          console.log(data);
+        },
+        function (err) {
+          return err("Audio upload failed");
+        },
+      );
+    }
     setScriptId(nextScriptId);
     customAxios.get(`nextScripts/${nextScriptId}`)
       .then((res) => {
-        console.log(`넘어가기 성공? ㅋ`, res)
+        console.log(`넘어가기 성공`, res)
       })
     if(recordingStatus === "stopped"){
       console.log("녹음이 완료되었습니다. 다음으로 넘어갑니다.")
@@ -75,7 +105,7 @@ const Script: React.FC<ScriptHeaderProps> = ({ index, setIndex }) => {
     <div>      
       <div className={styles.text}>
         <div className={styles.text_now}>{nowScript}</div>
-        <div className={styles.text_next}>{nextScript}</div>
+        <div className={styles.text_next}>Next {nextScript}</div>
       </div>
         
       <hr className={styles.hr} />

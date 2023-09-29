@@ -1,9 +1,8 @@
-import { useState, useCallback } from "react";
-import { useRecoilState } from "recoil";
-import { RecordingState } from "../../recoil/RecordAtom";
+import { useState } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { RecordingState, AudioDataState } from "../../recoil/RecordAtom";
 import styles from "./VoiceRecord.module.css";
 import { BsFillMicFill, BsStopFill, BsPlayFill } from "react-icons/bs";
-import * as AWS from 'aws-sdk';
 
 
 const VoiceRecord = () => {
@@ -14,6 +13,8 @@ const VoiceRecord = () => {
   const [source, setSource] = useState<MediaStreamAudioSourceNode | null>(null); // 오디오 소스 저장
   const [audioUrl, setAudioUrl] = useState<Blob | string | ArrayBuffer | null>(null); // 녹음된 오디오 데이터의 Url 저장
   const [disabled, setDisabled] = useState<boolean>(true);
+  const setAudioData = useSetRecoilState(AudioDataState);
+
 
   // 사용자가 음성 녹음을 시작했을 때
   const onRecAudio = () => {
@@ -27,10 +28,8 @@ const VoiceRecord = () => {
       var source = audioCtx.createMediaStreamSource(stream);
       source.connect(localAnalyser);
       localAnalyser.connect(audioCtx.destination);
-
       return source;
     }
-
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream: MediaStream) => {
       var mediaRecorder = new MediaRecorder(stream);
       mediaRecorder.start();
@@ -62,6 +61,7 @@ const VoiceRecord = () => {
                 if (buffer.byteLength == e.data.size) {
                   console.log("Buffer created.");
                   setAudioUrl(buffer);
+                  setAudioData(buffer);
                 }
               }
             };
@@ -83,54 +83,15 @@ const VoiceRecord = () => {
         });
       }
     }
-
     if (source) {
       source.disconnect();
     }
-
     if (analyser) {
       analyser.disconnect();
     }
-
     setDisabled(false);
     setRecordingStatus("stopped");
   };
-
-  const onSubmitAudioFile = useCallback(() => {
-    if (audioUrl) {
-      let blob = new Blob([audioUrl], { type: "audio/wav" });
-      let url = URL.createObjectURL(blob);
-      console.log(url);
-
-      const formData = new FormData();
-      formData.append("file", blob);
-
-      AWS.config.update({
-        region: import.meta.env.VITE_PUBLIC_REGION,
-        accessKeyId: import.meta.env.VITE_PUBLIC_ACCESSKEY,
-        secretAccessKey: import.meta.env.VITE_PUBLIC_SECRETKEY,
-      });
-
-      const upload = new AWS.S3.ManagedUpload({
-        params: {
-          Bucket: import.meta.env.VITE_PUBLIC_BUCKET,
-          Key: "testTrack/" + new Date().toISOString() + ".wav",
-        },
-      });
-
-      const promise = upload.promise();
-
-      promise.then(
-        function (data) {
-          console.log("File uploaded successfully");
-          console.log(data);
-        },
-        function (err) {
-          return err("Audio upload failed");
-        },
-      );
-    }
-  }, [audioUrl]);
 
   const play = () => {
     let blob = new Blob([audioUrl], { type: "audio/wav" });
@@ -165,7 +126,6 @@ const VoiceRecord = () => {
 
         {recordingStatus === "stopped" && (
           <>
-            <button onClick={onSubmitAudioFile}>저장</button>
             <button className={styles.Btn_play} onClick={play} disabled={!audioUrl}>
               <BsPlayFill />
             </button>

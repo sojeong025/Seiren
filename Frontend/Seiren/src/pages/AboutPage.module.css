@@ -1,7 +1,3 @@
-.container {
-  overflow-x: hidden;
-}
-
 /* section1 */
 .section1 {
   background-color: #fff;
@@ -23,10 +19,9 @@
 .section_right_txt{
   font-size: 34px;
   font-weight: 700;
-
-    animation: typing 4s steps(100, end);
-    overflow: hidden;
-    white-space: nowrap;
+  animation: typing 4s steps(100, end);
+  overflow: hidden;
+  white-space: nowrap;
 }
 .section_right_context{
   font-size: 18px;
@@ -52,15 +47,13 @@
 }
 .section2_txt, .section2_txt2{
   color: #fff;
-  display: flex;
-  justify-content: center;
   font-size: 200px;
   font-weight: bold;
   line-height: 250px;
 }
 
 .section2_video{
-  /* position: absolute; */
+  position: absolute;
 }
 
 /* section3 */

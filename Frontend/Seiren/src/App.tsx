@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+
 
 // 메인 페이지
 import MainPage from "./pages/MainPage";
@@ -39,12 +41,21 @@ import NavBar from "./components/common/NavBar";
 function App() {
   const [isNavBarVisible, setIsNavBarVisible] = useState(true);
 
-  
-
   return (
     <Router>
+      <RoutesComponent isNavBarVisible={isNavBarVisible} setIsNavBarVisible={setIsNavBarVisible} />
+    </Router>
+  );
+}
+
+function RoutesComponent({ isNavBarVisible, setIsNavBarVisible }) {
+  const location = useLocation(); // get the current location
+
+  return (
+    <>
       {isNavBarVisible && <NavBar />}
-        <Routes>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
 
           <Route path="/" element={<MainPage />} />
           <Route path="/about" element={<AboutPage />} />
@@ -72,8 +83,9 @@ function App() {
           {/* 로그인 */}
           <Route path="/login" element={<LoginPage setIsNavBarVisible={setIsNavBarVisible} />} />
           <Route path="/oauth/callback/kakao" element={<OAuth2RedirectHandler />} />
-        </Routes>
-    </Router>
+          </Routes>
+        </AnimatePresence>
+    </>
   );
 }
 

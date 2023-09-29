@@ -24,7 +24,7 @@ function ProductCustomPage(){
     };
 
   return(
-    <div>
+    <div className={styles.total}>
       장터 올릴 때 꾸며보자!
       <div>목소리 제목: <input type="text" /></div>
       <div></div>

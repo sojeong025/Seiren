@@ -13,13 +13,13 @@ function AboutPage() {
     setSideTab(tabName);
   };
 
+  const videoContainerRef = useRef(null);
+  const textRef = useRef(null);
   useEffect(() => {
-      const videoContainer = document.querySelector(`.${styles.section2_video}`);
-      const text = document.querySelector(`.${styles.section2_txt}`);
 
       // 비디오 컨테이너 확대 애니메이션 설정
       const videoTimeline = gsap.timeline();
-      videoTimeline.fromTo(videoContainer,{scaleX:"100%", scaleY:"100%"},{scaleX:"180%", scaleY:"180%"});
+      videoTimeline.fromTo(videoContainerRef.current, {scaleX:1, scaleY:1},{scaleX:1.8, scaleY:1.8});
   
       // 비디오 컨테이너 확대 애니메이션 설정
       ScrollTrigger.create({
@@ -35,7 +35,7 @@ function AboutPage() {
 
       // 텍스트 확대
       const textani = gsap.timeline();
-      textani.to(text, {scale: 2, x:200, duration:1})
+      textani.from(textRef.current, {scale: 2, x:200, duration:1})
 
       ScrollTrigger.create({
         id: "textani",
@@ -79,9 +79,9 @@ function AboutPage() {
 
       {/* section2: 전체적 소개 영상 */}
       <section id="section2" className={styles.section2}>
-        <div className={styles.section2_txt}>SHOW SHOW </div>
+        <div ref={textRef} className={styles.section2_txt} >SHOW SHOW </div>
         {/* <div className={styles.section2_txt}>SHOW SHOW </div> */}
-        {/* <div className={styles.section2_video}><YouTube videoId="K6fHSb87aAM" /></div> */}
+        <div ref={videoContainerRef} className={styles.section2_video} ><YouTube videoId="K6fHSb87aAM" /></div>
       </section>
 
 
