@@ -70,11 +70,12 @@ const Script: React.FC = () => {
         accessKeyId: import.meta.env.VITE_PUBLIC_ACCESSKEY,
         secretAccessKey: import.meta.env.VITE_PUBLIC_SECRETKEY,
       });
-
+      console.log(formData.get("file"));
       const upload = new AWS.S3.ManagedUpload({
         params: {
           Bucket: import.meta.env.VITE_PUBLIC_BUCKET,
-          Key: "testTrack/" + new Date().toISOString() + ".wav",
+          Key: "records/" + voiceId +'-'+ new Date().toISOString() + ".wav",
+          Body: formData.get("file")
         },
       });
 
@@ -83,7 +84,14 @@ const Script: React.FC = () => {
       promise.then(
         function (data) {
           console.log("File uploaded successfully");
-          console.log(data);
+          console.log(data.Location);
+          customAxios.post("records",{
+            "voiceId" : voiceId,
+            "scriptId" : scriptId,
+            "recordUrl":data.Location
+          }).then((res)=>{
+            console.log("녹음하고 보낸거"+res.data.response);
+          })
         },
         function (err) {
           return err("Audio upload failed");
