@@ -5,6 +5,7 @@
   padding: 30px 0px;
   box-sizing :border-box;
   height: 350px;
+  overflow: hidden;
 }
 .FavText{
   margin: 0px 220px;
@@ -25,4 +26,16 @@
   border-radius :10px;  
   padding :20px;  
   box-sizing:border-box ;   
+  overflow: hidden;
+  width: 200px;
+  height: 280px;
+}
+.pimg{
+  width: 150px;
+  height: 200px;
+}
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
