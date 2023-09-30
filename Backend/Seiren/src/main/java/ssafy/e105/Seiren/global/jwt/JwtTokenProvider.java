@@ -173,6 +173,7 @@ public class JwtTokenProvider {
 
                 response.getWriter().write(responseBody);
                 response.getWriter().flush();
+                return false;
             } catch (Exception ee) {
                 ee.printStackTrace();
                 throw new IllegalArgumentException("만료된 토큰 응답 생성 및 전송 실패");
@@ -180,7 +181,6 @@ public class JwtTokenProvider {
         } catch (JwtException e) {
             throw new IllegalArgumentException("토큰 잘못 됨2");
         }
-        return false;
     }
 
     /**
