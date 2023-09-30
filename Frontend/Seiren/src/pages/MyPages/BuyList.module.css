@@ -1,17 +1,15 @@
 .buyCountContainer {
   display: flex;
   flex-direction: row;
-  padding-top: 100px;
-  margin-left: 220px;
-  margin-right: 220px;
+  background-color: #fbfbf7;
+  min-height: 100vh;
+
 }
 .countInfo {
+  color: #000;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px; /* 공간을 더 확보하기 위한 마진 추가 */
   width: 100%;
-  margin-left: 240px;
+  margin-left: 300px;
 
 }

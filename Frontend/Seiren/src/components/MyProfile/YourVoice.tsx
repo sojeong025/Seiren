@@ -23,7 +23,7 @@ function YourVoice() {
   console.log(myVoice);
   return (
     <div className={styles.YourVoiceContainer}>
-      <div className={styles.YourVoiceText}>Your Voice</div>
+      <div className={styles.YourVoiceText}>마이 AI 목소리</div>
       <div className={styles.VoiceItems}>
         <ul>
           {myVoice.map(item => (

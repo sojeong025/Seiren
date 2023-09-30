@@ -10,11 +10,10 @@ function Likes() {
 
   useEffect(() => {
     customAxios
-      .get("wish") // 원하는 API 경로로 변경하세요.
+      .get("wish") 
       .then(response => {
         const responseData = response.data;
         const likeslist = responseData && responseData.response.wishList ? responseData.response.wishList : [];
-        // API 응답 데이터를 Recoil 상태에 설정
         setWishList(likeslist);
       })
       .catch(error => {
@@ -24,7 +23,7 @@ function Likes() {
 
   return (
     <div className={styles.LikesContainer}>
-      <div className={styles.likesText}>Likes</div>
+      <div className={styles.likesText}>좋아요 누른 목소리</div>
       <div className={styles.likesItems}>
         {wishList.map(item => (
           <div key={item.productId} className={styles.item}>

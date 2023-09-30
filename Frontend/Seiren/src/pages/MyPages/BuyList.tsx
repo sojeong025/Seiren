@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import styles from "./BuyList.module.css";
 import BuyListBox from "../../components/BuyLists/BuyListBox";
-import BuyCount from "../../components/BuyLists/BuyCount";
 import SideBar from "../../components/common/SideBar";
 
 const BuyList: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({ setIsNavBarVisible }) => {
@@ -19,7 +18,6 @@ const BuyList: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({
     <div className={styles.buyCountContainer}>
       <SideBar />
       <div className={styles.countInfo}>
-        <BuyCount />
         <BuyListBox />
       </div>
     </div>

@@ -1,10 +1,8 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, NavLink } from "react-router-dom";
 import styles from "./SideBar.module.css";
 import MyInfo from "../MyProfile/MyInfo";
-import EditIcon from "../../assets/icon/edit.png"
 
 const menuItems = [
-  { text: "홈", link: "/" },
   { text: "프로필", link: "/my-page" },
   { text: "구매내역", link: "/buy-list" },
   { text: "판매내역", link: "/sell-list" },
@@ -16,6 +14,9 @@ function SideBar() {
 
   return (
     <div className={styles.sidebar}>
+      <div className={styles.main}>
+        <NavLink to="/">Seiren</NavLink>
+      </div>
       <MyInfo />
       <span></span>
       <div className={styles.sidebarlist}>

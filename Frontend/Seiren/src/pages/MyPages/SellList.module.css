@@ -2,12 +2,11 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding-top: 100px;
-  margin-left: 220px;
-  margin-right: 220px;
+  min-height: 100vh;
+  background-color: #fbfbf7;
+  color: #000;
 }
 .chart{
-  margin-left: 220px;
-  margin-right: 440px;
+  margin-left: 300px;
   width: 100%;
 }

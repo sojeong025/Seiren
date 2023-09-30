@@ -1,17 +1,14 @@
 .sidebar {
-  background-color: transparent;
-  width: 220px;
+  background-image: linear-gradient(-20deg, #FCFAE8 0%, #fbfcdb 100%); 
+  width: 300px;
   height: 100%;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* border: 2px solid #fff; */
   box-shadow: none;
   position: fixed;
-  top: 80px; 
-  bottom: 0;
-  margin-top: 30px;
+  padding-top: 50px;
 }
 
 .sidebarlist {
@@ -19,21 +16,28 @@
   width: 100%;
   
 }
+.main a{
+  font-size: 35px !important;
+}
 
 .sidebar a {
   padding: 10px 0px;
   text-decoration: none;
-  color: #fff;
+  color: #000;
   display: flex;
-  font-size: 25px;
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 30px;
   width: 100%;
   justify-content: center;
   align-items: center;
 }
 
 .sidebar a.active {
-  background-image: linear-gradient(to right, transparent,#52057B);
-  background-position: 0 100%;
+  border-radius: 20px;
+  color: #ed5808;
+  background-color: #fff;
   background-repeat: no-repeat;
-  background-size: 100% 5px;
+  width: 260px;
+  margin-left: 20px;
 }
