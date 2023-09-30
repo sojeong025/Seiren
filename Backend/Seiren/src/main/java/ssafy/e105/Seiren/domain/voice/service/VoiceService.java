@@ -165,6 +165,7 @@ public class VoiceService {
                 new ApiError(NOT_EXSIT_VOICE.getMessage(), NOT_EXSIT_VOICE.getCode())));
     }
 
+    @Transactional
     public String getZipUrl(HttpServletRequest request, Long voiceId) {
         User user = userService.getUser(request);
         Voice voice = getVoice(voiceId);
@@ -192,8 +193,8 @@ public class VoiceService {
             int i = 0;
             for (Record record : recordList) {
                 String key = (new URI(record.getRecordUrl())).getPath().substring(1);
-                System.out.println(key);
-                addToZip(zipOut, String.valueOf(i++) + ".wav", s3Service.downloadWavFile(key));
+                addToZip(zipOut, "wavs/" + String.valueOf(i++) + ".wav",
+                        s3Service.downloadWavFile(key));
             }
             zipOut.close();
             return byteArrayOutputStream;
