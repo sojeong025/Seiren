@@ -1,11 +1,12 @@
 import { Link, useLocation, NavLink } from "react-router-dom";
 import styles from "./SideBar.module.css";
 import MyInfo from "../MyProfile/MyInfo";
+import { IoIosArrowBack } from "react-icons/io"
 
 const menuItems = [
   { text: "프로필", link: "/my-page" },
-  { text: "구매내역", link: "/buy-list" },
   { text: "판매내역", link: "/sell-list" },
+  { text: "구매내역", link: "/buy-list" },
   { text: "사용", link: "/use-voice" },
 ];
 
@@ -15,7 +16,7 @@ function SideBar() {
   return (
     <div className={styles.sidebar}>
       <div className={styles.main}>
-        <NavLink to="/">Seiren</NavLink>
+        <NavLink to="/"><IoIosArrowBack/> Seiren</NavLink>
       </div>
       <MyInfo />
       <span></span>
