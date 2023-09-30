@@ -3,51 +3,50 @@ import styles from "./BuyListBox.module.css";
 import { customAxios } from "../../libs/axios";
 import { useParams, NavLink } from "react-router-dom";
 import Pagination from "../common/Pagination";
-import { IoIosArrowDown } from "react-icons/io"
+import { IoIosArrowDown } from "react-icons/io";
 
 function BuyListBox() {
   const [purchaseData, setPurchaseData] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [totalBuyCount, setTotalBuyCount] = useState(0);
 
   // 이부분이 페이지네이션 같아욤 (수정 필요)
   const { page } = useParams();
-  const [currentPage, setCurrentPage] = useState(page || 1); // 현재 페이지 상태 추가
+  const [currentPage, setCurrentPage] = useState(page || 1); // 현재 페이지 상태 추가 (0부터 시작)
   const itemsPerPage = 10;
 
   useEffect(() => {
-    customAxios.get("transactions/receipt?page=0")
+    customAxios.get(`transactions/totalcount`)
       .then(response => {
-        console.log('구매목록 : ',response.data)
-        const data = response.data.response;
-        const numberOfItems = response.data.response.length;
-        setTotalBuyCount(numberOfItems);
-        setPurchaseData(data);
-
-        // 총 금액 계산
-        const totalPurchasePrice = data.reduce((acc, item) => {
-          return acc + item.totalPrice;
-        }, 0);
-        setTotalAmount(totalPurchasePrice);
-      
+        setTotalAmount(response.data.response)
       })
       .catch(error => {
         console.error("API 호출 중 오류 발생:", error);
       });
-  }, [setPurchaseData, page]);
+  }, []);
+
+
+  useEffect(() => {
+    customAxios.get(`transactions/receipt?page=${currentPage}`)
+      .then(response => {
+        console.log('구매목록 : ',response.data)
+        const data = response.data.response;
+        setPurchaseData(data);
+      })
+      .catch(error => {
+        console.error("API 호출 중 오류 발생:", error);
+      });
+  }, [currentPage]);
 
   const onPageChange = pageNumber => {
     setCurrentPage(pageNumber);
   };
-
-  const buyCountState = totalBuyCount
 
   return (
     <div className={styles.buyListBox}>
       <div className={styles.buyCount}>
         <div className={styles.buyCount_txt}>구매 목록</div>
         <div className={styles.count}>
-          <div className={styles.buyCount_count}>총 구매한 목소리는 <span>{buyCountState}개</span> 입니다 </div>
+          <div className={styles.buyCount_count}>총 구매한 목소리는 <span>{totalAmount}개</span> 입니다 </div>
           <div className={styles.buyCount_count}>
             <NavLink to="/use-voice">사용하기 <IoIosArrowDown/></NavLink>
           </div>
@@ -84,6 +83,7 @@ function BuyListBox() {
           </tbody>
           <tfoot>
             <tr>
+              {/* 수정필요 제현 */}
               <td colSpan={6} className={styles.totalPrice}>
                 총 사용 금액 : {totalAmount}원
               </td>
@@ -92,14 +92,13 @@ function BuyListBox() {
             <tr className={styles.page}>
               <Pagination
                 itemsPerPage={itemsPerPage}
-                totalItems={totalBuyCount}
                 currentPage={currentPage}
                 onPageChange={onPageChange}
+                totalAmount={totalAmount}
               />
             </tr>
           </tfoot>
         </table>
-
       </div>
     </div>
   );
