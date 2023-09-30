@@ -60,7 +60,7 @@ function ProductDetailPage() {
           <button onClick={handleLikeClick}>
             {isLiked ? '좋아요 취소' : '좋아요'}
           </button>
-          <Purchase productId={productId} />
+          <Purchase productId={productId} price={productDetail.price} />
         </div>
       )}
     </div>

@@ -4,9 +4,10 @@ import { customAxios } from "../../libs/axios";
 
 interface PurchaseProps {
   productId: string;
+  price: number;
 }
 
-function Purchase({ productId }: PurchaseProps) {
+function Purchase({ productId, price }: PurchaseProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [buyLetterCount, setBuyLetterCount] = useState("");
   const [purposeId, setPurposeId] = useState("");
@@ -61,6 +62,7 @@ function Purchase({ productId }: PurchaseProps) {
               onChange={(e) => setPurposeId(e.target.value)}
             />
           </label>
+          <p>가격: {price} 원</p>
           <button onClick={handlePurchase}>구매하기</button>
           <button onClick={handleCloseModal}>닫기</button>
         </div>
