@@ -193,7 +193,8 @@ public class VoiceService {
             int i = 0;
             for (Record record : recordList) {
                 String key = (new URI(record.getRecordUrl())).getPath().substring(1);
-                addToZip(zipOut, String.valueOf(i++) + ".wav", s3Service.downloadWavFile(key));
+                addToZip(zipOut, "wavs/" + String.valueOf(i++) + ".wav",
+                        s3Service.downloadWavFile(key));
             }
             zipOut.close();
             return byteArrayOutputStream;
