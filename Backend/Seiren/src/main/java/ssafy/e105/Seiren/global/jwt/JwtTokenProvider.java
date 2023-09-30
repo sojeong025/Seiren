@@ -22,7 +22,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import ssafy.e105.Seiren.global.utils.ApiUtils;
 
 @Component
 @RequiredArgsConstructor
@@ -170,8 +169,7 @@ public class JwtTokenProvider {
                 response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
                 ObjectMapper objectMapper = new ObjectMapper();
-                String responseBody = objectMapper.writeValueAsString(
-                        ApiUtils.error("만료된 토큰입니다.", 0));
+                String responseBody = objectMapper.writeValueAsString("만료된 토큰입니다.");
 
                 response.getWriter().write(responseBody);
                 response.getWriter().flush();
