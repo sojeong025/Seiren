@@ -1,19 +1,20 @@
 .profileContainer {
-  /* border: 1px solid white; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative
+  position: relative;
 }
 
 .profileImage {
-  width: 120px;
+  width: 100px;
   border-radius: 100%;
-  cursor: pointer;
   margin-bottom: 20px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  
 }
 
 .nickName {
+  color: #000;
   font-size: 26px;
   font-weight: 700;
   line-height: 32px;
@@ -23,6 +24,7 @@
 
 .editIcon {
   position: absolute;
+  color: #000;
   bottom: 55px;
   right: 5px;
   width: 30px;

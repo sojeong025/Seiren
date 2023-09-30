@@ -5,7 +5,7 @@ import { customAxios } from "../../libs/axios";
 import styles from "./MyInfo.module.css";
 import avatar from "../../assets/preview.png";
 import Edit from "../MyProfile/EditProfile";
-import EditIcon from "../../assets/icon/edit.png";
+import { BiSolidEditAlt } from "react-icons/bi"
 
 function MyInfo() {
   const [userInfo, setUserInfo] = useRecoilState(UserState);
@@ -40,7 +40,7 @@ function MyInfo() {
             alt="Profile"
             onClick={handleImageClick}
           />
-          <img src={EditIcon} className={styles.editIcon} alt="Edit Icon" onClick={handleImageClick} />
+          <BiSolidEditAlt className={styles.editIcon} alt="Edit Icon" onClick={handleImageClick} />
           {isEditing && <Edit />}
         </div>
       </div>

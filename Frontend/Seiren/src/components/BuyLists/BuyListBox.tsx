@@ -1,29 +1,26 @@
 import { useState, useEffect } from "react";
 import styles from "./BuyListBox.module.css";
 import { customAxios } from "../../libs/axios";
-import { buyListState, buyCountState } from "../../recoil/UserAtom";
-import { useRecoilState } from "recoil";
 import { useParams } from "react-router-dom";
 import Pagination from "../common/Pagination";
 
 
 function BuyListBox() {
-  const [purchaseData, setPurchaseData] = useRecoilState(buyListState);
+  const [purchaseData, setPurchaseData] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [totalBuyCount, setTotalBuyCount] = useRecoilState(buyCountState);
+  const [totalBuyCount, setTotalBuyCount] = useState(0);
   const { page } = useParams();
   const [currentPage, setCurrentPage] = useState(page || 1); // 현재 페이지 상태 추가
   const itemsPerPage = 10;
 
   useEffect(() => {
-    customAxios
-      .get("transactions/receipt?page=0")
+    customAxios.get("transactions/receipt?page=0")
       .then(response => {
-        console.log(response.data)
+        console.log('구매목록 : ',response.data)
         const data = response.data.response;
         const numberOfItems = response.data.response.length;
         setTotalBuyCount(numberOfItems);
-        setPurchaseData(data); // Recoil 상태 업데이트
+        setPurchaseData(data);
 
         // 총 금액 계산
         const totalPurchasePrice = data.reduce((acc, item) => {
@@ -41,8 +38,13 @@ function BuyListBox() {
     setCurrentPage(pageNumber);
   };
 
+  const buyCountState = totalBuyCount
+
   return (
     <div className={styles.buyListBox}>
+      <div>
+        {buyCountState}
+      </div>
       <div className={styles.buyListText}>구매내역</div>
       <table className={styles.purchaseTable}>
         <thead>
