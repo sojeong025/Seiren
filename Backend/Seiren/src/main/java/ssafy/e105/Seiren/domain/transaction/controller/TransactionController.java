@@ -80,7 +80,7 @@ public class TransactionController {
         return ApiUtils.success(transactionService.getTransactionTotal(request));
     }
 
-    @Operation(description = "목소리 구 목록 영수증")
+    @Operation(description = "목소리 구매 목록 영수증")
     @GetMapping("/receipt")
     public ApiResult getTransactionProductReceipt(HttpServletRequest request,
             @RequestParam("page") int page) {
