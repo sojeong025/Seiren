@@ -19,6 +19,8 @@ public class ProductDetailDto {
     private String summary;
     @Schema(description = "판매자 닉네임", example = "재키")
     private String nickname;
+    @Schema(description = "상픔 가격", example = "10")
+    private Double price;
     @Schema(description = "상품 카테고리 목록", example = "딱딱한, 청년")
     private List<String> productCategoryList;
 
@@ -27,6 +29,7 @@ public class ProductDetailDto {
         this.productImageUrl = product.getProductImageUrl();
         this.summary = product.getSummary();
         this.nickname = voice.getUser().getNickname();
+        this.price = product.getPrice();
         this.productCategoryList = categoryList;
     }
 }
