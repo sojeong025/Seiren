@@ -21,4 +21,7 @@ public interface TransactionDescriptionRepository extends
 
     @Query("SELECT td FROM TransactionDescription td WHERE td.transaction.seller.id = :userId AND FUNCTION('MONTH', td.buyDate) = :month")
     List<TransactionDescription> findBySellerIdAndMonth(@Param("userId") Long userId, int month);
+
+    @Query("SELECT COUNT(td) FROM TransactionDescription td JOIN td.transaction t JOIN t.buyer u WHERE u.id = :userId")
+    int countTransactionDescriptionsByUserId(@Param("userId") Long userId);
 }

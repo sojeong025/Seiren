@@ -54,7 +54,7 @@ public class TransactionService {
             int page, int size) {
         User user = getUser(request);
 
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page - 1, size);
         List<Transaction> transactionPage = transactionRepository.findAllByBuyer(user.getId(),
                 pageable).getContent();
         // 상품 사진, 상품 타이틀 셋팅
@@ -153,7 +153,7 @@ public class TransactionService {
 
     public List<TransactionProductHistoryResponse> getTransactionProductHistory(Long transactionId,
             int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page - 1, size);
 
         Transaction transaction = transactionRepository.findById(transactionId)
                 .orElseThrow(() -> new BaseException(
@@ -173,13 +173,14 @@ public class TransactionService {
 
     public int getTransactionTotal(HttpServletRequest request) {
         User user = getUser(request);
-        return transactionRepository.findByBuyer(user.getId());
+//        return transactionRepository.findByBuyer(user.getId());
+        return transactionDescriptionRepository.countTransactionDescriptionsByUserId(user.getId());
     }
 
     public List<TransactionProductReceiptResponse> getTransactionProductReceipt(
             HttpServletRequest request, int page, int size) {
         User user = getUser(request);
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page - 1, size);
         List<TransactionDescription> transactionDescriptionList = transactionDescriptionRepository.findAllByTransaction(
                 user.getId(), pageable).getContent();
         /**
