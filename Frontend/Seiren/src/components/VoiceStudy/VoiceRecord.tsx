@@ -31,10 +31,8 @@ const VoiceRecord = () => {
       return source;
     }
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream: MediaStream) => {
-      var mediaRecorder = new MediaRecorder(stream);
+      var mediaRecorder = new MediaRecorder(stream, {audioBitsPerSecond: 22050});
       mediaRecorder.start();
-
-      var source = makeSound(stream);
 
       setStream(stream);
       setMedia(mediaRecorder);

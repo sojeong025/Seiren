@@ -49,6 +49,8 @@
   padding: 20px;
   line-height: 25px;
   border-radius: 10px;
+  height: 130px;
+  width: 100%;
 }
 .categories{
   display: flex;
@@ -66,7 +68,6 @@
   width: 70vw;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin-left: 30px;
 }
 .listen, .test{
@@ -77,12 +78,21 @@
   background-color: #fff;
   color: #000;
   border-radius: 20px;
+  margin-bottom: 20px;
 }
 .test{
   display: flex;
   height: 50vh;
 }
 .text_txt{
+  font-size: 20px;
+  font-weight: 900;
+}
+.test textarea{
+  resize: none;
+}
+.test textarea:focus{
+  outline: none;
 }
 
 .btn{

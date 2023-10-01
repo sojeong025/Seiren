@@ -4,12 +4,17 @@ import { customAxios } from '../../libs/axios';
 import { Link } from 'react-router-dom';
 import styles from './ProductDetailPage.module.css';
 import { BsHeartFill, BsHeart} from "react-icons/bs"
+import AWS, { AlexaForBusiness } from "aws-sdk";
+import axios from 'axios';
+
+
 
 
 function ProductDetailPage() {
   const { productId } = useParams();
   const [productDetail, setProductDetail] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
+  const [testText, setTestText] = useState("");
 
   const colors = ['#e9defa', '#d9afd9', '#abecd6']; 
 
@@ -50,6 +55,22 @@ function ProductDetailPage() {
     }
   };
 
+  const accessToken = localStorage.getItem("accessToken");
+  const marketProduct = async (text) => {
+    let response = await axios.get(`http://70.12.130.121:1470/synthesize3?voice_id=18&product_id=20&text=${text}`,{
+      responseType: 'blob',
+      headers: {
+        'Authorization' : `Bearer ${accessToken}`
+      }
+    });
+    console.log(response.data);
+
+    const blobUrl = URL.createObjectURL(response.data);
+
+    let audio = new Audio(blobUrl);
+    audio.play();
+  };
+
   return (
     <div className={styles.total}>
       <div className={styles.product}>
@@ -76,7 +97,6 @@ function ProductDetailPage() {
         )}
         <div className={styles.product_right}>
           <div className={styles.listen}>
-            <div>미리듣기</div>
               <div>들어볼 문장 1</div>
               <div>들어볼 문장 2</div>
               <div>들어볼 문장 3</div>
@@ -84,7 +104,11 @@ function ProductDetailPage() {
 
           <div className={styles.test}>
             <div className={styles.text_txt}>TEST</div>
-            <textarea name="test" id="test" cols="30" rows="10"></textarea>
+            <textarea name="test" id="test" cols="30" rows="10" 
+            value={testText}
+            onChange={(e) => setTestText(e.target.value)}
+            resize="none" placeholder='듣고 싶은 내용을 입력하고 재생 버튼을 클릭하세요.'></textarea>
+            <button onClick={() => marketProduct(testText)}>들어보기</button>
           </div>
 
           <div className={styles.btn}>
