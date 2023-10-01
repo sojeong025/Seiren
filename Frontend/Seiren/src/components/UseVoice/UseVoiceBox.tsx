@@ -64,7 +64,7 @@ function UseVoiceBox() {
           </Link>
         ))}
       </div>
-      <div>
+      <div className={styles.pagi}>
         <Pagination
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}
