@@ -24,7 +24,14 @@ function EditProfileModal() {
 
   // 중복 검사 이벤트 핸들러
   const handleCheckNickname = () => {
-    checkNicknameAvailability(newNickname);
+    if (newNickname === userInfo.nickname) {
+      // 닉네임이 변경되지 않은 경우 아무것도 표시하지 않음
+      setError(null);
+      setIsNicknameAvailable(true); // 현재 닉네임과 같은 경우에도 사용 가능으로 설정
+      setNicknameMessage("사용 가능한 닉네임입니다!");
+    } else {
+      checkNicknameAvailability(newNickname);
+    }
   };
 
   // 닉네임 중복 체크 함수
@@ -70,38 +77,49 @@ function EditProfileModal() {
     return true;
   };
 
-  // 폼 제출 함수
-  const handleSubmit = async () => {
-    setIsSubmitting(true);
-    setError(null);
+// 폼 제출 함수
+const handleSubmit = async () => {
+  setIsSubmitting(true);
+  setError(null);
 
-    try {
-      if (!validateNickname(newNickname)) return;
-      await checkNicknameAvailability(newNickname);
-      if (!isNicknameAvailable) {
-        setError("이미 사용 중인 닉네임입니다.");
-        return;
-      }
-      await customAxios.put("user/nicknames", { nickname: newNickname });
-      setUserInfo(prev => ({ ...prev, nickname: newNickname }));
+  if (isNicknameAvailable === null) {
+    setNicknameMessage("중복확인을 해주세요!");
+    setIsSubmitting(false); // 변경 시도를 중단
+    return;
+  }
 
-      // 성공적으로 제출되면 모달을 닫음
-      setModalIsOpen(false);
-    } catch (error) {
-      console.error("프로필 변경 중 오류 발생:", error);
-      setError("프로필 변경 중 오류 발생");
-    } finally {
-      setIsSubmitting(false);
+  try {
+    if (!validateNickname(newNickname)) {
+      setIsSubmitting(false); // 변경 시도를 중단
+      return;
     }
-  };
+    
+    if (!isNicknameAvailable) {
+      setError("이미 사용 중인 닉네임입니다.");
+      setIsSubmitting(false); // 변경 시도를 중단
+      return;
+    }
+
+    await customAxios.put("user/nicknames", { nickname: newNickname });
+    setUserInfo(prev => ({ ...prev, nickname: newNickname }));
+
+    // 성공적으로 제출되면 모달을 닫음
+    setModalIsOpen(false);
+  } catch (error) {
+    console.error("프로필 변경 중 오류 발생:", error);
+    setError("프로필 변경 중 오류 발생");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   // 모달 닫기 함수
   const handleCancel = () => {
     setModalIsOpen(false);
   };
 
-  const isSubmitEnabled = isNicknameAvailable === true;
-
+  const isSubmitEnabled = isNicknameAvailable === true || newNickname === userInfo.nickname;
 
   return (
     <MyModal
@@ -132,13 +150,9 @@ function EditProfileModal() {
             </button>
           </div>
           <div className={styles.buttons}>
-          <button
-            onClick={handleSubmit}
-            disabled={!isSubmitEnabled}
-            className={styles.submitButton}
-          >
-            {isSubmitting ? "변경중.." : "변경"}
-          </button>
+            <button onClick={handleSubmit} disabled={!isSubmitEnabled} className={styles.submitButton}>
+              {isSubmitting ? "변경중.." : "변경"}
+            </button>
             <button
               onClick={handleCancel}
               disabled={isSubmitting}
