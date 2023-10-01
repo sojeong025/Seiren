@@ -26,35 +26,12 @@ function BuyListBox() {
       });
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let totalPrice = 0;
-      for (let i = 1; i <= Math.ceil(totalAmount / itemsPerPage); i++) {
-        try {
-          const response = await customAxios.get(`transactions/receipt?page=${i}`);
-          const data = response.data.response;
   
-          // data 배열에서 price * buyLetterCount 값을 모두 더한 값을 계산
-          data.forEach(item => {
-            totalPrice += item.price * item.buyLetterCount;
-          });
-
-        } catch (error) {
-          console.error("API 호출 중 오류 발생:", error);
-        }
-      }
-      setTotalPrice(totalPrice);
-    };
   
-    fetchData();
-  }, [itemsPerPage]);
-  
-
   useEffect(() => {
     customAxios
-      .get(`transactions/receipt?page=${currentPage}`)
-      .then(response => {
-        console.log("구매목록 : ", response.data);
+    .get(`transactions/receipt?page=${currentPage}`)
+    .then(response => {
         const data = response.data.response;
         setPurchaseData(data);
       })
@@ -62,11 +39,32 @@ function BuyListBox() {
         console.error("API 호출 중 오류 발생:", error);
       });
   }, [currentPage]);
-
+  
   const onPageChange = pageNumber => {
     setCurrentPage(pageNumber);
   };
-
+  
+  useEffect(() => {
+    let totalPrice = 0;
+    for (let i = 1; i <= Math.ceil(totalAmount / itemsPerPage); i++) {
+      customAxios
+        .get(`transactions/receipt?page=${i}`)
+        .then(response => {
+          const data = response.data.response;
+          data.forEach(item => {
+            totalPrice += item.price * item.buyLetterCount;
+          });
+  
+          // totalPrice를 상태로 설정
+          setTotalPrice(totalPrice);
+        })
+        .catch(error => {
+          console.error("API 호출 중 오류 발생:", error);
+        });
+    }
+  }, [totalAmount, itemsPerPage]);
+  
+  
   return (
     <div className={styles.buyListBox}>
       <div className={styles.buyCount}>
