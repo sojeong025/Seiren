@@ -230,6 +230,13 @@ public class TransactionService {
         return new ProductAvailabilityDto(useAbleCount, useUnableCount);
     }
 
+    public int getRemainLetters(HttpServletRequest request, Long productId) {
+        Transaction transaction = transactionRepository.findByBuyerAndProduct(
+                getUser(request).getId(), productId).orElseThrow(() -> new BaseException(
+                new ApiError(NOT_EXIST_TRANSACTION.getMessage(), NOT_EXIST_TRANSACTION.getCode())));
+        return transaction.getRestCount();
+    }
+
     public User getUser(HttpServletRequest request) {
         return userRepository.findByEmail(
                         jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request)))
