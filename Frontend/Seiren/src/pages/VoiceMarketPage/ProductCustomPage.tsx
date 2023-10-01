@@ -10,6 +10,12 @@ import { BiSolidCheckSquare } from 'react-icons/bi'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import { LiaRandomSolid } from 'react-icons/lia'
 import axios from 'axios';
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+
+interface GetData{
+  id:number;
+  name:string;
+}
 
 function Section({ children, title }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,15 +45,16 @@ function Section({ children, title }) {
 
 function ProductCustomPage(){
   const navigate = useNavigate();
+
+  // maxLength
+  const mL = Number(20);
+
   // const voiceId = useRecoilValue(VoiceIdState)
   const voiceId = 18
   const [title, setTitle] = useState();
   const [summary, setSummary] = useState();
   const [productImg, setProductImg] = useState("");
   const [price, setPrice] = useState();
-  const [gender, setGender] = useState("");
-  const [ageGroup, setAgeGroup] = useState("");
-  const [mood, setMood] = useState("");
     
   // 3가지 미리듣기
   const [text1, setText1] = useState("");
@@ -56,6 +63,38 @@ function ProductCustomPage(){
   const [text1Length, setText1Length] = useState(0);
   const [text2Length, setText2Length] = useState(0);
   const [text3Length, setText3Length] = useState(0);
+
+  // 카테고리
+  const [gender, setGender] = useState<GetData[]>([]);
+  const [age, setAge] = useState<GetData[]>([]);
+  const [mood, setMood] = useState<GetData[]>([]);
+
+  const [selectGender, setSelectGender] = useState<string|number>('');
+  const [selectAge, setSelectAge] = useState<string|number>('');
+  const [selectMood, setSelectMood] = useState<string|number>('');
+
+  const handleChangeGender = (event: SelectChangeEvent) => {
+    const target = event.target as HTMLInputElement;
+    setSelectGender(target.value);
+  };
+  const handleChangeAge = (event: SelectChangeEvent) =>{
+    const target = event.target as HTMLInputElement;
+    setSelectAge(target.value);
+  }
+  const handleChangeMood = (event: SelectChangeEvent) =>{
+    const target = event.target as HTMLInputElement;
+    setSelectMood(target.value);
+  }
+
+  useEffect(()=>{
+    customAxios.get("categories")
+    .then((res)=>{
+      console.log(res.data.response[0].children[0]);
+      setGender(res.data.response[0].children[0].children);
+      setAge(res.data.response[0].children[1].children);
+      setMood(res.data.response[0].children[2].children);
+    })
+  },[])
 
   const generateRandomAvatar = () => {
     const randomEyebrows = Math.floor(Math.random() * 15) + 1; // 눈썹
@@ -219,23 +258,60 @@ function ProductCustomPage(){
               <div className={styles.section3}>
                   <div className={styles.gender}>
                     <div className={styles.category}>성별</div>
-                    <input className={styles.radio} type="radio" name="gender" value="5" onChange={(e) => setGender(e.target.value)} /> 남
-                    <input className={styles.radio} type="radio" name="gender" value="6" onChange={(e) => setGender(e.target.value)} /> 여
+                    <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">Gender</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          value={selectGender}
+          onChange={handleChangeGender}
+          label="gender"
+        >
+          {
+            gender && gender.map((data, i)=>
+            <MenuItem key={i}  value={data.id}>{data.name}</MenuItem>
+            )
+          }
+        </Select>
+      </FormControl>
                   </div>
                   <div className={styles.age}>
                     <div className={styles.category}>연령대</div>
-                    <input className={styles.radio} type="radio" name="ageGroup" value="7" onChange={(e) => setAgeGroup(e.target.value)} /> 유아
-                    <input className={styles.radio} type="radio" name="ageGroup" value="8" onChange={(e) => setAgeGroup(e.target.value)} /> 청소년
-                    <input className={styles.radio} type="radio" name="ageGroup" value="9" onChange={(e) => setAgeGroup(e.target.value)} /> 청년
-                    <input className={styles.radio} type="radio" name="ageGroup" value="10" onChange={(e) => setAgeGroup(e.target.value)} /> 중년
-                    <input className={styles.radio} type="radio" name="ageGroup" value="11" onChange={(e) => setAgeGroup(e.target.value)} /> 노인
+                    <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          value={selectAge}
+          onChange={handleChangeAge}
+          label="age"
+        >
+          {
+            age && age.map((data, i)=>
+            <MenuItem key={i} value={data.id}>{data.name}</MenuItem>
+            )
+          }
+        </Select>
+      </FormControl>
                   </div>
                   <div className={styles.mood}>
                     <div className={styles.category}>분위기</div>
-                    <input className={styles.radio} type="radio" name="mood" value="12" onChange={(e) => setMood(e.target.value)} /> 따뜻
-                    <input className={styles.radio} type="radio" name="mood" value="13" onChange={(e) => setMood(e.target.value)} /> 활발
-                    <input className={styles.radio} type="radio" name="mood" value="14" onChange={(e) => setMood(e.target.value)} /> 무뚝뚝
-                    <input className={styles.radio} type="radio" name="mood" value="15" onChange={(e) => setMood(e.target.value)} /> 우울
+                    <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">Mood</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          value={selectMood}
+          onChange={handleChangeMood}
+          label="mood"
+        >
+          {
+            mood && mood.map((data, i)=>
+            <MenuItem key={i} value={data.id}>{data.name}</MenuItem>
+            )
+          }
+        </Select>
+      </FormControl>
                   </div>
               </div>
             </Section>
@@ -244,15 +320,15 @@ function ProductCustomPage(){
               <div className={styles.section4}>
                 <div className={styles.input}>
                   문장 1 : <input type='text' value ={text1} className={styles.input4}
-                        onChange={handleText1Change} maxLength="20" /><span className={styles.smallText}>{`${text1Length}/20자`}</span>
+                        onChange={handleText1Change} maxLength={mL} /><span className={styles.smallText}>{`${text1Length}/20자`}</span>
                 </div>
                 <div className={styles.input}>
                   문장 2 : <input  type='text' value ={text2} className={styles.input4}
-                        onChange={handleText2Change} maxLength="20" /><span className={styles.smallText}>{`${text2Length}/20자`}</span>
+                        onChange={handleText2Change} maxLength={mL} /><span className={styles.smallText}>{`${text2Length}/20자`}</span>
                 </div>
                 <div className={styles.input}>
                   문장 3 : <input type='text' value ={text3} className={styles.input4}
-                  onChange={handleText3Change} maxLength="20" /><span className={styles.smallText}>{`${text3Length}/20자`}</span>
+                  onChange={handleText3Change} maxLength={mL} /><span className={styles.smallText}>{`${text3Length}/20자`}</span>
                 </div>
               </div>
             </Section>
