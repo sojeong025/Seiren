@@ -31,14 +31,14 @@ public class TransactionController {
 
     private final TransactionService transactionService;
 
-    @Operation(description = "거래 상품 목록 리스트")
+    @Operation(summary = "거래 상품 목록 리스트")
     @GetMapping()
     public ApiResult getTransactionProductList(HttpServletRequest request,
             @RequestParam("page") int page) {
         return ApiUtils.success(transactionService.getTransactionProductList(request, page, 10));
     }
 
-    @Operation(description = "거래 상품 상세 정보")
+    @Operation(summary = "거래 상품 상세 정보")
     @GetMapping("/detail/{productid}")
     public ApiResult getTransactionProductDetail(
             HttpServletRequest request,
@@ -46,7 +46,7 @@ public class TransactionController {
         return ApiUtils.success(transactionService.getTransactionProductDetail(request, productId));
     }
 
-    @Operation(description = "TTS 글자수 체크")
+    @Operation(summary = "TTS 글자수 체크")
     @GetMapping("/check")
     public ApiResult checkRegistTTS(
             @RequestParam("transactionid") Long transactionId,
@@ -55,7 +55,7 @@ public class TransactionController {
                 transactionService.checkRegistTTS(transactionId, text));
     }
 
-    @Operation(description = "TTS 등록")
+    @Operation(summary = "TTS 등록")
     @PostMapping(value = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResult registTTS(
             @RequestParam("transactionid") Long transactionId,
@@ -66,7 +66,7 @@ public class TransactionController {
                 transactionService.registTTS(transactionId, text, file));
     }
 
-    @Operation(description = "구매 상품 사용 기록 리스트")
+    @Operation(summary = "구매 상품 사용 기록 리스트")
     @GetMapping("/history")
     public ApiResult getTransactionProductHistroy(@RequestParam("transactionid") Long transactionId,
             @RequestParam("page") int page) {
@@ -74,16 +74,29 @@ public class TransactionController {
                 transactionService.getTransactionProductHistory(transactionId, page, 10));
     }
 
-    @Operation(description = "총 구매 목소리 갯수")
+    @Operation(summary = "총 구매 목소리 갯수")
     @GetMapping("/totalcount")
     public ApiResult getTransactionTotal(HttpServletRequest request) {
         return ApiUtils.success(transactionService.getTransactionTotal(request));
     }
 
-    @Operation(description = "목소리 구매 목록 영수증")
+    @Operation(summary = "목소리 구매 목록 영수증")
     @GetMapping("/receipt")
     public ApiResult getTransactionProductReceipt(HttpServletRequest request,
             @RequestParam("page") int page) {
         return ApiUtils.success(transactionService.getTransactionProductReceipt(request, page, 10));
     }
+
+    @Operation(summary = "총 결제 내역 갯수")
+    @GetMapping("/description/totalcount")
+    public ApiResult getTransactionDescriptions(HttpServletRequest request) {
+        return ApiUtils.success(transactionService.getTransactionDescriptions(request));
+    }
+
+    @Operation(summary = "사용 가능 / 불가능 상품 개수")
+    @GetMapping("/availability")
+    public ApiResult getProductAvailability(HttpServletRequest request) {
+        return ApiUtils.success(transactionService.getProductAvailability(request));
+    }
+
 }
