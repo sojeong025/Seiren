@@ -39,7 +39,8 @@ function Section({ children, title }) {
 
 function ProductCustomPage(){
   const navigate = useNavigate();
-  const voiceId = useRecoilValue(VoiceIdState)
+  // const voiceId = useRecoilValue(VoiceIdState)
+  const voiceId = 18
   const [title, setTitle] = useState();
   const [summary, setSummary] = useState();
   const [productImg, setProductImg] = useState("");
@@ -129,30 +130,43 @@ function ProductCustomPage(){
 
 
   const marketProduct = async () => {
-    const categoryList=[gender, ageGroup, mood];
     console.log("하이");
+    AWS.config.update({
+      region: import.meta.env.VITE_PUBLIC_REGION,
+      accessKeyId: import.meta.env.VITE_PUBLIC_ACCESSKEY,
+      secretAccessKey: import.meta.env.VITE_PUBLIC_SECRETKEY,
+    });
+  
+    // 첫 번째 문장
+    let response1 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=18&text=${text1}`, {responseType: 'blob'});
+    await uploadFile(response1.data, text1);
+  
+    // 두 번째 문장
+    let response2 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=18&text=${text2}`, {responseType: 'blob'});
+    await uploadFile(response2.data, text2);
+  
+    // 세 번째 문장
+    let response3 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=18&text=${text3}`, {responseType: 'blob'});
+    await uploadFile(response3.data, text3);
+  };
+  
+    const uploadFile = async (data, text) => {
+    const file = new Blob([data], {type: 'audio/wav'});
 
-    const previews = await Promise.all([text1, text2, text3].map((text) => {
-    // 수정 필요
-    axios.get(`http://70.12.130.121:1470/synthesize?voice_id=18&transaction_id=202&text=${text}`)
-    .then((response)=>{
-      const file = response.blob();
-  
-      const upload = new AWS.S3.ManagedUpload({
-        params: {
-          Bucket: import.meta.env.VITE_PUBLIC_BUCKET,
-          Key: "testTrack/" + Date.now(),
-          Body: file,
-        },
-      });
-  
-      const data = upload.promise();
-      console.log(data.Location);
-      return { text:text, url: data.Location };
-    })
-  }));
-  
+    const upload = new AWS.S3.ManagedUpload({
+      params: {
+        Bucket: import.meta.env.VITE_PUBLIC_BUCKET,
+        Key: `preview/${voiceId}-${Date.now()}.wav`,
+        Body: file,
+        ContentType: 'audio/wav'
+      },
+    });
 
+    const result = await upload.promise();
+    console.log(result.Location);
+    return { text:text, url:result.Location };
+    
+    // const categoryList=[gender, ageGroup, mood];
     // const productData = {
     //   voiceId: voiceId,
     //   productTitle: title,
@@ -173,6 +187,7 @@ function ProductCustomPage(){
     //   })
     //   .catch((err) => console.log(err))
     };
+
 
   return(
     <div className={styles.total}>
