@@ -18,11 +18,14 @@ import java.util.zip.ZipOutputStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ssafy.e105.Seiren.domain.transaction.dto.ProductAvailabilityDto;
+import ssafy.e105.Seiren.domain.transaction.entity.Transaction;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.service.UserService;
 import ssafy.e105.Seiren.domain.voice.dto.VoiceDto;
 import ssafy.e105.Seiren.domain.voice.dto.VoiceInsertUpdateDto;
 import ssafy.e105.Seiren.domain.voice.dto.VoiceMemoUpdateRequest;
+import ssafy.e105.Seiren.domain.voice.dto.VoiceStateDto;
 import ssafy.e105.Seiren.domain.voice.entity.Record;
 import ssafy.e105.Seiren.domain.voice.entity.Voice;
 import ssafy.e105.Seiren.domain.voice.repository.VoiceRepository;
@@ -233,5 +236,18 @@ public class VoiceService {
         }
     }
 
-
+    public VoiceStateDto getContAboutVoiceState(HttpServletRequest request) {
+        User user = userService.getUser(request);
+        List<Voice> voiceList = voiceRepository.findByUserId(user.getId());
+        int oneOrLessCount = 0;
+        int twoOrMoreCount = 0;
+        for (Voice voice : voiceList) {
+            if (voice.getState() < 2) {
+                oneOrLessCount++;
+                continue;
+            }
+            twoOrMoreCount++;
+        }
+        return new VoiceStateDto(oneOrLessCount, twoOrMoreCount);
+    }
 }

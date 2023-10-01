@@ -22,4 +22,7 @@ public interface VoiceRepository extends JpaRepository<Voice, Long> {
     List<Voice> findByUser_IdAndStateLessThanOrderByCreatedAtDesc(Long userId, int state);
 
     List<Voice> findByUserIdAndStateGreaterThanEqual(Long userId, int state);
+
+    @Query("SELECT v FROM Voice v WHERE v.user.id = :userId")
+    List<Voice> findByUserId(@Param("userId") Long userId);
 }
