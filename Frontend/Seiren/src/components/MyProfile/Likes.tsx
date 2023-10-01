@@ -23,7 +23,7 @@ function Likes() {
 
   return (
     <div className={styles.LikesContainer}>
-      <div className={styles.likesText}>좋아요 누른 목소리</div>
+      <div className={styles.likesText}>관심 있는 목소리</div>
       <div className={styles.likesItems}>
         {wishList.map(item => (
           <div key={item.productId} className={styles.item}>

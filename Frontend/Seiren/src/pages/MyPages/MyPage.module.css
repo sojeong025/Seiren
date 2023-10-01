@@ -11,13 +11,13 @@
   display: flex;
   justify-content: space-between;
 }
-.hi{
+.hi, .my{
   display: flex;
   flex-direction: column;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   border-radius: 20px;
   background-color: #fff;
-  width: 35vw;
+  width: 23vw;
   height: 200px;
   padding: 30px 50px;
 }
@@ -33,6 +33,25 @@
   font-size: 16px;
   line-height: 25px;
   padding-top: 10px;
+}
+.my{
+  text-align: center;
+}
+.my_txt{
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+.my_state{
+  display: flex;
+  justify-content: center;
+}
+.my_state hr{
+  height: 60px;
+}
+.my_state span{
+  padding-top: 30px;
+  font-size: 24px;
 }
 .myPageBox {
   display: block;
