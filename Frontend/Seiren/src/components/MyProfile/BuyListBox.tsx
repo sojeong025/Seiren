@@ -17,7 +17,7 @@ function BuyListBox() {
 
   useEffect(() => {
     customAxios
-      .get(`transactions/totalcount`)
+      .get(`transactions/description/totalcount`)
       .then(response => {
         setTotalAmount(response.data.response);
       })
