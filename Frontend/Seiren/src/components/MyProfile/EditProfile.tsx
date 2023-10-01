@@ -47,8 +47,8 @@ function EditProfileModal() {
         }
       }
     } catch (error) {
-      console.error("닉네임 중복 검사 중 오류 발생:", error);
-      setError("닉네임 중복 검사 중 오류 발생");
+      console.error("이미 사용 중인 닉네임 입니다.:", error);
+      setError("이미 사용 중인 닉네임 입니다.");
     }
   };
 
@@ -83,7 +83,7 @@ function EditProfileModal() {
         return;
       }
       await customAxios.put("user/nicknames", { nickname: newNickname });
-      setUserInfo((prev) => ({ ...prev, nickname: newNickname }));
+      setUserInfo(prev => ({ ...prev, nickname: newNickname }));
 
       // 성공적으로 제출되면 모달을 닫음
       setModalIsOpen(false);
@@ -105,29 +105,42 @@ function EditProfileModal() {
       content={
         <div className={styles.modalContainer}>
           <h2 className={styles.modalTitle}>프로필 수정</h2>
-          <EditImage/>
-          {error && <div className={styles.error}>{error}</div>}
-          {nicknameMessage && <div className={styles.message}>{nicknameMessage}</div>}
+          <EditImage />
+          <div className={styles.nickText}>닉네임 수정</div>
           <div className={styles.formGroup}>
-            <label htmlFor="newNickname">New Nickname:</label>
+            {error && <div className={styles.error}>{error}</div>}
+            {nicknameMessage && <div className={styles.message}>{nicknameMessage}</div>}
+            <label htmlFor="newNickname">새로운 닉네임 : </label>
             <input
               type="text"
               id="newNickname"
               value={newNickname}
               onChange={handleNicknameChange}
-              onBlur={(e) => checkNicknameAvailability(e.target.value)}
+              onBlur={e => checkNicknameAvailability(e.target.value)}
               disabled={isSubmitting}
-              className={styles.inputField}
+              className={styles.inputField} // CSS 모듈에서 정의한 클래스를 사용
             />
-            <button onClick={handleCheckNickname} disabled={isSubmitting} className={styles.checkButton}>
+            <button
+              onClick={handleCheckNickname}
+              disabled={isSubmitting}
+              className={styles.checkButton} // CSS 모듈에서 정의한 클래스를 사용
+            >
               중복 확인
             </button>
           </div>
           <div className={styles.buttons}>
-            <button onClick={handleSubmit} disabled={isSubmitting || isNicknameAvailable === false} className={styles.submitButton}>
+            <button
+              onClick={handleSubmit}
+              disabled={isSubmitting || isNicknameAvailable === false}
+              className={styles.submitButton} // CSS 모듈에서 정의한 클래스를 사용
+            >
               {isSubmitting ? "변경중.." : "변경"}
             </button>
-            <button onClick={handleCancel} disabled={isSubmitting} className={styles.cancelButton}>
+            <button
+              onClick={handleCancel}
+              disabled={isSubmitting}
+              className={styles.cancelButton} // CSS 모듈에서 정의한 클래스를 사용
+            >
               취소
             </button>
           </div>
