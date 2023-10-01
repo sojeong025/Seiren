@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { myVoiceState } from "../../recoil/UserAtom";
 import { customAxios } from "../../libs/axios";
@@ -7,6 +7,14 @@ import { Link } from "react-router-dom";
 
 function YourVoice() {
   const [myVoice, setMyVoice] = useRecoilState(myVoiceState);
+  const [nickname, setNickname] = useState("");
+
+  useEffect(() => {
+    customAxios.get("user")
+      .then(response => {
+        setNickname(response.data.response.nickname)
+      })
+  }, []);
 
   useEffect(() => {
     customAxios
@@ -23,7 +31,7 @@ function YourVoice() {
   console.log(myVoice);
   return (
     <div className={styles.YourVoiceContainer}>
-      <div className={styles.YourVoiceText}>마이 AI 목소리</div>
+      <div className={styles.YourVoiceText}>{nickname}님의 목소리</div>
       <div className={styles.VoiceItems}>
         <ul>
           {myVoice.map(item => (
