@@ -13,6 +13,7 @@ import AboutPage from "./pages/AboutPage";
 import VoiceMarketPage from "./pages/VoiceMarketPage/VoiceMarketPage";
 import ProductDetailPage from "./pages/VoiceMarketPage/ProductDetailPage";
 import ProductCustomPage from "./pages/VoiceMarketPage/ProductCustomPage";
+import PurchasePage from "./pages/VoiceMarketPage/PurchasePage";
 
 // 목소리 학습 페이지
 import VoiceStudyPage from "./pages/VoiceStudyPages/VoiceStudyPage";
@@ -63,6 +64,7 @@ function RoutesComponent({ isNavBarVisible, setIsNavBarVisible }) {
           <Route path="/voice-market" element={<VoiceMarketPage />} />
           <Route path="/product/:productId" element={<ProductDetailPage />} />
           <Route path="/product-custom" element={<ProductCustomPage />} />
+          <Route path="/purchase" element={<PurchasePage />} />
 
           {/* 목소리 등록 페이지 */}
           <Route path="/voice-study" element={<VoiceStudyPage />} />

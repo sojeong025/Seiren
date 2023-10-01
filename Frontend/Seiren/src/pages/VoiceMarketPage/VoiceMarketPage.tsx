@@ -4,11 +4,12 @@ import Filter from "../../components/VoiceMarket/Filter";
 import styles from "./VoiceMarketPage.module.css"
 import { Link } from 'react-router-dom';
 import { customAxios } from "../../libs/axios";
+import { BsHeartFill, BsHeart} from "react-icons/bs"
 
 interface Product {
   nickname:string;
   price:number;
-  categoryList: ProductCategory[];
+  productCategoryList: ProductCategory[];
   productId:number;
   productImageUrl:string;
   summary:string;
@@ -22,14 +23,24 @@ interface ProductCategory{
 
 function ProductCard({ product }: { product : Product }) {
   return (
-    <Link to={`/product/${product.productId}`} className={styles.card}>
-      <img src={product.productImageUrl} alt="Avatar"/>
-      <h3>{product.title}</h3>
-      <p>{product.nickname}</p>
-      {product.categoryList && product.categoryList.map((category, index) => (
-        <p key={index}>{category.categoryName}</p>
-      ))}
-    </Link>
+    <div className={styles.card}>
+      <div className={styles.left}>
+        <img className={styles.card_img} src={product.productImageUrl} alt="Avatar"/>
+      </div>
+      <div className={styles.mid}>
+        <div className={styles.card_title}>{product.title}</div>
+
+        {product.productCategoryList && product.productCategoryList.map((category, index) => (
+          <div className={styles.card_category} key={index}> #{category.categoryName}</div>
+          ))}
+          
+        <div className={styles.card_nickname}>{product.nickname}</div>
+      </div>
+      <div className={styles.right}>
+        {/* <div className={styles.wish}>{product.wish? <BsHeartFill/> : <BsHeart />}</div> */}
+        <Link to={`/product/${product.productId}`} className={styles.detail}> 들어보기 </Link>
+      </div>
+    </div>
   );
 }
 
