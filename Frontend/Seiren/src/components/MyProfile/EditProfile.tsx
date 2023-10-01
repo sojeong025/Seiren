@@ -100,6 +100,9 @@ function EditProfileModal() {
     setModalIsOpen(false);
   };
 
+  const isSubmitEnabled = isNicknameAvailable === true;
+
+
   return (
     <MyModal
       content={
@@ -129,13 +132,13 @@ function EditProfileModal() {
             </button>
           </div>
           <div className={styles.buttons}>
-            <button
-              onClick={handleSubmit}
-              disabled={isSubmitting || isNicknameAvailable === false}
-              className={styles.submitButton} // CSS 모듈에서 정의한 클래스를 사용
-            >
-              {isSubmitting ? "변경중.." : "변경"}
-            </button>
+          <button
+            onClick={handleSubmit}
+            disabled={!isSubmitEnabled}
+            className={styles.submitButton}
+          >
+            {isSubmitting ? "변경중.." : "변경"}
+          </button>
             <button
               onClick={handleCancel}
               disabled={isSubmitting}

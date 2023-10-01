@@ -1,26 +1,40 @@
 import React from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles"; // ThemeProvider 추가
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import styles from "./Pagination.module.css";
 
-function Pagination({ itemsPerPage, currentPage, onPageChange, totalAmount }) {
-  const pageNumbers = [];
+// 새로운 테마 생성
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#ccc", // 원하는 회색 색상 코드로 변경
+    },
+  },
+});
 
-  for (let i = 1; i <= Math.ceil(totalAmount / itemsPerPage); i++) {
-    pageNumbers.push(i);
-  }
+function MyPagination({ itemsPerPage, currentPage, onPageChange, totalAmount }) {
+  const pageCount = Math.ceil(totalAmount / itemsPerPage);
+
+  const handleChange = (event, value) => {
+    onPageChange(value);
+  };
 
   return (
-    <nav>
-      <ul className={styles.pagination}>
-        {pageNumbers.map(number => (
-          <li key={number} className={`page-item ${currentPage === number ? styles.active : ""}`}>
-            <a onClick={() => onPageChange(number)} href="#!" className={`page-link ${styles.pageLink}`}>
-              {number}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <ThemeProvider theme={theme}> {/* ThemeProvider 추가 */}
+      <Stack spacing={2} direction="row" justifyContent="center">
+        <Pagination
+          count={pageCount}
+          page={currentPage}
+          onChange={handleChange}
+          size="large"
+          shape="rounded"
+          color="primary"
+          classes={{ ul: styles.pagination }}
+        />
+      </Stack>
+    </ThemeProvider>
   );
 }
 
-export default Pagination;
+export default MyPagination;
