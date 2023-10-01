@@ -1,0 +1,28 @@
+.customFileLabel {
+    background-color: black;
+    color: #fff;
+    border-radius: 5px; 
+    padding: 5px 10px; 
+    cursor: pointer;
+    margin: 4px;
+    font-weight: bold;
+  }
+  
+  .hiddenFileInput {
+    display: none;
+  }
+  .preimg{
+    width: 130px;
+    height: 130px;
+    margin: 20px;
+  }
+  .button {
+    background-color: #2DB400;
+    color: #fff;
+    border: 1px solid #2DB400;
+    border-radius: 5px; 
+    padding: 5px 10px; 
+    cursor: pointer;
+    margin: 4px;
+    font-weight: bold;
+  }
