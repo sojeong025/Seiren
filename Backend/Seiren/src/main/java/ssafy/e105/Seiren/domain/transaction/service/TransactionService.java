@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.entity.ProductCategory;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
+import ssafy.e105.Seiren.domain.transaction.dto.ProductAvailabilityDto;
 import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductDetailResponse;
 import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductHistoryResponse;
 import ssafy.e105.Seiren.domain.transaction.dto.TransactionProductReceiptResponse;
@@ -173,8 +174,7 @@ public class TransactionService {
 
     public int getTransactionTotal(HttpServletRequest request) {
         User user = getUser(request);
-//        return transactionRepository.findByBuyer(user.getId());
-        return transactionDescriptionRepository.countTransactionDescriptionsByUserId(user.getId());
+        return transactionRepository.findByBuyer(user.getId());
     }
 
     public List<TransactionProductReceiptResponse> getTransactionProductReceipt(
@@ -210,6 +210,25 @@ public class TransactionService {
         return transactionProductReceiptResponseList;
     }
 
+    public int getTransactionDescriptions(HttpServletRequest request) {
+        User user = getUser(request);
+        return transactionDescriptionRepository.countTransactionDescriptionsByUserId(user.getId());
+    }
+
+    public ProductAvailabilityDto getProductAvailability(HttpServletRequest request) {
+        int useAbleCount = 0;
+        int useUnableCount = 0;
+        User user = getUser(request);
+        List<Transaction> transactionList = transactionRepository.findAllByBuyer(user.getId());
+        for (Transaction transaction : transactionList) {
+            if (transaction.getRestCount() > 0) {
+                useAbleCount++;
+                continue;
+            }
+            useUnableCount++;
+        }
+        return new ProductAvailabilityDto(useAbleCount, useUnableCount);
+    }
 
     public User getUser(HttpServletRequest request) {
         return userRepository.findByEmail(
@@ -217,6 +236,4 @@ public class TransactionService {
                 .orElseThrow(() -> new BaseException(
                         new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode())));
     }
-
-
 }

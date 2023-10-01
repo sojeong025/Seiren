@@ -35,4 +35,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     @Query("SELECT DISTINCT t.id FROM Transaction t WHERE t.seller.id = :userId AND t.product.productId = :productId")
     List<Long> findBySellerAndProductId(@Param("userId") Long userId,
             @Param("productId") Long productId);
+
+    @Query(value = "SELECT t FROM Transaction t WHERE t.buyer.id = :userId")
+    List<Transaction> findAllByBuyer(@Param("userId") Long userId);
 }
