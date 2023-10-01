@@ -8,8 +8,22 @@ import Pagination from "../common/Pagination"; // Pagination 컴포넌트 추가
 function UseVoiceBox() {
   const [useVoiceList, setUseVoiceList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 추가
-  const itemsPerPage = 12;
-  const totalAmount = 50;
+  const [ableCount, setAbleCount] = useState();
+  const [unableCount, setUnableCount] = useState();
+  const itemsPerPage = 10;
+
+  useEffect(() => {
+    customAxios
+      .get(`transactions/availability`)
+      .then(response => {
+        const able = response.data.response.useAbleCount;
+        const unable = response.data.response.useUnableCount;
+        console.log(able);
+        setAbleCount(able);
+        setUnableCount(unable);
+      })
+      .catch(error => console.error("API 호출 중 오류 발생:", error));
+  }, []);
 
   useEffect(() => {
     customAxios
@@ -27,7 +41,15 @@ function UseVoiceBox() {
 
   return (
     <div className={styles.UseVoiceContainer}>
-      <div className={styles.textBox}>VoiceBox</div>
+      <div className={styles.useCount}>
+        <div className={styles.useCount_txt}>VoiceBox</div>
+        <div className={styles.count}>
+          <div className={styles.useCount_count}>
+            사용가능한 목소리는 <span>{ableCount}개</span> 입니다{" "}
+          </div>
+        </div>
+      </div>
+
       <div className={styles.voiceItems}>
         {useVoiceList.map(item => (
           <Link to={`/voice-detail/${item.productId}`} key={item.productId}>
@@ -43,12 +65,12 @@ function UseVoiceBox() {
         ))}
       </div>
       <div>
-      <Pagination
-        itemsPerPage={itemsPerPage}
-        currentPage={currentPage}
-        onPageChange={onPageChange}
-        totalAmount={totalAmount}
-      />
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+          totalAmount={ableCount}
+        />
       </div>
     </div>
   );
