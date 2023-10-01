@@ -1,30 +1,50 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { UserState } from "../../recoil/UserAtom";
 import { customAxios } from "../../libs/axios";
 import styles from "./EditProfile.module.css";
 import MyModal from "../common/MyModal";
+import EditImage from "../MyProfile/EditImage";
 
 function EditProfileModal() {
+  // Recoil 상태 및 초기값 설정
   const [userInfo, setUserInfo] = useRecoilState(UserState);
+
+  // 폼 관련 상태
   const [newNickname, setNewNickname] = useState(userInfo.nickname);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isNicknameAvailable, setIsNicknameAvailable] = useState<boolean | null>(null);
+
+  // 모달 상태
   const [modalIsOpen, setModalIsOpen] = useState(true);
 
-  // 닉네임 중복 체크
+  // 사용 가능한 닉네임 메시지
+  const [nicknameMessage, setNicknameMessage] = useState<string | null>(null);
+
+  // 중복 검사 이벤트 핸들러
+  const handleCheckNickname = () => {
+    checkNicknameAvailability(newNickname);
+  };
+
+  // 닉네임 중복 체크 함수
   const checkNicknameAvailability = async (nickname: string) => {
     try {
       const response = await customAxios.get("user/nicknames/check", { params: { nickname } });
       const { apiError, response: isAvailable } = response.data;
 
       if (apiError) {
-        setError("닉네임 중복 검사 중 오류 발생");
+        setError("이미 사용 중인 닉네임 입니다.");
         setIsNicknameAvailable(null);
+        setNicknameMessage(null);
       } else {
         setIsNicknameAvailable(isAvailable);
         setError(null); // 에러 메시지 초기화
+        if (isAvailable) {
+          setNicknameMessage("사용 가능한 닉네임입니다!");
+        } else {
+          setNicknameMessage("이미 사용 중인 닉네임입니다.");
+        }
       }
     } catch (error) {
       console.error("닉네임 중복 검사 중 오류 발생:", error);
@@ -32,25 +52,25 @@ function EditProfileModal() {
     }
   };
 
-  // 닉네임 유효성 검사(중복제거 위해)
+  // 사용자가 입력 변경할 때마다 실행 => 실시간으로 사용자에게 입력 값의 유효성 피드백
+  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setNewNickname(inputValue);
+    validateNickname(inputValue);
+  };
+
+  // 닉네임 유효성 검사 함수
   const validateNickname = (nickname: string) => {
     const isValid = /^[a-zA-Z0-9가-힣]{2,8}$/.test(nickname);
     if (!isValid) {
       setError("닉네임은 2글자 이상 8글자 이하의 문자, 숫자, 한글만 허용됩니다.");
+      setNicknameMessage(null);
       return false;
     }
     return true;
   };
 
-  // 사용자가 입력 변경할 때마다 실행 => 실시간으로 사용자에게 입력 값의 유효성 피드백
-  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setNewNickname(inputValue);
-
-    validateNickname(inputValue);
-  };
-
-  // 사용자가 폼 제출할 때 실행 => 서버에 전송하기 전에 한번 더 검증
+  // 폼 제출 함수
   const handleSubmit = async () => {
     setIsSubmitting(true);
     setError(null);
@@ -75,7 +95,7 @@ function EditProfileModal() {
     }
   };
 
-  // 모달을 닫는 함수
+  // 모달 닫기 함수
   const handleCancel = () => {
     setModalIsOpen(false);
   };
@@ -85,8 +105,9 @@ function EditProfileModal() {
       content={
         <div className={styles.modalContainer}>
           <h2 className={styles.modalTitle}>프로필 수정</h2>
+          <EditImage/>
           {error && <div className={styles.error}>{error}</div>}
-          {isNicknameAvailable === false && <div className={styles.error}>이미 사용 중인 닉네임입니다.</div>}
+          {nicknameMessage && <div className={styles.message}>{nicknameMessage}</div>}
           <div className={styles.formGroup}>
             <label htmlFor="newNickname">New Nickname:</label>
             <input
@@ -98,9 +119,12 @@ function EditProfileModal() {
               disabled={isSubmitting}
               className={styles.inputField}
             />
+            <button onClick={handleCheckNickname} disabled={isSubmitting} className={styles.checkButton}>
+              중복 확인
+            </button>
           </div>
           <div className={styles.buttons}>
-            <button onClick={handleSubmit} disabled={isSubmitting} className={styles.submitButton}>
+            <button onClick={handleSubmit} disabled={isSubmitting || isNicknameAvailable === false} className={styles.submitButton}>
               {isSubmitting ? "변경중.." : "변경"}
             </button>
             <button onClick={handleCancel} disabled={isSubmitting} className={styles.cancelButton}>
