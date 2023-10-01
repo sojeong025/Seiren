@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { BiSolidCheckSquare } from 'react-icons/bi'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import { LiaRandomSolid } from 'react-icons/lia'
+import axios from 'axios';
 
 function Section({ children, title }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +42,7 @@ function ProductCustomPage(){
   const voiceId = useRecoilValue(VoiceIdState)
   const [title, setTitle] = useState();
   const [summary, setSummary] = useState();
-  const [productImg, setProductImg] = useState();
+  const [productImg, setProductImg] = useState("");
   const [price, setPrice] = useState();
   const [gender, setGender] = useState("");
   const [ageGroup, setAgeGroup] = useState("");
@@ -129,47 +130,48 @@ function ProductCustomPage(){
 
   const marketProduct = async () => {
     const categoryList=[gender, ageGroup, mood];
+    console.log("하이");
 
-    const previews = await Promise.all([text1, text2, text3].map(async (text) => {
-
+    const previews = await Promise.all([text1, text2, text3].map((text) => {
     // 수정 필요
-    const aiUrl = await fetchAIUrl(text); 
-    
-    const response = await fetch(aiUrl);
-    const file = await response.blob();
-
-    const upload = new AWS.S3.ManagedUpload({
-      params: {
-        Bucket: import.meta.env.VITE_PUBLIC_BUCKET,
-        Key: "testTrack/" + Date.now(),
-        Body: file,
-      },
-    });
-
-    const data = await upload.promise();
-    return { text, url: data.Location };
+    axios.get(`http://70.12.130.121:1470/synthesize?voice_id=18&transaction_id=202&text=${text}`)
+    .then((response)=>{
+      const file = response.blob();
+  
+      const upload = new AWS.S3.ManagedUpload({
+        params: {
+          Bucket: import.meta.env.VITE_PUBLIC_BUCKET,
+          Key: "testTrack/" + Date.now(),
+          Body: file,
+        },
+      });
+  
+      const data = upload.promise();
+      console.log(data.Location);
+      return { text:text, url: data.Location };
+    })
   }));
   
 
-    const productData = {
-      voiceId: voiceId,
-      productTitle: title,
-      summary: summary,
-      productImageUrl: productImg,
-      price: price,
-      categoryList: categoryList,
-      previewTexts: [...previews.map(preview => preview.text)], 
-      previewUrls : [...previews.map(preview => preview.url)],
-    };
+    // const productData = {
+    //   voiceId: voiceId,
+    //   productTitle: title,
+    //   summary: summary,
+    //   productImageUrl: productImg,
+    //   price: price,
+    //   categoryList: categoryList,
+    //   previewTexts: [...previews.map(preview => preview.text)], 
+    //   previewUrls : [...previews.map(preview => preview.url)],
+    // };
 
-    console.log(productData);
+    // console.log(productData);
 
-    customAxios.post("product", productData)
-      .then((res) => {
-        console.log("장터에 올리기 성공", res);
-        navigate('/sell-list')
-      })
-      .catch((err) => console.log(err))
+    // customAxios.post("product", productData)
+    //   .then((res) => {
+    //     console.log("장터에 올리기 성공", res);
+    //     navigate('/sell-list')
+    //   })
+    //   .catch((err) => console.log(err))
     };
 
   return(
