@@ -34,25 +34,6 @@
   text-decoration: underline;
 }
 
-
-
-
-.textBox {
-  font-size: 60px;
-  font-weight: bold;
-}
-
-.UseVoiceContainer {
-  flex-direction: column;
-  
-}
-
-.textBox {
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
 .voiceItems {
   margin-top: 50px;
   width: 100%;

@@ -45,7 +45,7 @@ function UseVoiceBox() {
         <div className={styles.useCount_txt}>VoiceBox</div>
         <div className={styles.count}>
           <div className={styles.useCount_count}>
-            사용가능한 목소리는 <span>{ableCount}개</span> 입니다{" "}
+            사용 가능한 목소리는 <span>{ableCount}개</span> 입니다{" "}
           </div>
         </div>
       </div>
