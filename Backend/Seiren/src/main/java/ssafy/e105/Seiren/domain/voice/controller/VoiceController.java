@@ -1,5 +1,6 @@
 package ssafy.e105.Seiren.domain.voice.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -77,5 +78,11 @@ public class VoiceController {
     public ApiResult<?> deleteVoice(HttpServletRequest request, @PathVariable Long voiceId) {
         voiceService.deleteVoice(request, voiceId);
         return ApiUtils.success("목소리 삭제 상태로 변경");
+    }
+
+    @Operation(summary = "내 목소리 상태별 개수")
+    @GetMapping("/api/state/count")
+    public ApiResult<?> getContAboutVoiceState(HttpServletRequest request) {
+        return ApiUtils.success(voiceService.getContAboutVoiceState(request));
     }
 }
