@@ -1,5 +1,57 @@
-.YourVoiceDetailContainer{
-    padding-top: 100px;
-    margin-left: 220px;
-    margin-right: 220px;
+.YourVoiceDetailContainer {
+  padding-top: 100px;
+  margin-left: 220px;
+  margin-right: 220px;
+}
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+/* Edit 전 */
+.upBox {
+  display: flex;
+  flex-direction: row;
+}
+.imgContainer {
+  border: 2px solid #fff;
+  border-radius: 1.5rem;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  width: 50%;
+}
+.img {
+  width: 250px;
+}
+.stateBox {
+  border: 2px solid #fff;
+  width: 50%;
+  border-radius: 1.5rem;
+  padding: 30px;
+}
+.voiceTitle {
+  font-size: 50px;
+  padding: 30px;
+}
+.memo {
+  border: 2px solid #fff;
+  padding: 30px;
+  border-radius: 1.5rem;
+}
+.buttons {
+  padding: 30px;
+  display: flex;
+  justify-content: end;
+}
+.downBox{
+  border: 3px solid #fff;
+  border-radius: 1.5rem;
+  padding: 30px;
+}
+.editBox {
+  border: 3px solid #fff;
 }
