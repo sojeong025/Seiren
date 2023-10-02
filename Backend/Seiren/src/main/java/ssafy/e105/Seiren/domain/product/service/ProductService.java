@@ -113,7 +113,7 @@ public class ProductService {
             if (voice.getUser() == user) {
                 product.update(product.getState() ? false : true);
                 productRepository.save(product);
-                voice.update(product.getState() ? 2 : 3);
+                voice.update(product.getState() ? 3 : 4);
                 voiceRepository.save(voice);
                 return;
             }
