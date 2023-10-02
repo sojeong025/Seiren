@@ -4,9 +4,8 @@ import { useParams } from "react-router-dom";
 import styles from "./SellDetail.module.css";
 import SellDetailList from "./SellDetailList";
 
-
 interface Product {
-  productId : string;
+  productId: string;
   productTitle: string;
   productImageUrl: string;
   productCategoryList: string[];
@@ -16,28 +15,39 @@ interface Product {
 
 function SellDetail() {
   const { productId } = useParams();
-  const [product, setProduct] = useState<Product | null>(null);
-  
+  const [product, setProduct] = useState<Product | null>({ // 초기 상태를 빈 객체로 설정
+    productId: "",
+    productTitle: "",
+    productImageUrl: "",
+    productCategoryList: [],
+    summary: "",
+    nickname: "",
+  });
+
   console.log(productId);
   useEffect(() => {
     customAxios
       .get(`product/${productId}`)
-      .then(response => {
+      .then((response) => {
         let useProduct = response.data.response;
         console.log(useProduct);
         setProduct(useProduct);
       })
-      .catch(error => console.error("API 호출 중 오류 발생:", error));
+      .catch((error) => console.error("API 호출 중 오류 발생:", error));
   }, [productId]);
 
   return (
     <div className={styles.sellDetailContainer}>
       <div>
         <h1>{product.productTitle}</h1>
-        <div >
-          <img src={product.productImageUrl} alt={product.productTitle} className={styles.pimg} />
+        <div>
+          <img
+            src={product.productImageUrl}
+            alt={product.productTitle}
+            className={styles.pimg}
+          />
         </div>
-        <p>Product Category: {product.productCategoryList}</p>
+        <p>Product Category: {product.productCategoryList.join(", ")}</p>
         <p>Summary: {product.summary}</p>
         <p>Nickname: {product.nickname}</p>
       </div>
