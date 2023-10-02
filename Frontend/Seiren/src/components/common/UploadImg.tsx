@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import AWS from "aws-sdk";
 import styles from "./UploadImg.module.css";
 
-function UploadImg({ imgUrl, setImgUrl }) {
+function UploadImg({ imgUrl, setImgUrl}) {
   const imgRef = useRef(null);
   const [previewUrl, setPreviewUrl] = useState(imgUrl || null); // Set initial previewUrl with imgUrl if available
 
