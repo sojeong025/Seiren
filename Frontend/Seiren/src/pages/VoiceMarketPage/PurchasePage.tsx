@@ -5,6 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
+import styles from "./PurchasePage.module.css"
 
 interface PurposeGet {
   id: number;
@@ -50,7 +51,7 @@ function PurchasePage() {
   };
 
   return (
-    <div>
+    <div className={styles.total}>
       <label>
         Letter 수량:
         <input
