@@ -1,98 +1,85 @@
+import { useState } from "react";
 import FavoriteVoice from "../../components/VoiceMarket/FavoriteVoice";
 import Filter from "../../components/VoiceMarket/Filter";
-import styles from "./VoiceMarketPage.module.css"
-import { Link } from 'react-router-dom';
+import styles from "./VoiceMarketPage.module.css";
+import { Link } from "react-router-dom";
+import Pagination from "../../components/common/Pagination";
 
 
-interface Voice {
-  id: number;
-  avatar: string;
+interface Product {
+  nickname: string;
+  price: number;
+  productCategoryList: ProductCategory[];
+  productId: number;
+  productImageUrl: string;
+  summary: string;
   title: string;
-  seller: string;
-  category: string;
+  wish: boolean;
+}
+interface ProductCategory {
+  categoryId: number;
+  categoryName: string;
 }
 
-const voices: Voice[] = [
-  {
-    id: 1,
-    avatar: "avatar_url_1",
-    title: "Voice Title 1",
-    seller: "Seller Nickname 1",
-    category: "Category 1"
-  },
-  {
-    id: 2,
-    avatar: "avatar_url_2",
-    title: "Voice Title 2",
-    seller: "Seller Nickname 2",
-    category: "Category 2"
-  },
-  {
-    id: 1,
-    avatar: "avatar_url_1",
-    title: "Voice Title 1",
-    seller: "Seller Nickname 1",
-    category: "Category 1"
-  },
-  {
-    id: 3,
-    avatar: "avatar_url_2",
-    title: "Voice Title 2",
-    seller: "Seller Nickname 2",
-    category: "Category 2"
-  },
-  {
-    id: 4,
-    avatar: "avatar_url_1",
-    title: "Voice Title 1",
-    seller: "Seller Nickname 1",
-    category: "Category 1"
-  },
-  {
-    id: 5,
-    avatar: "avatar_url_2",
-    title: "Voice Title 2",
-    seller: "Seller Nickname 2",
-    category: "Category 2"
-  },
-  {
-    id: 6,
-    avatar: "avatar_url_1",
-    title: "Voice Title 1",
-    seller: "Seller Nickname 1",
-    category: "Category 1"
-  },
-  {
-    id: 7,
-    avatar: "avatar_url_2",
-    title: "Voice Title 2",
-    seller: "Seller Nickname 2",
-    category: "Category 2"
-  },
+function ProductCard({ product }: { product: Product }) {
+  return (
+    <div className={styles.card}>
+      <div className={styles.left}>
+        <img className={styles.card_img} src={product.productImageUrl} alt="Avatar" />
+      </div>
+      <div className={styles.mid}>
+        <div className={styles.card_title}>{product.title}</div>
 
-];
-function VoiceCard({ voice }: { voice : Voice }) {
-  return (
-    <Link to={`/voice/${voice.id}`} className={styles.card}>
-      <img src={voice.avatar} alt="Avatar" />
-      <h3>{voice.title}</h3>
-      <p>{voice.seller}</p>
-      <p>{voice.category}</p>
-    </Link>
-  );
-}
-function VoiceMarketPage() {
-  return (
-    <div>
-      <FavoriteVoice/>
-      <Filter />
-      <div className={styles.container}>
-        <div className={styles.cards}>
-          {voices.map((voice, index) => (
-            <VoiceCard key={index} voice={voice} />
+        {product.productCategoryList &&
+          product.productCategoryList.map((category, index) => (
+            <div className={styles.card_category} key={index}>
+              {" "}
+              #{category.categoryName}
+            </div>
           ))}
+
+        <div className={styles.card_nickname}>{product.nickname}</div>
+      </div>
+      <div className={styles.right}>
+        {/* <div className={styles.wish}>{product.wish? <BsHeartFill/> : <BsHeart />}</div> */}
+        <Link to={`/product/${product.productId}`} className={styles.detail}>
+          {" "}
+          들어보기{" "}
+        </Link>
       </div>
     </div>
+  );
+}
+
+function VoiceMarketPage() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 10;
+
+    const onPageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  return (
+    <div className={styles.total}>
+      <FavoriteVoice />
+      <Filter products={products} setProducts={setProducts} />
+      <div className={styles.container}>
+        <div className={styles.cards}>
+          {products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map(product => (
+            <ProductCard key={product.productId} product={product} />
+          ))}
+        </div>
+      </div>
+      <div className={styles.pagi}>
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+          totalAmount={products.length}
+        />
+      </div>
     </div>
   );
 }

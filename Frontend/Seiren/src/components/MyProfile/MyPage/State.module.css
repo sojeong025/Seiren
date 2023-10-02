@@ -1,0 +1,16 @@
+/* State.module.css */
+
+.text {
+    font-size: 30px;
+    color: black;
+    font-weight: bold;
+}
+
+.btn {
+    background-color: #ed5808;
+    color: white;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 10px 20px; 
+    cursor: pointer;
+}

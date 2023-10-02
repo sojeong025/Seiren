@@ -1,9 +1,10 @@
-import { useState, useRef } from "react";
-import AWS, { AlexaForBusiness } from "aws-sdk";
+import { useRef, useState } from "react";
+import AWS from "aws-sdk";
+import styles from "./UploadImg.module.css";
 
-function UploadImg({imgUrl, setImgUrl}){
- 
-  const imgRef = useRef<HTMLInputElement | null>(null);
+function UploadImg({ imgUrl, setImgUrl}) {
+  const imgRef = useRef(null);
+  const [previewUrl, setPreviewUrl] = useState(imgUrl || null); // Set initial previewUrl with imgUrl if available
 
   AWS.config.update({
     region: import.meta.env.VITE_PUBLIC_REGION,
@@ -11,19 +12,33 @@ function UploadImg({imgUrl, setImgUrl}){
     secretAccessKey: import.meta.env.VITE_PUBLIC_SECRETKEY,
   });
 
-  // 파일 올리는 곳
- const onChangeTrack = () => {
-  if (!imgRef.current) {
-    return;
-  }
+  const onChangeTrack = () => {
+    if (!imgRef.current) {
+      return;
+    }
 
-  const file = imgRef.current.files[0];
+    const file = imgRef.current.files[0];
 
-  if (!file) {
-    return;
-  }
+    if (!file) {
+      return;
+    }
 
-    // setTrackName(file.name);
+    // 파일을 미리보기 URL로 변환
+    const previewUrl = URL.createObjectURL(file);
+    setPreviewUrl(previewUrl);
+  };
+
+  const handleUpload = () => {
+    if (!imgRef.current) {
+      return;
+    }
+
+    const file = imgRef.current.files[0];
+
+    if (!file) {
+      return;
+    }
+
     const upload = new AWS.S3.ManagedUpload({
       params: {
         Bucket: import.meta.env.VITE_PUBLIC_BUCKET,
@@ -35,25 +50,42 @@ function UploadImg({imgUrl, setImgUrl}){
     const promise = upload.promise();
     promise.then(
       function (data) {
-        console.log(data)
+        console.log(data);
         setImgUrl(data.Location);
       },
       function (err) {
-        return err("사진 업로드 실패");
+        console.error("사진 업로드 실패", err);
       }
     );
   };
 
-  return(
-    <div>
-      <input
-        type="file"
-        accept="image/*"
-        ref={imgRef}
-        onChange={onChangeTrack}
-      />
+  return (
+    <div className={styles.file_input}>
+      {previewUrl && (
+        <img
+          src={previewUrl}
+          alt="미리보기"
+          className={styles.preimg}
+        />
+      )}
+      <div>
+        <label className={styles.customFileLabel} htmlFor="file">
+          이미지 선택
+        </label>
+        <input
+          type="file"
+          accept="image/*"
+          id="file"
+          ref={imgRef}
+          onChange={onChangeTrack}
+          className={styles.hiddenFileInput}
+        />
+        <label onClick={handleUpload} className={styles.button}>
+          변경
+        </label>
+      </div>
     </div>
   );
-};
+}
 
 export default UploadImg;

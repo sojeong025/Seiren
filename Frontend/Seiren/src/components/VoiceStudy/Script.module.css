@@ -5,8 +5,9 @@
   align-items: center;
   padding: 40px 20px 20px;
 }
-.text_now, .text_next{
+.text_now{
   font-size: 20px;
+  font-weight: 900;
 }
 .text_next {
   color: gray;

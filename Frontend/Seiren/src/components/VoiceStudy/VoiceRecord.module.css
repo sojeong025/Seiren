@@ -5,12 +5,11 @@
 }
 .MainText{
   font-size: 40px;
-  font-weight: bold;
-  padding: 40px 40px 20px;
-  letter-spacing: 5px;
+  font-weight: 900;
+  padding: 20px 40px 10px;
 }
 .RecordText{
-  font-size: 18px;
+  font-size: 20px;
   padding-bottom: 40px;
 }
 .Btn {
@@ -23,9 +22,9 @@
   width: 130px;
   height: 130px;
   line-height: 130px;
-  font-size: 70px;
-  background-color: #BC7AF9;
-  color: white;
+  font-size: 55px;
+  background-color: #defe52;
+  color: #2f2f2b;
   border: 8px solid #fff;
   border-radius: 50%;
   text-align: center;

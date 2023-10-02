@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import NoVoice from "../../components/VoiceStudy/NoVoice";
 import VoiceState from "../../components/VoiceStudy/VoiceState";
-
+import styles from './VoiceStudyPage.module.css'
 
 function VoiceStudyPage() {
   const [success, setSuccess] = useState<boolean | null>(null);
@@ -17,9 +17,14 @@ function VoiceStudyPage() {
     customAxios.get("progressingVoices")
       .then((res) => {
         console.log('목소리 상태 호출', res)
-        setSuccess(res.data.success);
-        setRecordState(res.data.response.state);
-        setVoiceId(res.data.response.voiceId);
+        if (res.data.response) { // response 객체가 있는지 확인
+          console.log(`voiceId:`, res.data.response.voiceId)
+          setSuccess(res.data.success);
+          setRecordState(res.data.response.state);
+          setVoiceId(res.data.response.voiceId);
+        } else {
+          setSuccess(false);
+        }
       })
       .catch((error) => {
         console.error('목소리 상태 호출 중 오류:', error);
@@ -30,8 +35,8 @@ function VoiceStudyPage() {
   if(success === null) return null;
 
   return (
-    <div>
-      { success? <VoiceState/> : <NoVoice/>}
+    <div className={styles.total}>
+      { success? <VoiceState/> : <NoVoice setSuccess={setSuccess}/>}
     </div>
   );
 }

@@ -1,8 +1,22 @@
 .allContainer {
-  text-align: center;
-  margin: 20px;
+  padding: 50px 50px 30px 30px;
 }
-
+.top{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border-radius: 20px;
+  padding : 30px 50px;
+}
+.top_txt{
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+.totalStatic{
+  display: flex;
+}
 .sellChartContainer {
   display: flex;
   flex-direction: column;

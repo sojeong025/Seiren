@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { customAxios } from "../../libs/axios";
 import styles from "./UseVoiceDetail.module.css";
-import SideBar from "../../components/common/SideBar";
-import UseList from "../UseVoice/UseList";
+import SideBar from "../common/SideBar";
+import UseList from "./UseList";
+import { RxDot } from "react-icons/rx"
+import { VscSend } from "react-icons/vsc"
 
 const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({ setIsNavBarVisible }) => {
   useEffect(() => {
     setIsNavBarVisible(false);
-
     return () => {
       setIsNavBarVisible(true);
     };
@@ -17,13 +18,22 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
   const { productId } = useParams();
   const [voiceDetail, setVoiceDetail] = useState(null);
   const [text, setText] = useState("");
+  const mL = Number(200);
+  const [textLength, setTextLength] = useState(0);
 
+  const handleTextChange = event => {
+    setText(event.target.value);
+    setTextLength(event.target.value.length)
+  };
+
+  // 목소리 (상품) 상세 정보 GET 
   useEffect(() => {
     customAxios
       .get(`transactions/detail/${productId}`)
       .then(response => {
-        const voiceDetailData =  response.data.response;
-        
+        const voiceDetailData = response.data.response;
+        console.log('상품 상세정보 api ', response)
+
         setVoiceDetail(voiceDetailData);
       })
       .catch(error => {
@@ -31,25 +41,12 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
       });
   }, [productId]);
 
-  const sendPostRequest = () => {
-    const requestData = {
-      transactionId: 0,
-      text: text, // 페이지에서 입력한 텍스트를 사용
-    };
+  // 사용 TEXT 서버에 전송 API
 
-    customAxios
-      .post("transactions", requestData)
-      .then((response) => {
-        console.log("POST 요청 성공:", response.data);
-      })
-      .catch((error) => {
-        console.error("POST 요청 중 오류 발생:", error);
-      });
-  };
+  // 차감 횟수 받아오는 API
 
-  const handleTextChange = (event) => {
-    setText(event.target.value);
-  };
+
+
 
   // 상세 정보가 로딩 중인 경우 로딩 표시
   if (!voiceDetail) {
@@ -60,27 +57,57 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
     <div className={styles.UseVoiceDetailContainer}>
       <SideBar />
       <div className={styles.content}>
-        <h1>{voiceDetail.productTitle}</h1>
+        {/* 좌측에는 사용자 정보를 간단히 보여줄거임 */}
+        <div className={styles.left}>
+          <div>
+            {/* <img className={styles.pimg} src={voiceDetail.productImageUrl} alt={voiceDetail.productTitle} /> */}
+            <div className={styles.title}>{voiceDetail.productTitle}</div>
+            <div className={styles.summary}>{voiceDetail.summary}</div>
 
-        <img className={styles.pimg} src={voiceDetail.productImageUrl} alt={voiceDetail.productTitle} />
+            <div className={styles.remain}> <RxDot/> <span>사용 가능</span>한 글자 수 : <span>{voiceDetail.remainLetter}</span>자 </div>
+            <div className={styles.total}> <RxDot/>  <span>구매</span>한 총 글자 수 :<span>{voiceDetail.totalCount}</span>자</div>
+            <div className={styles.alert}>한 번에 최대 200자까지만 사용 가능합니다.</div>
 
-        {voiceDetail.productCategories && voiceDetail.productCategories.length > 0 && (
-          <p>카테고리: {voiceDetail.productCategories.join(", ")}</p>
-        )}
+          </div>
+          <Link to="/use-voice">
+            <div className={styles.select}>
+              AI 목소리 선택
+            </div>
+          </Link>
+        </div>
 
-        <p>요약: {voiceDetail.summary}</p>
-        <p>남은 수량: {voiceDetail.remainLetter}</p>
-        <p>총 수량: {voiceDetail.totalCount}</p>
-        <p>거래 ID: {voiceDetail.transactionId}</p>
+        <hr />
 
-        <input
-        type="text"
-        value={text}
-        onChange={handleTextChange}
-        placeholder="텍스트를 입력하세요"
-      />
-      <button onClick={sendPostRequest}>POST 요청 보내기</button>
-      <UseList transactionid={voiceDetail.transactionId.toString()} />
+        {/* 우측에는 text 창이랑 사용 history 함께 보여줄거임 */}
+        <div className={styles.right}>
+          {/* text창 */}
+          <div className={styles.inputContainer}>
+          <div className={styles.textBox}>
+          </div>
+          <div className={styles.textcontain}>
+            
+            <textarea
+              value={text}
+              onChange={handleTextChange}
+              maxLength={mL}
+              placeholder="사용하실 텍스트를 입력하세요"
+              className={styles.textarea}
+            />
+            <div className={styles.button}>
+              <VscSend />
+            </div>
+          </div>
+            <div className={styles.characterCount}>{text.length}자 / 200자</div>
+            <div></div>
+          </div>
+
+          <hr className={styles.hr} />
+
+          {/* history */}
+          <div>
+            <UseList transactionid={voiceDetail.transactionId.toString()} />
+          </div>
+        </div>
       </div>
     </div>
   );

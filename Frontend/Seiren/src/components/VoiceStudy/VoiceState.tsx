@@ -36,7 +36,7 @@ function VoiceState() {
         <div className={styles.icon}>
         <Lottie animationData={finish} style={{width: '350px', height: '350px'}} />
           </div>
-          <NavLink to='/voice-studying' onClick={(e) => recordState !== 2 && e.preventDefault()}>
+          <NavLink to='/voice-finish' onClick={(e) => recordState !== 2 && e.preventDefault()}>
             <div className={`${styles.btn} ${recordState !== 2 && styles.disabled}`}>학습완료</div>
           </NavLink> 
         </div>

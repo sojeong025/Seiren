@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { AuthenticationService } from './AuthenticationService';
-import axios from 'axios'
 
 // OAuth2 인증 처리를 위한 컴포넌트
 const OAuth2RedirectHandler: React.FC = () => {

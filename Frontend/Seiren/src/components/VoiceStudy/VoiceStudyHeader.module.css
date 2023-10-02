@@ -11,11 +11,15 @@
 }
 .progressBar{
   height:20px;
-  background-color:#BC7AF9;
+  background-color:#defe52;
   border-radius: 10px;
 }
 .button_study {
   width: 100px;
   margin-left: 20px;
   border-radius: 10px;
+}
+.button_study{
+  width: 150px;
+  height: 40px;
 }

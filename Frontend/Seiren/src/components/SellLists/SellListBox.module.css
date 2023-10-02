@@ -1,40 +1,65 @@
+.container{
+  padding: 0px 50px 30px 30px;
+}
 .sellListBoxContainer {
-  width: 100%;
-  flex-direction: row;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border-radius: 20px;
+  padding : 30px 50px;
 }
 
 .sellListBoxTitle {
   font-size: 24px;
+  font-weight: 900;
   margin-bottom: 20px;
 }
 
 .sellList {
   display: flex;
-  flex-wrap: wrap; /* 가로로 나열하고 넘칠 경우 줄바꿈 */
-  gap: 20px; /* 각 목록 아이템 간의 간격 설정 */
-  border: 2px solid #52057B;
-  border-radius: 2.5rem;
+  align-items: center;
 }
-
-.sellListItem {
-  width: calc(33.33% - 20px); /* 3개의 아이템이 가로로 나열되도록 설정 */
-  padding: 10px;
-  border: 1px solid #52057B;
-  background-color: #000;
-  text-align: center;
+.sellItem{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
   border-radius: 10px;
-  margin: 10px;
-  display: flex;
-  flex-direction: row;
-
+  margin-right: 20px;
+  position: relative;
+  transition : transform .2s ease-in-out;
+  overflow:hidden;
 }
-
-.sellListItem img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover; 
-  border-radius: 2.5rem;
-  }
-.itemText{
+.productInfo{
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+}
+.sellItem:hover{
+  transform: scale(1.05);
+}
+.sellItem:hover .productInfo{
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  background: rgba(0, 0, 0, 0.548);
+  color: #fff;
+  font-size: 30px;
+  font-weight: 900;
+  border-radius: 10px;
+}
+.pimg{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+.productTitle, .productTotal{
+  font-size: 14px;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }

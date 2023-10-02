@@ -4,32 +4,39 @@ import { customAxios } from "../../libs/axios";
 import { Link } from "react-router-dom";
 
 function SellListBox() {
-  const [sellList, setSellList] = useState();
-  
+  const [sellList, setSellList] = useState([]);
 
-  // useEffect(() => {
-  //   customAxios
-  //     .get("Statistics/products")
-  //     .then(response => {
-  //       let sellData = response.data.response;
-  //       console.log(sellData)
+  useEffect(() => {
+    customAxios
+      .get("statistics/products")
+      .then(response => {
+        let sellData = response.data.response;
+        console.log('구매상품 체크',response)
 
-  //     })
-  //     .catch(error => console.error("API 호출 중 오류 발생:", error));
-  // }, []);
+        setSellList(sellData);
+      })
+      .catch(error => console.error("API 호출 중 오류 발생:", error));
+  }, []);
 
   return (
-    <div className={styles.sellListBoxContainer}>
-      <h1 className={styles.sellListBoxTitle}>MY Voice</h1>
-      <div className={styles.sellList}>
-        {/* {buyItems.map((item, index) => (
-          <Link to={`/detail/${index}`} key={index} className={styles.sellListItem}>
-            <div>
-              <img src="프로필 이미지 경로" alt="프로필 이미지" />
+    <div className={styles.container} >
+      <div className={styles.sellListBoxContainer}>
+        <div className={styles.sellListBoxTitle}>개별 통계</div>
+        <div className={styles.sellList}>
+          {sellList.map((item, index) => (
+            <div key={index} className={styles.sellItem}>
+              <Link to={`/sell-list/detail/${item.productId}`} className={styles.productLink}>
+              <img src={item.productImageUrl} alt={item.productTitle} className={styles.pimg} />
+
+
+              <div className={styles.productInfo}>
+                <div className={styles.productTitle}>{item.productTitle}</div>
+                <div className={styles.productTotal}>Total Sales: {item.totalSumCount}</div>
+              </div>
+              </Link>
             </div>
-            <div className={styles.itemText}>{item}</div>
-          </Link>
-        ))} */}
+          ))}
+        </div> 
       </div>
     </div>
   );

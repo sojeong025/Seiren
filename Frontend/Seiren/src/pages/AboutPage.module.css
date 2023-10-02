@@ -1,84 +1,78 @@
-.container {
-  margin: 0px -220px;
-  overflow-x: hidden;
-}
-
 /* section1 */
 .section1 {
-  margin: 0px 220px;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  padding: 0 220px;
+  height: 100vh;
+}
+.section1_left {
+  width: 30%;
+}
+.section1_right {
+  width: 70%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-self: center;
 }
-.section1 hr{
-  margin-top: 20px;
+.section_right_txt {
+  font-size: 34px;
+  font-weight: 700;
+  animation: typing 4s steps(100, end);
+  overflow: hidden;
+  white-space: nowrap;
 }
-.main {
+.section_right_context {
+  font-size: 18px;
   display: flex;
+  justify-content: space-between;
 }
-.main_txt {
-  margin-top: 160px;
-  font-size: 52px;
-  font-weight: bold;
-  line-height: 70px;
+.section_right_context div {
+  flex: 1;
 }
-.main_txt span {
-  color: #F6C90E;
+.section1_right hr {
+  width: 100%;
+  margin: 50px 0;
 }
-
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
 /* section2 */
 .section2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #F0F0F0;
+  background-color: #000;
+  height: 100vh;
 }
-.section2_txt, .section2_txt2{
-  color: #9BA4B5;
-  display: flex;
-  justify-content: center;
+.section2_txt,
+.section2_txt2 {
+  color: #fff;
   font-size: 200px;
   font-weight: bold;
   line-height: 250px;
 }
-.animatedText {
-  white-space: nowrap;
-  will-change: transform; 
-  animation-name: marqueeLeft; 
-  animation-duration :50s; 
-  animation-timing-function :linear; 
-  animation-iteration-count :infinite;
-}
 
-@keyframes marqueeLeft {
-  from { transform: translateX(100%); }
-  to { transform: translateX(-100%); }
-}
-
-.animatedText2 {
-  white-space: nowrap;
-  will-change: transform; 
-  animation-name: marqueeRight; 
-  animation-duration :50s; 
-  animation-timing-function :linear; 
-  animation-iteration-count :infinite;
-}
-
-@keyframes marqueeRight {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(100%); }
-}
-
-.section2_video{
-  position: absolute;;
+.section2_video {
+  position: absolute;
 }
 
 /* section3 */
 .section3 {
-  background-color: #E2F3F5;
-  color: #000;
+  background-color: #3a4750;
+  color: #fff;
+  display: flex;
+  height: 100vh;
+  padding-bottom: -150px;
 }
-.left{
+.left {
   width: 30%;
   display: flex;
   flex-direction: column;
@@ -86,11 +80,12 @@
   font-size: 30px;
   padding: 100px;
 }
-.menu{
+.menu {
   margin: 50px 0;
   text-align: end;
+  cursor: pointer;
 }
-.right{
+.right {
   /* border: 1px solid black; */
   width: 70%;
 }

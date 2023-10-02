@@ -1,67 +1,63 @@
-import { useState, useCallback } from "react";
-import { useRecoilState } from "recoil";
-import { RecordingState } from "../../recoil/RecordAtom";
+import { useState, useEffect } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { RecordingState, AudioDataState } from "../../recoil/RecordAtom";
 import styles from "./VoiceRecord.module.css";
 import { BsFillMicFill, BsStopFill, BsPlayFill } from "react-icons/bs";
-import * as AWS from 'aws-sdk';
+import { MediaRecorder, register } from 'extendable-media-recorder';
+import { connect } from 'extendable-media-recorder-wav-encoder';
 
 
 const VoiceRecord = () => {
   const [recordingStatus, setRecordingStatus] = useRecoilState(RecordingState);
   const [stream, setStream] = useState<MediaStream | null>(null); // 오디오 스트림 저장
-  const [media, setMedia] = useState<MediaRecorder | null>(null); // 인스턴스 저장
+  const [media, setMedia] = useState<typeof MediaRecorder | null>(null); 
   const [analyser, setAnalyser] = useState<ScriptProcessorNode | null>(null);
   const [source, setSource] = useState<MediaStreamAudioSourceNode | null>(null); // 오디오 소스 저장
   const [audioUrl, setAudioUrl] = useState<Blob | string | ArrayBuffer | null>(null); // 녹음된 오디오 데이터의 Url 저장
   const [disabled, setDisabled] = useState<boolean>(true);
+  const setAudioData = useSetRecoilState(AudioDataState);
+
+  useEffect(() => {
+    const registerEncoder = async () => {
+      await register(await connect());
+    };
+    
+    registerEncoder();
+  }, []);
 
   // 사용자가 음성 녹음을 시작했을 때
-  const onRecAudio = () => {
+  const onRecAudio=async()=>{
     setRecordingStatus("recording");
-    setDisabled(true);
-    const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      try{
+        const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+        if(!MediaRecorder.isTypeSupported('audio/wav')){
+          console.error('audio/wav is not supported');
+          return;
+        }
+        var mediaRecoder=new MediaRecorder(stream,{
+          mimeType:'audio/wav',
+          audioBitsPerSecond: 22050
+        });
 
-    const localAnalyser = audioCtx.createScriptProcessor(0, 1, 1);
+        mediaRecoder.start();
 
-    function makeSound(stream) {
-      var source = audioCtx.createMediaStreamSource(stream);
-      source.connect(localAnalyser);
-      localAnalyser.connect(audioCtx.destination);
-
-      return source;
-    }
-
-    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream: MediaStream) => {
-      var mediaRecorder = new MediaRecorder(stream);
-      mediaRecorder.start();
-
-      var source = makeSound(stream);
-
-      setStream(stream);
-      setMedia(mediaRecorder);
-      setSource(source);
-      setAnalyser(localAnalyser);
-
-      mediaRecorder.ondataavailable = function (e) {
-        if (e.data.size > 0) {
-          console.log("Data available after MediaRecorder.stop() called.");
-          console.log(`This blob's size is ${e.data.size}`);
-          let blobURL = URL.createObjectURL(e.data);
-          console.log(blobURL);
-          if (blobURL) {
-            console.log("Blob url created.");
-            console.log(blobURL);
-            let data = new Blob([e.data], { type: "audio/wav" });
-            let fileReader = new FileReader();
-
-            fileReader.onloadend = function () {
-              let arrayBuffer = fileReader.result as ArrayBuffer;
-              if (arrayBuffer) {
-                console.log("Array buffer created.");
-                let buffer = new Uint8Array(arrayBuffer);
-                if (buffer.byteLength == e.data.size) {
-                  console.log("Buffer created.");
-                  setAudioUrl(buffer);
+        setStream(stream);
+        setMedia(mediaRecoder);
+    
+        mediaRecoder.ondataavailable=function(e){
+          if(e.data.size>0){
+            let blobURL=URL.createObjectURL(e.data);
+          if(blobURL){
+            let data=new Blob([e.data],{type:'audio/wav'});
+            let fileReader=new FileReader();
+    
+          fileReader.onloadend=function(){
+            let arrayBuffer=fileReader.result as ArrayBuffer;
+              if(arrayBuffer){
+                let buffer=new Uint8Array(arrayBuffer);
+              if(buffer.byteLength==e.data.size){
+                setAudioUrl(buffer);
+                setAudioData(buffer);
                 }
               }
             };
@@ -69,8 +65,11 @@ const VoiceRecord = () => {
           }
         }
       };
-    });
-  };
+    }catch(error){
+    console.error('Error occurred while starting the recording:',error)
+    }
+    
+    };
 
   // 사용자가 음성 녹음을 중지했을 때
   const offRecAudio = () => {
@@ -83,54 +82,15 @@ const VoiceRecord = () => {
         });
       }
     }
-
     if (source) {
       source.disconnect();
     }
-
     if (analyser) {
       analyser.disconnect();
     }
-
     setDisabled(false);
     setRecordingStatus("stopped");
   };
-
-  const onSubmitAudioFile = useCallback(() => {
-    if (audioUrl) {
-      let blob = new Blob([audioUrl], { type: "audio/wav" });
-      let url = URL.createObjectURL(blob);
-      console.log(url);
-
-      const formData = new FormData();
-      formData.append("file", blob);
-
-      AWS.config.update({
-        region: import.meta.env.VITE_PUBLIC_REGION,
-        accessKeyId: import.meta.env.VITE_PUBLIC_ACCESSKEY,
-        secretAccessKey: import.meta.env.VITE_PUBLIC_SECRETKEY,
-      });
-
-      const upload = new AWS.S3.ManagedUpload({
-        params: {
-          Bucket: import.meta.env.VITE_PUBLIC_BUCKET,
-          Key: "testTrack/" + new Date().toISOString() + ".wav",
-        },
-      });
-
-      const promise = upload.promise();
-
-      promise.then(
-        function (data) {
-          console.log("File uploaded successfully");
-          console.log(data);
-        },
-        function (err) {
-          return err("Audio upload failed");
-        },
-      );
-    }
-  }, [audioUrl]);
 
   const play = () => {
     let blob = new Blob([audioUrl], { type: "audio/wav" });
@@ -165,7 +125,6 @@ const VoiceRecord = () => {
 
         {recordingStatus === "stopped" && (
           <>
-            <button onClick={onSubmitAudioFile}>저장</button>
             <button className={styles.Btn_play} onClick={play} disabled={!audioUrl}>
               <BsPlayFill />
             </button>

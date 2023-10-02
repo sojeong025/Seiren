@@ -1,0 +1,13 @@
+.useVoiceContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: #fbfbf7;
+  color: #000;
+  min-height: 100vh;
+}
+.useVoiceBox{
+  width: 100%;
+  flex-grow: 1;
+  margin-left: 300px;
+}

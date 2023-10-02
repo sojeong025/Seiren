@@ -1,0 +1,53 @@
+.deleteContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.delete {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+  color: gray;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.modalContainer {
+  border-radius: 5%;
+  border: 2px solid #000;
+  padding: 40px;
+  background-color: #fff;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.2),
+    0 6px 20px rgba(0, 0, 0, 0.15);
+}
+.modalTitle {
+  color: black;
+  text-align: center;
+}
+.content {
+  color: #ce5b5b;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+}
+.submitButton {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin: 4px;
+  font-weight: bold;
+}
+.cancelButton {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin: 4px;
+  font-weight: bold;
+}

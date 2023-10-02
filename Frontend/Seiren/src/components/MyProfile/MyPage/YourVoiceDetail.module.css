@@ -1,0 +1,124 @@
+.YourVoiceDetailContainer {
+  padding-top: 100px;
+  margin-left: 220px;
+  margin-right: 220px;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.upBox {
+  display: flex;
+  flex-direction: row;
+}
+
+.imgBtn{
+  background-color: #ed5808;
+  color: white;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 10px 20px; 
+  cursor: pointer;
+  height: 50px;
+}
+
+.imgContainer {
+  border: 2px solid #fff;
+  border-radius: 1.5rem;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  width: 50%;
+  background-image: linear-gradient(-20deg, #FCFAE8 0%, #fbfcdb 100%);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
+}
+.savebtn{
+  /* margin: 20px; */
+  background-color: #ed5808;
+  color: white;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 10px 20px; 
+  cursor: pointer;
+  width: 120px;
+  font-size: 16px;
+
+}
+
+.stateBox {
+  border: 2px solid #fff;
+  width: 50%;
+  border-radius: 1.5rem;
+  padding: 30px;
+  background-image: linear-gradient(-20deg, #FCFAE8 0%, #fbfcdb 100%); 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
+}
+
+.voiceTitle {
+  font-size: 50px;
+  padding: 20px;
+}
+
+.memo {
+  border: 2px solid #fff;
+  padding: 30px;
+  border-radius: 1.5rem;
+  height: 100px;
+  background-color: #ffffff; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.inputTitle  {
+
+}
+.inputMemo {
+
+}
+.buttons {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end; 
+}
+
+.downBox {
+  background-image: linear-gradient(-20deg, #FCFAE8 0%, #fbfcdb 100%);
+  border: 3px solid #fff;
+  border-radius: 1.5rem;
+  padding: 20px;
+  color: black;
+  font-weight: bold;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
+}
+
+.editBox {
+  border: 3px solid #fff;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
+  border-radius: 1.5rem;
+  padding: 20px;
+}
+.submitbtn {
+  background-color: #ed5808;
+  color: white;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 10px 20px; 
+  cursor: pointer;
+  height: 50px;
+}
+.cancelbtn {
+  background-color: #fff;
+  color: black;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 10px 20px; 
+  cursor: pointer;
+  height: 50px;
+}

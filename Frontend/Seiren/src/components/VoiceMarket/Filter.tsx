@@ -6,14 +6,18 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import styles from "./Filter.module.css"
 import { customAxios } from '../../libs/axios';
 
-function Filter() {
+function Filter({products, setProducts}) {
   const [gender, setGender] = useState<GetData[]>([]);
   const [age, setAge] = useState<GetData[]>([]);
   const [mood, setMood] = useState<GetData[]>([]);
 
-  const [selectGender, setSelectGender] = useState<string|number>();
-  const [selectAge, setSelectAge] = useState<string|number>();
-  const [selectMood, setSelectMood] = useState<string|number>();
+  const [selectGender, setSelectGender] = useState<string|number>('');
+  const [selectAge, setSelectAge] = useState<string|number>('');
+  const [selectMood, setSelectMood] = useState<string|number>('');
+  const [productList, setProductList] = useState();
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState('');
+  const [sortType, setSortType] = useState("Latest");
 
   interface GetData{
     id:number;
@@ -32,6 +36,10 @@ function Filter() {
     const target = event.target as HTMLInputElement;
     setSelectMood(target.value === "-1" ? '' : target.value);
   }
+  const handleChangeSort = (event: SelectChangeEvent) =>{
+    const target = event.target as HTMLInputElement;
+    setSortType(target.value === "-1" ? '' : target.value);
+  }
 
   useEffect(()=>{
     customAxios.get("categories")
@@ -43,11 +51,33 @@ function Filter() {
     })
   },[])
 
+  useEffect(()=>{
+    customAxios.get(`products?nickname=&age=${selectAge}&mood=${selectMood}&gender=${selectGender}&sortType=${sortType}&page=${page}`)
+    .then((res)=>{
+      console.log(res.data.response.productDtoList);
+      setProducts(res.data.response.productDtoList);
+    })
+  },[selectMood, selectAge, selectGender, sortType, page])
+
+  const searchChange = (e) =>{
+    console.log(e.target.value);
+      setSearch(e.target.value);
+  }
+
+  const getProductNickname = (event) =>{
+    event.preventDefault();
+    customAxios.get(`products?nickname=${search}&age=${selectAge}&mood=${selectMood}&gender=${selectGender}&sortType=${sortType}&page=${page}`)
+    .then((res)=>{
+      console.log(res.data.response.productDtoList);
+      setProducts(res.data.response.productDtoList);
+    })
+  }
+
   return (
     <div className={styles.filter}>
       {/* 필터 넣는 곳 */}
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">Gender</InputLabel>
+        <InputLabel id="demo-simple-select-standard-label">성별</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
@@ -56,7 +86,7 @@ function Filter() {
           label="gender"
         >
           <MenuItem value="-1">
-            <em>All</em>
+            <em>기본</em>
           </MenuItem>
           {
             gender && gender.map((data, i)=>
@@ -67,7 +97,7 @@ function Filter() {
       </FormControl>
 
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+        <InputLabel id="demo-simple-select-standard-label">연령대</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
@@ -76,7 +106,7 @@ function Filter() {
           label="age"
         >
           <MenuItem value="-1">
-            <em>All</em>
+            <em>기본</em>
           </MenuItem>
           {
             age && age.map((data, i)=>
@@ -87,7 +117,7 @@ function Filter() {
       </FormControl>
 
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">Mood</InputLabel>
+        <InputLabel id="demo-simple-select-standard-label">분위기</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
@@ -96,7 +126,7 @@ function Filter() {
           label="mood"
         >
           <MenuItem value="-1">
-            <em>All</em>
+            <em>기본</em>
           </MenuItem>
           {
             mood && mood.map((data, i)=>
@@ -105,9 +135,31 @@ function Filter() {
           }
         </Select>
       </FormControl>
-      <div>
-        <input className={styles.searchbar} placeholder='seach user nickname' type="text" />
-        <button type="submit" className={styles.search_btn}>검색</button>
+
+      {/* 정렬 */}
+      <div className={styles.sort}>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-standard-label">정렬</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          value={sortType}
+          onChange={handleChangeSort}
+          label="sort"
+        >
+        <MenuItem value={'Latest'}>
+          <em>최신순</em>
+        </MenuItem>
+        <MenuItem value={'Sales'}>
+          <em>판매순</em>
+        </MenuItem>
+        </Select>
+      </FormControl>
+    </div>
+      <div className={styles.search}>
+        <form className={styles.search} onSubmit={getProductNickname}>
+          <input className={styles.searchbar} placeholder='seach user nickname' type="text" value={search} onChange={(e)=>searchChange(e)}/>
+        </form>
       </div>
     </div>
   );
