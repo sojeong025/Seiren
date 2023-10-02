@@ -182,4 +182,8 @@ public class ProductService {
         }
         return null;
     }
+
+    public Long getProductId(Long voiceId) {
+        return productRepository.findByVoiceId(voiceId).getProductId();
+    }
 }
