@@ -74,12 +74,12 @@ function VoiceMarketPage() {
         </div>
       </div>
       <div className={styles.pagi}>
-      <Pagination
-        itemsPerPage={itemsPerPage}
-        currentPage={currentPage}
-        onPageChange={onPageChange}
-        totalAmount={products.length}
-      />
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+          totalAmount={products.length}
+        />
       </div>
     </div>
   );

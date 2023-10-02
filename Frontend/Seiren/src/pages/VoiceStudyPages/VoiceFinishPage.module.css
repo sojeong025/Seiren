@@ -67,11 +67,12 @@
 .market{
   background-color: #d0dced;
   margin-bottom: 100px;
+  position: relative;
 }
 .market_img{
   position: absolute;
-  left: 5%;
-  top: 130%;
+  left: -130px;
+  top: 60px;
 }
 .market_link{
   color: #5391ed;
