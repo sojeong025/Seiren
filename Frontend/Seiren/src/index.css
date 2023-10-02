@@ -21,7 +21,18 @@
   font-weight: normal;
   font-style: normal;
 }
-
+@font-face {
+  font-family: 'SEBANG_Gothic_Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'TAEBAEKmilkyway';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/TAEBAEKmilkyway.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
 
 body {
   margin: 0;
@@ -29,7 +40,7 @@ body {
   background-color: #000;
   /* background-color: #000; */
   color: #EEEEEE;
-  font-family: 'S-CoreDream-3Light', 'S-CoreDream-4Regular', 'S-CoreDream-6Bold';
+  font-family: 'S-CoreDream-3Light', 'S-CoreDream-4Regular', 'S-CoreDream-6Bold', 'S-CoreDream-9Black';
 }
 a {
   text-decoration-line: none;
