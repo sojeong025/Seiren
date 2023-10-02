@@ -3,8 +3,12 @@ import { customAxios } from "../../libs/axios";
 import { useParams } from "react-router-dom";
 import styles from "./SellDetailList.module.css";
 
-function SellDetailList() {
-  const { productId } = useParams();
+
+interface SellDetailListProps {
+  productId: string;
+}
+
+function SellDetailList({ productId }: SellDetailListProps) {
   const [sellList, setSellList] = useState([]);
 
   useEffect(() => {
