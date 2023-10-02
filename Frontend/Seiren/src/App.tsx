@@ -25,7 +25,7 @@ import VoiceFinishPage from "./pages/VoiceStudyPages/VoiceFinishPage";
 import MyPage from "./pages/MyPages/MyPage";
 import BuyList from "./pages/MyPages/BuyListPage";
 import SellList from "./pages/MyPages/SellListPage";
-import SellDetail from "./components/SellLists/SellDetail";
+import SellDetail from "./components/SellLists/sellDetail";
 import DetailPage from "./pages/MyPages/DetailPage";
 import UseVoice from "./pages/MyPages/UseVoicePage";
 import UseVoiceDetail from "./components/UseVoice/useVoiceDetail";
