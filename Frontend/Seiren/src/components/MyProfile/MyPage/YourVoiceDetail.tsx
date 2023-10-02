@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { customAxios } from "../../../libs/axios";
+import State from "./State";
+import UploadImgOri from "../../common/UploadImgOri";
 import styles from "./YourVoiceDetail.module.css";
 
 function EditVoiceDetail() {
@@ -8,8 +10,9 @@ function EditVoiceDetail() {
   const [voiceDetail, setVoiceDetail] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [newImage, setNewImage] = useState(null);
-  const voiceTitleRef = useRef(null);
-  const memoRef = useRef(null);
+  const [voiceTitle, setVoiceTitle] = useState(""); // 상태로 voiceTitle을 관리합니다.
+  const [memo, setMemo] = useState(""); // 상태로 memo를 관리합니다.
+  const [voiceAvatarUrl, setVoiceAvatarUrl] = useState(""); //
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,6 +21,9 @@ function EditVoiceDetail() {
       .then(response => {
         const voiceDetailData = response.data.response;
         setVoiceDetail(voiceDetailData);
+        setVoiceTitle(voiceDetailData.voiceTitle); // voiceTitle 초기값 설정
+        setMemo(voiceDetailData.memo); // memo 초기값 설정
+        setVoiceAvatarUrl(voiceDetailData.voiceAvatarUrl);
         console.log(voiceDetailData);
       })
       .catch(error => {
@@ -32,9 +38,9 @@ function EditVoiceDetail() {
   const handleSaveClick = () => {
     const updatedData = {
       voiceId: voiceDetail.voiceId,
-      voiceTitle: voiceTitleRef.current.value,
-      memo: memoRef.current.value,
-      voiceAvatarUrl: voiceDetail.voiceAvatarUrl,
+      voiceTitle: voiceTitle,
+      memo: memo,
+      voiceAvatarUrl: voiceAvatarUrl,
     };
 
     customAxios
@@ -45,7 +51,9 @@ function EditVoiceDetail() {
           ...prevState,
           voiceTitle: updatedData.voiceTitle,
           memo: updatedData.memo,
+          voiceAvatarUrl: updatedData.voiceAvatarUrl,
         }));
+        console.log(response);
       })
       .catch(error => {
         console.error("수정 중 오류 발생:", error);
@@ -75,9 +83,24 @@ function EditVoiceDetail() {
   };
 
   const handleImageUpload = () => {
-    // 이미지 업로드 및 URL 업데이트를 처리하는 코드를 추가합니다.
-    // 이 부분은 서버 API와 연동하여 이미지 업로드 기능을 구현해야 합니다.
-    // 이미지 업로드 후, 업로드된 이미지의 URL을 `voiceDetail.voiceAvatarUrl`로 업데이트합니다.
+    if (newImage) {
+      const formData = new FormData();
+      formData.append('image', newImage);
+
+      customAxios
+        .post('upload-image-endpoint', formData)
+        .then(response => {
+          const newImageUrl = response.data.imageUrl;
+          setVoiceDetail(prevState => ({
+            ...prevState,
+            voiceAvatarUrl: newImageUrl,
+          }));
+          setIsEditing(false);
+        })
+        .catch(error => {
+          console.error("이미지 업로드 중 오류 발생:", error);
+        });
+    }
   };
 
   if (voiceDetail === null) {
@@ -89,17 +112,48 @@ function EditVoiceDetail() {
       <div className={styles.contentContainer}>
         <div className={styles.upBox}>
           <div className={styles.imgContainer}>
-            <img src={newImage || voiceDetail.voiceAvatarUrl} alt={voiceDetail.voiceTitle} className={styles.img} />
-            <button> 이미지 수정 </button>
+            <UploadImgOri
+              imgUrl={voiceDetail.voiceAvatarUrl}
+              setImgUrl={setVoiceAvatarUrl}
+            />
+            <button className={styles.savebtn} onClick={handleSaveClick}>저장</button>
           </div>
-          <div className={styles.stateBox}>여긴 상태변경</div>
+          <div className={styles.stateBox}>
+            <State voiceDetail={voiceDetail} />
+          </div>
         </div>
 
         <div className={styles.downBox}>
-          <div className={styles.voiceTitle}>{voiceDetail.voiceTitle}</div>
-          <div className={styles.memo}>Memo: {voiceDetail.memo}</div>
+          {isEditing ? (
+            <><div className={styles.voiceTitle}>
+              <input
+                type="text"
+                value={voiceTitle}
+                onChange={e => setVoiceTitle(e.target.value)}
+                className={styles.inputTitle}
+              />
+              </div>
+              <div className={styles.memo} >
+              <input
+                type="text"
+                value={memo}
+                onChange={e => setMemo(e.target.value)}
+                className={styles.inputMemo}
+              />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={styles.voiceTitle}>{voiceDetail.voiceTitle}</div>
+              <div className={styles.memo}>{voiceDetail.memo}</div>
+            </>
+          )}
           <div className={styles.buttons}>
-            <button onClick={handleEditClick}>수정</button>
+            {isEditing ? (
+              <button onClick={handleSaveClick}>저장</button>
+            ) : (
+              <button onClick={handleEditClick}>수정</button>
+            )}
             <button onClick={handleDeleteClick}>삭제</button>
           </div>
         </div>
