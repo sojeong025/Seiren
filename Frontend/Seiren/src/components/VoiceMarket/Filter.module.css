@@ -11,21 +11,14 @@
 }
 .searchbar{
   height: 50px;
-  width: 40vw;
-  border-radius: 8px;
-  border: 0.8px solid gray;
+  width: 50vw;
+  border-radius: 4px;
+  border: 0.8px solid #ddd;
   font-size: 16px;
-  font-style: italic;
   padding: 10px;
-}
-.search_btn{
-  right: 280px;
-  position: absolute;
-  background-color: #ddd;
+  font-family: 'S-CoreDream-4Regular';
   margin-left: 30px;
-  width: 100px;
-  height: 40px;
-  border-radius: 8px;
-  border: none;
-  font-size: 16px;
+}
+.searchbar:focus{
+  outline: none;
 }

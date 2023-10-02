@@ -64,7 +64,8 @@ function Filter({products, setProducts}) {
       setSearch(e.target.value);
   }
 
-  const getProductNickname = () =>{
+  const getProductNickname = (event) =>{
+    event.preventDefault();
     customAxios.get(`products?nickname=${search}&age=${selectAge}&mood=${selectMood}&gender=${selectGender}&sortType=${sortType}&page=${page}`)
     .then((res)=>{
       console.log(res.data.response.productDtoList);
@@ -76,7 +77,7 @@ function Filter({products, setProducts}) {
     <div className={styles.filter}>
       {/* 필터 넣는 곳 */}
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">Gender</InputLabel>
+        <InputLabel id="demo-simple-select-standard-label">성별</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
@@ -85,7 +86,7 @@ function Filter({products, setProducts}) {
           label="gender"
         >
           <MenuItem value="-1">
-            <em>All</em>
+            <em>기본</em>
           </MenuItem>
           {
             gender && gender.map((data, i)=>
@@ -96,7 +97,7 @@ function Filter({products, setProducts}) {
       </FormControl>
 
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+        <InputLabel id="demo-simple-select-standard-label">연령대</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
@@ -105,7 +106,7 @@ function Filter({products, setProducts}) {
           label="age"
         >
           <MenuItem value="-1">
-            <em>All</em>
+            <em>기본</em>
           </MenuItem>
           {
             age && age.map((data, i)=>
@@ -116,7 +117,7 @@ function Filter({products, setProducts}) {
       </FormControl>
 
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">Mood</InputLabel>
+        <InputLabel id="demo-simple-select-standard-label">분위기</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
@@ -125,7 +126,7 @@ function Filter({products, setProducts}) {
           label="mood"
         >
           <MenuItem value="-1">
-            <em>All</em>
+            <em>기본</em>
           </MenuItem>
           {
             mood && mood.map((data, i)=>
@@ -134,16 +135,11 @@ function Filter({products, setProducts}) {
           }
         </Select>
       </FormControl>
-      <div className={styles.search}>
-        <input className={styles.searchbar} placeholder='seach user nickname' type="text" value={search} onChange={(e)=>searchChange(e)}/>
-        <button type="submit" className={styles.search_btn} onClick={getProductNickname}>검색</button>
-      </div>
-
 
       {/* 정렬 */}
       <div className={styles.sort}>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">Sort</InputLabel>
+        <InputLabel id="demo-simple-select-standard-label">정렬</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
@@ -160,8 +156,11 @@ function Filter({products, setProducts}) {
         </Select>
       </FormControl>
     </div>
-
-
+      <div className={styles.search}>
+        <form className={styles.search} onSubmit={getProductNickname}>
+          <input className={styles.searchbar} placeholder='seach user nickname' type="text" value={search} onChange={(e)=>searchChange(e)}/>
+        </form>
+      </div>
     </div>
   );
 }

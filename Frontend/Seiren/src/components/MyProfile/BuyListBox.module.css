@@ -93,8 +93,3 @@ th span{
   border-bottom: none !important;
   padding-right: 30px !important;
 }
-
-/* 페이지 확인 위해 일단 넣어둔 곳입니다 이것도 수정 할 예정 */
-.page a{
-  color: black;
-}
