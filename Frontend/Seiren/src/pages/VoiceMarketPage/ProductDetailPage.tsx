@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import { customAxios } from '../../libs/axios';
 import { Link } from 'react-router-dom';
 import styles from './ProductDetailPage.module.css';
-import { BsHeartFill, BsHeart} from "react-icons/bs"
+import { BsHeartFill, BsHeart, Bs1CircleFill, Bs2CircleFill, Bs3CircleFill
+        , Bs1Circle, Bs2Circle, Bs3Circle} from "react-icons/bs"
 import AWS, { AlexaForBusiness } from "aws-sdk";
 import axios from 'axios';
 
@@ -103,7 +104,10 @@ function ProductDetailPage() {
           </div>
 
           <div className={styles.test}>
-            <div className={styles.text_txt}>TEST</div>
+            <div className={styles.text_txt}>
+              <div>미리듣기 <span> * 상품 당 3번 씩 들을 수 있습니다.</span> </div>
+              <div><Bs1CircleFill/> <Bs2CircleFill /> <Bs3CircleFill /></div>
+            </div>
             <textarea name="test" id="test" cols="30" rows="10" 
             value={testText}
             onChange={(e) => setTestText(e.target.value)}

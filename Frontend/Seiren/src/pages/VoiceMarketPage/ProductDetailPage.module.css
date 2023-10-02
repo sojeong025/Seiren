@@ -88,6 +88,10 @@
   font-size: 20px;
   font-weight: 900;
 }
+.text_txt span{
+  color:#ed5808;
+  font-size: 14px;
+}
 .test textarea{
   resize: none;
 }
