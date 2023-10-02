@@ -28,7 +28,7 @@ import SellList from "./pages/MyPages/SellListPage";
 import SellDetail from "./components/SellLists/SellDetail";
 import DetailPage from "./pages/MyPages/DetailPage";
 import UseVoice from "./pages/MyPages/UseVoicePage";
-import UseVoiceDetail from "./components/UseVoice/useVoiceDetail";
+import UseVoiceDetail from "./components/UseVoice/UseVoiceDetail";
 import YourVoiceDetail from "./components/MyProfile/MyPage/YourVoiceDetail";
 
 // 로그인
