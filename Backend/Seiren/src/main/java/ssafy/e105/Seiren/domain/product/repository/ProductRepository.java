@@ -1,6 +1,7 @@
 package ssafy.e105.Seiren.domain.product.repository;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -57,6 +58,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product findByProductId(Long productId);
 
-    Product findByVoiceId(Long voiceId);
+    Optional<Product> findByVoice_VoiceId(Long voiceId);
 
 }
