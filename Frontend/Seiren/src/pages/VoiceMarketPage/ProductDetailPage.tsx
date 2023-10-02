@@ -16,6 +16,10 @@ function ProductDetailPage() {
   const [productDetail, setProductDetail] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [testText, setTestText] = useState("");
+  const [useCount, setUseCount] = useState(0);
+  const mL = 20;
+  const col = 30;
+  const row = 10;
 
   const colors = ['#e9defa', '#d9afd9', '#abecd6']; 
 
@@ -30,6 +34,12 @@ function ProductDetailPage() {
       .catch((error) => {
         console.error('API 호출 중 오류 발생:', error);
       });
+
+    customAxios.get(`tts/count/${productId}`)
+    .then((res)=>{
+      console.log(res);
+      setUseCount(res.data.response);
+    })
   }, [productId]);
 
   const handleLikeClick = () => {
@@ -72,6 +82,12 @@ function ProductDetailPage() {
     audio.play();
   };
 
+  const changeTestText = (e) =>{
+    if(e.target.value.length <= 20){
+      setTestText(e.target.value);
+    }
+  }
+
   return (
     <div className={styles.total}>
       <div className={styles.product}>
@@ -106,12 +122,18 @@ function ProductDetailPage() {
           <div className={styles.test}>
             <div className={styles.text_txt}>
               <div>미리듣기 <span> * 상품 당 3번 씩 들을 수 있습니다.</span> </div>
-              <div><Bs1CircleFill/> <Bs2CircleFill /> <Bs3CircleFill /></div>
+              <div>{useCount === 3 ? <><Bs1Circle/> <Bs2Circle/> <Bs3Circle/></>:
+              useCount === 2 ? <><Bs1CircleFill/> <Bs2Circle/> <Bs3Circle/></>:
+              useCount === 1 ? <><Bs1CircleFill/> <Bs2CircleFill/> <Bs3Circle/></>:
+              <><Bs1CircleFill/> <Bs2CircleFill/> <Bs3CircleFill/></>
+              }</div>
             </div>
-            <textarea name="test" id="test" cols="30" rows="10" 
+            <textarea name="test" id="test" cols={col} rows={row} 
             value={testText}
-            onChange={(e) => setTestText(e.target.value)}
+            onChange={(e) => changeTestText(e)}
+            maxLength={mL}
             style={{ resize: 'none' }} placeholder='듣고 싶은 내용을 입력하고 재생 버튼을 클릭하세요.'></textarea>
+            <div className={styles.characterCount}>{testText.length}자 / 20자</div>
             <button onClick={() => marketProduct(testText)}>들어보기</button>
           </div>
 
