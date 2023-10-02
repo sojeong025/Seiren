@@ -1,6 +1,5 @@
 // UseList.tsx
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { customAxios } from "../../libs/axios";
 
 interface UseListProps {

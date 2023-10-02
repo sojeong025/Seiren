@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { customAxios } from "../../libs/axios";
 import styles from "./UseVoiceBox.module.css";
@@ -7,7 +7,6 @@ import Pagination from "../common/Pagination"; // Pagination 컴포넌트 추가
 import { BiSolidSelectMultiple } from "react-icons/bi" 
 import { FaKeyboard } from "react-icons/fa"
 import { MdLibraryMusic } from "react-icons/md"
-import { style } from "@mui/system";
 
 
 function UseVoiceBox() {

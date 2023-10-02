@@ -1,6 +1,4 @@
 import styles from "./FavoriteVoice.module.css";
-import Lottie from "lottie-react";
-
 
 function FavoriteVoice() {
   return (

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import styles from "./MainPage.module.css";
 import { Link as ScrollLink } from "react-scroll"
 import AboutPage from "./AboutPage";

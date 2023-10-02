@@ -1,6 +1,5 @@
 import { customAxios } from "../../libs/axios";
 import styles from './NoVoice.module.css'
-// import UploadImg from "../common/UploadImg";
 import { useEffect, useState } from "react";
 import { LiaRandomSolid } from 'react-icons/lia'
 import { FunctionComponent } from 'react';
