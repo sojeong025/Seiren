@@ -59,6 +59,16 @@
   margin: 4px;
   font-weight: bold;
 }
+.completeButton{
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 5px; 
+  padding: 5px 10px; 
+  cursor: pointer;
+  margin: 4px;
+  font-weight: bold;
+}
 .cancelButton{
   background-color: #fff;
   color: #000;
@@ -68,4 +78,11 @@
   cursor: pointer;
   margin: 4px;
   font-weight: bold;
+}
+.delete {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+  color: gray;
+  text-decoration: underline;
 }
