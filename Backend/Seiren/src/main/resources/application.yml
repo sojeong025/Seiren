@@ -60,8 +60,8 @@ jwt:
   secret: ${secret}
 
   token:
-    token-validity-in-seconds: 86400 # ttl (?)
-    access-token-expiration-sec: 1800
+    token-validity-in-seconds: 864000 # ttl (?)
+    access-token-expiration-sec: 18000
     refresh-token-expiration-sec: 1209600
 
 management:

@@ -35,15 +35,15 @@ public class JwtTokenProvider {
     private final RedisTemplate<String, String> redisTemplate;
 
     private final Environment env;
-    private final long JWT_EXPIRATION_MS = 6000000 * 1;
+    private final long JWT_EXPIRATION_MS = 60000000 * 1;
     private final UserDetailsServiceImpl userDetailsService;
     @Value("${secret}")
     private String secretKey;
     @Value("Authorization")
     private String jwtHeader;
-    @Value("1209600")
-    private long accessExpirationTime;
     @Value("12096000")
+    private long accessExpirationTime;
+    @Value("120960000")
     private long refreshExpirationTime;
 
     /**

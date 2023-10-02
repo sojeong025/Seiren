@@ -18,8 +18,7 @@ import java.util.zip.ZipOutputStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ssafy.e105.Seiren.domain.transaction.dto.ProductAvailabilityDto;
-import ssafy.e105.Seiren.domain.transaction.entity.Transaction;
+import ssafy.e105.Seiren.domain.product.service.ProductService;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.service.UserService;
 import ssafy.e105.Seiren.domain.voice.dto.VoiceDto;
@@ -43,6 +42,7 @@ public class VoiceService {
     private final S3Service s3Service;
     private final RecordService recordService;
     private final ScriptService scriptService;
+    private final ProductService productService;
 
     public VoiceDto getCurrentVoiceId(HttpServletRequest request) {
         List<Voice> list = voiceRepository.findByUser_IdAndStateLessThanOrderByCreatedAtDesc(
@@ -79,7 +79,7 @@ public class VoiceService {
                 userService.getUser(request).getId(),
                 voiceId).orElseThrow(() -> new BaseException(new ApiError(
                 NOT_EXIST_VOICE.getMessage(), NOT_EXIST_VOICE.getCode())));
-        return new VoiceInsertUpdateDto(voice);
+        return new VoiceInsertUpdateDto(voice, productService.getProductId(voice.getVoiceId()));
     }
 
     @Transactional

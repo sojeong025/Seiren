@@ -14,11 +14,15 @@ public class VoiceInsertUpdateDto {
     private String voiceTitle;
     private String memo;
     private String voiceAvatarUrl;
+    private Integer state;
+    private Long productId;
 
-    public VoiceInsertUpdateDto(Voice voice) {
+    public VoiceInsertUpdateDto(Voice voice, Long productId) {
         this.voiceId = voice.getVoiceId();
         this.voiceTitle = voice.getVoiceTitle();
         this.memo = voice.getMemo();
         this.voiceAvatarUrl = voice.getVoiceAvatarUrl();
+        this.state = voice.getState();
+        this.productId = productId;
     }
 }
