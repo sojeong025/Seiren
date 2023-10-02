@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./SellChart.module.css";
 import { customAxios } from "../../libs/axios";
-import { useParams } from "react-router-dom";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import Calendar from 'react-calendar';
 import './ReactCalendar.css';

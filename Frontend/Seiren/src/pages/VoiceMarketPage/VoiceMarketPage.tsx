@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import FavoriteVoice from "../../components/VoiceMarket/FavoriteVoice";
 import Filter from "../../components/VoiceMarket/Filter";
 import styles from "./VoiceMarketPage.module.css";
 import { Link } from "react-router-dom";
 import Pagination from "../../components/common/Pagination";
-import { customAxios } from "../../libs/axios";
-import { BsHeartFill, BsHeart } from "react-icons/bs";
+
 
 interface Product {
   nickname: string;

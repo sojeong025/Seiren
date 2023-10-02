@@ -158,7 +158,7 @@ function ProductDetailPage() {
 
           <div className={styles.btn}>
             <div className={styles.table}>가격표 보기</div>
-            <Link to="/purchase">
+            <Link to={`/purchase/${productId}`}>
               <div className={styles.buy}>구매 하기</div>
             </Link>
             <div className={styles.wish} onClick={handleLikeClick}>

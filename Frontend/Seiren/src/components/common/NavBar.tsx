@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./NavBar.module.css";
-import useScrollDirection from "../../hooks/useScrollDirection";
 import { UserState } from "../../recoil/UserAtom";
 import { customAxios } from "../../libs/axios";
 import { useRecoilState } from "recoil";

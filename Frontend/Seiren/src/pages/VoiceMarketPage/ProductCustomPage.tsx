@@ -2,9 +2,7 @@ import styles from './ProductCutomPage.module.css'
 import { customAxios } from '../../libs/axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { VoiceIdState } from '../../recoil/RecordAtom';
-import AWS, { AlexaForBusiness } from "aws-sdk";
+import AWS from "aws-sdk";
 import { motion, AnimatePresence } from 'framer-motion';
 import { BiSolidCheckSquare } from 'react-icons/bi'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'

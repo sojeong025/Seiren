@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { UserState } from "../../../recoil/UserAtom";
 import { customAxios } from "../../../libs/axios";
@@ -130,26 +130,36 @@ function EditProfileModal() {
       content={
         <div className={styles.modalContainer}>
           <h2 className={styles.modalTitle}>프로필 수정</h2>
-          <EditImage />
-          <div className={styles.formGroup}>
-            {error && <div className={styles.error}>{error}</div>}
-            {nicknameMessage && <div className={styles.message}>{nicknameMessage}</div>}
-            <label htmlFor="newNickname">닉네임 : </label>
-            <input
-              type="text"
-              id="newNickname"
-              value={newNickname}
-              onChange={handleNicknameChange}
-              disabled={isSubmitting}
-              className={styles.inputField} // CSS 모듈에서 정의한 클래스를 사용
-            />
-            <button
-              onClick={handleCheckNickname}
-              disabled={isSubmitting}
-              className={styles.checkButton} // CSS 모듈에서 정의한 클래스를 사용
-            >
-              중복 확인
-            </button>
+          <div className={styles.total}>
+            {/* 이미지 바꾸는 곳 */}
+            <div>
+              <EditImage />
+              
+            </div>
+            {/* 닉네임 바꾸는 곳 */}
+            <div>
+              <div className={styles.formGroup}>
+                {error && <div className={styles.error}>{error}</div>}
+                {nicknameMessage && <div className={styles.message}>{nicknameMessage}</div>}
+                  <label htmlFor="newNickname">닉네임 : </label>
+                  <input
+                    type="text"
+                    id="newNickname"
+                    value={newNickname}
+                    onChange={handleNicknameChange}
+                    disabled={isSubmitting}
+                    className={styles.inputField} // CSS 모듈에서 정의한 클래스를 사용
+                  />
+                <button
+                  onClick={handleCheckNickname}
+                  disabled={isSubmitting}
+                  className={styles.checkButton} // CSS 모듈에서 정의한 클래스를 사용
+                >
+                  중복 확인
+                </button>
+              </div>
+
+            </div>
           </div>
           <div className={styles.buttons}>
             <button

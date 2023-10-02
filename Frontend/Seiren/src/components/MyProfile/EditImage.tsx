@@ -47,8 +47,10 @@ function EditImage() {
   }, [uploadedImageUrl, setUserInfo]);
 
   return (
-    <div>
-      <div className={styles.text}>프로필 이미지</div>
+    <div className={styles.changeImg}>
+      <div className={styles.text}>
+        프로필 이미지
+      </div>
       <div className={styles.EditContainer}>
         <div className={styles.upload}>
         <UploadImg imgUrl={uploadedImageUrl} setImgUrl={setUploadedImageUrl} />
