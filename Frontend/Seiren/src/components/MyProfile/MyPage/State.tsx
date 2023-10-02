@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // useNavigate 추가
+import { customAxios } from "../../../libs/axios";
 import styles from "./State.module.css";
 
 function State({ voiceDetail }) {
