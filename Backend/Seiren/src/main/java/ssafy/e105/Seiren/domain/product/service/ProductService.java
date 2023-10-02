@@ -11,6 +11,7 @@ import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_US
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -184,6 +185,7 @@ public class ProductService {
     }
 
     public Long getProductId(Long voiceId) {
-        return productRepository.findByVoiceId(voiceId).getProductId();
+        Optional<Product> optionalProduct = productRepository.findByVoice_VoiceId(voiceId);
+        return optionalProduct.map(Product::getProductId).orElse(null);
     }
 }
