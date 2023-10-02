@@ -4,6 +4,9 @@
   align-items: center;
   position: relative;
 }
+.imageContainer {
+  position: relative;
+}
 
 .profileImage {
   width: 120px;
@@ -26,8 +29,8 @@
 .editIcon {
   position: absolute;
   color: #000;
-  bottom: 55px;
-  right: 5px;
+  bottom: 20px;
+  right: 3px;
   width: 30px;
   height: 30px;
   cursor: pointer;

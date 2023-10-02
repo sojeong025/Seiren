@@ -5,6 +5,7 @@ import { customAxios } from "../../libs/axios";
 import styles from "./EditProfile.module.css";
 import MyModal from "../common/MyModal";
 import EditImage from "../MyProfile/EditImage";
+import UserDelete from "./UserDelete";
 
 function EditProfileModal() {
   // Recoil 상태 및 초기값 설정
@@ -77,45 +78,47 @@ function EditProfileModal() {
     return true;
   };
 
-// 폼 제출 함수
-const handleSubmit = async () => {
-  setIsSubmitting(true);
-  setError(null);
+  // 폼 제출 함수
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    setError(null);
 
-  if (isNicknameAvailable === null) {
-    setNicknameMessage("중복확인을 해주세요!");
-    setIsSubmitting(false); // 변경 시도를 중단
-    return;
-  }
-
-  try {
-    if (!validateNickname(newNickname)) {
-      setIsSubmitting(false); // 변경 시도를 중단
-      return;
-    }
-    
-    if (!isNicknameAvailable) {
-      setError("이미 사용 중인 닉네임입니다.");
+    if (isNicknameAvailable === null) {
+      setNicknameMessage("중복확인을 해주세요!");
       setIsSubmitting(false); // 변경 시도를 중단
       return;
     }
 
-    await customAxios.put("user/nicknames", { nickname: newNickname });
-    setUserInfo(prev => ({ ...prev, nickname: newNickname }));
+    try {
+      if (!validateNickname(newNickname)) {
+        setIsSubmitting(false); // 변경 시도를 중단
+        return;
+      }
 
-    // 성공적으로 제출되면 모달을 닫음
-    setModalIsOpen(false);
-  } catch (error) {
-    console.error("프로필 변경 중 오류 발생:", error);
-    setError("프로필 변경 중 오류 발생");
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+      if (!isNicknameAvailable) {
+        setError("이미 사용 중인 닉네임입니다.");
+        setIsSubmitting(false); // 변경 시도를 중단
+        return;
+      }
 
+      await customAxios.put("user/nicknames", { nickname: newNickname });
+      setUserInfo(prev => ({ ...prev, nickname: newNickname }));
+
+      // 성공적으로 제출되면 모달을 닫음
+      setModalIsOpen(false);
+    } catch (error) {
+      console.error("프로필 변경 중 오류 발생:", error);
+      setError("프로필 변경 중 오류 발생");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // 모달 닫기 함수
   const handleCancel = () => {
+    setModalIsOpen(false);
+  };
+  const handleComplete = () => {
     setModalIsOpen(false);
   };
 
@@ -148,10 +151,17 @@ const handleSubmit = async () => {
             >
               중복 확인
             </button>
-          </div>
-          <div className={styles.buttons}>
             <button onClick={handleSubmit} disabled={!isSubmitEnabled} className={styles.submitButton}>
               {isSubmitting ? "변경중.." : "변경"}
+            </button>
+          </div>
+          <div className={styles.buttons}>
+            <button
+              onClick={handleComplete}
+              disabled={isSubmitting}
+              className={styles.completeButton} // 완료 버튼에 대한 CSS 클래스를 정의해야 합니다.
+            >
+              완료
             </button>
             <button
               onClick={handleCancel}
@@ -161,6 +171,7 @@ const handleSubmit = async () => {
               취소
             </button>
           </div>
+          <UserDelete/>          
         </div>
       }
       open={modalIsOpen}
