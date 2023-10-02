@@ -13,6 +13,9 @@ const MyPage: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({
   const [nickname, setNickname] = useState('');
   const [ableCount, setAbleCount] = useState(0); // 기본값 설정
   const [unableCount, setUnableCount] = useState(0); // 기본값 설정
+  const [oneOrLessCount, setOneOrLessCount] = useState(0);
+  const [twoOrMoreCount, setTwoOrMoreCount] = useState(0);
+
 
   useEffect(() => {
     setIsNavBarVisible(false);
@@ -40,6 +43,18 @@ const MyPage: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({
       .catch((error) => console.error('API 호출 중 오류 발생:', error));
   }, []);
 
+  useEffect(() => {
+    customAxios
+      .get(`state/count`)
+      .then((response) => {
+        const oneOrLessCount = response.data.response.oneOrLessCount;
+        const twoOrMoreCount = response.data.response.twoOrMoreCount;
+        setOneOrLessCount(oneOrLessCount);
+        setTwoOrMoreCount(twoOrMoreCount);
+      })
+      .catch((error) => console.error('API 호출 중 오류 발생:', error));
+  }, []);
+
   return (
     <div className={styles.myPageContainer}>
       <SideBar />
@@ -60,12 +75,12 @@ const MyPage: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({
             <div className={styles.my_state}>
               <div>
                 생성 중 <br />
-                <span>0개</span>
+                <span>{oneOrLessCount}개</span>
               </div>
               <hr />
               <div>
                 생성 완료 <br />
-                <span>0개</span>
+                <span className={styles.color}>{twoOrMoreCount}개</span>
               </div>
             </div>
           </div>
@@ -81,7 +96,7 @@ const MyPage: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({
               <hr />
               <div>
                 사용 완료 <br />
-                <span>{unableCount}개</span>
+                <span className={styles.color}>{unableCount}개</span>
               </div>
             </div>
           </div>

@@ -49,6 +49,9 @@
 .my_state hr{
   height: 60px;
 }
+.color{
+  color: #ed5808;
+}
 .my_state span{
   padding-top: 30px;
   font-size: 24px;
