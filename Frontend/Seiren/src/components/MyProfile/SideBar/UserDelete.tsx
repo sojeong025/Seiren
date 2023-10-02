@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { customAxios } from "../../libs/axios";
+import { customAxios } from "../../../libs/axios";
 import styles from "./UserDelete.module.css";
-import MyModal from "../common/MyModal";
+import MyModal from "../../common/MyModal";
 import { useNavigate } from "react-router-dom";
 
 function UserDelete() {

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import styles from "./BuyList.module.css";
-import BuyListBox from "../../components/MyProfile/BuyListBox";
+import styles from "./BuyListPage.module.css";
+import BuyListBox from "../../components/MyProfile/Buy/BuyListBox";
 import SideBar from "../../components/common/SideBar";
 
 const BuyList: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({ setIsNavBarVisible }) => {

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { customAxios } from "../../libs/axios";
+import { customAxios } from "../../../libs/axios";
 import styles from "./YourVoiceDetail.module.css";
 
 function EditVoiceDetail() {

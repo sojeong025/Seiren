@@ -1,4 +1,4 @@
-import styles from "./SellList.module.css";
+import styles from "./SellListPage.module.css";
 import { useEffect } from 'react';
 import SellListBox from "../../components/SellLists/SellListBox";
 import SellChart from "../../components/ChartBox/SellChart";

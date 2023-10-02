@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './MyPage.module.css';
-import Likes from '../../components/MyProfile/Likes';
-import YourVoice from '../../components/MyProfile/YourVoice';
+import Likes from '../../components/MyProfile/MyPage/Likes';
+import YourVoice from '../../components/MyProfile/MyPage/YourVoice';
 import SideBar from '../../components/common/SideBar';
 import { customAxios } from '../../libs/axios';
 import { BiHeadphone } from 'react-icons/bi';

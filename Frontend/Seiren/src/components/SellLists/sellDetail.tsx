@@ -4,9 +4,19 @@ import { useParams } from "react-router-dom";
 import styles from "./SellDetail.module.css";
 import SellDetailList from "./SellDetailList";
 
+
+interface Product {
+  productTitle: string;
+  productImageUrl: string;
+  productCategoryList: string[];
+  summary: string;
+  nickname: string;
+}
+
 function SellDetail() {
   const { productId } = useParams();
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState<Product | null>(null);
+  
   console.log(productId);
   useEffect(() => {
     customAxios

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { useRecoilState } from "recoil";
-import { likeListState } from "../../recoil/UserAtom";
-import { customAxios } from "../../libs/axios";
+import { likeListState } from "../../../recoil/UserAtom";
+import { customAxios } from "../../../libs/axios";
 import styles from "./Likes.module.css";
 
 function Likes() {
