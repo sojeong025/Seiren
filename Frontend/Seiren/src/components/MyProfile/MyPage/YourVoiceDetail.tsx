@@ -9,7 +9,6 @@ function EditVoiceDetail() {
   const { voiceId } = useParams();
   const [voiceDetail, setVoiceDetail] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [newImage, setNewImage] = useState(null);
   const [voiceTitle, setVoiceTitle] = useState(""); // 상태로 voiceTitle을 관리합니다.
   const [memo, setMemo] = useState(""); // 상태로 memo를 관리합니다.
   const [voiceAvatarUrl, setVoiceAvatarUrl] = useState(""); //
@@ -68,39 +67,6 @@ function EditVoiceDetail() {
         navigate("/my-page");
       })
       .catch(err => console.log(err));
-  };
-
-  const handleImageChange = e => {
-    const file = e.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = e => {
-        setNewImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleImageUpload = () => {
-    if (newImage) {
-      const formData = new FormData();
-      formData.append('image', newImage);
-
-      customAxios
-        .post('upload-image-endpoint', formData)
-        .then(response => {
-          const newImageUrl = response.data.imageUrl;
-          setVoiceDetail(prevState => ({
-            ...prevState,
-            voiceAvatarUrl: newImageUrl,
-          }));
-          setIsEditing(false);
-        })
-        .catch(error => {
-          console.error("이미지 업로드 중 오류 발생:", error);
-        });
-    }
   };
 
   if (voiceDetail === null) {

@@ -1,11 +1,14 @@
 import styles from './VoiceStudyingPage.module.css'
+import Lottie from "lottie-react";
+import Voice_studying from "../../assets/lottie/voice_studying.json";
 
 function VoiceStudyingPage() {
   return (
     <div className={styles.container}>
       <div className={styles.contain}>
         <div>
-          <img className={styles.img} src="src/assets/img/working.png" alt="학습중" />
+          {/* <img className={styles.img} src="src/assets/img/working.png" alt="학습중" /> */}
+          <Lottie animationData={Voice_studying} style={{width: '350px', height: '350px'}} />
         </div>
         {/* <div className={styles.percent}>
           20%
