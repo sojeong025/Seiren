@@ -13,7 +13,7 @@ function UseList({ transactionid }: UseListProps) {
 
   useEffect(() => {
     customAxios
-      .get(`transactions/history?transactionid=${transactionid}&page=0`) 
+      .get(`transactions/history?transactionid=${transactionid}&page=1`) 
       .then(response => {
         const responseData = response.data.response;
 
@@ -28,7 +28,7 @@ function UseList({ transactionid }: UseListProps) {
   return (
     <div>
       <div>
-        상품 리스트
+        사용 내역 
         <div>{useList}</div>
       </div>
     </div>
