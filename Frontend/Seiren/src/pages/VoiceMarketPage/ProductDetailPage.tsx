@@ -4,11 +4,9 @@ import { customAxios } from '../../libs/axios';
 import { Link } from 'react-router-dom';
 import styles from './ProductDetailPage.module.css';
 import { BsHeartFill, BsHeart, Bs1CircleFill, Bs2CircleFill, Bs3CircleFill
-        , Bs1Circle, Bs2Circle, Bs3Circle} from "react-icons/bs"
-import AWS, { AlexaForBusiness } from "aws-sdk";
+        , Bs1Circle, Bs2Circle, Bs3Circle, BsFillPlayCircleFill, BsMusicNoteList} from "react-icons/bs"
 import axios from 'axios';
-
-
+import dreamsAudio from "../../assets/audio/dreams.mp3";
 
 
 function ProductDetailPage() {
@@ -18,10 +16,8 @@ function ProductDetailPage() {
   const [testText, setTestText] = useState("");
   const [useCount, setUseCount] = useState(0);
   const mL = 20;
-  const col = 30;
-  const row = 10;
 
-  const colors = ['#e9defa', '#d9afd9', '#abecd6']; 
+  const colors = ['#FFD1DC', '#B2FEBD', '#C5A3FF']; 
 
   useEffect(() => {
     customAxios
@@ -93,7 +89,7 @@ function ProductDetailPage() {
       <div className={styles.product}>
         {productDetail && (
           <div className={styles.product_left}>
-            <div className={styles.nickname}>{productDetail.nickname}</div>
+            {/* <div className={styles.nickname}>{productDetail.nickname}</div> */}
             <img src={productDetail.productImageUrl} alt={productDetail.productTitle} className={styles.img}/>
             <div className={styles.title}>{productDetail.productTitle}</div>
             <div className={styles.summary}>{productDetail.summary}</div>
@@ -114,27 +110,50 @@ function ProductDetailPage() {
         )}
         <div className={styles.product_right}>
           <div className={styles.listen}>
-              <div>들어볼 문장 1</div>
-              <div>들어볼 문장 2</div>
-              <div>들어볼 문장 3</div>
+            <div className={styles.url}>
+              <div className={styles.url_txt}><BsMusicNoteList/> &nbsp;&nbsp; 미리듣기 문장 1</div>
+              <audio controls>
+                {/* <source src={productDetail.audioFileUrl} type="audio/mp3" /> */}
+                <source src={dreamsAudio} type="audio/mp3" />
+              </audio>
+            </div>
+
+            <div className={styles.url}>
+              <div className={styles.url_txt}><BsMusicNoteList/> &nbsp;&nbsp; 미리듣기 문장 2 </div>
+              <audio controls>
+                {/* <source src={productDetail.audioFileUrl} type="audio/mp3" /> */}
+                <source src={dreamsAudio} type="audio/mp3" />
+              </audio>
+            </div>
+
+            <div className={styles.url}>
+              <div className={styles.url_txt}><BsMusicNoteList/> &nbsp;&nbsp; 미리듣기 문장 3 </div>
+              <audio controls>
+                {/* <source src={productDetail.audioFileUrl} type="audio/mp3" /> */}
+                <source src={dreamsAudio} type="audio/mp3" />
+              </audio>  
+            </div>
           </div>
 
           <div className={styles.test}>
             <div className={styles.text_txt}>
-              <div>미리듣기 <span> * 상품 당 3번 씩 들을 수 있습니다.</span> </div>
-              <div>{useCount === 3 ? <><Bs1Circle/> <Bs2Circle/> <Bs3Circle/></>:
+              <div>체험하기 <span> * 각 목소리 상품 당 3번 씩 들을 수 있습니다.</span> </div>
+              <div className={styles.icon}>{useCount === 3 ? <><Bs1Circle/> <Bs2Circle/> <Bs3Circle/></>:
               useCount === 2 ? <><Bs1CircleFill/> <Bs2Circle/> <Bs3Circle/></>:
               useCount === 1 ? <><Bs1CircleFill/> <Bs2CircleFill/> <Bs3Circle/></>:
               <><Bs1CircleFill/> <Bs2CircleFill/> <Bs3CircleFill/></>
               }</div>
             </div>
-            <textarea name="test" id="test" cols={col} rows={row} 
-            value={testText}
-            onChange={(e) => changeTestText(e)}
-            maxLength={mL}
-            style={{ resize: 'none' }} placeholder='듣고 싶은 내용을 입력하고 재생 버튼을 클릭하세요.'></textarea>
+
+            <textarea 
+              name="test" id="test"
+              value={testText}
+              onChange={(e) => changeTestText(e)}
+              maxLength={mL}
+              style={{ resize: 'none' }} placeholder='듣고 싶은 내용을 입력하고 재생 버튼을 클릭하세요.'>
+            </textarea>
+            <div className={styles.play} onClick={() => marketProduct(testText)}><BsFillPlayCircleFill/></div>
             <div className={styles.characterCount}>{testText.length}자 / 20자</div>
-            <button onClick={() => marketProduct(testText)}>들어보기</button>
           </div>
 
           <div className={styles.btn}>
