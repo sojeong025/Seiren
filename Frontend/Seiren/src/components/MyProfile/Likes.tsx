@@ -26,14 +26,14 @@ function Likes() {
       <div className={styles.likesText}>관심 있는 목소리</div>
       <div className={styles.likesItems}>
         {wishList.map(item => (
-          <div key={item.productId} className={styles.item}>
+          <div key={item.productId} className={styles.card}>
             <Link to={`/product/${item.productId}`}>
-            <div className={styles.card}>
               <img className={styles.pimg} src={item.productImageUrl} alt={item.title} />
+
+
               <div className={styles.titleOverlay}>
                 <div className={styles.title}>{item.title}</div>
               </div>
-            </div>
             </Link>
           </div>
         ))}
