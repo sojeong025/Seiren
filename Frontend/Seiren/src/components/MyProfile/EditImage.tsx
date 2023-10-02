@@ -48,14 +48,9 @@ function EditImage() {
 
   return (
     <div>
-      <div className={styles.text}>프로필 이미지 수정</div>
+      <div className={styles.text}>프로필 이미지</div>
       <div className={styles.EditContainer}>
-        <div className={styles.texta}>
-          <div>변경 전</div>
-        <img src={userInfo.profileImage} alt="프로필 이미지" className={styles.img} />
-        </div>
         <div className={styles.upload}>
-        <div>변경 후</div>
         <UploadImg imgUrl={uploadedImageUrl} setImgUrl={setUploadedImageUrl} />
         </div>
       </div>

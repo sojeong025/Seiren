@@ -37,26 +37,27 @@ function EditProfileModal() {
 
   // 닉네임 중복 체크 함수
   const checkNicknameAvailability = async (nickname: string) => {
-    try {
-      const response = await customAxios.get("user/nicknames/check", { params: { nickname } });
-      const { apiError, response: isAvailable } = response.data;
-
-      if (apiError) {
-        setError("이미 사용 중인 닉네임 입니다.");
-        setIsNicknameAvailable(null);
-        setNicknameMessage(null);
-      } else {
-        setIsNicknameAvailable(isAvailable);
-        setError(null); // 에러 메시지 초기화
-        if (isAvailable) {
-          setNicknameMessage("사용 가능한 닉네임입니다!");
+    if(validateNickname(nickname)){
+      try {
+        const response = await customAxios.get("user/nicknames/check", { params: { nickname } });
+        console.log(response.data.response);
+        if (!response.data.response) {
+          setError("이미 사용 중인 닉네임 입니다.");
+          setIsNicknameAvailable(null);
+          setNicknameMessage(null);
         } else {
-          setNicknameMessage("이미 사용 중인 닉네임입니다.");
+          setIsNicknameAvailable(response.data.response);
+          setError(null); // 에러 메시지 초기화
+          if (response.data.response) {
+            setNicknameMessage("사용 가능한 닉네임입니다!");
+          } else {
+            setNicknameMessage("이미 사용 중인 닉네임입니다.");
+          }
         }
+      } catch (error) {
+        console.error("이미 사용 중인 닉네임 입니다.:", error);
+        setError("이미 사용 중인 닉네임 입니다.");
       }
-    } catch (error) {
-      console.error("이미 사용 중인 닉네임 입니다.:", error);
-      setError("이미 사용 중인 닉네임 입니다.");
     }
   };
 
@@ -64,7 +65,7 @@ function EditProfileModal() {
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setNewNickname(inputValue);
-    validateNickname(inputValue);
+    setIsNicknameAvailable(null);
   };
 
   // 닉네임 유효성 검사 함수
@@ -96,7 +97,7 @@ function EditProfileModal() {
       }
 
       if (!isNicknameAvailable) {
-        setError("이미 사용 중인 닉네임입니다.");
+        setError("닉네임은 2글자 이상 8글자 이하의 문자, 숫자, 한글만 허용됩니다.");
         setIsSubmitting(false); // 변경 시도를 중단
         return;
       }
@@ -119,7 +120,7 @@ function EditProfileModal() {
     setModalIsOpen(false);
   };
   const handleComplete = () => {
-    setModalIsOpen(false);
+    handleSubmit();
   };
 
   const isSubmitEnabled = isNicknameAvailable === true || newNickname === userInfo.nickname;
@@ -130,17 +131,15 @@ function EditProfileModal() {
         <div className={styles.modalContainer}>
           <h2 className={styles.modalTitle}>프로필 수정</h2>
           <EditImage />
-          <div className={styles.nickText}>닉네임 수정</div>
           <div className={styles.formGroup}>
             {error && <div className={styles.error}>{error}</div>}
             {nicknameMessage && <div className={styles.message}>{nicknameMessage}</div>}
-            <label htmlFor="newNickname">새로운 닉네임 : </label>
+            <label htmlFor="newNickname">닉네임 : </label>
             <input
               type="text"
               id="newNickname"
               value={newNickname}
               onChange={handleNicknameChange}
-              onBlur={e => checkNicknameAvailability(e.target.value)}
               disabled={isSubmitting}
               className={styles.inputField} // CSS 모듈에서 정의한 클래스를 사용
             />
@@ -150,9 +149,6 @@ function EditProfileModal() {
               className={styles.checkButton} // CSS 모듈에서 정의한 클래스를 사용
             >
               중복 확인
-            </button>
-            <button onClick={handleSubmit} disabled={!isSubmitEnabled} className={styles.submitButton}>
-              {isSubmitting ? "변경중.." : "변경"}
             </button>
           </div>
           <div className={styles.buttons}>

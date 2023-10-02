@@ -6,6 +6,7 @@ import SellDetailList from "./SellDetailList";
 
 
 interface Product {
+  productId : string;
   productTitle: string;
   productImageUrl: string;
   productCategoryList: string[];

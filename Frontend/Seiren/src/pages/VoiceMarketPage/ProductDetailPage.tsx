@@ -111,7 +111,7 @@ function ProductDetailPage() {
             <textarea name="test" id="test" cols="30" rows="10" 
             value={testText}
             onChange={(e) => setTestText(e.target.value)}
-            resize="none" placeholder='듣고 싶은 내용을 입력하고 재생 버튼을 클릭하세요.'></textarea>
+            style={{ resize: 'none' }} placeholder='듣고 싶은 내용을 입력하고 재생 버튼을 클릭하세요.'></textarea>
             <button onClick={() => marketProduct(testText)}>들어보기</button>
           </div>
 
