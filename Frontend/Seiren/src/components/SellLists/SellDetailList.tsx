@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { customAxios } from "../../libs/axios";
-import { useParams } from "react-router-dom";
 import styles from "./SellDetailList.module.css";
 
 

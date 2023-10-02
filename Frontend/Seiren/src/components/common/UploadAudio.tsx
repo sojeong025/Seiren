@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import AWS, { AlexaForBusiness } from "aws-sdk";
+import AWS from "aws-sdk";
 
 function UploadAudio(){
   const [audioUrl, setAudioUrl] = useState(null);

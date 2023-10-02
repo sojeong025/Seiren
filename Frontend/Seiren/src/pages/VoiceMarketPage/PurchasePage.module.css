@@ -1,6 +1,79 @@
 .total{
   background-color: #fff;
-  padding-top: 100px;
+  padding: 100px 220px 0px;
   min-height: 100vh;
   color: #000;
+  display: flex;
+  flex-direction: column;
+}
+.mainTxt{
+  font-size: 24px;
+  font-weight: 900;
+  margin: 30px 0 20px;
+}
+.container{
+  display: flex;
+}
+.left{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid black;
+  width: 60%;
+}
+.purchase{
+  font-weight: 900;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.img{
+  width: 140px;
+  height: 140px;
+}
+.title, .nickname{
+  margin-left: 20px;
+}
+.title{
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+.nickname{
+  font-size: 14px;
+}
+.intro{
+  display: flex;
+  margin-bottom: 20px;
+}
+/* 가격 */
+.payments{
+  display: flex;
+  flex-direction: column;
+}
+.payments hr{
+  width: 100%;
+}
+.pay {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card {
+  border: 1px solid black;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 140px;
+  height: 80px;
+}
+.letter{
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.right{
+  padding: 20px;
+  width: 40%;
+  border: 1px solid black;
 }

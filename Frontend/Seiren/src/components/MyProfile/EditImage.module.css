@@ -1,25 +1,28 @@
-  .text {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  .texta {
-    text-align: center;
-  }
-  .EditContainer {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-top: 10px;
-  }
-  .img {
-    width: 130px;
-    height: 130px;
-    margin: 20px;
-  }
-  .upload {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  }
+.changeImg{
+  background-color: aqua;
+  height: 300px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text {
+  border: 1px solid black;
+  background-color: #FCFAE8;
+  font-size: 15px;
+  font-weight: 900;
+}
+.EditContainer {
+  border: 1px solid black;
+  width: 60%;
+}
+.img {
+  width: 200px;
+  height: 200px;
+}
+.upload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
