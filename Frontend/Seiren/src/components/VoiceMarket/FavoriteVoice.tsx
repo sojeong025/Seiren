@@ -29,7 +29,7 @@ function FavoriteVoice() {
 
       for (let page = 1; page <= 5; page++) {
         try {
-          const response = await customAxios.get(`productList?page=${page}`);
+          const response = await customAxios.get(`productList?page=1`);
           const voices = response.data.response;
           allVoices.push(...voices);
         } catch (error) {

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { customAxios } from "../../libs/axios";
 import styles from "./UseVoiceDetail.module.css";
-import SideBar from "../../components/common/SideBar";
-import UseList from "../UseVoice/UseList";
+import SideBar from "../common/SideBar";
+import UseList from "./UseList";
 import { RxDot } from "react-icons/rx"
 import { VscSend } from "react-icons/vsc"
 

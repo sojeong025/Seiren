@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { UserState } from "../../recoil/UserAtom";
-import { customAxios } from "../../libs/axios";
+import { UserState } from "../../../recoil/UserAtom";
+import { customAxios } from "../../../libs/axios";
 import styles from "./EditProfile.module.css";
-import MyModal from "../common/MyModal";
-import EditImage from "../MyProfile/EditImage";
+import MyModal from "../../common/MyModal";
+import EditImage from "../../MyProfile/EditImage";
 import UserDelete from "./UserDelete";
 
 function EditProfileModal() {

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { UserState } from "../../recoil/UserAtom";
-import { customAxios } from "../../libs/axios";
+import { UserState } from "../../../recoil/UserAtom";
+import { customAxios } from "../../../libs/axios";
 import styles from "./MyInfo.module.css";
-import avatar from "../../assets/preview.png";
-import Edit from "../MyProfile/EditProfile";
+import avatar from "../../../assets/preview.png";
+import Edit from "./EditProfile";
 import { BiSolidEditAlt } from "react-icons/bi"
 
 function MyInfo() {

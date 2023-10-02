@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import styles from "./BuyListBox.module.css";
-import { customAxios } from "../../libs/axios";
+import { customAxios } from "../../../libs/axios";
 import { useParams, NavLink } from "react-router-dom";
-import Pagination from "../common/Pagination";
+import Pagination from "../../common/Pagination";
 import { IoIosArrowDown } from "react-icons/io";
 
 function BuyListBox() {

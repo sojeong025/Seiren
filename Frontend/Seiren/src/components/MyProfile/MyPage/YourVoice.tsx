@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { myVoiceState } from "../../recoil/UserAtom";
-import { customAxios } from "../../libs/axios";
+import { myVoiceState } from "../../../recoil/UserAtom";
+import { customAxios } from "../../../libs/axios";
 import styles from "./YourVoice.module.css";
 import { Link } from "react-router-dom";
 

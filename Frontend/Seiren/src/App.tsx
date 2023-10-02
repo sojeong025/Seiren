@@ -23,13 +23,13 @@ import VoiceFinishPage from "./pages/VoiceStudyPages/VoiceFinishPage";
 
 // 마이 페이지
 import MyPage from "./pages/MyPages/MyPage";
-import BuyList from "./pages/MyPages/BuyList";
-import SellList from "./pages/MyPages/SellList";
+import BuyList from "./pages/MyPages/BuyListPage";
+import SellList from "./pages/MyPages/SellListPage";
 import SellDetail from "./components/SellLists/SellDetail";
 import DetailPage from "./pages/MyPages/DetailPage";
-import UseVoice from "./pages/MyPages/UseVoice";
-import UseVoiceDetail from "./components/UseVoice/UseVoiceDetail";
-import YourVoiceDetail from "./components/MyProfile/YourVoiceDetail";
+import UseVoice from "./pages/MyPages/UseVoicePage";
+import UseVoiceDetail from "./components/UseVoice/useVoiceDetail";
+import YourVoiceDetail from "./components/MyProfile/MyPage/YourVoiceDetail";
 
 // 로그인
 import LoginPage from "./pages/LoginPages/LoginPage";

@@ -1,4 +1,4 @@
-import styles from "./UseVoice.module.css";
+import styles from "./UseVoicePage.module.css";
 import { useEffect } from "react";
 import UseVoiceBox from "../../components/UseVoice/UseVoiceBox";
 import SideBar from "../../components/common/SideBar";

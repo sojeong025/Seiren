@@ -1,6 +1,6 @@
 import { Link, useLocation, NavLink } from "react-router-dom";
 import styles from "./SideBar.module.css";
-import MyInfo from "../MyProfile/MyInfo";
+import MyInfo from "../MyProfile/SideBar/MyInfo";
 import { IoIosArrowBack } from "react-icons/io"
 
 const menuItems = [
