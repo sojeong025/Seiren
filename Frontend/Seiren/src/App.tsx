@@ -37,6 +37,7 @@ import OAuth2RedirectHandler from "./pages/LoginPages/OAuth2RedirectHandler";
 
 // 공통
 import NavBar from "./components/common/NavBar";
+import ScrollToTop from "./components/common/ScrollToTop";
 
 
 function App() {
@@ -56,6 +57,7 @@ function RoutesComponent({ isNavBarVisible, setIsNavBarVisible }) {
     <>
       {isNavBarVisible && <NavBar />}
         <AnimatePresence mode="wait">
+          <ScrollToTop/>
           <Routes location={location} key={location.pathname}>
 
           <Route path="/" element={<MainPage />} />
