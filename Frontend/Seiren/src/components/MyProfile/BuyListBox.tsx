@@ -10,9 +10,8 @@ function BuyListBox() {
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  // 이부분이 페이지네이션 같아욤 (수정 필요)
   const { page } = useParams();
-  const [currentPage, setCurrentPage] = useState(page || 1); // 현재 페이지 상태 추가 (0부터 시작)
+  const [currentPage, setCurrentPage] = useState(page || 1);
   const itemsPerPage = 10;
 
   useEffect(() => {
@@ -25,8 +24,6 @@ function BuyListBox() {
         console.error("API 호출 중 오류 발생:", error);
       });
   }, []);
-
-  
   
   useEffect(() => {
     customAxios
@@ -55,7 +52,6 @@ function BuyListBox() {
             totalPrice += item.price * item.buyLetterCount;
           });
   
-          // totalPrice를 상태로 설정
           setTotalPrice(totalPrice);
         })
         .catch(error => {
@@ -113,22 +109,18 @@ function BuyListBox() {
           </tbody>
           <tfoot>
             <tr>
-              {/* 수정필요 제현 */}
               <td colSpan={6} className={styles.totalPrice}>
-                총 사용 금액 : {totalPrice}원
+                총 구매 금액 : {totalPrice}원
               </td>
-            </tr>
-            {/* 페이지네이션 수정 필요 */}
-            <tr className={styles.page}>
-              <Pagination
-                itemsPerPage={itemsPerPage}
-                currentPage={currentPage}
-                onPageChange={onPageChange}
-                totalAmount={totalAmount}
-              />
             </tr>
           </tfoot>
         </table>
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+          totalAmount={totalAmount}
+        />
       </div>
     </div>
   );
