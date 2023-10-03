@@ -1,0 +1,50 @@
+.allContainer {
+  padding: 50px 50px 30px 30px;
+}
+.top{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border-radius: 20px;
+  padding : 30px 50px;
+}
+.top_txt{
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+.totalStatic{
+  display: flex;
+}
+.sellChartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.sellChartBox {
+  width: 100%;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.recharts-tooltip {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-size: 14px;
+}
+
+.recharts-legend {
+  margin-top: 20px;
+}
