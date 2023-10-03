@@ -2,6 +2,7 @@ import { useRef } from "react";
 import styles from "./MainPage.module.css";
 import { Link as ScrollLink } from "react-scroll"
 import AboutPage from "./AboutPage";
+import AboutImg from "../assets/img/about.png";
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -30,7 +31,7 @@ function MainPage() {
               <div className={styles.go_about_txt}> ABOUT</div>  
             </div>
           </ScrollLink>
-        <div className={styles.main_img}><img ref={imgRef} src="src/assets/img/about.png" alt="img" onLoad={handleImageLoad} /></div>   
+        <div className={styles.main_img}><img ref={imgRef} src={AboutImg} alt="img" onLoad={handleImageLoad} /></div>   
         </div>
         <hr className={styles.hr} />
       </section>
