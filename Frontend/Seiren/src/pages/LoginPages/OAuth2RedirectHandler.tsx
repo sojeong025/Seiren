@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthenticationService } from './AuthenticationService.tsx';
 
 const OAuth2RedirectHandler: React.FC = () => {
-  let params = new URL(document.URL).searchParams;
+  let params = new URL(window.document.URL).searchParams;
   let code = params.get('code');
   let navigate = useNavigate();
   
