@@ -6,7 +6,6 @@ export const AuthenticationService = {
 
 loginSocialKakao: function(): void {
   window.location.href = KAKAO_AUTH_URL;
-  console.log("url", KAKAO_AUTH_URL);
 },
 
 kakaoLogin: async function(code: string): Promise<AxiosResponse> {

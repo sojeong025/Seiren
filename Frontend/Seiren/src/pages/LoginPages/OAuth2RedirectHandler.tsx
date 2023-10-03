@@ -7,8 +7,8 @@ const OAuth2RedirectHandler: React.FC = () => {
   const [check, setCheck] = useState(false);
 
   // URL에서 'code' 파라미터 추출
-  const searchParams = new URLSearchParams(window.location.search);
-  const code = searchParams.get('code');
+  // const searchParams = new URLSearchParams(window.location.search);
+  const code = new URL(window.location.href).searchParams.get("code");
 
   // 토큰 요청 및 저장하는 함수
   async function fetchToken() {
