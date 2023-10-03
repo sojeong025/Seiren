@@ -26,7 +26,8 @@ function State({ voiceDetail, checkState, setCheckState }) {
         setButtonText("");
         break;
     }
-  }, [checkState]);
+  }, [voiceDetail]);
+
 
   const handleButtonClick = () => {
     if (voiceDetail.productId) {
