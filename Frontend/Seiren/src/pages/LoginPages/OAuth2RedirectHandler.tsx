@@ -6,14 +6,15 @@ import axios, { AxiosResponse } from 'axios';
 const OAuth2RedirectHandler: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-
+  console.log('3');
   useEffect(() => {
     // URL에서 파라미터 추출
     const params = new URL(window.location.href).searchParams;
     const code = params.get('code');
-
+    console.log('4');
     // 토큰 요청 및 저장
     async function fetchToken() {
+      console.log('5');
       try {
         const response = await axios.get(`/api/login/oauth2/code/kakao?code=${code}`);
         console.log('kakaoLogin 성공');
