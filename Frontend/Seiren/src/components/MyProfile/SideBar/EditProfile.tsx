@@ -139,10 +139,15 @@ function EditProfileModal() {
             {/* 닉네임 바꾸는 곳 */}
             <div>
               <div className={styles.formGroup}>
-                {error && <div className={styles.error}>{error}</div>}
-                {nicknameMessage && <div className={styles.message}>{nicknameMessage}</div>}
-                  <label htmlFor="newNickname">닉네임 : </label>
-                  <input
+                
+                <div className={styles.nicknameWrab}>
+                <label htmlFor="newNickname">닉네임 </label>
+                </div>
+              
+                  <div className={styles.inputWrab}>
+                
+                    <div className={styles.inputWrab2}>
+                    <input
                     type="text"
                     id="newNickname"
                     value={newNickname}
@@ -150,13 +155,25 @@ function EditProfileModal() {
                     disabled={isSubmitting}
                     className={styles.inputField} // CSS 모듈에서 정의한 클래스를 사용
                   />
-                <button
+                  <div className={styles.buttonWrab}>
+                  <button
                   onClick={handleCheckNickname}
                   disabled={isSubmitting}
                   className={styles.checkButton} // CSS 모듈에서 정의한 클래스를 사용
                 >
                   중복 확인
                 </button>
+                  </div>
+                    </div>
+                    <div className={styles.messageWrap}>
+                    {error && <div className={styles.error}>{error}</div>}
+                    {nicknameMessage && <div className={styles.message}>{nicknameMessage}</div>}
+                    </div>
+                  
+                  </div>
+                 
+                  
+                
               </div>
 
             </div>
