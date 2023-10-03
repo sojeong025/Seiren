@@ -93,13 +93,15 @@ function UseVoiceBox() {
             />
           ))}
         </div>
+        <div className={styles.page}>
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+          totalAmount={ableCount}
+        />
+        </div>
       </div>
-      <Pagination
-        itemsPerPage={itemsPerPage}
-        currentPage={currentPage}
-        onPageChange={onPageChange}
-        totalAmount={ableCount}
-      />
     </div>
   );
 }
