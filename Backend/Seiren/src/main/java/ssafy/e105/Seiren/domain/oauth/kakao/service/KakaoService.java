@@ -41,8 +41,8 @@ public class KakaoService {
     private String KAKAO_CLIENT_ID;
     @Value("${kakao.client.secret}")
     private String KAKAO_CLIENT_SECRET;
-    //    @Value("${spring.data.kakao-redirectUrl}")
-    @Value("${kakao.redirect.url}")
+    @Value("${spring.data.kakao-redirectUrl}")
+//    @Value("${kakao.redirect.url}")
     private String KAKAO_REDIRECT_URL;
 
     @Transactional
