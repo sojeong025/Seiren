@@ -17,7 +17,7 @@ const SellList: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = (
 
   return (
     <div className={styles.sellCountContainer}>
-      <SideBar />
+      <SideBar/>
       <div className={styles.chart}>
         <SellChart />
         <SellListBox />
