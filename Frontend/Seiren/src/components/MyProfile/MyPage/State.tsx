@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom"; // useNavigate 추가
 import { customAxios } from "../../../libs/axios";
 import styles from "./State.module.css";
 
-function State({ voiceDetail }) {
+function State({ voiceDetail, checkState, setCheckState }) {
   const [buttonText, setButtonText] = useState("");
   const navigate = useNavigate(); // useNavigate 훅 사용
-  const [checkState, setCheckState] = useState(false);
-
+  
   useEffect(() => {
     switch (voiceDetail.state) {
       case 0:
@@ -28,9 +27,6 @@ function State({ voiceDetail }) {
         break;
     }
   }, [checkState]);
-  useEffect(()=>{
-
-  },[buttonText])
 
   const handleButtonClick = () => {
     if (voiceDetail.productId) {

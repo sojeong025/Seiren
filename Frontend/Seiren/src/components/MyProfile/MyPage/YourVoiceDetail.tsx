@@ -14,6 +14,8 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
   const [memo, setMemo] = useState(""); // 상태로 memo를 관리합니다.
   const [voiceAvatarUrl, setVoiceAvatarUrl] = useState(""); //
   const navigate = useNavigate();
+  const [checkState, setCheckState] = useState(false);
+
 
   useEffect(() => {
     setIsNavBarVisible(false); // 네비게이션 바 숨기기
@@ -37,7 +39,7 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
       .catch(error => {
         console.error("API 호출 중 오류 발생:", error);
       });
-  }, [voiceId]);
+  }, [voiceId, checkState]);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -95,7 +97,7 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
               </button>
             </div>
             <div className={styles.stateBox}>
-              <State voiceDetail={voiceDetail} />
+              <State voiceDetail={voiceDetail} checkState={checkState} setCheckState={setCheckState}/>
             </div>
           </div>
 
