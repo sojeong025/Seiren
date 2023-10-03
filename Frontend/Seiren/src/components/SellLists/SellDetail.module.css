@@ -1,9 +1,9 @@
-.sellDetailContainer{
-    padding-top: 100px;
-    margin-left: 220px;
-    margin-right: 220px;
+.container{
+  margin-left: 300px;
+  background-color: #fbfbf7;
+  color: #000;
 }
 .pimg {
-    width: 70px;
-    height: auto;
+  width: 70px;
+  height: auto;
 }
