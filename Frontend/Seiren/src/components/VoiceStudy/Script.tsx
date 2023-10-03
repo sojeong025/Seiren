@@ -1,5 +1,5 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { RecordingState, VoiceIdState, AudioDataState } from '../../recoil/RecordAtom';
+import { RecordingState, VoiceIdState, AudioDataState, RecordCountState } from '../../recoil/RecordAtom';
 import { customAxios } from '../../libs/axios';
 import { useState, useEffect } from 'react';
 import styles from "./Script.module.css"
@@ -26,6 +26,8 @@ async function resampleAudioData(audioData, newSampleRate) {
 }
 
 const Script: React.FC = () => {
+  const [recordCount, setRecordCount] = useRecoilState(RecordCountState);
+
   // 스크립트 state설정
   const [scriptId, setScriptId] = useState();
   const [nextScriptId, setNextScriptId] = useState();
@@ -126,6 +128,15 @@ const Script: React.FC = () => {
         },
       );
     }
+
+    customAxios.get(`records/count/${voiceId}`)
+      .then((res) => {
+        console.log('진행률 요청 성공', res)
+        setRecordCount(res.data.response.recordCount); // 진행률 정보 업데이트
+      })
+      .catch((err) => {console.error('진행률 요청 실패', err)})
+
+    
     setScriptId(nextScriptId);
     customAxios.get(`nextScripts/${nextScriptId}`)
       .then((res) => {
@@ -136,6 +147,7 @@ const Script: React.FC = () => {
       setRecordingStatus("idle");
     }
   }
+
 
   return (
     <div>      
