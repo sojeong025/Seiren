@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom/dist/index";
 import { AuthenticationService } from './AuthenticationService.tsx';
 
 const OAuth2RedirectHandler: React.FC = () => {
