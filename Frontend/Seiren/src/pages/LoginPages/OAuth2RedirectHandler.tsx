@@ -5,7 +5,6 @@ import { AuthenticationService } from './AuthenticationService';
 // OAuth2 인증 처리를 위한 컴포넌트
 const OAuth2RedirectHandler: React.FC = () => {
   // URL에서 파라미터 추출
-  
   let params = new URL(document.URL).searchParams;
   let code = params.get('code');
   let navigate = useNavigate();

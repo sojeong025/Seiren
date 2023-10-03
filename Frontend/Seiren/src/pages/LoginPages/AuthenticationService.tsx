@@ -6,12 +6,11 @@ export const AuthenticationService = {
 
 loginSocialKakao: function(): void {
   window.location.href = KAKAO_AUTH_URL;
-  console.log(window.location.href);
 },
 
 kakaoLogin: async function(code: string): Promise<AxiosResponse> {
-  console.log(code)
-  return await axios.get(`http://j9e105.p.ssafy.io:8080/api/login/oauth2/code/kakao?code=${code}`);
+  console.log('asdasdasd');
+  return await axios.get(`https://j9e105.p.ssafy.io/api/login/oauth2/code/kakao?code=${code}`);
 },
 
 registerSuccessfulLoginForJwt: function( accessToken: string) {
