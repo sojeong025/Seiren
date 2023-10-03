@@ -14,8 +14,11 @@ interface Product {
   nickname: string;
   price: number;
 }
+interface SellDetailProps {
+  setIsNavBarVisible: (value: boolean) => void; // setIsNavBarVisible 프로퍼티 추가
+}
 
-function SellDetail() {
+function SellDetail({ setIsNavBarVisible }: SellDetailProps) {
   const { productId } = useParams();
   const [isEditing, setIsEditing] = useState(false);
   const [productTitle, setProductTitle] = useState("");
@@ -31,6 +34,12 @@ function SellDetail() {
     nickname: "",
     price: 0,
   });
+  useEffect(() => {
+    setIsNavBarVisible(false); // setIsNavBarVisible 사용
+    return () => {
+      setIsNavBarVisible(true); // 컴포넌트 언마운트 시 다시 설정
+    };
+  }, [setIsNavBarVisible]);
   useEffect(() => {
     customAxios
       .get(`product/${productId}`)
