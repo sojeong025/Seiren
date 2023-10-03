@@ -13,13 +13,15 @@
 }
 .container{
   display: flex;
+  margin-bottom: 50px;
 }
 .left{
   display: flex;
   flex-direction: column;
   padding: 20px;
-  border: 1px solid black;
+  border: 1px solid #999999;
   width: 60%;
+  margin-right: 5px;
 }
 .purchase{
   font-weight: 900;
@@ -50,16 +52,22 @@
   display: flex;
   flex-direction: column;
 }
-.payments hr{
+.payments hr, .reason hr{
   width: 100%;
 }
 .pay {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
+}
+.bold{
+  font-weight: 900;
+  font-size: 18px;
+  margin-bottom: 5px;
 }
 .card {
-  border: 1px solid black;
+  border: 1px solid #999999;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -67,13 +75,68 @@
   border-radius: 10px;
   width: 140px;
   height: 80px;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+.card:hover{
+  border: 2px solid #ed5808;
+}
+.card.selected{
+  border: 2px solid #ed5808;
+
 }
 .letter{
   font-size: 20px;
   margin-bottom: 10px;
 }
+
+/* 구매목적 */
+.reason {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 오른쪽 */
 .right{
   padding: 20px;
   width: 40%;
-  border: 1px solid black;
+  border: 1px solid #999999;
+  margin-left: 10px;
+  position: relative;
+}
+.dummy{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.finish{
+  font-size: 18px;
+  margin-top: 20px;
+  font-weight: 900;
+}
+.rule{
+  background-color: #FFFFE0;
+  color: #999999;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 3px;
+  font-size: 12px;
+}
+.rule2{
+  text-align: center;
+  font-size: 12px;
+  margin: 10px 0;
+}
+.btn{
+  background-color: #ffe500;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  width: 90%;
+  font-weight: 900;
 }
