@@ -8,7 +8,7 @@ export default defineConfig({
   base: './',
   build: {
     minify: false
-  }
+  },
   define: {
     'global' : {},
   },
