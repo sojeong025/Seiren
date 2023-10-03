@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { AuthenticationService } from './AuthenticationService';
+import { AuthenticationService } from './AuthenticationService.tsx';
 
 const OAuth2RedirectHandler: React.FC = () => {
   let params = new URL(document.URL).searchParams;
@@ -29,8 +29,7 @@ const OAuth2RedirectHandler: React.FC = () => {
   }, [code, navigate]);
     
   return (
-    <>
-    </>
+    <></>
   )
 }
 
