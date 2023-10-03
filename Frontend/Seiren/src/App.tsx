@@ -65,7 +65,7 @@ function RoutesComponent({ isNavBarVisible, setIsNavBarVisible }) {
           {/* 목소리 장터 페이지 */}
           <Route path="/voice-market" element={<VoiceMarketPage />} />
           <Route path="/product/:productId" element={<ProductDetailPage />} />
-          <Route path="/product-custom" element={<ProductCustomPage />} />
+          <Route path="/product-custom/:voiceId" element={<ProductCustomPage />} />
           <Route path="/purchase/:productId" element={<PurchasePage />} />
 
           {/* 목소리 등록 페이지 */}

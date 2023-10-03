@@ -6,6 +6,7 @@ import styles from "./State.module.css";
 function State({ voiceDetail }) {
   const [buttonText, setButtonText] = useState("");
   const navigate = useNavigate(); // useNavigate 훅 사용
+  const [checkState, setCheckState] = useState(false);
 
   useEffect(() => {
     switch (voiceDetail.state) {
@@ -26,7 +27,7 @@ function State({ voiceDetail }) {
         setButtonText("");
         break;
     }
-  }, [voiceDetail]);
+  }, [checkState]);
 
   const handleButtonClick = () => {
     if (voiceDetail.productId) {
@@ -34,6 +35,11 @@ function State({ voiceDetail }) {
         .put(`product/state/${voiceDetail.productId}`)
         .then(response => {
           console.log(response);
+          if(checkState === false){
+            setCheckState(true);
+          }else{
+            setCheckState(false);
+          }
         })
         .catch(error => {
           console.error("API 호출 중 오류 발생:", error);
@@ -47,7 +53,7 @@ function State({ voiceDetail }) {
         navigate("/voice-record");
         break;
       case 2:
-        navigate("/voice-finish");
+        navigate(`/product-custom/${voiceDetail.voiceId}`);
         break;
       default:
         break;
