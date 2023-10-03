@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import styles from "./SellDetail.module.css";
 import SellDetailList from "./SellDetailList";
 import UploadImgOri from "../common/UploadImgOri";
+import SideBar from "../../components/common/SideBar";
+
 
 interface Product {
   productId: string;
@@ -15,7 +17,17 @@ interface Product {
   price: number;
 }
 
-function SellDetail() {
+
+const SellDetail : React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({ setIsNavBarVisible }) => {
+  useEffect(() => {
+    setIsNavBarVisible(false);
+
+    return()=>{
+      setIsNavBarVisible(true)
+    }
+    
+  }, [setIsNavBarVisible]);
+
   const { productId } = useParams();
   const [isEditing, setIsEditing] = useState(false);
   const [productTitle, setProductTitle] = useState("");
@@ -78,14 +90,15 @@ function SellDetail() {
 
   return (
     <div className={styles.sellDetailContainer}>
-      <div>
-        <h1>
+      <SideBar/>
+      <div className={styles.container}>
+        <div>
           {isEditing ? (
             <input type="text" value={productTitle} onChange={e => setProductTitle(e.target.value)} />
           ) : (
             product.productTitle
           )}
-        </h1>
+        </div>
         <div>
           {isEditing ? (
             <>
