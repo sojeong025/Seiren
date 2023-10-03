@@ -1,47 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { AuthenticationService } from './AuthenticationService';
 
+// OAuth2 인증 처리를 위한 컴포넌트
 const OAuth2RedirectHandler: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
+  // URL에서 파라미터 추출
+  let params = new URL(document.URL).searchParams;
+  let code = params.get('code');
+  let navigate = useNavigate();
+  const [check, setCheck] = useState(false);
 
-  useEffect(() => {
-    // URL에서 파라미터 추출
-    const params = new URL(window.location.href).searchParams;
-    const code = params.get('code');
+  // 토큰 요청 및 저장하는 함수
+  async function fetchToken() {
+    try {
+        const res = await AuthenticationService.kakaoLogin(code as string);
+        console.log('kakaoLogin 성공');
+        console.log(res);
 
-    // 토큰 요청 및 저장
-    async function fetchToken() {
-      try {
-        if (code) {
-          const response = await axios.get(`/api/login/oauth2/code/kakao?code=${code}`);
-          console.log('kakaoLogin 성공');
-          console.log(response.data);
+        // 토큰을 로컬 스토리지에 저장
+        localStorage.setItem('kakaoLogin', "true");
 
-          // 토큰을 로컬 스토리지에 저장
-          localStorage.setItem('accessToken', response.data.accessToken);
-
-          // JWT 로그인 처리 또는 다른 로직을 수행
-          // AuthenticationService.registerSuccessfulLoginForJwt(response.data.accessToken);
-        } else {
-          console.error('인증 코드가 없습니다.');
-        }
+        // JWT 로그인 처리
+        AuthenticationService.registerSuccessfulLoginForJwt(res.data.response.accessToken);
       } catch (error) {
-        console.error('kakaoLogin 실패', error);
-      } finally {
-        setIsLoading(false);
+        console.log('kakaoLogin 실패');
       }
     }
+    
 
-    fetchToken();
-  }, [navigate]);
-
-  if (isLoading) {
-    return <div>로그인 중...</div>;
-  }
-
-  return <div>로그인 완료!</div>;
-};
+    // 컴포넌트가 마운트될 때 한 번만 실행
+    useEffect(()=>{
+      setCheck(true);
+    },[]);
+    
+    // check 상태 변경 시 실행되는 효과
+    useEffect(() => {
+      if(check === true){
+        fetchToken(); // 토큰 요청 및 저장
+        navigate('/');
+      }
+    }, [check]);
+    
+    
+  return (
+    <div>
+      로그인 중
+    </div>
+  )
+}
 
 export default OAuth2RedirectHandler;
