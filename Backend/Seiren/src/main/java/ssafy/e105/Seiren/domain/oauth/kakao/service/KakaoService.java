@@ -1,5 +1,7 @@
 package ssafy.e105.Seiren.domain.oauth.kakao.service;
 
+import java.util.Optional;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
@@ -23,35 +25,30 @@ import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.repository.UserRepository;
 import ssafy.e105.Seiren.global.jwt.JwtTokenProvider;
 
-import java.util.Optional;
-import java.util.UUID;
-
 @Service
 @Slf4j
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class KakaoService {
 
+    private final static String KAKAO_AUTH_URI = "https://kauth.kakao.com";
+    private final static String KAKAO_API_URI = "https://kapi.kakao.com";
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
-
     @Value("${kakao.client.id}")
-    private  String KAKAO_CLIENT_ID;
-
+    private String KAKAO_CLIENT_ID;
     @Value("${kakao.client.secret}")
     private String KAKAO_CLIENT_SECRET;
-
-    @Value("${kakao.redirect.url}")
+    @Value("${spring.data.kakao-redirectUrl}")
     private String KAKAO_REDIRECT_URL;
 
-    private final static String KAKAO_AUTH_URI = "https://kauth.kakao.com";
-    private final static String KAKAO_API_URI = "https://kapi.kakao.com";
-
     @Transactional
-    public TokenDto getKakaoInfo(String code) throws Exception{
-        if(code == null) throw  new Exception("코드를 가져오는데 오류가 발생했습니다.");
+    public TokenDto getKakaoInfo(String code) throws Exception {
+        if (code == null) {
+            throw new Exception("코드를 가져오는데 오류가 발생했습니다.");
+        }
 
         String accessToken = "";
         String refreshToken = "";
@@ -61,14 +58,15 @@ public class KakaoService {
             headers.add("Content-type", "application/x-www-form-urlencoded");
 
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-            params.add("grant_type"   , "authorization_code");
-            params.add("client_id"    , KAKAO_CLIENT_ID);
+            params.add("grant_type", "authorization_code");
+            params.add("client_id", KAKAO_CLIENT_ID);
             params.add("client_secret", KAKAO_CLIENT_SECRET);
-            params.add("code"         , code);
-            params.add("redirect_uri" , KAKAO_REDIRECT_URL);
+            params.add("code", code);
+            params.add("redirect_uri", KAKAO_REDIRECT_URL);
 
             RestTemplate restTemplate = new RestTemplate();
-            HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(params, headers);
+            HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(params,
+                    headers);
 
             ResponseEntity<String> response = restTemplate.exchange(
                     KAKAO_AUTH_URI + "/oauth/token",
@@ -80,7 +78,7 @@ public class KakaoService {
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonObj = (JSONObject) jsonParser.parse(response.getBody());
 
-            accessToken  = (String) jsonObj.get("access_token");
+            accessToken = (String) jsonObj.get("access_token");
             refreshToken = (String) jsonObj.get("refresh_token");
 
         } catch (Exception e) {
@@ -110,7 +108,7 @@ public class KakaoService {
 
         //Response 데이터 파싱
         JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObj    = (JSONObject) jsonParser.parse(response.getBody());
+        JSONObject jsonObj = (JSONObject) jsonParser.parse(response.getBody());
         System.out.println("jsonObj = " + jsonObj);
         JSONObject account = (JSONObject) jsonObj.get("kakao_account");
         JSONObject profile = (JSONObject) account.get("profile");
@@ -123,14 +121,14 @@ public class KakaoService {
         Optional<User> user = userRepository.findByEmail(email);
         String nickname = generateUniqueNickname();
 
-        if(user.isEmpty()){
-            userRepository.save(User.toEntity(email, nickname,profileImg, passwordEncoder));
+        if (user.isEmpty()) {
+            userRepository.save(User.toEntity(email, nickname, profileImg, passwordEncoder));
             userRepository.flush();
         }
 
         Optional<User> oauthUser = userRepository.findByEmail(email);
 
-        try{
+        try {
             log.info("email = {}", oauthUser.get().getEmail());
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -145,19 +143,19 @@ public class KakaoService {
                     .accessToken(accessToken2)
                     .refreshToken(refreshToken)
                     .build();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new NullPointerException("로그인 에러");
         }
     }
 
-    public String generateUniqueNickname(){
+    public String generateUniqueNickname() {
 //        UUID uuid = UUID.randomUUID();
         String nickname = UUID.randomUUID().toString();
         boolean check = true;
-        while(check){
+        while (check) {
             Optional<User> user = userRepository.findByNickname(nickname);
-            if(user.isEmpty()){
+            if (user.isEmpty()) {
                 check = false;
             }
             nickname = UUID.randomUUID().toString();
