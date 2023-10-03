@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [react()],
   base: './',
   build: {
+    assetsDir: 'assets',
     minify: false,
     outDir: 'dist',
     sourcemap: true,
