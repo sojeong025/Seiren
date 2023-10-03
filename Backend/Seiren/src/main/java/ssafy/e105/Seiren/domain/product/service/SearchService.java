@@ -51,7 +51,7 @@ public class SearchService {
         if (mood != null) {
             categoryIdList.add(mood);
         }
-        int size = 12;
+        int size = 10;
         try {
             // 닉네임 x 목록
             if (nickname.isEmpty()) {
