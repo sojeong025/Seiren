@@ -57,7 +57,7 @@ const MyPage: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({
 
   return (
     <div className={styles.myPageContainer}>
-      <SideBar />
+      <SideBar/>
       <div className={styles.myPageBox}>
         <div className={styles.section1}>
           <div className={styles.hi}>
