@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { AuthenticationService } from './AuthenticationService';
 
@@ -6,6 +6,8 @@ const OAuth2RedirectHandler: React.FC = () => {
   let params = new URL(document.URL).searchParams;
   let code = params.get('code');
   let navigate = useNavigate();
+  
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const handleLogin = async () => {
@@ -19,6 +21,7 @@ const OAuth2RedirectHandler: React.FC = () => {
         console.log('카카오 로그인 실패')
       }
 
+      setLoading(false);
       navigate('/');
     };
 
@@ -27,9 +30,10 @@ const OAuth2RedirectHandler: React.FC = () => {
     
   return (
     <div>
-      로그인 중
+      {loading ? '로그인 중' : null}
     </div>
   )
 }
 
 export default OAuth2RedirectHandler;
+
