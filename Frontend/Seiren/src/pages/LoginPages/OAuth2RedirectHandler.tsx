@@ -29,9 +29,8 @@ const OAuth2RedirectHandler: React.FC = () => {
   }, [code, navigate]);
     
   return (
-    <div>
-      {loading ? '로그인 중' : null}
-    </div>
+    <>
+    </>
   )
 }
 
