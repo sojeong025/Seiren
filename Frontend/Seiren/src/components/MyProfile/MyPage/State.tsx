@@ -28,6 +28,9 @@ function State({ voiceDetail }) {
         break;
     }
   }, [checkState]);
+  useEffect(()=>{
+
+  },[buttonText])
 
   const handleButtonClick = () => {
     if (voiceDetail.productId) {
