@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { AuthenticationService } from './AuthenticationService';
 
@@ -8,39 +8,24 @@ const OAuth2RedirectHandler: React.FC = () => {
   let params = new URL(document.URL).searchParams;
   let code = params.get('code');
   let navigate = useNavigate();
-  const [check, setCheck] = useState(false);
 
-  // 토큰 요청 및 저장하는 함수
-  async function fetchToken() {
-    try {
-        const res = await AuthenticationService.kakaoLogin(code as string);
-        console.log('kakaoLogin 성공');
-        console.log(res);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await AuthenticationService.kakaoLogin(code);
+        console.log('kakao로그인 성공');
+        console.log(response);
 
-        // 토큰을 로컬 스토리지에 저장
-        localStorage.setItem('kakaoLogin', "true");
-
-        // JWT 로그인 처리
-        AuthenticationService.registerSuccessfulLoginForJwt(res.data.response.accessToken);
-      } catch (error) {
-        console.log('kakaoLogin 실패');
-      }
-    }
-    
-
-    // 컴포넌트가 마운트될 때 한 번만 실행
-    useEffect(()=>{
-      setCheck(true);
-    },[]);
-    
-    // check 상태 변경 시 실행되는 효과
-    useEffect(() => {
-      if(check === true){
-        fetchToken(); // 토큰 요청 및 저장
+        AuthenticationService.registerSuccessfulLoginForJwt(response.data.response.accessToken);
         navigate('/');
+      } catch (err) {
+        console.log('카카오 로그인 실패', err);
+        // 오류 처리 로직을 추가할 수 있습니다.
       }
-    }, [check]);
-    
+    };
+
+    fetchData();
+  }, [code, navigate]);
     
   return (
     <div>
