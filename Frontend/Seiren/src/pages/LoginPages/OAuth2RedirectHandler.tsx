@@ -6,6 +6,7 @@ import { AuthenticationService } from './AuthenticationService';
 const OAuth2RedirectHandler: React.FC = () => {
   // URL에서 파라미터 추출
   let params = new URL(document.URL).searchParams;
+  console.log(params);
   let code = params.get('code');
   let navigate = useNavigate();
   const [check, setCheck] = useState(false);
