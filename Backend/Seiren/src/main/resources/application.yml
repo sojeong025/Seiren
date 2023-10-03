@@ -152,6 +152,8 @@ spring:
   config:
     activate:
       on-profile: port_8081
+  data:
+    kakao-redirectUrl: https://j9e105.p.ssafy.io/api/login/oauth2/code/kakao
 
 server:
   port: 8081
@@ -162,6 +164,8 @@ spring:
   config:
     activate:
       on-profile: port_8082
+  data:
+    kakao-redirectUrl: http://192.168.30.208:5173/api/login/oauth2/code/kakao
 
 server:
   port: 8082
