@@ -7,6 +7,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import styles from "./PurchasePage.module.css"
 import { AiOutlineUser } from "react-icons/ai"
+import { MdOutlineKeyboardArrowDown } from "react-icons/md"
 
 interface PurposeGet {
   id: number;
@@ -22,6 +23,7 @@ function PurchasePage() {
   const [productDetail, setProductDetail] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
   const [letterOptions, setLetterOptions] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(100);
   
   const navigate = useNavigate();
 
@@ -114,20 +116,25 @@ function PurchasePage() {
               {letterOptions.map((option) => (
                 <div 
                   key={option.letters} 
-                  className={styles.card} // 카드 스타일을 적용하세요.
-                  onClick={() => setBuyLetterCount(option.letters)}
+                  className={`${styles.card} ${selectedCard === option.letters ? styles['selected'] : ''}`}
+                  onClick={() => {
+                    setBuyLetterCount(option.letters);
+                    setSelectedCard(option.letters);
+                  }}
                 >
-                  <div className={styles.letter}>{option.letters}자</div>
+                  <div className={styles.bold}>{option.letters}자</div>
                   <div>가격 : {option.price}원</div>
                 </div>
-            ))}
+              ))}
             </div>
           </div>
 
           {/* 구매 목적 */}
           <div className={styles.reason}>
+          <div>구매 목적</div>
+          <hr />
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="demo-simple-select-standard-label">구매 목적</InputLabel>
+              <InputLabel id="demo-simple-select-standard-label">선택해주세요.</InputLabel>
               <Select
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
@@ -148,29 +155,43 @@ function PurchasePage() {
 
         {/* 우측 */}
         <div className={styles.right}>
-          <div>
-            <div>
-              주문 금액
-            </div>
-            <div>총 가격 : {productDetail?.price * buyLetterCount}원</div>
-              <button onClick={handlePurchase}>구매하기</button>
-
-              {purchaseResponse ? (
-                <div>
-                  <p>구매가 성공적으로 완료되었습니다.</p>
-                </div>
-              ) : (
-                null
-              )}
+          <div className={styles.dummy}>
+            <div>주문 금액</div>
+            <div>{totalPrice}원</div>
           </div>
 
+          <div className={styles.dummy}>
+            <div>쿠폰 할인</div>
+            <div>0원</div>
+          </div>
+
+          <div className={styles.dummy}>
+            <div>세이렌 포인트</div>
+            <div>0원</div>
+          </div>
+
+          <hr />
+          <div className={styles.dummy}>
+            <div className={styles.finish}>총 결제 금액</div>
+            <div className={styles.finish}>{totalPrice}원</div>
+          </div>
+
+          <div className={styles.rule}>
+            <div>결제 전 안내사항</div>
+            <div><MdOutlineKeyboardArrowDown/></div>
+          </div>
+
+          <div className={styles.rule}>
+            <div>개인정보 제3자 제공</div>
+            <div><MdOutlineKeyboardArrowDown/></div>
+          </div>
+
+          <div className={styles.rule2}>위 내용을 확인하였고, 결제에 동의합니다.</div>
+
+
+          <div className={styles.btn} onClick={handlePurchase}>결제하기</div>
         </div>
       </div>
-
-
-
-
-
     </div>
   );
 }
