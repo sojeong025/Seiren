@@ -6,9 +6,8 @@ import { IoIosArrowBack } from "react-icons/io";
 
 function SideBar() { 
   const location = useLocation();
-  const isNumeric = /^\d+$/;
   const menuItems = [
-    { text: "프로필", link: "/my-page" },
+    { text: "프로필", link: "/my-page", addLink: `/your-voice-detail` },
     { text: "판매내역", link: "/sell-list", addLink: `/sell-list/detail` },
     { text: "구매내역", link: "/buy-list" },
     { text: "사용", link: "/use-voice", addLink: `/voice-detail/` },

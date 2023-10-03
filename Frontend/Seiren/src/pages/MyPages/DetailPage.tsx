@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./DetailPage.module.css";
 import { customAxios } from "../../libs/axios";
 import { useParams } from "react-router-dom";
+import SideBar from "../../components/common/SideBar";
 
 // API 응답 데이터와 일치하는 인터페이스 정의
 interface ProductData {
@@ -36,6 +37,7 @@ const DetailPage: React.FC = () => {
 
   return (
     <div className={styles.detailContainer}>
+      <SideBar/>
       <h1>Detail Page</h1>
       {productData && (
         <>

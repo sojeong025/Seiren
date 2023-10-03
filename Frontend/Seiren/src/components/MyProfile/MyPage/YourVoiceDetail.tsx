@@ -3,9 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { customAxios } from "../../../libs/axios";
 import State from "./State";
 import UploadImgOri from "../../common/UploadImgOri";
+import SideBar from "../../../components/common/SideBar";
 import styles from "./YourVoiceDetail.module.css";
 
-function EditVoiceDetail() {
+function EditVoiceDetail({ setIsNavBarVisible }) {
   const { voiceId } = useParams();
   const [voiceDetail, setVoiceDetail] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -13,6 +14,14 @@ function EditVoiceDetail() {
   const [memo, setMemo] = useState(""); // 상태로 memo를 관리합니다.
   const [voiceAvatarUrl, setVoiceAvatarUrl] = useState(""); //
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsNavBarVisible(false); // 네비게이션 바 숨기기
+
+    return () => {
+      setIsNavBarVisible(true); // 컴포넌트가 언마운트될 때 네비게이션 바 다시 보이기
+    };
+  }, [setIsNavBarVisible]);
 
   useEffect(() => {
     customAxios
@@ -74,53 +83,56 @@ function EditVoiceDetail() {
   }
 
   return (
-    <div className={styles.YourVoiceDetailContainer}>
-      <div className={styles.contentContainer}>
-        <div className={styles.upBox}>
-          <div className={styles.imgContainer}>
-            <UploadImgOri
-              imgUrl={voiceDetail.voiceAvatarUrl}
-              setImgUrl={setVoiceAvatarUrl}
-            />
-            <button className={styles.savebtn} onClick={handleSaveClick}>저장</button>
+    <div>
+      <SideBar />
+      <div className={styles.YourVoiceDetailContainer}>
+        <div className={styles.contentContainer}>
+          <div className={styles.upBox}>
+            <div className={styles.imgContainer}>
+              <UploadImgOri imgUrl={voiceDetail.voiceAvatarUrl} setImgUrl={setVoiceAvatarUrl} />
+              <button className={styles.savebtn} onClick={handleSaveClick}>
+                저장
+              </button>
+            </div>
+            <div className={styles.stateBox}>
+              <State voiceDetail={voiceDetail} />
+            </div>
           </div>
-          <div className={styles.stateBox}>
-            <State voiceDetail={voiceDetail} />
-          </div>
-        </div>
 
-        <div className={styles.downBox}>
-          {isEditing ? (
-            <><div className={styles.voiceTitle}>
-              <input
-                type="text"
-                value={voiceTitle}
-                onChange={e => setVoiceTitle(e.target.value)}
-                className={styles.inputTitle}
-              />
-              </div>
-              <div className={styles.memo} >
-              <input
-                type="text"
-                value={memo}
-                onChange={e => setMemo(e.target.value)}
-                className={styles.inputMemo}
-              />
-              </div>
-            </>
-          ) : (
-            <>
-              <div className={styles.voiceTitle}>{voiceDetail.voiceTitle}</div>
-              <div className={styles.memo}>{voiceDetail.memo}</div>
-            </>
-          )}
-          <div className={styles.buttons}>
+          <div className={styles.downBox}>
             {isEditing ? (
-              <button onClick={handleSaveClick}>저장</button>
+              <>
+                <div className={styles.voiceTitle}>
+                  <input
+                    type="text"
+                    value={voiceTitle}
+                    onChange={e => setVoiceTitle(e.target.value)}
+                    className={styles.inputTitle}
+                  />
+                </div>
+                <div className={styles.memo}>
+                  <input
+                    type="text"
+                    value={memo}
+                    onChange={e => setMemo(e.target.value)}
+                    className={styles.inputMemo}
+                  />
+                </div>
+              </>
             ) : (
-              <button onClick={handleEditClick}>수정</button>
+              <>
+                <div className={styles.voiceTitle}>{voiceDetail.voiceTitle}</div>
+                <div className={styles.memo}>{voiceDetail.memo}</div>
+              </>
             )}
-            <button onClick={handleDeleteClick}>삭제</button>
+            <div className={styles.buttons}>
+              {isEditing ? (
+                <button onClick={handleSaveClick}>저장</button>
+              ) : (
+                <button onClick={handleEditClick}>수정</button>
+              )}
+              <button onClick={handleDeleteClick}>삭제</button>
+            </div>
           </div>
         </div>
       </div>
