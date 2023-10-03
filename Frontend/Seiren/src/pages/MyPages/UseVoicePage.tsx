@@ -16,7 +16,7 @@ const SellList: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = (
 
   return (
     <div className={styles.useVoiceContainer}>
-      <SideBar />
+      <SideBar/>
       <div className={styles.useVoiceBox}>
         <UseVoiceBox />
       </div>

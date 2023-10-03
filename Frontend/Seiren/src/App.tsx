@@ -81,8 +81,8 @@ function RoutesComponent({ isNavBarVisible, setIsNavBarVisible }) {
           <Route path="/use-voice" element={<UseVoice setIsNavBarVisible={setIsNavBarVisible} />} />
           <Route path="/detail/:index" element={<DetailPage />} />
           <Route path="/voice-detail/:productId" element={<UseVoiceDetail setIsNavBarVisible={setIsNavBarVisible} />} />
-          <Route path="/your-voice-detail/:voiceId" element={<YourVoiceDetail />} />
-          <Route path="/sell-list/detail/:productId" element={<SellDetail />} />
+          <Route path="/your-voice-detail/:voiceId" element={<YourVoiceDetail setIsNavBarVisible={setIsNavBarVisible} />} />
+          <Route path="/sell-list/detail/:productId" element={<SellDetail setIsNavBarVisible={setIsNavBarVisible} />} />
 
           {/* 로그인 */}
           <Route path="/login" element={<LoginPage setIsNavBarVisible={setIsNavBarVisible} />} />

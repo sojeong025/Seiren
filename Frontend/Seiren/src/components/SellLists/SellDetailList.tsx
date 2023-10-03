@@ -25,8 +25,8 @@ function SellDetailList({ productId }: SellDetailListProps) {
   }, [productId]);
 
   return (
-    <div>
-      <h1 className={styles.sellDetailTitle}>판매 목록</h1>
+    <div className={styles.container}>
+      <div className={styles.sellDetailTitle}>판매 목록</div>
       <table className={styles.sellDetailTable}>
         <thead>
           <tr>
