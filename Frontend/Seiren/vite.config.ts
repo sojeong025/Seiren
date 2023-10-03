@@ -7,10 +7,14 @@ export default defineConfig({
   plugins: [react()],
   base: './',
   build: {
-    minify: 'terser', // Terser를 사용하여 코드를 최소화합니다.
-    rollupOptions: {
-      // 기타 Rollup 옵션을 설정합니다.
-      // 필요한 경우 코드 스플리팅 등을 활성화할 수 있습니다.
+    minify: false,
+    outDir: 'dist',
+    sourcemap: true,
+    commonjsOptions: {
+      include: [/node_modules/],
+      extensions: ['.js', '.cjs'],
+      strictRequires: true,
+      transformMixedEsModules: true,
     },
   },
   optimizeDeps: {
