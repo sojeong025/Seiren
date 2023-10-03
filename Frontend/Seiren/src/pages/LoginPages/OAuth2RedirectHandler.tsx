@@ -29,7 +29,7 @@ const OAuth2RedirectHandler: React.FC = () => {
   }, [code, navigate]);
     
   return (
-    <></>
+    <div>{params}</div>
   )
 }
 
