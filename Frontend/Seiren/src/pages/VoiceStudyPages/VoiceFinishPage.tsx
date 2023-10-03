@@ -49,7 +49,9 @@ function VoiceFinishPage() {
           </NavLink>
           <div className={styles.market_txt}>공유 및 수익 창출</div>
           <NavLink to="/product-custom">
-            <div className={styles.market_underlink} onClick={getProduct}>자세히 보기</div>
+            <div className={styles.end}>
+              <div className={styles.market_underlink} onClick={getProduct}>자세히 보기</div>
+            </div>
           </NavLink>
         </div>
       </div>

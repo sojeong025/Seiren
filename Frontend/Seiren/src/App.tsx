@@ -71,7 +71,7 @@ function RoutesComponent({ isNavBarVisible, setIsNavBarVisible }) {
           {/* 목소리 등록 페이지 */}
           <Route path="/voice-study" element={<VoiceStudyPage />} />
           <Route path="/voice-record" element={<VoiceRecordPage />} />
-          <Route path="/voice-studying" element={<VoiceStudyingPage />} />
+          <Route path="/voice-studying/:voiceId" element={<VoiceStudyingPage />} />
           <Route path="/voice-finish" element={<VoiceFinishPage />} />
 
           {/* 마이페이지 */}

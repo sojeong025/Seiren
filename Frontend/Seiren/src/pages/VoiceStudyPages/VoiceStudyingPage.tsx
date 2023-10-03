@@ -2,6 +2,7 @@ import styles from './VoiceStudyingPage.module.css'
 import Lottie from "lottie-react";
 import Voice_studying from "../../assets/lottie/voice_studying.json";
 
+
 function VoiceStudyingPage() {
   return (
     <div className={styles.container}>
