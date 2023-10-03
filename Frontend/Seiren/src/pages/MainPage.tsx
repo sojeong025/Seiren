@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import styles from "./MainPage.module.css";
 import { Link as ScrollLink } from "react-scroll"
-import AboutPage from "./AboutPage";
+// import AboutPage from "./AboutPage";
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -36,7 +36,7 @@ function MainPage() {
       </section>
 
       <div id="about">
-        <AboutPage />
+        {/* <AboutPage /> */}
       </div>
     </div>
   );
