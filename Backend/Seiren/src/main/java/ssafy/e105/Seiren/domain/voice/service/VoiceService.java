@@ -58,7 +58,7 @@ public class VoiceService {
     }
 
     public List<VoiceDto> getVoiceList(HttpServletRequest request) {
-        List<Voice> voiceList = voiceRepository.findByUser_IdAndIsDeleteFalse(
+        List<Voice> voiceList = voiceRepository.findByUser_IdAndIsDeleteFalseOrderByVoiceIdDesc(
                 userService.getUser(request).getId());
 //        return voiceList.stream()
 //                .map(voice -> {
@@ -160,7 +160,7 @@ public class VoiceService {
         User user = userService.getUser(request);
         Voice voice = getVoice(voiceId);
         if (voice.getUser() == user) {
-            if(voice.getState() < 3){
+            if (voice.getState() < 3) {
                 voice.delete();
                 return;
             }
@@ -252,7 +252,7 @@ public class VoiceService {
         int oneOrLessCount = 0;
         int twoOrMoreCount = 0;
         for (Voice voice : voiceList) {
-            if(voice.getIsDelete() != true){
+            if (voice.getIsDelete() != true) {
                 if (voice.getState() < 2) {
                     oneOrLessCount++;
                     continue;
