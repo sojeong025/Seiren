@@ -27,8 +27,7 @@ public class TestHistoryController {
     @PutMapping("/api/tts")
     public ApiResult<?> testTTS(@RequestParam Long productId,
             HttpServletRequest request) {
-        testHistoryService.checkTestCount(productId, request);
-        return ApiUtils.success("체험판 TTS를 들었습니다.");
+        return ApiUtils.success(testHistoryService.checkTestCount(productId, request));
     }
 
     @Operation(summary = "체험판 TTS 남은 횟수 확인")

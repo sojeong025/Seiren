@@ -4,11 +4,13 @@ import static ssafy.e105.Seiren.domain.product.exception.ProductErrorCode.OVER_R
 import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_USER;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.entity.TestHistory;
+import ssafy.e105.Seiren.domain.product.entity.Wish;
 import ssafy.e105.Seiren.domain.product.repository.TestHistoryRepository;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.repository.UserRepository;
@@ -27,13 +29,12 @@ public class TestHistoryService {
     private final ProductService productService;
 
     @Transactional
-    public boolean checkTestCount(Long productId, HttpServletRequest request) {
+    public Integer checkTestCount(Long productId, HttpServletRequest request) {
         User user = getUser(request);
         if (countTest(productId, request) > 0) {
-            TestHistory testHistory = testHistoryRepository.findCountByUser_IdAndProduct_ProductId(
-                    user.getId(), productId);
+            TestHistory testHistory = getTestHistory(user.getId(), productId);
             testHistory.update();
-            return true;
+            return  testHistory.getCount();
         }
         throw new BaseException(
                 new ApiError(OVER_RESTCOUNT.getMessage(), OVER_RESTCOUNT.getCode()));
@@ -43,18 +44,28 @@ public class TestHistoryService {
     public int countTest(Long productId, HttpServletRequest request) {
         User user = getUser(request);
         Product product = productService.getProduct(productId);
-        TestHistory testHistory = testHistoryRepository.findCountByUser_IdAndProduct_ProductId(
-                user.getId(), productId);
-        if (testHistory != null) {
-            return testHistory.getCount();
+        TestHistory testHistory = getTestHistory(user.getId(), productId);
+        if (testHistory == null) {
+            testHistoryRepository.save(TestHistory.toEntity(user, product));
+            return 3;
         }
-        testHistoryRepository.save(TestHistory.toEntity(user, product));
-        return 3;
+        return testHistory.getCount();
     }
 
     public User getUser(HttpServletRequest request) {
         String userEmail = jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request));
         return userRepository.findByEmail(userEmail).orElseThrow(() -> new BaseException(
                 new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode())));
+    }
+
+    @Transactional
+    public TestHistory getTestHistory(Long userId, Long productId) {
+        Optional<TestHistory> testHistoryOptional = testHistoryRepository.findByUser_IdAndProduct_ProductId(
+                userId, productId);
+        // TestHistory를 찾았을 경우에 대한 처리
+        if (testHistoryOptional.isPresent()) {
+            return testHistoryOptional.get();
+        }
+        return null;
     }
 }
