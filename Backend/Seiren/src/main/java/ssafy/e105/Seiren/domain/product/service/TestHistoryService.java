@@ -34,6 +34,7 @@ public class TestHistoryService {
         if (countTest(productId, request) > 0) {
             TestHistory testHistory = getTestHistory(user.getId(), productId);
             testHistory.update();
+            testHistoryRepository.save(testHistory);
             return  testHistory.getCount();
         }
         throw new BaseException(
