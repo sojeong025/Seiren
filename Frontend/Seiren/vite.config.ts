@@ -5,6 +5,11 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+<<<<<<< HEAD
+  base: './',
+  build: {
+    minify: false
+=======
   base: '/',
   build: {
     assetsDir: 'assets',
@@ -20,6 +25,7 @@ export default defineConfig({
   },
   optimizeDeps: {
     // optimizeDeps를 비활성화하지 않고 사용합니다.
+>>>>>>> 652105329397947faa1ca60a721eafe71d044e64
   },
   define: {
     'global' : {},

@@ -13,15 +13,46 @@
   width: 200px;
 }
 .formGroup {
-  border: 1px solid black;
-  background-color: blue;
+  border-bottom: 1px solid black;
+  /* background-color: blue; */
   display: flex;
   height: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+.nicknameWrab{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid black;
+}
+.inputWrab{
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.inputWrab2{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* height: 100%; */
 }
 .nickText{
   font-size: 20px;
   font-weight: bold;
   width: 200px;
+}
+.messageWrap{
+  height:0px;
 }
 .error{
   text-align: center;
@@ -29,6 +60,7 @@
   color: red;
 }
 .message {
+  margin: 5px;
   text-align: center;
 }
 .inputField {
@@ -38,11 +70,19 @@
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   font-size: 16px;
   outline: none;
-  margin-right: 20px;
+  /* margin: 20px; */
   transition: border-color 0.2s ease-in-out; 
 }
 .inputField:focus {
-  border-color: #007BFF; 
+  /* border-color: #007BFF;  */
+}
+.buttonWrab{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 30Px;
+  position: absolute;
+  right: 10px;
 }
 .checkButton {
   background-color: #fff;
@@ -53,6 +93,7 @@
   cursor: pointer;
 }
 .buttons {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 }
