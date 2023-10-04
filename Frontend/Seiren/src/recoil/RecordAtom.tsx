@@ -20,3 +20,8 @@ export const AudioDataState = atom({
   key: 'audioDataState',
   default: null,
 });
+
+export const RecordCountState = atom({
+  key: 'recordCountState',
+  default: 0,
+});

@@ -48,8 +48,10 @@ function EditImage() {
 
   return (
     <div className={styles.changeImg}>
+      <div className={styles.textWrab}>
       <div className={styles.text}>
         프로필 이미지
+      </div>
       </div>
       <div className={styles.EditContainer}>
         <div className={styles.upload}>

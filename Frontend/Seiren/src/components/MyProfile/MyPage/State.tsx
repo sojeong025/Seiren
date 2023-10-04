@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom"; // useNavigate 추가
 import { customAxios } from "../../../libs/axios";
 import styles from "./State.module.css";
 
-function State({ voiceDetail }) {
+function State({ voiceDetail, checkState, setCheckState }) {
   const [buttonText, setButtonText] = useState("");
   const navigate = useNavigate(); // useNavigate 훅 사용
-
+  
   useEffect(() => {
     switch (voiceDetail.state) {
       case 0:
@@ -28,12 +28,18 @@ function State({ voiceDetail }) {
     }
   }, [voiceDetail]);
 
+
   const handleButtonClick = () => {
     if (voiceDetail.productId) {
       customAxios
         .put(`product/state/${voiceDetail.productId}`)
         .then(response => {
           console.log(response);
+          if(checkState === false){
+            setCheckState(true);
+          }else{
+            setCheckState(false);
+          }
         })
         .catch(error => {
           console.error("API 호출 중 오류 발생:", error);
@@ -47,7 +53,7 @@ function State({ voiceDetail }) {
         navigate("/voice-record");
         break;
       case 2:
-        navigate("/voice-finish");
+        navigate(`/product-custom/${voiceDetail.voiceId}`);
         break;
       default:
         break;

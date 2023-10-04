@@ -68,7 +68,7 @@ function UploadImg({ imgUrl, setImgUrl}) {
           className={styles.preimg}
         />
       )}
-      <div>
+        <div>
         <label className={styles.customFileLabel} htmlFor="file">
           이미지 선택
         </label>

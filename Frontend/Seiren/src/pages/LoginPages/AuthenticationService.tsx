@@ -14,8 +14,15 @@ export const AuthenticationService = {
       console.log('kakaoLogin 성공');
       console.log(response.data);
 
+<<<<<<< HEAD
       // 토큰을 로컬 스토리지에 저장
       localStorage.setItem('accessToken', response.data.accessToken);
+=======
+kakaoLogin: async function(code: string): Promise<AxiosResponse> {
+  console.log(code)
+  return await axios.get(`http://j9e105.p.ssafy.io:8082/api/login/oauth2/code/kakao?code=${code}`);
+},
+>>>>>>> e82f6607ea1ec22087fe3660df00e9b1d278359e
 
       return response;
     } catch (error) {

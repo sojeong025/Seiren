@@ -97,6 +97,11 @@
   line-height: 40px;
   height: 40px;
   font-size: 20px;
-  margin: 20px 0 0 430px;
+  margin: 20px 100px 0 0;
   color: #fff;
+}
+.end{
+  display: flex;
+  justify-content: end;
+  align-items: end;
 }
