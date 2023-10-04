@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { RecordingState, AudioDataState } from "../../recoil/RecordAtom";
 import styles from "./VoiceRecord.module.css";
 import { BsFillMicFill, BsStopFill, BsPlayFill } from "react-icons/bs";
-// import { MediaRecorder, register } from "extendable-media-recorder";
+import { MediaRecorder, register } from "extendable-media-recorder";
 import { connect } from "extendable-media-recorder-wav-encoder";
 
 const VoiceRecord = () => {
@@ -16,13 +16,13 @@ const VoiceRecord = () => {
   const [disabled, setDisabled] = useState<boolean>(true);
   const setAudioData = useSetRecoilState(AudioDataState);
 
-  // useEffect(() => {
-  //   const registerEncoder = async () => {
-  //     await register(await connect());
-  //   };
+  useEffect(() => {
+    const registerEncoder = async () => {
+      await register(await connect());
+    };
 
-  //   registerEncoder();
-  // }, []);
+    registerEncoder();
+  }, []);
 
   // 사용자가 음성 녹음을 시작했을 때
   const onRecAudio = async () => {

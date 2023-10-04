@@ -11,6 +11,8 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    // "moduleResolution": "node",
+    // "moduleResolution": "commonjs",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
