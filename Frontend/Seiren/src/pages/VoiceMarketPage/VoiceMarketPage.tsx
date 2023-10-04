@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FavoriteVoice from "../../components/VoiceMarket/FavoriteVoice";
 import Filter from "../../components/VoiceMarket/Filter";
 import styles from "./VoiceMarketPage.module.css";
 import { Link } from "react-router-dom";
 import Pagination from "../../components/common/Pagi";
+import { customAxios } from "../../libs/axios";
 
 interface Product {
   nickname: string;
@@ -21,6 +22,22 @@ interface ProductCategory {
 }
 
 function ProductCard({ product }: { product: Product }) {
+  const [wList, setwList] = useState(false);
+
+  useEffect(() => {
+    customAxios
+      .get(`wish`)
+      .then(res => {
+        const list = res.data.response.wishList;
+        const wishedList = list.map(item => item.productId);
+        
+        setwList(wishedList.includes(product.productId));
+      })
+      .catch(error => {
+        console.error("API 호출 중 오류 발생:", error);
+      });
+  }, []);
+
   return (
     <div className={styles.card}>
       <div className={styles.left}>
@@ -41,9 +58,8 @@ function ProductCard({ product }: { product: Product }) {
       </div>
       <div className={styles.right}>
         {/* <div className={styles.wish}>{product.wish? <BsHeartFill/> : <BsHeart />}</div> */}
-        <Link to={`/product/${product.productId}`} className={styles.detail}>
-          {" "}
-          들어보기{" "}
+        <Link to={`/product/${product.productId}?wList=${wList}`} className={styles.detail}>
+          들어보기
         </Link>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { customAxios } from '../../libs/axios';
 import { Link } from 'react-router-dom';
 import styles from './ProductDetailPage.module.css';
@@ -12,7 +12,10 @@ import dreamsAudio from "../../assets/audio/dreams.mp3";
 function ProductDetailPage() {
   const { productId } = useParams();
   const [productDetail, setProductDetail] = useState(null);
-  const [isLiked, setIsLiked] = useState(false);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const wList = JSON.parse(queryParams.get("wList"));
+  const [isLiked, setIsLiked] = useState(wList);
   const [testText, setTestText] = useState("");
   const [useCount, setUseCount] = useState(0);
   const mL = 20;
@@ -20,8 +23,23 @@ function ProductDetailPage() {
   const [audio1, setAudio1] = useState();
   const [audio2, setAudio2] = useState();
   const [audio3, setAudio3] = useState();
-
+  
   const colors = ['#FFD1DC', '#B2FEBD', '#C5A3FF']; 
+
+
+  useEffect(() => {
+    customAxios
+      .get(`wish`)
+      .then(res => {
+        const list = res.data.response.wishList;
+        const wishedList = list.map(item => item.productId);
+        setIsLiked(JSON.parse(wishedList.includes(Number(productId))));
+
+      })
+      .catch(error => {
+        console.error("API 호출 중 오류 발생:", error);
+      });
+  }, []);
 
   useEffect(() => {
     customAxios.get(`preview/${productId}`)
@@ -180,7 +198,7 @@ function ProductDetailPage() {
               <div className={styles.buy}>구매 하기</div>
             </Link>
             <div className={styles.wish} onClick={handleLikeClick}>
-              {isLiked ? <BsHeart/> : <BsHeartFill/>}
+              {isLiked ? <BsHeartFill/> : <BsHeart/>}
             </div>
           </div>
         </div>
