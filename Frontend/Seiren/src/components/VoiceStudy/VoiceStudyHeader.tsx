@@ -11,6 +11,8 @@ const VoiceStudyHeader: React.FC = () => {
   const [recordCount, setRecordCount] = useRecoilState(RecordCountState); 
   const [totalCount, setTotalCount] = useState(1);
   const [zipVoice, setZipVoice] = useState("");
+  const accessToken = localStorage.getItem("accessToken");
+
   
   
   const navigate = useNavigate();
@@ -19,20 +21,23 @@ const VoiceStudyHeader: React.FC = () => {
       .then((res) => {
         console.log('zip파일 생성',res)
         setZipVoice(res.data.response)
+  
+        return axios.get(`http://70.12.130.121:1468/upload?voice_id=${voiceId}&zipURL=${res.data.response}`, {
+          headers: {
+            'Authorization' : `Bearer ${accessToken}`
+          }
+        });
       })
-      .catch((err) => {
-        console.error('zip파일 생성 실패', err)
-      })
-
-    axios.get(`http://70.12.130.121:1468/upload?voice_id=${voiceId}&zipURL=${zipVoice}`)
       .then((res) => {
         console.log('목소리 학습 버튼 클릭 시 ai 연결 성공', res)
         navigate(`/voice-studying/${voiceId}`);
       })
       .catch((err) => {
-        console.error('목소리 학습 버튼 클릭 시 ai 연결 실패', err)
-      })
-    }
+          console.error(err);
+      });
+  }
+  
+  
   
   useEffect(() => {
     customAxios.get(`records/count/${voiceId}`)
@@ -51,7 +56,7 @@ const VoiceStudyHeader: React.FC = () => {
     const additionalProgress = ((recordCount - 100) / (totalCount - 100)) * 20
     progress = 80 + additionalProgress;
   }
-  const isButtonDisabled = recordCount < 100; 
+  const isButtonDisabled = recordCount < 1; 
 
 
   return (
