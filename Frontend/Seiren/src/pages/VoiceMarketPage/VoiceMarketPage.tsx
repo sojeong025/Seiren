@@ -54,7 +54,12 @@ function ProductCard({ product }: { product: Product }) {
 function VoiceMarketPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [total, setTotal] = useState('');
 
+  // 자식 컴포넌트에서 호출할 콜백 함수
+  const updateTotal = (newTotal) => {
+    setTotal(newTotal);
+  };
   const itemsPerPage = 10;
 
     const onPageChange = (page) => {
@@ -64,7 +69,7 @@ function VoiceMarketPage() {
   return (
     <div className={styles.total}>
       <FavoriteVoice />
-      <Filter products={products} setProducts={setProducts} />
+      <Filter products={products} setProducts={setProducts} setTotal={updateTotal} />
       <div className={styles.container}>
         <div className={styles.cards}>
           {products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map(product => (
