@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.el.parser.BooleanNode;
 import org.hibernate.annotations.UpdateTimestamp;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.user.entity.User;
@@ -68,6 +69,11 @@ public class Voice {
     }
 
     public void update(Integer state) {
+        this.state = state;
+    }
+
+    public void update(Boolean isDelete, Integer state) {
+        this.isDelete = isDelete;
         this.state = state;
     }
 
