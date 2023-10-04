@@ -46,24 +46,18 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
 
   // 사용 TEXT 서버에 전송 API
   const accessToken = localStorage.getItem("accessToken");
-  const marketProduct = async (text) => {
-    try {
-      const response = await axios.get(
-        `http://70.12.130.121:1470/synthesize2?voice_id=${voiceDetail.voiceId}&transaction_id=${voiceDetail.transactionId}&text=${text}`,
-        {
-          responseType: "json", // JSON 응답을 기대하는 경우
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-  
-      // 여기서 response를 사용하여 원하는 작업을 수행합니다.
-    } catch (error) {
-      console.error("API 호출 중 오류 발생:", error);
-    }
-  };
-  
+  const marketProduct = async(text) => {
+    let response = await axios
+      .get(`http://70.12.130.121:1470/synthesize2?voice_id=${voiceDetail.voiceId}&transaction_id=${voiceDetail.transactionId}&text=${text}`,{
+      responseType: "blob",
+      headers: {
+        'Authorization' : `Bearer ${accessToken}`
+      }
+    });
+    console.log(response.data);
+    // const blobUrl = URL.createObjectURL(response.data);
+    // let audio = new Audio(blobUrl);
+  }
 
   // 차감 글자 수
 
