@@ -9,6 +9,8 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import { LiaRandomSolid } from 'react-icons/lia'
 import axios from 'axios';
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { useRecoilValue } from 'recoil';
+import { VoiceIdState } from '../../recoil/RecordAtom';
 
 interface GetData{
   id:number;
@@ -47,8 +49,8 @@ function ProductCustomPage(){
   // maxLength
   const mL = Number(20);
 
-  // const voiceId = useRecoilValue(VoiceIdState)
-  const voiceId = 18
+  const voiceId = useRecoilValue(VoiceIdState)
+  // const voiceId = 18
   const [title, setTitle] = useState();
   const [summary, setSummary] = useState();
   const [productImg, setProductImg] = useState("");
@@ -167,7 +169,6 @@ function ProductCustomPage(){
 
 
   const marketProduct = async () => {
-    console.log("하이");
     AWS.config.update({
       region: import.meta.env.VITE_PUBLIC_REGION,
       accessKeyId: import.meta.env.VITE_PUBLIC_ACCESSKEY,
@@ -175,16 +176,37 @@ function ProductCustomPage(){
     });
   
     // 첫 번째 문장
-    let response1 = await axios.get(`http://70.12.130.121:1470/ai/synthesize?voice_id=18&text=${text1}`, {responseType: 'blob'});
-    await uploadFile(response1.data, text1);
+    let response1 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=18&text=${text1}`, {responseType: 'blob'});
+    let url1 = await uploadFile(response1.data, text1);
   
     // 두 번째 문장
-    let response2 = await axios.get(`http://70.12.130.121:1470/ai/synthesize?voice_id=18&text=${text2}`, {responseType: 'blob'});
-    await uploadFile(response2.data, text2);
+    let response2 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=18&text=${text2}`, {responseType: 'blob'});
+    let url2 = await uploadFile(response2.data, text2);
   
     // 세 번째 문장
-    let response3 = await axios.get(`http://70.12.130.121:1470/ai/synthesize?voice_id=18&text=${text3}`, {responseType: 'blob'});
-    await uploadFile(response3.data, text3);
+    let response3 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=18&text=${text3}`, {responseType: 'blob'});
+    let url3 = await uploadFile(response3.data, text3);
+
+    const productData = {
+      voiceId: voiceId,
+      productTitle: title,
+      summary: summary,
+      productImageUrl: productImg,
+      price: price,
+      categoryList:[selectGender, selectAge, selectMood],
+      previewTexts:[text1,text2,text3],
+      previewUrls : [url1,url2,url3],
+    };
+
+    console.log(productData);
+
+    customAxios.post("product",productData)
+        .then((res)=>{
+          console.log("장터에 올리기 성공",res);
+          navigate('/sell-list')
+        })
+        .catch((err)=>console.log(err))
+
   };
   
     const uploadFile = async (data, text) => {
@@ -201,29 +223,9 @@ function ProductCustomPage(){
 
     const result = await upload.promise();
     console.log(result.Location);
-    return { text:text, url:result.Location };
     
-    // const categoryList=[gender, ageGroup, mood];
-    // const productData = {
-    //   voiceId: voiceId,
-    //   productTitle: title,
-    //   summary: summary,
-    //   productImageUrl: productImg,
-    //   price: price,
-    //   categoryList: categoryList,
-    //   previewTexts: [...previews.map(preview => preview.text)], 
-    //   previewUrls : [...previews.map(preview => preview.url)],
-    // };
-
-    // console.log(productData);
-
-    // customAxios.post("product", productData)
-    //   .then((res) => {
-    //     console.log("장터에 올리기 성공", res);
-    //     navigate('/sell-list')
-    //   })
-    //   .catch((err) => console.log(err))
-    };
+    return result.Location ;
+  };
 
 
   return(

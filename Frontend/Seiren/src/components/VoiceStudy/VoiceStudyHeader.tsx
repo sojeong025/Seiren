@@ -24,7 +24,7 @@ const VoiceStudyHeader: React.FC = () => {
         console.error('zip파일 생성 실패', err)
       })
 
-    axios.get(`http://70.12.130.121:1468/ai/upload?voice_id=${voiceId}&zipURL=${zipVoice}`)
+    axios.get(`http://70.12.130.121:1468/upload?voice_id=${voiceId}&zipURL=${zipVoice}`)
       .then((res) => {
         console.log('목소리 학습 버튼 클릭 시 ai 연결 성공', res)
         navigate(`/voice-studying/${voiceId}`);
