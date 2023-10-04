@@ -15,7 +15,7 @@ public interface VoiceRepository extends JpaRepository<Voice, Long> {
     @Query("SELECT v FROM Voice v WHERE v.user.id = :userId AND v.state = 0")
     List<Voice> findByUser_IdAndStateIsZero(@Param("userId") Long userId);
 
-    List<Voice> findByUser_IdAndStateLessThan(Long userId, int state);
+    List<Voice> findByUser_IdAndStateLessThanAndIsDeleteFalse(Long userId, int state);
 
     Optional<Voice> findOneByUser_IdAndVoiceId(Long userId, Long voiceId);
 
