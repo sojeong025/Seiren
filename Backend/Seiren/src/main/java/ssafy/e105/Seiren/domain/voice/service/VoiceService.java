@@ -18,6 +18,8 @@ import java.util.zip.ZipOutputStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ssafy.e105.Seiren.domain.product.entity.Product;
+import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
 import ssafy.e105.Seiren.domain.product.service.ProductService;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.service.UserService;
@@ -38,6 +40,7 @@ import ssafy.e105.Seiren.global.utils.ApiError;
 public class VoiceService {
 
     private final VoiceRepository voiceRepository;
+    private final ProductRepository productRepository;
     private final UserService userService;
     private final S3Service s3Service;
     private final RecordService recordService;
@@ -157,6 +160,12 @@ public class VoiceService {
         User user = userService.getUser(request);
         Voice voice = getVoice(voiceId);
         if (voice.getUser() == user) {
+            if(voice.getState() < 3){
+                voice.delete();
+                return;
+            }
+            Product product = productRepository.findByVoice_VoiceId(voiceId).get();
+            product.update(false);
             voice.delete();
             return;
         }
