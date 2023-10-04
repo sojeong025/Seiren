@@ -19,11 +19,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-<<<<<<< HEAD
-    // optimizeDeps를 비활성화하지 않고 사용합니다.
-=======
-    // optimizeDeps를 비활성화하지 않고 사용합니다. test
->>>>>>> 32f6ea9615902fd5d0c4890255cd0e6fa73fc634
+    // optimizeDeps를 비활성화하지 않고 사용합니다. te
   },
   define: {
     'global' : {},
