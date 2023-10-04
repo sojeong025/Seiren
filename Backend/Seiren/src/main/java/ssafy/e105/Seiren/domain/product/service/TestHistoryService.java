@@ -43,7 +43,7 @@ public class TestHistoryService {
         int count = testHistory.getCount();
         if (count > 0) {
             testHistory.update();
-            return count - 1;
+            return testHistory.getCount();
         }
         throw new BaseException(
                 new ApiError(OVER_RESTCOUNT.getMessage(), OVER_RESTCOUNT.getCode()));
