@@ -11,7 +11,7 @@ import ssafy.e105.Seiren.domain.transaction.entity.Transaction;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
-    @Query(value = "SELECT t FROM Transaction t WHERE t.buyer.id = :userId")
+    @Query(value = "SELECT t FROM Transaction t WHERE t.buyer.id = :userId ORDER BY t.id DESC")
     Page<Transaction> findAllByBuyer(@Param("userId") Long userId, Pageable pageable);
 
     @Query("SELECT t FROM Transaction t WHERE t.product.productId = :productId AND t.seller.id = :sellerId AND t.buyer.id = :buyerId")
