@@ -32,11 +32,14 @@ public class TestHistoryService {
     public Integer checkTestCount(Long productId, HttpServletRequest request) {
         User user = getUser(request);
         if (countTest(productId, request) > 0) {
+            System.out.println("testHistory 상태 : " + countTest(productId, request));
             TestHistory testHistory = getTestHistory(user.getId(), productId);
             testHistory.update();
             testHistoryRepository.save(testHistory);
+            testHistoryRepository.flush();
             return  testHistory.getCount();
         }
+        System.out.println("testHistory 상태 : null");
         throw new BaseException(
                 new ApiError(OVER_RESTCOUNT.getMessage(), OVER_RESTCOUNT.getCode()));
     }
@@ -47,9 +50,12 @@ public class TestHistoryService {
         Product product = productService.getProduct(productId);
         TestHistory testHistory = getTestHistory(user.getId(), productId);
         if (testHistory == null) {
+            System.out.println("testHistory 상태 : " + testHistory);
             testHistoryRepository.save(TestHistory.toEntity(user, product));
+            testHistoryRepository.flush();
             return 3;
         }
+        System.out.println("testHistory 상태 : 이미 있음" );
         return testHistory.getCount();
     }
 
