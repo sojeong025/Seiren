@@ -10,7 +10,7 @@ import ssafy.e105.Seiren.domain.voice.entity.Voice;
 public interface VoiceRepository extends JpaRepository<Voice, Long> {
 
     //    @Query("select v from Voice v left join fetch v.product") state column을 voice table에 넣기 이전에 사용한 코드
-    List<Voice> findByUser_IdAndIsDeleteFalse(Long userId);
+    List<Voice> findByUser_IdAndIsDeleteFalseOrderByVoiceIdDesc(Long userId);
 
     @Query("SELECT v FROM Voice v WHERE v.user.id = :userId AND v.state = 0")
     List<Voice> findByUser_IdAndStateIsZero(@Param("userId") Long userId);
