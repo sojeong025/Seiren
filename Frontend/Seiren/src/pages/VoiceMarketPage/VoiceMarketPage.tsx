@@ -3,7 +3,7 @@ import FavoriteVoice from "../../components/VoiceMarket/FavoriteVoice";
 import Filter from "../../components/VoiceMarket/Filter";
 import styles from "./VoiceMarketPage.module.css";
 import { Link } from "react-router-dom";
-import Pagination from "../../components/common/Pagination";
+import Pagination from "../../components/common/Pagi";
 
 
 interface Product {
@@ -82,7 +82,7 @@ function VoiceMarketPage() {
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}
           onPageChange={onPageChange}
-          totalAmount={total}
+          totalPageNum={total}
         />
       </div>
     </div>
