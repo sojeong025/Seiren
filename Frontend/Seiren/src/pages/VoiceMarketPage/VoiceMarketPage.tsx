@@ -3,8 +3,7 @@ import FavoriteVoice from "../../components/VoiceMarket/FavoriteVoice";
 import Filter from "../../components/VoiceMarket/Filter";
 import styles from "./VoiceMarketPage.module.css";
 import { Link } from "react-router-dom";
-import Pagination from "../../components/common/Pagination";
-
+import Pagination from "../../components/common/Pagi";
 
 interface Product {
   nickname: string;
@@ -54,31 +53,30 @@ function ProductCard({ product }: { product: Product }) {
 function VoiceMarketPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [total, setTotal] = useState();
 
-  const itemsPerPage = 10;
+  // 자식 컴포넌트에서 호출할 콜백 함수
+  const updateTotal = newTotal => {
+    setTotal(newTotal);
+  };
 
-    const onPageChange = (page) => {
+  const onPageChange = page => {
     setCurrentPage(page);
   };
 
   return (
     <div className={styles.total}>
       <FavoriteVoice />
-      <Filter products={products} setProducts={setProducts} />
+      <Filter products={products} setProducts={setProducts} setTotal={updateTotal} currentPage={currentPage} />
       <div className={styles.container}>
         <div className={styles.cards}>
-          {products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map(product => (
+          {products.map(product => (
             <ProductCard key={product.productId} product={product} />
           ))}
         </div>
       </div>
       <div className={styles.pagi}>
-        <Pagination
-          itemsPerPage={itemsPerPage}
-          currentPage={currentPage}
-          onPageChange={onPageChange}
-          totalAmount={products.length}
-        />
+        <Pagination currentPage={currentPage} onPageChange={onPageChange} totalPageNum={total} />
       </div>
     </div>
   );

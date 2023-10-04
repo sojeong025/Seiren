@@ -64,7 +64,8 @@ const MyPage: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({
             <div className={styles.hi_1}>안녕하세요,</div>
             <div className={styles.hi_2}>{nickname}님!</div>
             <div className={styles.hi_3}>
-              {nickname}님의 SEIREN 보이스 스튜디오 <br />
+              {nickname}님의 <br />
+              SEIREN 보이스 스튜디오 <br />
               사용현황을 한 눈에 알려드릴게요
             </div>
           </div>

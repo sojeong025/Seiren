@@ -8,7 +8,7 @@
   background-image:
   linear-gradient(to bottom, #000000c6 50%, rgba(0, 112, 211, 0.142)),
   linear-gradient(to right, #000 40%, rgba(0, 112, 211, 0.142)),
-    url("src/assets/img/market.jpeg");
+    url("../../assets/img/market.jpeg");
   background-size: cover; 
 }
 .left{
