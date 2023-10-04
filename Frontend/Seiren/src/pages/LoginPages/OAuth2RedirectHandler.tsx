@@ -21,7 +21,8 @@ const OAuth2RedirectHandler: React.FC = () => {
         localStorage.setItem('kakaoLogin', "true");
 
         // JWT 로그인 처리
-        AuthenticationService.registerSuccessfulLoginForJwt(res.data.response.accessToken);
+        await AuthenticationService.registerSuccessfulLoginForJwt(res.data.response.accessToken);
+        navigate('/');
       } catch (error) {
         console.log('kakaoLogin 실패');
       }
@@ -37,7 +38,7 @@ const OAuth2RedirectHandler: React.FC = () => {
     useEffect(() => {
       if(check === true){
         fetchToken(); // 토큰 요청 및 저장
-        navigate('/');
+
       }
     }, [check]);
     
