@@ -32,18 +32,19 @@ public class TestHistoryService {
     @Transactional
     public Integer checkTestCount(Long productId, HttpServletRequest request) {
         User user = getUser(request);
-        log.debug(user.getId() + ", prodictId : " + productId);
-        if (countTest(productId, request) > 0) {
-            System.out.println("testHistory 상태 : " + countTest(productId, request));
-            TestHistory testHistory = getTestHistory(user.getId(), productId);
-            testHistory.update();
-            testHistoryRepository.save(testHistory);
-            testHistoryRepository.flush();
-            log.debug(String.valueOf(testHistory.getCount()));
-            return  testHistory.getCount();
+        TestHistory testHistory = getTestHistory(user.getId(), productId);
+        if (testHistory == null) { // 없는 경우
+            testHistoryRepository.save(
+                    TestHistory.toEntity(user,
+                            productService.getProduct(productId))); // 생성과 함께 차감을 포함해 count 2로 설정
+            return 2;
         }
-        System.out.println("testHistory 상태 : null");
-        log.debug(user.getId() + ", prodictId : " + productId + ": 횟수 초과!");
+        // 있는 경우
+        int count = testHistory.getCount();
+        if (count > 0) {
+            testHistory.update();
+            return count - 1;
+        }
         throw new BaseException(
                 new ApiError(OVER_RESTCOUNT.getMessage(), OVER_RESTCOUNT.getCode()));
     }
@@ -54,12 +55,9 @@ public class TestHistoryService {
         Product product = productService.getProduct(productId);
         TestHistory testHistory = getTestHistory(user.getId(), productId);
         if (testHistory == null) {
-            System.out.println("testHistory 상태 : " + testHistory);
             testHistoryRepository.save(TestHistory.toEntity(user, product));
-            testHistoryRepository.flush();
             return 3;
         }
-        System.out.println("testHistory 상태 : 이미 있음" );
         return testHistory.getCount();
     }
 
@@ -74,9 +72,6 @@ public class TestHistoryService {
         Optional<TestHistory> testHistoryOptional = testHistoryRepository.findByUser_IdAndProduct_ProductId(
                 userId, productId);
         // TestHistory를 찾았을 경우에 대한 처리
-        if (testHistoryOptional.isPresent()) {
-            return testHistoryOptional.get();
-        }
-        return null;
+        return testHistoryOptional.orElse(null);
     }
 }
