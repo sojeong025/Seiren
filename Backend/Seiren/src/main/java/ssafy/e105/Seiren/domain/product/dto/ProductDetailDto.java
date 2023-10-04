@@ -11,6 +11,8 @@ import ssafy.e105.Seiren.domain.voice.entity.Voice;
 @NoArgsConstructor
 public class ProductDetailDto {
 
+    @Schema(description = "보이스 id", example = "3")
+    private Long voiceId;
     @Schema(description = "상품명", example = "김밤")
     private String productTitle;
     @Schema(description = "상품 이미지 url", example = "https://recipe1.ezmember.co.kr/cache/recipe/2018/12/14/4cde7fc3e79989e982dd00e6891939d81.jpg")
@@ -25,6 +27,7 @@ public class ProductDetailDto {
     private List<String> productCategoryList;
 
     public ProductDetailDto(Product product, Voice voice, List<String> categoryList) {
+        this.voiceId = voice.getVoiceId();
         this.productTitle = product.getProductTitle();
         this.productImageUrl = product.getProductImageUrl();
         this.summary = product.getSummary();
