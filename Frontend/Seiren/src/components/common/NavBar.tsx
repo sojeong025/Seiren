@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import { UserState } from "../../recoil/UserAtom";
 import { customAxios } from "../../libs/axios";
@@ -11,6 +11,9 @@ function NavBar() {
   const isKakaoLoggedIn = localStorage.getItem("kakaoLogin") === "true";
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useRecoilState(UserState);
+  const location = useLocation();
+  console.log(location.pathname);
+
 
   useEffect(() => {
     customAxios.get("user").then(response => {
@@ -24,7 +27,7 @@ function NavBar() {
       console.log(updatedUserData.nickname);
       console.log("recoil 저장 성공");
     });
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,7 +71,7 @@ function NavBar() {
           <NavLink to="/my-page">MyPage</NavLink>
 
           {isKakaoLoggedIn ? (
-            <img className={styles.proImg} src={userInfo.profileImage} alt="Profile" />
+            userInfo.profileImage && <img className={styles.proImg} src={userInfo.profileImage} alt="Profile" />
           ) : (
             <div className={styles.login} onClick={handleLoginClick}>
               LOGIN
