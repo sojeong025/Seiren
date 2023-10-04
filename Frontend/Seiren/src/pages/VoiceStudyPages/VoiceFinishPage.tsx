@@ -4,15 +4,25 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import market from "../../assets/img/market.png";
 import mypageimg from "../../assets/img/mypage.png";
+import { useEffect, useState } from 'react';
 
 function VoiceFinishPage() {
-  const getProduct = () => {
+  const [voiceId, setVoiceId] = useState();
+  
+  useEffect(() => {
     customAxios.get("progressingVoices")
       .then((res) => {
-        console.log("목소리 정보 가져오기", res)
+        console.log('목소리 상태 호출', res)
+        if (res.data.response) { // response 객체가 있는지 확인
+          console.log(`voiceId:`, res.data.response.voiceId)
+          setVoiceId(res.data.response.voiceId);
+        } else {
+        }
       })
-      .catch((err) => console.log(err))
-    };
+      .catch((error) => {
+        console.error('목소리 상태 호출 중 오류:', error);
+      });
+  }, []);
 
   return(
     <motion.div
@@ -47,12 +57,12 @@ function VoiceFinishPage() {
             <img src={mypageimg} alt="마이페이지" />
           </div>
           <NavLink to="/product-custom">
-            <div className={styles.market_link} onClick={getProduct}>스토어에 등록하기</div>
+            <div className={styles.market_link}>스토어에 등록하기</div>
           </NavLink>
           <div className={styles.market_txt}>공유 및 수익 창출</div>
-          <NavLink to="/product-custom">
+          <NavLink to={`/product-custom/${voiceId}`}>
             <div className={styles.end}>
-              <div className={styles.market_underlink} onClick={getProduct}>자세히 보기</div>
+              <div className={styles.market_underlink}>자세히 보기</div>
             </div>
           </NavLink>
         </div>

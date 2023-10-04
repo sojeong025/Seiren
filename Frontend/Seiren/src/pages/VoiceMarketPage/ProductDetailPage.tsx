@@ -17,10 +17,20 @@ function ProductDetailPage() {
   const [useCount, setUseCount] = useState(0);
   const mL = 20;
   const [checkPre, setCheckPre] = useState(false);
+  const [audio1, setAudio1] = useState();
+  const [audio2, setAudio2] = useState();
+  const [audio3, setAudio3] = useState();
 
   const colors = ['#FFD1DC', '#B2FEBD', '#C5A3FF']; 
 
   useEffect(() => {
+    customAxios.get(`preview/${productId}`)
+      .then((res) => {
+        console.log('미리듣기 음성파일 url 받아오기', res)
+        // setAudio1(res.data.response.previewUrls.0)
+      })
+      .catch((err) => console.log(err));
+
     customAxios
       .get(`product/${productId}`)
       .then((response) => {
@@ -65,7 +75,7 @@ function ProductDetailPage() {
 
   const accessToken = localStorage.getItem("accessToken");
   const marketProduct = async (text) => {
-    let response = await axios.get(`http://70.12.130.121:1470/synthesize3?voice_id=18&product_id=20&text=${text}`,{
+    let response = await axios.get(`http://70.12.130.121:1470/synthesize3?voice_id=${productDetail.voiceId}&product_id=${productId}&text=${text}`,{
       responseType: 'blob',
       headers: {
         'Authorization' : `Bearer ${accessToken}`
@@ -161,7 +171,6 @@ function ProductDetailPage() {
             {
               useCount && useCount > 0 ? <div className={styles.play} onClick={() => marketProduct(testText)}><BsFillPlayCircleFill/></div>:<div></div>
             }
-           
             <div className={styles.characterCount}>{testText.length}자 / 20자</div>
           </div>
 
