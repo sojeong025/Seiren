@@ -45,8 +45,8 @@ public class VoiceService {
     private final ProductService productService;
 
     public VoiceDto getCurrentVoiceId(HttpServletRequest request) {
-        List<Voice> list = voiceRepository.findByUser_IdAndStateAndIsDeleteOrderByCreatedAtDesc(
-                userService.getUser(request).getId(), 3, false);
+        List<Voice> list = voiceRepository.findByUser_IdAndStateLessThanAndIsDeleteFalseOrderByCreatedAtDesc(
+                userService.getUser(request).getId(), 3);
         if (list.size() == 0) {
             throw new BaseException(new ApiError(NOT_EXIST_PROCESSING_VOICE.getMessage(),
                     NOT_EXIST_PROCESSING_VOICE.getCode()));

@@ -142,6 +142,8 @@ spring:
   config:
     activate:
       on-profile: port_8080
+  data:
+    kakao-redirectUrl: http://localhost:5173/oauth/callback/kakao
 
 server:
   port: 8080

@@ -19,8 +19,8 @@ public interface VoiceRepository extends JpaRepository<Voice, Long> {
 
     Optional<Voice> findOneByUser_IdAndVoiceId(Long userId, Long voiceId);
 
-    List<Voice> findByUser_IdAndStateAndIsDeleteOrderByCreatedAtDesc(Long userId,
-            int state, Boolean isDelete);
+    List<Voice> findByUser_IdAndStateLessThanAndIsDeleteFalseOrderByCreatedAtDesc(Long userId,
+            int state);
 
     List<Voice> findByUserIdAndStateGreaterThanEqual(Long userId, int state);
 
