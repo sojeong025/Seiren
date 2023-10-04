@@ -6,11 +6,11 @@ import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.NOT_EXIST_US
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.entity.TestHistory;
-import ssafy.e105.Seiren.domain.product.entity.Wish;
 import ssafy.e105.Seiren.domain.product.repository.TestHistoryRepository;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.repository.UserRepository;
@@ -21,6 +21,7 @@ import ssafy.e105.Seiren.global.utils.ApiError;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class TestHistoryService {
 
     private final TestHistoryRepository testHistoryRepository;
@@ -31,15 +32,18 @@ public class TestHistoryService {
     @Transactional
     public Integer checkTestCount(Long productId, HttpServletRequest request) {
         User user = getUser(request);
+        log.debug(user.getId() + ", prodictId : " + productId);
         if (countTest(productId, request) > 0) {
             System.out.println("testHistory 상태 : " + countTest(productId, request));
             TestHistory testHistory = getTestHistory(user.getId(), productId);
             testHistory.update();
             testHistoryRepository.save(testHistory);
             testHistoryRepository.flush();
+            log.debug(String.valueOf(testHistory.getCount()));
             return  testHistory.getCount();
         }
         System.out.println("testHistory 상태 : null");
+        log.debug(user.getId() + ", prodictId : " + productId + ": 횟수 초과!");
         throw new BaseException(
                 new ApiError(OVER_RESTCOUNT.getMessage(), OVER_RESTCOUNT.getCode()));
     }

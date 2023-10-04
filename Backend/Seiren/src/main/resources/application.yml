@@ -155,7 +155,7 @@ spring:
     activate:
       on-profile: port_8081
   data:
-    kakao-redirectUrl: https://j9e105.p.ssafy.io/oauth/callback/kakao
+    kakao-redirectUrl: http://j9e105.p.ssafy.io/oauth/callback/kakao
 
 server:
   port: 8081
