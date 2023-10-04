@@ -38,7 +38,7 @@ public class TestHistory {
         return TestHistory.builder()
                 .user(user)
                 .product(product)
-                .count(2)
+                .count(3)
                 .build();
     }
 
