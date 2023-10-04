@@ -83,7 +83,7 @@ function AboutPage() {
         </div>
         {/* <div className={styles.section2_txt}>SHOW SHOW </div> */}
         <div ref={videoContainerRef} className={styles.section2_video}>
-          <YouTube videoId="K6fHSb87aAM" />
+          {/* <YouTube videoId="K6fHSb87aAM" /> */}
         </div>
       </section>
 
