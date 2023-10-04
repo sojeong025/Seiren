@@ -6,7 +6,6 @@ import SellDetailList from "./SellDetailList";
 import UploadImgOri from "../common/UploadImgOri";
 import SideBar from "../../components/common/SideBar";
 
-
 interface Product {
   productId: string;
   productTitle: string;
@@ -20,15 +19,13 @@ interface SellDetailProps {
   setIsNavBarVisible: (value: boolean) => void; // setIsNavBarVisible 프로퍼티 추가
 }
 
-
-const SellDetail : React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({ setIsNavBarVisible }) => {
+const SellDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({ setIsNavBarVisible }) => {
   useEffect(() => {
     setIsNavBarVisible(false);
 
-    return()=>{
-      setIsNavBarVisible(true)
-    }
-    
+    return () => {
+      setIsNavBarVisible(true);
+    };
   }, [setIsNavBarVisible]);
 
   const { productId } = useParams();
@@ -99,48 +96,63 @@ const SellDetail : React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> 
 
   return (
     <div className={styles.sellDetailContainer}>
-      <SideBar/>
-      <div className={styles.container}>
-        <div>
-          {isEditing ? (
-            <input type="text" value={productTitle} onChange={e => setProductTitle(e.target.value)} />
-          ) : (
-            product.productTitle
-          )}
+      <SideBar />
+      <div className={styles.big}>
+        <div className={styles.container}>
+          <div className={styles.left}>
+            {isEditing ? (
+              <>
+                <UploadImgOri imgUrl={productImageUrl} setImgUrl={setProductImageUrl} />
+              </>
+            ) : (
+              <>
+                <img src={productImageUrl} alt={product.productTitle} className={styles.pimg} />
+              </>
+            )}
+          </div>
+          <div className={styles.mid}>
+            <div className={styles.title}>
+              {isEditing ? (
+                <input className={styles.edittitle} type="text" value={productTitle} onChange={e => setProductTitle(e.target.value)} />
+              ) : (
+                product.productTitle
+              )}
+            </div>
+            <p className={styles.mood}>#{product.productCategoryList.join(", #")}</p>
+            <p className={styles.summary}>
+              {" "}
+              {isEditing ? (
+                <input className={styles.editsummary} type="text" value={summary} onChange={e => setSummary(e.target.value)} />
+              ) : (
+                product.summary
+              )}
+            </p>
+          </div>
+          <div className={styles.right}>
+            <div className={styles.price}>
+              <span className={styles.pricetxt}>
+              {isEditing ? (
+                <input className={styles.editprice} type="number" value={price} onChange={e => setPrice(e.target.value)} />
+              ) : (
+                product.price
+              )}
+              </span> <span className={styles.one}>원</span>
+              
+              <span className={styles.txt}> (단위 : 자)</span>
+              
+            </div>
+            <div className={styles.btn}>
+              {isEditing && <button onClick={handleSaveClick}>저장</button>}
+              {!isEditing && <button onClick={handleEditClick}>수정</button>}
+            </div>
+          </div>
         </div>
         <div>
-          {isEditing ? (
-            <>
-              <UploadImgOri imgUrl={productImageUrl} setImgUrl={setProductImageUrl} />
-            </>
-          ) : (
-            <>
-              <img src={productImageUrl} alt={product.productTitle} className={styles.pimg} />
-            </>
-          )}
+          <SellDetailList productId={productId} />
         </div>
-
-        <p>Product Category: {product.productCategoryList.join(", ")}</p>
-        <p>
-          Summary:{" "}
-          {isEditing ? (
-            <input type="text" value={summary} onChange={e => setSummary(e.target.value)} />
-          ) : (
-            product.summary
-          )}
-        </p>
-        <p>
-          price:{" "}
-          {isEditing ? <input type="number" value={price} onChange={e => setPrice(e.target.value)} /> : product.price}
-        </p>
-        {isEditing && <button onClick={handleSaveClick}>저장</button>}
-        {!isEditing && <button onClick={handleEditClick}>수정</button>}
-      </div>
-      <div>
-        <SellDetailList productId={productId} />
       </div>
     </div>
   );
-}
+};
 
 export default SellDetail;

@@ -51,7 +51,7 @@ function BuyListBox() {
           data.forEach(item => {
             totalPrice += item.price * item.buyLetterCount;
           });
-  
+
           setTotalPrice(totalPrice);
         })
         .catch(error => {

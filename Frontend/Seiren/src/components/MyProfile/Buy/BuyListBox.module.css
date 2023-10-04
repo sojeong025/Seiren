@@ -70,6 +70,10 @@
   width: 10%;
 }
 
+.purchaseTable th {
+  font-weight: 900;
+  border-bottom: 2px solid black;
+}
 .purchaseTable th,
 .purchaseTable td {
   padding: 20px 13px;
@@ -79,10 +83,6 @@
   word-break: keep-all;
 }
 
-.purchaseTable th {
-  font-weight: 900;
-  border-bottom: 2px solid black;
-}
 th span{
   font-size: 13px;
 }
