@@ -2,6 +2,8 @@ import styles from './VoiceFinishPage.module.css'
 import { customAxios } from '../../libs/axios';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import market from "../../assets/img/market.png";
+import mypageimg from "../../assets/img/mypage.png";
 
 function VoiceFinishPage() {
   const getProduct = () => {
@@ -29,7 +31,7 @@ function VoiceFinishPage() {
       <div className={styles.page}>
         <div className={styles.mypage}>
           <div className={styles.mypage_img}>
-            <img src="src/assets/img/market.png" alt="마이페이지" />
+            <img src={market} alt="마이페이지" />
           </div>
           <NavLink to="/my-page">
             <div className={styles.mypage_link}>마이페이지에서 확인하기</div>
@@ -42,7 +44,7 @@ function VoiceFinishPage() {
         </div>
         <div className={styles.market}>
           <div className={styles.market_img}>
-            <img src="src/assets/img/mypage.png" alt="마이페이지" />
+            <img src={mypageimg} alt="마이페이지" />
           </div>
           <NavLink to="/product-custom">
             <div className={styles.market_link} onClick={getProduct}>스토어에 등록하기</div>
