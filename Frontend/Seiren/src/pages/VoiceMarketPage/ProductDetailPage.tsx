@@ -65,7 +65,7 @@ function ProductDetailPage() {
 
   const accessToken = localStorage.getItem("accessToken");
   const marketProduct = async (text) => {
-    let response = await axios.get(`http://70.12.130.121:1470/synthesize3?voice_id=18&product_id=20&text=${text}`,{
+    let response = await axios.get(`https://j9e105.p.ssafy.io/ai/synthesize3?voice_id=18&product_id=20&text=${text}`,{
       responseType: 'blob',
       headers: {
         'Authorization' : `Bearer ${accessToken}`
@@ -158,7 +158,10 @@ function ProductDetailPage() {
               maxLength={mL}
               style={{ resize: 'none' }} placeholder='듣고 싶은 내용을 입력하고 재생 버튼을 클릭하세요.'>
             </textarea>
-            <div className={styles.play} onClick={() => marketProduct(testText)}><BsFillPlayCircleFill/></div>
+            {
+              useCount && useCount > 0 ? <div className={styles.play} onClick={() => marketProduct(testText)}><BsFillPlayCircleFill/></div>:<div></div>
+            }
+           
             <div className={styles.characterCount}>{testText.length}자 / 20자</div>
           </div>
 
