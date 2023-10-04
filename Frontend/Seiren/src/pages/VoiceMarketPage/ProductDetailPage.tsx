@@ -6,11 +6,12 @@ import styles from './ProductDetailPage.module.css';
 import { BsHeartFill, BsHeart, Bs1CircleFill, Bs2CircleFill, Bs3CircleFill
         , Bs1Circle, Bs2Circle, Bs3Circle, BsFillPlayCircleFill, BsMusicNoteList} from "react-icons/bs"
 import axios from 'axios';
-import dreamsAudio from "../../assets/audio/dreams.mp3";
+// import dreamsAudio from "../../assets/audio/dreams.mp3";
 
 
 function ProductDetailPage() {
   const { productId } = useParams();
+  console.log(productId);
   const [productDetail, setProductDetail] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [testText, setTestText] = useState("");
@@ -23,31 +24,38 @@ function ProductDetailPage() {
 
   const colors = ['#FFD1DC', '#B2FEBD', '#C5A3FF']; 
 
+  
+
   useEffect(() => {
+    if (productId){
+      customAxios
+        .get(`product/${productId}`)
+        .then((response) => {
+          const responseData = response.data.response;
+          console.log('목소리 상세 정보 받아오기', responseData)
+          setProductDetail(responseData);
+          console.log('사진 url 체크',responseData.productImageUrl)
+        })
+        .catch((error) => {
+          console.error('API 호출 중 오류 발생:', error);
+        });
+    }
+  }, [productId])
+
+  useEffect(()=> {
     customAxios.get(`preview/${productId}`)
       .then((res) => {
         console.log('미리듣기 음성파일 url 받아오기', res)
-        // setAudio1(res.data.response.previewUrls.0)
+        const previewUrls = res.data.response.previewUrls;
+        setAudio1(previewUrls[0]);
+        setAudio2(previewUrls[1]);
+        setAudio3(previewUrls[2]);
       })
       .catch((err) => console.log(err));
-
-    customAxios
-      .get(`product/${productId}`)
-      .then((response) => {
-        const responseData = response.data.response;
-        console.log(responseData)
-        setProductDetail(responseData);
-      })
-      .catch((error) => {
-        console.error('API 호출 중 오류 발생:', error);
-      });
-
-    customAxios.get(`tts/count/${productId}`)
-    .then((res)=>{
-      console.log(res);
-      setUseCount(res.data.response);
-    })
-  }, [productId, checkPre]);
+  },[]);
+  console.log('첫번째 오디오', audio1)
+  console.log('두번째 오디오',audio2)
+  console.log('세번째 오디오',audio3)
 
   const handleLikeClick = () => {
     if (isLiked) {
@@ -82,10 +90,9 @@ function ProductDetailPage() {
       }
     });
     console.log(response.data);
-
     const blobUrl = URL.createObjectURL(response.data);
-
     let audio = new Audio(blobUrl);
+
     audio.play();
     if(checkPre === false){
       setCheckPre(true);
@@ -93,6 +100,14 @@ function ProductDetailPage() {
       setCheckPre(false);
     }
   };
+
+  useEffect(() => {
+    customAxios.get(`tts/count/${productId}`)
+    .then((res)=>{
+      console.log('체험판 3번 듣는거 남은 횟수 체크', res);
+      setUseCount(res.data.response);
+    })
+  }, [checkPre]);
 
   const changeTestText = (e) =>{
     if(e.target.value.length <= 20){
@@ -105,8 +120,7 @@ function ProductDetailPage() {
       <div className={styles.product}>
         {productDetail && (
           <div className={styles.product_left}>
-            {/* <div className={styles.nickname}>{productDetail.nickname}</div> */}
-            <img src={productDetail.productImageUrl} alt={productDetail.productTitle} className={styles.img}/>
+            {productDetail.productImageUrl && <img src={productDetail.productImageUrl} alt={productDetail.productTitle} className={styles.img}/>}
             <div className={styles.title}>{productDetail.productTitle}</div>
             <div className={styles.summary}>{productDetail.summary}</div>
             {productDetail.productCategoryList && (
@@ -129,24 +143,24 @@ function ProductDetailPage() {
             <div className={styles.url}>
               <div className={styles.url_txt}><BsMusicNoteList/> &nbsp;&nbsp; 미리듣기 문장 1</div>
               <audio controls>
-                {/* <source src={productDetail.audioFileUrl} type="audio/mp3" /> */}
-                <source src={dreamsAudio} type="audio/mp3" />
+                {audio1 && <source src={audio1} type="audio/wav" />}
+                {/* <source src={dreamsAudio} type="audio/mp3" /> */}
               </audio>
             </div>
 
             <div className={styles.url}>
               <div className={styles.url_txt}><BsMusicNoteList/> &nbsp;&nbsp; 미리듣기 문장 2 </div>
               <audio controls>
-                {/* <source src={productDetail.audioFileUrl} type="audio/mp3" /> */}
-                <source src={dreamsAudio} type="audio/mp3" />
+                {audio2 && <source src={audio2} type="audio/wav" />}
+                {/* <source src={dreamsAudio} type="audio/mp3" /> */}
               </audio>
             </div>
 
             <div className={styles.url}>
               <div className={styles.url_txt}><BsMusicNoteList/> &nbsp;&nbsp; 미리듣기 문장 3 </div>
               <audio controls>
-                {/* <source src={productDetail.audioFileUrl} type="audio/mp3" /> */}
-                <source src={dreamsAudio} type="audio/mp3" />
+                {audio3 && <source src={audio3} type="audio/wav" /> }
+                {/* <source src={dreamsAudio} type="audio/mp3" /> */}
               </audio>  
             </div>
           </div>
