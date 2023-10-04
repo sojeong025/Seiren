@@ -24,7 +24,7 @@
     "axios": "^0.21.1",
     "date-fns": "^2.30.0",
     "esbuild": "^0.19.4",
-    "extendable-media-recorder": "^9.1.1",
+    "extendable-media-recorder": "^9.1.2",
     "extendable-media-recorder-wav-encoder": "^7.0.97",
     "framer-motion": "^10.16.4",
     "gsap": "^3.12.2",
@@ -41,6 +41,7 @@
     "recharts": "^2.8.0",
     "recoil": "^0.7.7",
     "slick-carousel": "^1.8.1",
+    "standardized-audio-context": "^25.3.57",
     "styled-components": "^5.3.11"
   },
   "devDependencies": {
@@ -60,6 +61,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "prettier": "^3.0.3",
+    "rollup": "^3.29.4",
     "terser": "^5.21.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.9",

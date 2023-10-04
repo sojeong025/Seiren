@@ -12,7 +12,6 @@ function NavBar() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useRecoilState(UserState);
   const location = useLocation();
-  console.log(location.pathname);
 
 
   useEffect(() => {
