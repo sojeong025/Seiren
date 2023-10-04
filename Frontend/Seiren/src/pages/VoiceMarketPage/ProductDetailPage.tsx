@@ -65,7 +65,11 @@ function ProductDetailPage() {
 
   const accessToken = localStorage.getItem("accessToken");
   const marketProduct = async (text) => {
+<<<<<<< HEAD
     let response = await axios.get(`https://70.12.130.121:1470/synthesize3?voice_id=18&product_id=20&text=${text}`,{
+=======
+    let response = await axios.get(`http://70.12.130.121:1470/ai/synthesize3?voice_id=18&product_id=20&text=${text}`,{
+>>>>>>> 33ee5af5a0b26ca997498800a313104e38f71482
       responseType: 'blob',
       headers: {
         'Authorization' : `Bearer ${accessToken}`
