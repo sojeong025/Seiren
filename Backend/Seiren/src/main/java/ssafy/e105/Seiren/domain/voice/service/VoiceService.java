@@ -86,7 +86,8 @@ public class VoiceService {
     public Long addVoice(HttpServletRequest request, VoiceInsertUpdateDto voiceDto) {
         User user = userService.getUser(request);
         try {
-            if (voiceRepository.findByUser_IdAndStateLessThan(user.getId(), 2).isEmpty()) {
+            if (voiceRepository.findByUser_IdAndStateLessThanAndIsDeleteFalse(user.getId(), 2)
+                    .isEmpty()) {
                 Voice voice = Voice.toEntity(user, voiceDto);
                 return voiceRepository.save(voice).getVoiceId();
             }
