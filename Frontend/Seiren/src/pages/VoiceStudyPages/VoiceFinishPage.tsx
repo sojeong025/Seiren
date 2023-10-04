@@ -29,7 +29,7 @@ function VoiceFinishPage() {
       <div className={styles.page}>
         <div className={styles.mypage}>
           <div className={styles.mypage_img}>
-            <img src="/src/assets/img/market.png" alt="마이페이지" />
+            <img src="src/assets/img/market.png" alt="마이페이지" />
           </div>
           <NavLink to="/my-page">
             <div className={styles.mypage_link}>마이페이지에서 확인하기</div>
@@ -42,7 +42,7 @@ function VoiceFinishPage() {
         </div>
         <div className={styles.market}>
           <div className={styles.market_img}>
-            <img src="/src/assets/img/mypage.png" alt="마이페이지" />
+            <img src="src/assets/img/mypage.png" alt="마이페이지" />
           </div>
           <NavLink to="/product-custom">
             <div className={styles.market_link} onClick={getProduct}>스토어에 등록하기</div>
