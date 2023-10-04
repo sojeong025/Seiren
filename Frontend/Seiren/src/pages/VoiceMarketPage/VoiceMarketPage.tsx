@@ -5,7 +5,6 @@ import styles from "./VoiceMarketPage.module.css";
 import { Link } from "react-router-dom";
 import Pagination from "../../components/common/Pagi";
 
-
 interface Product {
   nickname: string;
   price: number;
@@ -57,12 +56,11 @@ function VoiceMarketPage() {
   const [total, setTotal] = useState();
 
   // 자식 컴포넌트에서 호출할 콜백 함수
-  const updateTotal = (newTotal) => {
+  const updateTotal = newTotal => {
     setTotal(newTotal);
   };
-  const itemsPerPage = 10;
 
-    const onPageChange = (page) => {
+  const onPageChange = page => {
     setCurrentPage(page);
   };
 
@@ -72,18 +70,13 @@ function VoiceMarketPage() {
       <Filter products={products} setProducts={setProducts} setTotal={updateTotal} currentPage={currentPage} />
       <div className={styles.container}>
         <div className={styles.cards}>
-          {products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map(product => (
+          {products.map(product => (
             <ProductCard key={product.productId} product={product} />
           ))}
         </div>
       </div>
       <div className={styles.pagi}>
-        <Pagination
-          itemsPerPage={itemsPerPage}
-          currentPage={currentPage}
-          onPageChange={onPageChange}
-          totalPageNum={total}
-        />
+        <Pagination currentPage={currentPage} onPageChange={onPageChange} totalPageNum={total} />
       </div>
     </div>
   );

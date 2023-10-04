@@ -12,7 +12,7 @@ const theme = createTheme({
   },
 });
 
-function MyPagination({ itemsPerPage = 10, currentPage, onPageChange, totalPageNum }) {
+function MyPagination({ currentPage, onPageChange, totalPageNum }) {
   const pageCount = totalPageNum;
 
   const handleChange = (event, value) => {
