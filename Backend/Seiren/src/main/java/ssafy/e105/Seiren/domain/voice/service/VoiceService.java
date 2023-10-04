@@ -242,11 +242,13 @@ public class VoiceService {
         int oneOrLessCount = 0;
         int twoOrMoreCount = 0;
         for (Voice voice : voiceList) {
-            if (voice.getState() < 2) {
-                oneOrLessCount++;
-                continue;
+            if(voice.getIsDelete() != true){
+                if (voice.getState() < 2) {
+                    oneOrLessCount++;
+                    continue;
+                }
+                twoOrMoreCount++;
             }
-            twoOrMoreCount++;
         }
         return new VoiceStateDto(oneOrLessCount, twoOrMoreCount);
     }

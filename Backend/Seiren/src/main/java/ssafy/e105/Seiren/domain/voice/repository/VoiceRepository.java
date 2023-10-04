@@ -26,4 +26,9 @@ public interface VoiceRepository extends JpaRepository<Voice, Long> {
 
     @Query("SELECT v FROM Voice v WHERE v.user.id = :userId")
     List<Voice> findByUserId(@Param("userId") Long userId);
+
+    Voice findByProduct_ProductId(Long productId);
+
+    @Query("SELECT v FROM Voice v WHERE v.user.id = :userId AND v.state = :i")
+    List<Voice> findByUser_IdAndStateIsThree(@Param("userId") Long userId, Integer i);
 }

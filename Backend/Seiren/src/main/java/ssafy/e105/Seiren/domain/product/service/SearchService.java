@@ -63,12 +63,12 @@ public class SearchService {
                     if (categoryIdList.size() == 0) {
                         Page<Product> productPage = productRepository.findAllProductsOrderByCreateAtDesc(
                                 pageable);
-                        return new ProductSearchResponse(getProductDtoList(productPage, user));
+                        return new ProductSearchResponse(getProductDtoList(productPage, user), productPage.getTotalPages());
                     }
                     // 필터 선택 o
                     Page<Product> productPage = productRepository.findProductsByCategoryIdsOrderByCreateAtDesc(
                             categoryIdList, pageable);
-                    return new ProductSearchResponse(getProductDtoList(productPage, user));
+                    return new ProductSearchResponse(getProductDtoList(productPage, user), productPage.getTotalPages());
                 }
                 // 판매순 정렬
                 else if (sortType.equals("Sales")) {
@@ -80,14 +80,14 @@ public class SearchService {
 
                         System.out.println("productPage 이후");
                         ProductSearchResponse response = new ProductSearchResponse(
-                                getProductDtoList(productPage, user));
+                                getProductDtoList(productPage, user), productPage.getTotalPages());
                         System.out.println("response 받아옴");
                         return response;
                     }
                     // 필터 선택 o
                     Page<Product> productPage = productRepository.findAllByCategoryOrderByTransactionCountDesc(
                             categoryIdList, pageable);
-                    return new ProductSearchResponse(getProductDtoList(productPage, user));
+                    return new ProductSearchResponse(getProductDtoList(productPage, user), productPage.getTotalPages());
                 }
             }
             // 닉네임 o 목록
@@ -99,12 +99,12 @@ public class SearchService {
                     if (categoryIdList.size() == 0) {
                         Page<Product> productPage = productRepository.findAllProductByUserNickname(
                                 nickname, pageable);
-                        return new ProductSearchResponse(getProductDtoList(productPage, user));
+                        return new ProductSearchResponse(getProductDtoList(productPage, user), productPage.getTotalPages());
                     }
                     // 필터 선택 o
                     Page<Product> productPage = productRepository.findProductsByCategoryIdsAndNicknameOrderByCreateAtDesc(
                             categoryIdList, nickname, pageable);
-                    return new ProductSearchResponse(getProductDtoList(productPage, user));
+                    return new ProductSearchResponse(getProductDtoList(productPage, user), productPage.getTotalPages());
                 }
                 // 판매순 정렬
                 else if (sortType.equals("Sales")) {
@@ -113,12 +113,12 @@ public class SearchService {
                     if (categoryIdList.size() == 0) {
                         Page<Product> productPage = productRepository.findAllByNicknameOrderByTransactionCountDesc(
                                 nickname, pageable);
-                        return new ProductSearchResponse(getProductDtoList(productPage, user));
+                        return new ProductSearchResponse(getProductDtoList(productPage, user), productPage.getTotalPages());
                     }
                     // 필터 선택 o
                     Page<Product> productPage = productRepository.findAllByCategoryIdsAndNicknameOrderByTransactionCountDesc(
                             categoryIdList, nickname, pageable);
-                    return new ProductSearchResponse(getProductDtoList(productPage, user));
+                    return new ProductSearchResponse(getProductDtoList(productPage, user), productPage.getTotalPages());
                 }
             }
             throw new BaseException(

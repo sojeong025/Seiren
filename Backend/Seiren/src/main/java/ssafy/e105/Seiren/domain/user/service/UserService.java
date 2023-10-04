@@ -10,6 +10,7 @@ import static ssafy.e105.Seiren.domain.user.exception.UserErrorCode.UPDATE_PROFI
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ssafy.e105.Seiren.domain.product.entity.Product;
+import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
+import ssafy.e105.Seiren.domain.product.service.ProductService;
 import ssafy.e105.Seiren.domain.user.dto.ProfileImgRequest;
 import ssafy.e105.Seiren.domain.user.dto.UserInfoResponse;
 import ssafy.e105.Seiren.domain.user.dto.login.LoginReqDto;
@@ -30,6 +34,9 @@ import ssafy.e105.Seiren.domain.user.dto.register.RegisterResDto;
 import ssafy.e105.Seiren.domain.user.dto.token.TokenDto;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.repository.UserRepository;
+import ssafy.e105.Seiren.domain.voice.entity.Voice;
+import ssafy.e105.Seiren.domain.voice.repository.VoiceRepository;
+import ssafy.e105.Seiren.domain.voice.service.VoiceService;
 import ssafy.e105.Seiren.global.error.type.BaseException;
 import ssafy.e105.Seiren.global.jwt.JwtTokenProvider;
 import ssafy.e105.Seiren.global.utils.ApiError;
@@ -45,6 +52,8 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
     private final RedisTemplate<String, String> redisTemplate;
+    private final ProductRepository productRepository;
+    private final VoiceRepository voiceRepository;
 
     @Transactional
     public RegisterResDto signup(RegisterReqDto registerReqDto){
@@ -139,6 +148,12 @@ public class UserService {
     @Transactional
     public boolean deleteUser(HttpServletRequest request){
         User user = getUser(request);
+        List<Voice> voiceList = voiceRepository.findByUser_IdAndStateIsThree(user.getId(), 3);
+        for(Voice voice : voiceList){
+            Product product = productRepository.findByVoice_VoiceId(voice.getVoiceId()).get();
+            product.update(false);
+            voice.update(true, 4);
+        }
         userRepository.deleteById(user.getId());
         return true;
     }
