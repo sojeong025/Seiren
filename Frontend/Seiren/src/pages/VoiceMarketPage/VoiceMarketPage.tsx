@@ -54,7 +54,7 @@ function ProductCard({ product }: { product: Product }) {
 function VoiceMarketPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [total, setTotal] = useState('');
+  const [total, setTotal] = useState();
 
   // 자식 컴포넌트에서 호출할 콜백 함수
   const updateTotal = (newTotal) => {
@@ -82,7 +82,7 @@ function VoiceMarketPage() {
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}
           onPageChange={onPageChange}
-          totalAmount={products.length}
+          totalAmount={total}
         />
       </div>
     </div>
