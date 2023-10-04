@@ -27,7 +27,6 @@ function ProductDetailPage() {
   
   const colors = ['#FFD1DC', '#B2FEBD', '#C5A3FF']; 
 
-<<<<<<< HEAD
 
   useEffect(() => {
     customAxios
@@ -42,9 +41,6 @@ function ProductDetailPage() {
         console.error("API 호출 중 오류 발생:", error);
       });
   }, []);
-=======
-  
->>>>>>> cde657ba093b1ecca69912bc8070d6e111f08a67
 
   useEffect(() => {
     if (productId){
