@@ -27,7 +27,15 @@ function UseList({ transactionid }: UseListProps) {
     <div>
       <div>
         사용 내역 
-        <div>{useList}</div>
+        <div>
+          {useList.map((item) => (
+            <div key={item.createAt}>
+              <p>{item.text}</p>
+              <p>{item.mp3Url}</p>
+              <p>{item.createAt}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

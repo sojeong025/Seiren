@@ -49,7 +49,7 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
   const marketProduct = async(text) => {
     let response = await axios
       .get(`http://70.12.130.121:1470/synthesize2?voice_id=${voiceDetail.voiceId}&transaction_id=${voiceDetail.transactionId}&text=${text}`,{
-      responseType: 'blob',
+      responseType: "application/json",
       headers: {
         'Authorization' : `Bearer ${accessToken}`
       }
