@@ -16,6 +16,7 @@ function ProductDetailPage() {
   const [testText, setTestText] = useState("");
   const [useCount, setUseCount] = useState(0);
   const mL = 20;
+  const [checkPre, setCheckPre] = useState(false);
 
   const colors = ['#FFD1DC', '#B2FEBD', '#C5A3FF']; 
 
@@ -36,7 +37,7 @@ function ProductDetailPage() {
       console.log(res);
       setUseCount(res.data.response);
     })
-  }, [productId]);
+  }, [productId, checkPre]);
 
   const handleLikeClick = () => {
     if (isLiked) {
@@ -76,6 +77,11 @@ function ProductDetailPage() {
 
     let audio = new Audio(blobUrl);
     audio.play();
+    if(checkPre === false){
+      setCheckPre(true);
+    }else{
+      setCheckPre(false);
+    }
   };
 
   const changeTestText = (e) =>{
