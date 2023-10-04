@@ -3,12 +3,11 @@ import { useState, useEffect } from "react";
 import { customAxios } from "../../libs/axios";
 
 interface UseListProps {
-  transactionid: string; // transactionid의 타입을 string으로 지정
+  transactionid: string;
 }
 
 function UseList({ transactionid }: UseListProps) {
   const [useList, setUseList] = useState([]);
-  // transactionid는 이미 prop으로 받았으므로 useParams를 사용하지 않습니다.
 
   useEffect(() => {
     customAxios
@@ -28,7 +27,15 @@ function UseList({ transactionid }: UseListProps) {
     <div>
       <div>
         사용 내역 
-        <div>{useList}</div>
+        <div>
+          {useList.map((item) => (
+            <div key={item.createAt}>
+              <p>{item.text}</p>
+              <p>{item.mp3Url}</p>
+              <p>{item.createAt}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
