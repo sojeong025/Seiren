@@ -55,7 +55,7 @@ public class TestHistoryService {
         Product product = productService.getProduct(productId);
         TestHistory testHistory = getTestHistory(user.getId(), productId);
         if (testHistory == null) {
-            testHistoryRepository.save(TestHistory.toEntity(user, product));
+//            testHistoryRepository.save(TestHistory.toEntity(user, product));
             return 3;
         }
         return testHistory.getCount();
