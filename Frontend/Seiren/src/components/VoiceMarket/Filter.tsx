@@ -15,7 +15,6 @@ function Filter({products, setProducts, setTotal, currentPage}) {
   const [selectAge, setSelectAge] = useState<string|number>('');
   const [selectMood, setSelectMood] = useState<string|number>('');
   const [productList, setProductList] = useState();
-  const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [sortType, setSortType] = useState("Latest");
 
@@ -58,7 +57,7 @@ function Filter({products, setProducts, setTotal, currentPage}) {
       console.log(res.data.response.productDtoList);
       setProducts(res.data.response.productDtoList);
     })
-  },[selectMood, selectAge, selectGender, sortType, page])
+  },[selectMood, selectAge, selectGender, sortType, currentPage])
 
   const searchChange = (e) =>{
     console.log(e.target.value);
