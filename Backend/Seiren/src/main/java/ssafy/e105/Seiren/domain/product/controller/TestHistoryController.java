@@ -6,12 +6,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ssafy.e105.Seiren.domain.product.dto.TestTTSRequest;
 import ssafy.e105.Seiren.domain.product.service.TestHistoryService;
 import ssafy.e105.Seiren.global.utils.ApiResult;
 import ssafy.e105.Seiren.global.utils.ApiUtils;
@@ -27,12 +24,14 @@ public class TestHistoryController {
     @PutMapping("/api/tts")
     public ApiResult<?> testTTS(@RequestParam Long productId,
             HttpServletRequest request) {
+        System.out.println("api/tts 요청을 받았습니다");
         return ApiUtils.success(testHistoryService.checkTestCount(productId, request));
     }
 
     @Operation(summary = "체험판 TTS 남은 횟수 확인")
     @GetMapping("/api/tts/count/{productId}")
     public ApiResult<?> countTestHistory(@PathVariable Long productId, HttpServletRequest request) {
+        System.out.println("api/tts/count 요청을 받았습니다.");
         return ApiUtils.success(testHistoryService.countTest(productId, request));
     }
 
