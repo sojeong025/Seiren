@@ -192,38 +192,59 @@
 
 ## 📱 Frontend
 
-- React `18.2.0`
-- Vite `^4.4.5`
-- Recoil `^0.7.7`
-- React-Router-Dom `6.14.2`
-- Library
-  - antd : `^5.7.3`
-  - antd-mobile : `^5.32.0`
-  - axios : `^1.4.0`
-  - clipboard-copy : `^4.0.1`
-  - dayjs : `^1.11.9`
-  - framer-motion : `^10.13.0`
-  - gsap : `^3.12.2`
-  - qrcode : `^1.5.2`
-  - react-calendar : `^4.5.0`
-  - react-datepicker : `^4.16.0`
-  - react-dom : `^18.2.0`
-  - react-icons : `4.10.1`
-  - react-infinite-scroll-component : `^6.1.0`
-  - react-kakao-link : `^0.1.2`
-  - react-loading-skeleton : `^3.3.1`
-  - react-pageflip : `^2.0.3`
-  - react-rating : `2.0.5`
-  - react-responsice-carousel : `^3.2.23`
-  - react-slick : `^0.29.0`
-  - react-swipeable : `^7.0.1`
-  - react-swipable-list : `^1.8.1`
-  - slick-carousel : `^1.8.1`
-  - styled-components : `^6.0.7`
-- Flutter
-  - library
-    - inapp_webview
-- Android Studio
+├── @date-io/date-fns@2.17.0
+├── @emotion/react@11.11.1
+├── @emotion/styled@11.11.0
+├── @lottiefiles/react-lottie-player@3.5.3
+├── @mui/material@5.14.11
+├── @mui/styled-engine-sc@5.14.11
+├── @types/axios@0.14.0
+├── @types/node@20.8.2
+├── @types/react-dom@18.2.8
+├── @types/react@18.2.24
+├── @typescript-eslint/eslint-plugin@6.7.4
+├── @typescript-eslint/parser@6.7.4
+├── @vitejs/plugin-react-swc@3.4.0
+├── @vitejs/plugin-react@4.1.0
+├── audiobuffer-to-wav@1.0.0
+├── aws-sdk@2.1468.0
+├── axios@0.21.4
+├── date-fns@2.30.0
+├── esbuild@0.18.20 invalid: "^0.19.4" from the root project
+├── eslint-config-prettier@9.0.0
+├── eslint-import-resolver-typescript@3.6.1
+├── eslint-plugin-import@2.28.1
+├── eslint-plugin-prettier@5.0.0
+├── eslint-plugin-react-hooks@4.6.0
+├── eslint-plugin-react-refresh@0.4.3
+├── eslint-plugin-react@7.33.2
+├── eslint@8.50.0
+├── extendable-media-recorder-wav-encoder@7.0.98
+├── extendable-media-recorder@9.1.2
+├── framer-motion@10.16.4
+├── gsap@3.12.2
+├── lottie-react@2.4.0
+├── prettier@3.0.3
+├── react-calendar@4.6.0
+├── react-datepicker@4.18.0
+├── react-dom@18.2.0
+├── react-icons@4.11.0
+├── UNMET DEPENDENCY react-player@^2.13.0
+├── react-router-dom@6.16.0
+├── react-scroll@1.8.9
+├── react-slick@0.29.0
+├── react-youtube@10.1.0
+├── react@18.2.0
+├── recharts@2.8.0
+├── recoil@0.7.7
+├── rollup@3.29.4
+├── slick-carousel@1.8.1
+├── standardized-audio-context@25.3.57
+├── styled-components@5.3.11
+├── terser@5.21.0
+├── typescript@5.2.2
+├── vite-tsconfig-paths@4.2.1
+└── vite@4.4.9
 
 ## 💾 Backend
 
@@ -281,17 +302,25 @@
 
 ## 📝 API 명세서
 
-![1.PNG](README_assets/3674abed7430e2ab4655ee9ac516111d316a6b66.PNG)
+![API(1).png](./API(1).png)
 
-![2.PNG](README_assets/bae47ca24fb0bb348a98fb5e5f5f96ae5ee093bb.PNG)
+![API(2).png](./API(2).png)
 
-![3.PNG](README_assets/ff053b7c0450734fc3cd4da63cb50eec8682827d.PNG)
+![API(3).png](./API(3).png)
 
-![4.PNG](README_assets/8308685bed8fdbf1e1a7e1c5776bd830c3faef8f.PNG)
+![API(4).png](./API(4).png)
 
-![5.PNG](README_assets/a1d905bd7614f156c39e5a2e4e8f3c14442642d1.PNG)
+![API(5).png](./API(5).png)
 
-![6.PNG](README_assets/5f2d5013dfb56d63dc8211fc1ae8cf797804d58e.PNG)
+![API(6).png](./API(6).png)
+
+![API(7).png](./API(7).png)
+
+![API(8).png](./API(8).png)
+
+![API(9).png](./API(9).png)
+
+![API(10).png](./API(10).png)
 
 ## 📏 ERD
 
@@ -314,14 +343,20 @@
 
 **Frontend**
 
-- 정훈석 : 프론트 Token 처리 / Flutter / 카카오톡 공유하기 / 리액트 베이스 코드 제작 / 에러 수정
-- 정소정 : UX/UI 설계 / PPT제작 / 영상 제작 / 발표 / 모바일 청첩장 페이지 제작
-- 구희영 : UX/UI 설계 / PPT제작 / Route 설정 /회원 정보, 상품 정보, 마이페이지 제작
+- 성제현 : 
+
+- 정소정 : 
+
+**Full Stack**
+
+- 최진석 : 
 
 **Backend**
 
-- 강동윤: Fluttter / infra 구축 / 다이어리, 찜하기, 도움돼요 API 제작
+- 구배성: 
 
-- 김성인 : DB설계 및 구축 / 회원(Oauth, JWT) 관련 API / S3 / 커플, 회원 등 API 제작
+- 황재영 : 
 
-- 김승연 : 상품 크롤링 및 기타 API / FCM 알림 / Redis를 이용한 예약 랭킹 및 최근 본 상품 리스트 API 제작
+**AI**
+
+- 라동엽 : 
