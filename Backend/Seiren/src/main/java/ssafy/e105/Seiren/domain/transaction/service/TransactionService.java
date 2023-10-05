@@ -163,7 +163,7 @@ public class TransactionService {
         /**
          * 사용 내역
          */
-        List<TransactionProductHistoryResponse> transactionProductHistoryResponseList = useHistoryRepository.findAllByTransaction(
+        List<TransactionProductHistoryResponse> transactionProductHistoryResponseList = useHistoryRepository.findAllByTransactionOrderByCreateAtDesc(
                         transaction, pageable)
                 .getContent()
                 .stream()
