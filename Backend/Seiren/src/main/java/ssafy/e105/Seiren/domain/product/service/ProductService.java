@@ -145,9 +145,8 @@ public class ProductService {
     }
 
     @Transactional
-    public List<ProductDto> getAllProducts(HttpServletRequest request, int page) {
+    public List<ProductDto> getAllProducts(HttpServletRequest request, int page, int size) {
         User user = isUser(request);
-        int size = 10;
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<Product> productPage = productRepository.findAllProductsOrderByCreateAtDesc(pageable);
         return searchService.getProductDtoList(productPage, user);
