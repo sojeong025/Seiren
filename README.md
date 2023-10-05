@@ -192,58 +192,58 @@
 
 ## 📱 Frontend
 
-├── @date-io/date-fns@2.17.0
-├── @emotion/react@11.11.1
-├── @emotion/styled@11.11.0
-├── @lottiefiles/react-lottie-player@3.5.3
-├── @mui/material@5.14.11
-├── @mui/styled-engine-sc@5.14.11
-├── @types/axios@0.14.0
-├── @types/node@20.8.2
-├── @types/react-dom@18.2.8
-├── @types/react@18.2.24
-├── @typescript-eslint/eslint-plugin@6.7.4
-├── @typescript-eslint/parser@6.7.4
-├── @vitejs/plugin-react-swc@3.4.0
-├── @vitejs/plugin-react@4.1.0
-├── audiobuffer-to-wav@1.0.0
-├── aws-sdk@2.1468.0
-├── axios@0.21.4
-├── date-fns@2.30.0
-├── esbuild@0.18.20 invalid: "^0.19.4" from the root project
-├── eslint-config-prettier@9.0.0
-├── eslint-import-resolver-typescript@3.6.1
-├── eslint-plugin-import@2.28.1
-├── eslint-plugin-prettier@5.0.0
-├── eslint-plugin-react-hooks@4.6.0
-├── eslint-plugin-react-refresh@0.4.3
-├── eslint-plugin-react@7.33.2
-├── eslint@8.50.0
-├── extendable-media-recorder-wav-encoder@7.0.98
-├── extendable-media-recorder@9.1.2
-├── framer-motion@10.16.4
-├── gsap@3.12.2
-├── lottie-react@2.4.0
-├── prettier@3.0.3
-├── react-calendar@4.6.0
-├── react-datepicker@4.18.0
-├── react-dom@18.2.0
-├── react-icons@4.11.0
-├── UNMET DEPENDENCY react-player@^2.13.0
-├── react-router-dom@6.16.0
-├── react-scroll@1.8.9
-├── react-slick@0.29.0
-├── react-youtube@10.1.0
-├── react@18.2.0
-├── recharts@2.8.0
-├── recoil@0.7.7
-├── rollup@3.29.4
-├── slick-carousel@1.8.1
-├── standardized-audio-context@25.3.57
-├── styled-components@5.3.11
-├── terser@5.21.0
-├── typescript@5.2.2
-├── vite-tsconfig-paths@4.2.1
+─ @date-io/date-fns@2.17.0
+─ @emotion/react@11.11.1
+─ @emotion/styled@11.11.0
+─ @lottiefiles/react-lottie-player@3.5.3
+─ @mui/material@5.14.11
+─ @mui/styled-engine-sc@5.14.11
+─ @types/axios@0.14.0
+─ @types/node@20.8.2
+─ @types/react-dom@18.2.8
+─ @types/react@18.2.24
+─ @typescript-eslint/eslint-plugin@6.7.4
+─ @typescript-eslint/parser@6.7.4
+─ @vitejs/plugin-react-swc@3.4.0
+─ @vitejs/plugin-react@4.1.0
+─ audiobuffer-to-wav@1.0.0
+─ aws-sdk@2.1468.0
+─ axios@0.21.4
+─ date-fns@2.30.0
+─ esbuild@0.18.20 invalid: "^0.19.4" from the root project
+─ eslint-config-prettier@9.0.0
+─ eslint-import-resolver-typescript@3.6.1
+─ eslint-plugin-import@2.28.1
+─ eslint-plugin-prettier@5.0.0
+─ eslint-plugin-react-hooks@4.6.0
+─ eslint-plugin-react-refresh@0.4.3
+─ eslint-plugin-react@7.33.2
+─ eslint@8.50.0
+─ extendable-media-recorder-wav-encoder@7.0.98
+─ extendable-media-recorder@9.1.2
+─ framer-motion@10.16.4
+─ gsap@3.12.2
+─ lottie-react@2.4.0
+─ prettier@3.0.3
+─ react-calendar@4.6.0
+─ react-datepicker@4.18.0
+─ react-dom@18.2.0
+─ react-icons@4.11.0
+─ UNMET DEPENDENCY react-player@^2.13.0
+─ react-router-dom@6.16.0
+─ react-scroll@1.8.9
+─ react-slick@0.29.0
+─ react-youtube@10.1.0
+─ react@18.2.0
+─ recharts@2.8.0
+─ recoil@0.7.7
+─ rollup@3.29.4
+─ slick-carousel@1.8.1
+─ standardized-audio-context@25.3.57
+─ styled-components@5.3.11
+─ terser@5.21.0
+─ typescript@5.2.2
+─ vite-tsconfig-paths@4.2.1
 └── vite@4.4.9
 
 ## 💾 Backend
@@ -302,31 +302,30 @@
 
 ## 📝 API 명세서
 
-![API(1).png](.README_assets/API(1).png)
+![API(1).png](README_assets/API(1).png)
 
-![API(2).png](.README_assets/API(2).png)
+![API(2).png](README_assets/API(2).png)
 
-![API(3).png](.README_assets/API(3).png)
+![API(3).png](README_assets/API(3).png)
 
-![API(4).png](.README_assets/API(4).png)
+![API(4).png](README_assets/API(4).png)
 
-![API(5).png](.README_assets/API(5).png)
+![API(5).png](README_assets/API(5).png)
 
-![API(6).png](.README_assets/API(6).png)
+![API(6).png](README_assets/API(6).png)
 
-![API(7).png](.README_assets/API(7).png)
+![API(7).png](README_assets/API(7).png)
 
-![API(8).png](.README_assets/API(8).png)
+![API(8).png](README_assets/API(8).png)
 
-![API(9).png](.README_assets/API(9).png)
+![API(9).png](README_assets/API(9).png)
 
-![API(10).png](.README_assets/API(10).png)
+![API(10).png](README_assets/API(10).png)
 
 ## 📏 ERD
 
-![image.png](README_assets/73d0eb2c4e0f672b49e231b2767145e6c75e0960.png)
+![ERD](README_assets/ERD.png)
 
-![image (1).png](README_assets/d16a1b6b607ae6111b7be51a15bc703b586b90fb.png)
 
 ## 📐 시스템 아키텍처
 
