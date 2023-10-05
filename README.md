@@ -245,7 +245,41 @@
 └── vite@4.4.9
 
 ## 💾 Backend
+  - jpa
+  - redis
+  - security
+  - jdbc
+  - oauth2
+  - lombok
+  - h2
+  - mysql
+  - swagger
+  - jwt
+  - s3
 
+## AI
+
+  - Cython
+  - librosa==0.8.0
+  - matplotlib
+  - numpy
+  - scipy
+  - tensorboard
+  - unidecode
+  - pyopenjtalk
+  - jamo
+  - pypinyin
+  - jieba
+  - protobuf
+  - cn2an
+  - inflect
+  - eng_to_ipa
+  - ko_pron
+  - indic_transliteration
+  - num_thai
+  - opencc
+  - ipython
+  - gradio
 
 
 ## Infra
