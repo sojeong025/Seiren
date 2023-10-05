@@ -302,25 +302,25 @@
 
 ## 📝 API 명세서
 
-![API(1).png](./API(1).png)
+![API(1).png](.README_assets/API(1).png)
 
-![API(2).png](./API(2).png)
+![API(2).png](.README_assets/API(2).png)
 
-![API(3).png](./API(3).png)
+![API(3).png](.README_assets/API(3).png)
 
-![API(4).png](./API(4).png)
+![API(4).png](.README_assets/API(4).png)
 
-![API(5).png](./API(5).png)
+![API(5).png](.README_assets/API(5).png)
 
-![API(6).png](./API(6).png)
+![API(6).png](.README_assets/API(6).png)
 
-![API(7).png](./API(7).png)
+![API(7).png](.README_assets/API(7).png)
 
-![API(8).png](./API(8).png)
+![API(8).png](.README_assets/API(8).png)
 
-![API(9).png](./API(9).png)
+![API(9).png](.README_assets/API(9).png)
 
-![API(10).png](./API(10).png)
+![API(10).png](.README_assets/API(10).png)
 
 ## 📏 ERD
 
