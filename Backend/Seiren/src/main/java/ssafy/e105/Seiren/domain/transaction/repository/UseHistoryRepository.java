@@ -8,5 +8,5 @@ import ssafy.e105.Seiren.domain.transaction.entity.UseHistory;
 
 public interface UseHistoryRepository extends JpaRepository<UseHistory, Long> {
 
-    Page<UseHistory> findAllByTransaction(Transaction transaction, Pageable pageable);
+    Page<UseHistory> findAllByTransactionOrderByCreateAtDesc(Transaction transaction, Pageable pageable);
 }
