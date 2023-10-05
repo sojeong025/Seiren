@@ -26,8 +26,7 @@
 ## Main Page
 
 <br>
-<img src="./README_assets/MainPage.gif" width="400px">
-<img src="./gif_files/03메인페이지웨딩정보.gif" width="200px">
+<img src="./README_assets/mainPage.gif" width="400px">
 <br>
 
 - 메인페이지. 네브바에 각 페이지로 갈 수 있는 링크들이 있음.
@@ -37,8 +36,7 @@
 ## Login Page
 
 <br>
-<img src="./README_assets/MainPage.gif" width="400px">
-<img src="./gif_files/03메인페이지웨딩정보.gif" width="200px">
+<img src="./README_assets/loginPage.gif" width="400px">
 <br>
 
 - 카카오 로그인 화면이다.
@@ -47,8 +45,8 @@
 ## About Page
 
 <br>
-<img src="./gif_files/06웨딩홀찜담기예약.gif" width="200px">
-<img src="./gif_files/07상품후기쓰고도움돼요버튼누르기.gif" width="200px">
+<img src="./README_assets/aboutPage.gif" width="400px">
+<img src="./README_assets/aboutPage(2).gif" width="400px">
 <br>
 
 - 플랫폼에 대한 자세한 설명이 적혀있는 페이지
@@ -60,9 +58,8 @@
 ## Store Page
 
 <br>
-<img src="gif_files/10개인일정등록후알림.gif" width="200px">
-<img src="gif_files/11일정등록알림.gif" width="200px">
-<img src="gif_files/12일정리마인드알림.gif" width="200px">
+<img src="gif_files/10개인일정등록후알림.gif" width="400px">
+
 <br>
 
 - 학습된 AI-Voice를 상품 등록 하면 해당 페이지에서 판매가 가능하다.
@@ -72,8 +69,8 @@
 ## Store Detail Page
 
 <br>
-<img src="./gif_files/13다이어리페이지시작.gif" width="200px">
-<img src="./gif_files/14다이어리메인.gif" width="200px">
+<img src="./gif_files/13다이어리페이지시작.gif" width="400px">
+<img src="./gif_files/14다이어리메인.gif" width="400px">
 <br>
 
 - 선택한 목소리의 정보를 볼 수 있다.
@@ -83,8 +80,8 @@
 
 
 <br>
-<img src="./gif_files/15다이어리글작성.gif" width="200px">
-<img src="./gif_files/16커플다이어리결혼식날오픈.gif" width="200px">
+<img src="./gif_files/15다이어리글작성.gif" width="400px">
+<img src="./gif_files/16커플다이어리결혼식날오픈.gif" width="400px">
 <br>
 
 - 구매하기를 누를 시 글자 단위로 구매가 가능하다
@@ -93,18 +90,18 @@
 ## Voice Study Page
 
 <br>
-<img src="./gif_files/17커플코드연결.gif" width="200px">
-<img src="./gif_files/18커플연결성공후프로필.gif" width="200px">
-<img src="./gif_files/19푸시알림설정.gif" width="200px">
+<img src="./gif_files/17커플코드연결.gif" width="400px">
+<img src="./gif_files/18커플연결성공후프로필.gif" width="400px">
+<img src="./gif_files/19푸시알림설정.gif" width="400px">
 <br>
 
 - 녹음을 하기 전 Voice 정보를 먼저 등록한다.
 - 제공된 문장을 통해 녹음을 진행합니다.
 
 <br>
-<img src="./gif_files/20마이페이지내후기.gif" width="200px">
-<img src="./gif_files/21찜등록내찜목록보기.gif" width="200px">
-<img src="./gif_files/22커플찜확인.gif" width="200px">
+<img src="./gif_files/20마이페이지내후기.gif" width="400px">
+<img src="./gif_files/21찜등록내찜목록보기.gif" width="400px">
+<img src="./gif_files/22커플찜확인.gif" width="400px">
 <br>
 
 - 충분한 녹음이 완료되면 목소리 학습이 활성화 됩니다.
@@ -114,9 +111,9 @@
 ## My profile Page
 
 <br>
-<img src="./gif_files/17커플코드연결.gif" width="200px">
-<img src="./gif_files/18커플연결성공후프로필.gif" width="200px">
-<img src="./gif_files/19푸시알림설정.gif" width="200px">
+<img src="./gif_files/17커플코드연결.gif" width="400px">
+<img src="./gif_files/18커플연결성공후프로필.gif" width="400px">
+<img src="./gif_files/19푸시알림설정.gif" width="400px">
 <br>
 
 - 내가 등록한 목소리와 좋아요를 누른 목소리를 볼 수 있다.
@@ -124,9 +121,9 @@
 - 목소리 디테일로 들어가면 수정이 가능하다.
 
 <br>
-<img src="./gif_files/20마이페이지내후기.gif" width="200px">
-<img src="./gif_files/21찜등록내찜목록보기.gif" width="200px">
-<img src="./gif_files/22커플찜확인.gif" width="200px">
+<img src="./gif_files/20마이페이지내후기.gif" width="400px">
+<img src="./gif_files/21찜등록내찜목록보기.gif" width="400px">
+<img src="./gif_files/22커플찜확인.gif" width="400px">
 <br>
 
 - 전체 판매 통계를 볼 수 있다.
@@ -135,9 +132,9 @@
 
 
 <br>
-<img src="./gif_files/20마이페이지내후기.gif" width="200px">
-<img src="./gif_files/21찜등록내찜목록보기.gif" width="200px">
-<img src="./gif_files/22커플찜확인.gif" width="200px">
+<img src="./gif_files/20마이페이지내후기.gif" width="400px">
+<img src="./gif_files/21찜등록내찜목록보기.gif" width="400px">
+<img src="./gif_files/22커플찜확인.gif" width="400px">
 <br>
 
 - 자신이 구매한 보이스 구매내역을 볼 수 있습니다.
@@ -146,9 +143,9 @@
 
 
 <br>
-<img src="./gif_files/20마이페이지내후기.gif" width="200px">
-<img src="./gif_files/21찜등록내찜목록보기.gif" width="200px">
-<img src="./gif_files/22커플찜확인.gif" width="200px">
+<img src="./gif_files/20마이페이지내후기.gif" width="400px">
+<img src="./gif_files/21찜등록내찜목록보기.gif" width="400px">
+<img src="./gif_files/22커플찜확인.gif" width="400px">
 <br>
 
 - 자신이 구매한 목소리를 사용 할 수 있다.
@@ -248,27 +245,11 @@
 
 ## 💾 Backend
 
-- Springboot `2.7.13`
-- Lombok
-- Spring Data JPA
-- Spring Data Redis(lettuce)
-- Spring Web
-- Springdoc-openapi-ui `1.6.11`
-- Oauth2
-- Swagger 3.0.0
-- Oauth2
-- Redis
-- MySql 8.0.34
+
 
 ## Infra
 
-- AWS S3
-- AWS EC2
-- Nginx 1.18.0
-- Docker 20.10.12
-- Ubuntu 20.04.6 LTS
-- CertBot(CA Certificates)
-- SSL
+
 
 # 기술 소개
 
