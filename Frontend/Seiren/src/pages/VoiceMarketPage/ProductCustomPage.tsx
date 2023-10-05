@@ -200,10 +200,10 @@ function ProductCustomPage(){
 
     console.log(productData);
 
-    customAxios.post("product",productData)
+    customAxios.post("product", productData)
         .then((res)=>{
           console.log("장터에 올리기 성공",res);
-          navigate('/sell-list')
+          // navigate('/sell-list') 오류 해결
         })
         .catch((err)=>console.log(err))
 

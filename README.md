@@ -26,7 +26,7 @@
 ## Main Page
 
 <br>
-<img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif" width="500">
+<img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif" width="400">
 <br>
 
 - 메인페이지. 네브바에 각 페이지로 갈 수 있는 링크들이 있음.
@@ -36,7 +36,7 @@
 ## Login Page
 
 <br>
-<img src="/uploads/2aacb8c24e0a0c2636d27daeecbb4d86/loginPage.gif" width="500">
+<img src="/uploads/2aacb8c24e0a0c2636d27daeecbb4d86/loginPage.gif" width="400">
 <br>
 
 - 카카오 로그인 화면이다.
@@ -45,8 +45,8 @@
 ## About Page
 
 <br>
-<img src="/uploads/32ccc43db339a9ed12116fcb20e4dcc3/aboutPage.gif" width="500">
-<img src="/uploads/20b5f7042593edc9a22ac2a87271c8fb/aboutPage_2_.gif" width="500">
+<img src="/uploads/32ccc43db339a9ed12116fcb20e4dcc3/aboutPage.gif" width="400">
+<img src="/uploads/20b5f7042593edc9a22ac2a87271c8fb/aboutPage_2_.gif" width="400">
 
 
 <br>
@@ -60,8 +60,8 @@
 ## Store Page
 
 <br>
-<img src="/uploads/8d96fe715733efc63cfeac4fd46dd5fe/store_1_.gif" width="500" />
-<img src="/uploads/e6438fe3809461e35185600fd901284d/store_2_.gif" width="500" />
+<img src="/uploads/8d96fe715733efc63cfeac4fd46dd5fe/store_1_.gif" width="400" />
+<img src="/uploads/e6438fe3809461e35185600fd901284d/store_2_.gif" width="400" />
 <br>
 
 - 학습된 AI-Voice를 상품 등록 하면 해당 페이지에서 판매가 가능하다.
@@ -71,8 +71,8 @@
 ## Store Detail Page
 
 <br>
-<img src="./gif_files/13다이어리페이지시작.gif" width="400px">
-<img src="./gif_files/14다이어리메인.gif" width="400px">
+<img src="/uploads/039dc5ea323bd4450f62eac52a0b8cc3/storeDetail_1_.gif" width="400px">
+<img src="/uploads/0ae386b2b1a527daabbfe97a8b52f2bc/storeDetail_2_.gif" width="400px">
 <br>
 
 - 선택한 목소리의 정보를 볼 수 있다.
@@ -82,8 +82,7 @@
 
 
 <br>
-<img src="./gif_files/15다이어리글작성.gif" width="400px">
-<img src="./gif_files/16커플다이어리결혼식날오픈.gif" width="400px">
+<img src="/uploads/262a3a8e1d7017dbb32dfe972a90d59b/storeDetail_3_.gif" width="400px"> 
 <br>
 
 - 구매하기를 누를 시 글자 단위로 구매가 가능하다
@@ -113,14 +112,15 @@
 ## My profile Page
 
 <br>
-<img src="./gif_files/17커플코드연결.gif" width="400px">
-<img src="./gif_files/18커플연결성공후프로필.gif" width="400px">
-<img src="./gif_files/19푸시알림설정.gif" width="400px">
+<img src="/uploads/c2a0f26fc27688da96d352629e3d3eda/myProfile_1_.gif" width="400px">
+<img src="/uploads/617651b2810508539ddd939648e842fc/myProfile_2_.gif" width="400px">
 <br>
 
 - 내가 등록한 목소리와 좋아요를 누른 목소리를 볼 수 있다.
 - 네브바는 사이드바로 변경된다.
 - 목소리 디테일로 들어가면 수정이 가능하다.
+
+## My SellList Page
 
 <br>
 <img src="./gif_files/20마이페이지내후기.gif" width="400px">
@@ -133,6 +133,8 @@
 - 판매 중인 상품의 정보를 수정 할 수 있다.
 
 
+## My BuyList Page
+
 <br>
 <img src="./gif_files/20마이페이지내후기.gif" width="400px">
 <img src="./gif_files/21찜등록내찜목록보기.gif" width="400px">
@@ -143,6 +145,8 @@
 - 어떤 목적으로 언제, 몇자를, 얼마에 구매한 지 알 수 있습니다.
 - 전체 사용 금액을 사용할 수 있다.
 
+
+## My UseList Page
 
 <br>
 <img src="./gif_files/20마이페이지내후기.gif" width="400px">
