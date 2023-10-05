@@ -5,6 +5,7 @@ import State from "./State";
 import UploadImgOri from "../../common/UploadImgOri";
 import SideBar from "../../../components/common/SideBar";
 import styles from "./YourVoiceDetail.module.css";
+import {LiaRandomSolid} from "react-icons/lia"
 
 function EditVoiceDetail({ setIsNavBarVisible }) {
   const { voiceId } = useParams();
@@ -41,6 +42,8 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
       });
   }, [voiceId, checkState]);
 
+  
+
   const handleEditClick = () => {
     setIsEditing(true);
   };
@@ -70,6 +73,36 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
       });
   };
 
+  const generateRandomAvatar = () => {
+    const randomEyebrows = Math.floor(Math.random() * 15) + 1; // 눈썹
+    const randomEyes = Math.floor(Math.random() * 26) + 1; // 눈
+    const randomHairType = Math.random() < 0.5 ? 'long' : 'short'; // 머리 길이
+    const randomHairNumberLong = Math.floor(Math.random() * (26 -1)) +1; // long
+    const randomHairNumberShort= Math.floor(Math.random()* (19 -1)) +1; // short
+    
+    let hairVariant; // 머리 카락
+      if(randomHairType === 'long'){
+          hairVariant= `${randomHairType}${String(randomHairNumberLong).padStart(2,'0')}`
+      }
+      else{
+          hairVariant= `${randomHairType}${String(randomHairNumberShort).padStart(2,'0')}`
+      }
+      const randomMouth = Math.floor(Math.random() *30) +1 ;
+      
+    var skinColorArray=["9e5622","763900","ecad80", "f2d3b1"]; // 피부색
+    var skinColorRandom=skinColorArray[Math.floor(Math.random()*skinColorArray.length)];
+    var hairColorArray=["0e0e0e","3eac2c","6a4e35","85c2c6","796a45","562306",
+                      "592454","ab2a18","ac6511", "afafaf", "b9a05f", 
+                      "cb6820", "dba3be", "e5d7a3"];
+    var hairColorRandom=hairColorArray[Math.floor(Math.random()*hairColorArray.length)]; // 머리카락 색
+
+    
+    // 최종 캐릭터
+    let dicebearUrl=`https://api.dicebear.com/7.x/adventurer/svg?flip=true&eyebrows=${`variant${String(randomEyebrows).padStart(2,'0')}`}&eyes=${`variant${String(randomEyes).padStart(2,'0')}`}&hair=${hairVariant}&mouth=${`variant${String(randomMouth).padStart(2,'0')}`}&skinColor=${skinColorRandom}&hairColor=${hairColorRandom}`;
+    
+    console.log(dicebearUrl);
+  };
+
   const handleDeleteClick = () => {
     customAxios
       .delete(`voices/${voiceId}`)
@@ -88,7 +121,67 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
     <div>
       <SideBar />
       <div className={styles.YourVoiceDetailContainer}>
-        <div className={styles.contentContainer}>
+        {/* 필요한 부분 : 상태 값 변경 */}
+        {/* 수정해보기 */}
+
+        {/* 왼쪽 부분임 */}
+        <div className={styles.imgContainer}>
+          <div>
+            <img src={voiceAvatarUrl}/>
+            <div className={styles.btn_random} onClick={generateRandomAvatar}>
+              Randomize <LiaRandomSolid /></div>
+          </div>
+          <div className={styles.downBox}>
+            {isEditing ? (
+              <>
+                <div className={styles.voiceTitle}>
+                  <div>상품 제목</div>
+                  <input
+                    type="text"
+                    value={voiceTitle}
+                    onChange={e => setVoiceTitle(e.target.value)}
+                    className={styles.inputTitle}
+                  />
+                </div>
+                <div className={styles.memo}>
+                  <div>상품 설명</div>
+                  <input
+                    type="text"
+                    value={memo}
+                    onChange={e => setMemo(e.target.value)}
+                    className={styles.inputMemo}
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className={styles.voiceTitle}>
+                  <div>상품 제목</div>
+                  <div>{voiceDetail.voiceTitle}</div>
+                </div>
+                <div className={styles.memo}>
+                  <div>상품 설명</div>
+                  <div>{voiceDetail.memo}</div>
+                </div>
+              </>
+            )}
+                        <div className={styles.stateBox}>
+              <State voiceDetail={voiceDetail} checkState={checkState} setCheckState={setCheckState}/>
+            </div>
+            <div className={styles.buttons}>
+              {isEditing ? (
+                <div onClick={handleSaveClick}>저장</div>
+              ) : (
+                <div onClick={handleEditClick}>수정</div>
+              )}
+              <div onClick={handleDeleteClick}>삭제</div>
+            </div>
+          </div>
+        </div>
+        
+
+
+        {/* <div className={styles.contentContainer}>
           <div className={styles.upBox}>
             <div className={styles.imgContainer}>
               <UploadImgOri imgUrl={voiceDetail.voiceAvatarUrl} setImgUrl={setVoiceAvatarUrl} />
@@ -101,42 +194,8 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
             </div>
           </div>
 
-          <div className={styles.downBox}>
-            {isEditing ? (
-              <>
-                <div className={styles.voiceTitle}>
-                  <input
-                    type="text"
-                    value={voiceTitle}
-                    onChange={e => setVoiceTitle(e.target.value)}
-                    className={styles.inputTitle}
-                  />
-                </div>
-                <div className={styles.memo}>
-                  <input
-                    type="text"
-                    value={memo}
-                    onChange={e => setMemo(e.target.value)}
-                    className={styles.inputMemo}
-                  />
-                </div>
-              </>
-            ) : (
-              <>
-                <div className={styles.voiceTitle}>{voiceDetail.voiceTitle}</div>
-                <div className={styles.memo}>{voiceDetail.memo}</div>
-              </>
-            )}
-            <div className={styles.buttons}>
-              {isEditing ? (
-                <button onClick={handleSaveClick}>저장</button>
-              ) : (
-                <button onClick={handleEditClick}>수정</button>
-              )}
-              <button onClick={handleDeleteClick}>삭제</button>
-            </div>
-          </div>
-        </div>
+
+        </div> */}
       </div>
     </div>
   );

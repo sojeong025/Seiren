@@ -97,7 +97,6 @@
   height: 50px;
   border-radius: 100%;
 }
-.aboutLink {
-  background-color: black !important;
- 
+.aboutLink a{
+  color: black !important;
 }
