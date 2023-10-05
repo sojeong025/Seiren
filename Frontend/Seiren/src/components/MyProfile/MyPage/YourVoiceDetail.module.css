@@ -3,48 +3,96 @@
   margin-left: 300px;
   min-height: 100vh;
   background-color: #FCFAE8;
+  color: black;
 }
 
 .imgContainer {  
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   border-radius: 20px;
   padding: 30px;
   background-color: #fff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
-  min-height: 80vh;
+  /* min-height: 80vh; */
+  height: 100%;
 }
 .imgContainer img{
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
+}
+.imgEdit {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
 }
 .downBox {
-  border: 1px solid black;
-  padding: 20px;
-  color: black;
-  font-weight: bold;
-  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px; */
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
+  padding : 30px 50px;
+  width: 50%;
 }
+.minTitle, 
+.minMemo {
+  font-size: 26px;
+  margin-bottom: 5px;
+  font-weight: 900;
+}
+.voiceTitle input,
+.memo input {
+  font-size: 24px;
+  border: none;
+  background-color: #F0f0f0;
+}
+
 .voiceTitle {
   display: flex;
-  border: 1px solid black;
-  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid gray;
+  border-radius: 1.5rem;
+  font-size: 24px;
   padding: 20px;
+  background-color: #f0f0f0;
 }
+
+
 .memo {
   display: flex;
-  border: 1px solid black;
+  flex-direction: column; 
+  border: 2px solid gray;
+  border-radius: 1.5rem;
   font-size: 20px;
-  padding: 30px;
+  padding: 20px; 
+  margin-top: 10px;
+  height: 200px;
+  background-color: #f0f0f0;
 }
+
 .buttons {
   padding: 10px;
   display: flex;
   justify-content: flex-end; 
 }
 
+.stateBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.buttons {
+  gap: 8px;
+}
+.deletebtn {
+  color: red;
+}
 
 
 /* 

@@ -1,5 +1,10 @@
 /* State.module.css */
-
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 .text {
     font-size: 30px;
     color: black;
