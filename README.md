@@ -91,18 +91,17 @@
 ## Voice Study Page
 
 <br>
-<img src="./gif_files/17커플코드연결.gif" width="400px">
-<img src="./gif_files/18커플연결성공후프로필.gif" width="400px">
-<img src="./gif_files/19푸시알림설정.gif" width="400px">
+<img src="/uploads/38afd98467912b918655bd97fcc69779/Record_1_.gif" width="400px">
+<img src="/uploads/5d2ffa58914cf30695035ed714cf40a8/Record_2_.gif" width="400px">
 <br>
 
 - 녹음을 하기 전 Voice 정보를 먼저 등록한다.
 - 제공된 문장을 통해 녹음을 진행합니다.
 
 <br>
-<img src="./gif_files/20마이페이지내후기.gif" width="400px">
-<img src="./gif_files/21찜등록내찜목록보기.gif" width="400px">
-<img src="./gif_files/22커플찜확인.gif" width="400px">
+<img src="/uploads/ec21511dd6834c82f446919adfcdcb71/Record_3_.gif" width="400px">
+<img src="/uploads/dea2f06ce9f944f9e2ff4bcc9db57a4c/Record_4_.gif" width="400px">
+<img src="/uploads/0ae836df524a155fb4d6b95c26ee455f/Record_5_.gif" width="400px">
 <br>
 
 - 충분한 녹음이 완료되면 목소리 학습이 활성화 됩니다.
@@ -123,9 +122,8 @@
 ## My SellList Page
 
 <br>
-<img src="./gif_files/20마이페이지내후기.gif" width="400px">
-<img src="./gif_files/21찜등록내찜목록보기.gif" width="400px">
-<img src="./gif_files/22커플찜확인.gif" width="400px">
+<img src="/uploads/ba7f379b9911bdef6735666d4ce60492/my_SellList_1_.gif" width="400px">
+<img src="/uploads/1d6bb2185eb42eaa48210a2f87166ff8/my_SellList_2_.gif" width="400px">
 <br>
 
 - 전체 판매 통계를 볼 수 있다.
@@ -136,9 +134,7 @@
 ## My BuyList Page
 
 <br>
-<img src="./gif_files/20마이페이지내후기.gif" width="400px">
-<img src="./gif_files/21찜등록내찜목록보기.gif" width="400px">
-<img src="./gif_files/22커플찜확인.gif" width="400px">
+<img src="/uploads/4a9c1f217d3b0f8b725edf4315c54210/my_BuyList_1_.gif" width="400px">
 <br>
 
 - 자신이 구매한 보이스 구매내역을 볼 수 있습니다.
@@ -149,9 +145,8 @@
 ## My UseList Page
 
 <br>
-<img src="./gif_files/20마이페이지내후기.gif" width="400px">
-<img src="./gif_files/21찜등록내찜목록보기.gif" width="400px">
-<img src="./gif_files/22커플찜확인.gif" width="400px">
+<img src="/uploads/b9271c3ec2943b264009c7c62e79f29b/my_Use_1_.gif" width="400px">
+<img src="/uploads/f29bc3308956cd43cefccfeef91e631d/my_Use_2_.gif" width="400px">
 <br>
 
 - 자신이 구매한 목소리를 사용 할 수 있다.
@@ -324,9 +319,10 @@
 <img src="/uploads/efab5be1d9c1978c56821e5de9e71d59/ERD.png"/>
 
 
+
 ## 📐 시스템 아키텍처
 
-![architecture.png](README_assets/1cdf902b533381a38dedc536f451ac3ef56dd738.png)
+<img src="/uploads/62e9409e4baf25518fbeaff640d8f493/아키텍쳐.png"/>
 
 # 팀원 소개
 
@@ -339,13 +335,13 @@
 
 **Frontend**
 
-- 성제현 : UX/UI 설계 / 마이페이지 제작 및 api / 뼈대 구축 / 문서화 작업 / 빌드 및 오류 수정
+- 성제현 : UX/UI 설계 / 마이페이지 제작 및 api / 문서화 작업 / 빌드 및 오류 수정
 
 - 정소정 : UX/UI 설계 / PPT제작 / 영상 제작 / 발표 / 디자인 총괄 / 전 페이지 검수
 
 **Full Stack**
 
-- 최진석 : API 제작 / front api 연결 / 오류 수정
+- 최진석 : API 제작 / front api 연결 / 오류 수정 / DB 설계
 
 **Full Stack & CI/CD**
 
@@ -358,4 +354,4 @@
 
 **AI**
 
-- 라동엽 : Flask 서버 구축 / AI 학습 모델 생성 / 
+- 라동엽 : Flask 서버 구축 / AI 학습 모델 생성 
