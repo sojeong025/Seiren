@@ -176,15 +176,15 @@ function ProductCustomPage(){
     });
   
     // 첫 번째 문장
-    let response1 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=18&text=${text1}`, {responseType: 'blob'});
+    let response1 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=${voiceId}&text=${text1}`, {responseType: 'blob'});
     let url1 = await uploadFile(response1.data, text1);
   
     // 두 번째 문장
-    let response2 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=18&text=${text2}`, {responseType: 'blob'});
+    let response2 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=${voiceId}&text=${text2}`, {responseType: 'blob'});
     let url2 = await uploadFile(response2.data, text2);
   
     // 세 번째 문장
-    let response3 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=18&text=${text3}`, {responseType: 'blob'});
+    let response3 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=${voiceId}&text=${text3}`, {responseType: 'blob'});
     let url3 = await uploadFile(response3.data, text3);
 
     const productData = {
