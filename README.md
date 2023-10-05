@@ -1,4 +1,5 @@
-<img title="" src="README_assets/df44f536b80d0d6e4948a3a76fefff95dc535d88.PNG" alt="123.PNG" width="349" data-align="center">
+<img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif" width="700">
+
 
 # Seiren
 
