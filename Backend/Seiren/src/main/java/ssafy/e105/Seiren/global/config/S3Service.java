@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -71,7 +72,7 @@ public class S3Service {
     // tts 음성 파일 s3에 저장
     public String uploadTTSFile(MultipartFile file) {
         try {
-            String fileName = "tts/" + file.getOriginalFilename();
+            String fileName = "tts/" + file.getOriginalFilename() + LocalDateTime.now();
             ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentType(file.getContentType());
             InputStream inputStream = file.getInputStream();
