@@ -87,12 +87,15 @@
 .store,
 .record,
 .my {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   flex: 1;
   font-size: 20px;
-  margin: 80px 30px;
+  margin: 120px 30px 0px;
   background-color: #d0dced;
-  border-radius: 20px;
-  padding: 30px;
+  padding: 30px 50px;
   color: #000;
   width: 30%;
   height: 70%;
@@ -104,24 +107,35 @@
   transition: transform 300ms
 }
 .store, .my {
-  background-color: #fefef1;
-}
-.record {
   background-color: #eff7ff;
 }
-.exImg {
-  width: 100%;
-}
-.store img {
-  margin-top: 65px;
-  margin-bottom: 65px;
+.record {
+  background-color: #f1f3f5;
 }
 .smallTitle {
-  font-size: 16px;
+  font-size: 22px;
   font-weight: 900;
+  margin-bottom: 10px;
+  padding-bottom: px;
+  text-decoration: underline;
+
 }
 .smallSummary {
-  margin-top: 10px;
-  font-size: 15px;
-  color: rgb(154, 155, 167);
+  font-size: 18px;
+  color: #000;
+  line-height: 30px;
+  word-break: keep-all;
+  text-align: center;
+}
+
+.btn{
+  width: 250px;
+  background-color: #000;
+  color: #fff;
+  height: 50px;
+  line-height: 50px;
+  border: 1px solid black;
+  text-align: center;
+  margin-top: 30px;
+  font-weight: 900;
 }

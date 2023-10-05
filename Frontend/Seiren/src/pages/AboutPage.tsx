@@ -6,6 +6,7 @@ import store from "../assets/AboutAssets/about_store.png";
 import mypage from "../assets/AboutAssets/about_mypage.png";
 import record from "../assets/AboutAssets/about_record.png";
 import YouTube from "react-youtube";
+import { NavLink } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,7 +17,7 @@ function AboutPage() {
   const videoRef = useRef<HTMLImageElement>(null);
 
   const opts = {
-    height: '500',
+    height: '600',
     width: '900',
   }
 
@@ -45,6 +46,8 @@ function AboutPage() {
       scrub: true,
       pin: true,
     });
+
+    
     return() => {
       textani.kill();
     }
@@ -95,25 +98,42 @@ function AboutPage() {
       </section>
       <section className={styles.section4}>
         <div className={styles.store}>
-          <div>
-            <img src={store} alt="" className={styles.exImg} />
-            <div className={styles.smallTitle}>물결이 되어 퍼져나가는 목소리의 아름다움</div>
-            <div className={styles.smallSummary}>당신의 목소리를 다른 사용자와 공유해 보세요. </div>
-            {/* <div>Seiren의 다양한 목소리를 듣고</div>
-            <div>여러가지 콘텐츠에 활용해 보세요.</div> */}
+          <div className={styles.smallTitle}>당신의 목소리를 거래하세요</div>
+          <div className={styles.smallSummary}>
+            구매자가 직접 입력한 문장을 실시간 음성으로 변환하여
+            구매하려는 목소리에 대해 더 확실히 알아볼 수 있으며, 
+            그에 따라 보다 만족도 높은 구매 결정을 내릴 수 있게 됩니다
           </div>
+          {/* <div>Seiren의 다양한 목소리를 듣고</div>
+          <div>여러가지 콘텐츠에 활용해 보세요.</div> */}
+          <NavLink to="/voice-market">
+            <div className={styles.btn}>스토어 가기</div>
+          </NavLink>
         </div>
 
         <div className={styles.record}>
-          <img src={record} alt="" className={styles.exImg} />
-          <div className={styles.smallTitle}>상상하는 모든 것, Seiren과 함께 대화해 보세요.</div>
-          <div className={styles.smallSummary}>나만의 AI Voice 모델을 만들 수 있습니다.</div>
+          <div className={styles.smallTitle}>제공된 스크립트와 함께 녹음해 보세요</div>
+          <div className={styles.smallSummary}>
+            사용자가 가장 자연스럽고 섬세한 음성을 경험할 수 있도록, 
+            녹음된 목소리를 학습하고 있습니다. 최소 100개의 녹음된 목소리를 통해
+            자연스러우면서도 섬세한 TTS 출력이 가능합니다
+
+          </div>
+          <NavLink to="/voice-study">
+            <div className={styles.btn}>녹음하러 가기</div>
+          </NavLink>
         </div>
 
         <div className={styles.my}>
-          <img src={mypage} alt="" className={styles.exImg} />
-          <div className={styles.smallTitle}>Seiren과 함께 성장하는 AI 목소리의 여정</div>
-          <div className={styles.smallSummary}>목소리의 인기 장르와 트렌드를 파악할 수 있습니다.</div>
+          <div className={styles.smallTitle}>사용자 데이터를 한 번에 확인해보세요</div>
+          <div className={styles.smallSummary}>
+            프로필, 판매 내역, 구매 내역, 사용의 개별 탭에 따라 목소리 관리, 통계 차트, 
+            전체 구매 및 구매한 보이스 사용을 통해 실시간 데이터 확인 및 관리 할 수 있습니다
+
+          </div>
+          <NavLink to="/my-page">
+            <div className={styles.btn}>마이페이지 가기</div>
+          </NavLink>
 
         </div>
       </section>
