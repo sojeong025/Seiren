@@ -33,6 +33,18 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'PartialSansKR-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/PartialSansKR-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'yg-jalnan';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 body {
   margin: 0;
@@ -40,7 +52,8 @@ body {
   background-color: #000;
   /* background-color: #000; */
   color: #EEEEEE;
-  font-family: 'S-CoreDream-3Light', 'S-CoreDream-4Regular', 'S-CoreDream-6Bold', 'S-CoreDream-9Black';
+  font-family: 'S-CoreDream-3Light', 'S-CoreDream-4Regular', 'S-CoreDream-6Bold', 'S-CoreDream-9Black', 'PartialSansKR-Regular', 'yg-jalnan';
+  scroll-behavior: smooth;
 }
 a {
   text-decoration-line: none;

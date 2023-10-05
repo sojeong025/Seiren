@@ -19,14 +19,15 @@
 .section_right_txt {
   font-size: 34px;
   font-weight: 700;
-  animation: typing 4s steps(100, end);
-  overflow: hidden;
-  white-space: nowrap;
 }
 .section_right_context {
   font-size: 18px;
   display: flex;
   justify-content: space-between;
+  line-height: 35px;
+}
+.section_right_context span{
+  font-weight: 900;
 }
 .section_right_context div {
   flex: 1;
@@ -34,14 +35,6 @@
 .section1_right hr {
   width: 100%;
   margin: 50px 0;
-}
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
 }
 /* section2 */
 .section2 {
@@ -65,27 +58,38 @@
 }
 
 /* section3 */
-.section3 {
+.section3{
   background-color: #3a4750;
   color: #fff;
   display: flex;
-  height: 100vh;
-  padding-bottom: -150px;
-}
-.left {
-  width: 30%;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  font-size: 30px;
-  padding: 100px;
+  height: 100vh;
+  padding: 80px;
+  background-image: url("src/assets/img/main.jpg");
+  background-size: cover;
 }
-.menu {
-  margin: 50px 0;
-  text-align: end;
-  cursor: pointer;
+.section3_title {
+  padding: 50px;
+  font-size: 40px;
+  font-weight: 900;
+  text-align: center;
 }
-.right {
-  /* border: 1px solid black; */
-  width: 70%;
+.section3_title span{
+  font-size: 26px;
+  font-weight: 400;
+}
+.section4{
+  background-color: #040822;
+  color: #fff;
+  display: flex;
+  height: 100vh;
+}
+.store, .record, .my{
+  flex: 1;
+  font-size: 20px;
+  margin: 80px 30px;
+  background-color: #d0dced;
+  border-radius: 20px;
+  padding: 30px;
+  color: #000;
 }
