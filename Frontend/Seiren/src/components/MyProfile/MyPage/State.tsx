@@ -61,7 +61,7 @@ function State({ voiceDetail, checkState, setCheckState }) {
   };
 
   return (
-    <div>
+    <div className={styles.box}>
       {/* 텍스트 렌더링 */}
       {(voiceDetail.state === 0 || voiceDetail.state === 1) && (
         <p className={styles.text}>녹음을 완료해 주세요</p>
