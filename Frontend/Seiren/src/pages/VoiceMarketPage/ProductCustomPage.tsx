@@ -178,7 +178,7 @@ function ProductCustomPage(){
     // 첫 번째 문장
     let response1 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=${voiceId}&text=${text1}`, {responseType: 'blob'});
     let url1 = await uploadFile(response1.data, text1);
-  
+    console.log('111111///', voiceId);
     // 두 번째 문장
     let response2 = await axios.get(`http://70.12.130.121:1470/synthesize?voice_id=${voiceId}&text=${text2}`, {responseType: 'blob'});
     let url2 = await uploadFile(response2.data, text2);
