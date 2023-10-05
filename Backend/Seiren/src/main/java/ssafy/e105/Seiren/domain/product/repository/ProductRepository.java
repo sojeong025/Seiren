@@ -16,9 +16,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findAllProductsOrderByCreateAtDesc(Pageable pageable);
 
     // categoryIdList에 해당하는 Product 목록을 최신순으로 가져오는 쿼리
-    @Query("SELECT DISTINCT p FROM Product p JOIN p.productCategories pc WHERE pc.category.id IN :categoryIdList AND p.state = TRUE ORDER BY p.createAt DESC")
+    @Query("SELECT p FROM Product p JOIN p.productCategories pc WHERE pc.category.id IN :categoryIdList AND p.state = TRUE "
+            + "GROUP BY p HAVING COUNT(DISTINCT pc.category) = :categoryCount ORDER BY p.createAt DESC")
     Page<Product> findProductsByCategoryIdsOrderByCreateAtDesc(
-            @Param("categoryIdList") List<Long> categoryIdList, Pageable pageable);
+            @Param("categoryIdList") List<Long> categoryIdList,
+            @Param("categoryCount") int categoryCount, Pageable pageable);
 
     // nickname에 해당하는 Product 목록을 최신순으로 가져오는 쿼리
     @Query("SELECT p FROM Product p JOIN p.voice v JOIN v.user u WHERE u.nickname = :nickname AND p.state = TRUE ORDER BY p.createAt DESC")
@@ -27,9 +29,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     // categoryIdList와 nickname에 해당하는 Product 목록을 최신순으로 가져오는 쿼리
     @Query("SELECT DISTINCT p FROM Product p JOIN p.productCategories pc JOIN p.voice v JOIN v.user u "
-            + "WHERE u.nickname = :nickname AND pc.category.id IN :categoryIdList AND p.state = TRUE ORDER BY p.createAt DESC")
+            + "WHERE u.nickname = :nickname AND pc.category.id IN :categoryIdList AND p.state = TRUE"
+            + " GROUP BY p HAVING COUNT(DISTINCT pc.category) = :categoryCount ORDER BY p.createAt DESC")
     Page<Product> findProductsByCategoryIdsAndNicknameOrderByCreateAtDesc(
-            @Param("categoryIdList") List<Long> categoryIdList, @Param("nickname") String nickname,
+            @Param("categoryIdList") List<Long> categoryIdList, @Param("categoryCount") int categoryCount, @Param("nickname") String nickname,
             Pageable pageable);
 
     // Product 목록을 판매순으로 가져오는 쿼리
@@ -45,15 +48,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     // categoryIdList에 해당하는 Product 목록을 판매순으로 가져오는 쿼리
     @Query("SELECT p FROM Product p LEFT JOIN p.productCategories pc LEFT JOIN Transaction t ON p.productId = t.product.productId "
-            + "WHERE pc.category.id IN :categoryIdList AND p.state = TRUE GROUP BY p ORDER BY COUNT(t) DESC")
+            + "WHERE pc.category.id IN :categoryIdList AND p.state = TRUE GROUP BY p HAVING COUNT(DISTINCT pc.category) = :categoryCount ORDER BY COUNT(t) DESC")
     Page<Product> findAllByCategoryOrderByTransactionCountDesc(
-            @Param("categoryIdList") List<Long> categoryIdList, Pageable pageable);
+            @Param("categoryIdList") List<Long> categoryIdList, @Param("categoryCount") int categoryCount,  Pageable pageable);
 
     // categoryIdList와 nickname에 해당하는 Product 목록을 판매순으로 가져오는 쿼리
     @Query("SELECT p FROM Product p LEFT JOIN p.productCategories pc LEFT JOIN p.voice.user u LEFT JOIN Transaction t ON p.productId = t.product.productId "
-            + "WHERE u.nickname = :nickname AND pc.category.id IN :categoryIdList AND p.state = TRUE GROUP BY p ORDER BY COUNT(t) DESC")
+            + "WHERE u.nickname = :nickname AND pc.category.id IN :categoryIdList AND p.state = TRUE GROUP BY p HAVING COUNT(DISTINCT pc.category) = :categoryCount ORDER BY COUNT(t) DESC")
     Page<Product> findAllByCategoryIdsAndNicknameOrderByTransactionCountDesc(
-            @Param("categoryIdList") List<Long> categoryIdList, @Param("nickname") String nickname,
+            @Param("categoryIdList") List<Long> categoryIdList, @Param("categoryCount") int categoryCount, @Param("nickname") String nickname,
             Pageable pageable);
 
     Product findByProductId(Long productId);
@@ -62,4 +65,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT p.productId FROM Product p JOIN p.voice v JOIN v.user u WHERE u.id = :userId AND p.state = TRUE")
     List<Long> findAllByUserId(@Param("userId") Long userId);
+
+    // categoryIdList에 해당하는 모든 카테고리를 가지는 Product 목록을 가져오는 쿼리
+    @Query("SELECT p FROM Product p JOIN p.productCategories pc WHERE pc.category.id IN :categoryIdList "
+            +
+            "GROUP BY p HAVING COUNT(DISTINCT pc.category) = :categoryCount AND p.state = TRUE")
+    List<Product> findProductsByAllCategoryIds(@Param("categoryIdList") List<Long> categoryIdList,
+            @Param("categoryCount") Long categoryCount);
 }

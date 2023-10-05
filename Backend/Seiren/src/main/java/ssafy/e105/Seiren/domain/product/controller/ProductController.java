@@ -67,12 +67,12 @@ public class ProductController {
             @RequestParam(value = "sortType", required = false, defaultValue = "") String sortType,
             HttpServletRequest request, @RequestParam("page") int page) {
         return ApiUtils.success(
-                searchService.searchProduct(nickname, gender, age, mood, sortType, request, page));
+                searchService.searchProduct(nickname, gender, age, mood, sortType, request, page, 10));
     }
 
     @Operation(summary = "상품 목록 보기")
     @GetMapping("/api/productList")
     public ApiResult<?> getAllProducts(HttpServletRequest request, @RequestParam("page") int page) {
-        return ApiUtils.success(productService.getAllProducts(request, page));
+        return ApiUtils.success(productService.getAllProducts(request, page, 10));
     }
 }

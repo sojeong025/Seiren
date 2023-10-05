@@ -39,7 +39,7 @@ public class SearchService {
 
     @Transactional
     public ProductSearchResponse searchProduct(String nickname, Long gender, Long age, Long mood,
-            String sortType, HttpServletRequest request, int page) {
+            String sortType, HttpServletRequest request, int page, int size) {
         User user = getUser(request);
         List<Long> categoryIdList = new ArrayList<>();
         if (gender != null) {
@@ -51,7 +51,6 @@ public class SearchService {
         if (mood != null) {
             categoryIdList.add(mood);
         }
-        int size = 10;
         try {
             // 닉네임 x 목록
             if (nickname.isEmpty()) {
@@ -67,7 +66,7 @@ public class SearchService {
                     }
                     // 필터 선택 o
                     Page<Product> productPage = productRepository.findProductsByCategoryIdsOrderByCreateAtDesc(
-                            categoryIdList, pageable);
+                            categoryIdList, categoryIdList.size(), pageable);
                     return new ProductSearchResponse(getProductDtoList(productPage, user), productPage.getTotalPages());
                 }
                 // 판매순 정렬
@@ -86,7 +85,7 @@ public class SearchService {
                     }
                     // 필터 선택 o
                     Page<Product> productPage = productRepository.findAllByCategoryOrderByTransactionCountDesc(
-                            categoryIdList, pageable);
+                            categoryIdList, categoryIdList.size(), pageable);
                     return new ProductSearchResponse(getProductDtoList(productPage, user), productPage.getTotalPages());
                 }
             }
@@ -103,7 +102,7 @@ public class SearchService {
                     }
                     // 필터 선택 o
                     Page<Product> productPage = productRepository.findProductsByCategoryIdsAndNicknameOrderByCreateAtDesc(
-                            categoryIdList, nickname, pageable);
+                            categoryIdList, categoryIdList.size(), nickname, pageable);
                     return new ProductSearchResponse(getProductDtoList(productPage, user), productPage.getTotalPages());
                 }
                 // 판매순 정렬
@@ -117,7 +116,7 @@ public class SearchService {
                     }
                     // 필터 선택 o
                     Page<Product> productPage = productRepository.findAllByCategoryIdsAndNicknameOrderByTransactionCountDesc(
-                            categoryIdList, nickname, pageable);
+                            categoryIdList, categoryIdList.size(), nickname, pageable);
                     return new ProductSearchResponse(getProductDtoList(productPage, user), productPage.getTotalPages());
                 }
             }
