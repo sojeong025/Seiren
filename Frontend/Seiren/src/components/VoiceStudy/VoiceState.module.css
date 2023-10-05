@@ -1,0 +1,83 @@
+.Maintext {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: 900;
+  margin : 60px 40px 80px 40px;
+}
+.MainState {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 300px;
+  background-image:
+  linear-gradient(to right, #defe52, #0e0f0934);
+  border-radius: 200px;
+}
+.MainState_record {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #defe52;
+  width: 300px;
+  height: 300px;
+  border-radius: 100%;
+  color: #000;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+.record{
+  width: 300px;
+  height: 300px;
+  margin-bottom: 20px;
+}
+.icon {
+  position: relative;
+  z-index: 3;
+  color: #000;
+  font-size: 60px;
+}
+.btn {
+  z-index: 3;
+  position: relative;
+  color: #000;
+  font-size: 16px;
+  font-weight: 900;
+  margin: 20px 0px;
+  padding: 10px 30px;
+  border-radius: 10px;
+  background-color: #EEE;
+}
+.btn:hover{
+background-color: #defe52;
+}
+.disabled {
+  pointer-events: none;
+  opacity: .5;
+  color: #808080;
+}
+a .disabled{
+  pointer-events: none;
+}
+.smallCircle {
+  position: absolute;
+  z-index: 1;
+  width: 280px;
+  height: 280px;
+  background-color: #fff;
+  border-radius: 100%;
+}
+.title{
+  position: relative;
+  z-index: 3;
+  font-size: 19px;
+  font-weight: 900;
+  color: #000;
+  margin-bottom: 5px;
+}
+.subtitle{
+  position: relative;
+  z-index: 3;
+  font-size: 12px;
+
+}

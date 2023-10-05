@@ -1,0 +1,83 @@
+.total {
+  padding-top: 100px;
+  margin-left: 220px;
+  margin-right: 220px;
+}
+.container {
+  display: flex;
+  margin: 0 -220px;
+  padding: 20px 80px;
+  background-color: #fff;
+}
+.cards {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.card {
+  display: flex;
+  background-color: #fff;
+  box-shadow:
+    rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border-radius: 20px;
+  padding: 30px;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+  width: calc(50% - 20px);
+  color: #000;
+}
+.card_img {
+  width: 120px;
+  height: 120px;
+}
+.card_title {
+  font-size: 17px;
+  font-weight: 900;
+  word-break: keep-all;
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+  padding-bottom: 10px;
+}
+.card_nickname {
+  font-size: 15px;
+}
+.card_category {
+  display: inline-block;
+  color: #777;
+  font-size: 15px;
+  margin-right: 8px;
+  padding-bottom: 10px;
+}
+.left,
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+}
+.right {
+  flex-direction: column;
+}
+.mid {
+  padding: 10px 20px;
+  width: 60%;
+}
+.detail {
+  background-color: #d0dced;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 900;
+  cursor: pointer;
+  color: black;
+}
+.pagi {
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  margin: 0 -220px;
+  padding-bottom: 50px;
+}

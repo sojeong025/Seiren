@@ -1,0 +1,63 @@
+
+/* SellDetailList.module.css */
+.container {
+  margin-top: 50px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border-radius: 20px;
+  padding : 30px 50px;
+}
+.container th,
+.container td {
+  padding: 20px 13px;
+  text-align: center; 
+  font-size: 16px;
+  border-bottom: 1px solid black;
+  word-break: keep-all;
+}
+
+.container th {
+  font-weight: 900;
+  border-bottom: 2px solid black;
+}
+
+/* Styles for the container div */
+.sellDetailTitle {
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+/* Styles for the table */
+.table{
+  table-layout: fixed; 
+}
+.table th:nth-child(1) {
+  width: 10%;
+}
+.table th:nth-child(2) {
+  width: 10%;
+}
+.table th:nth-child(3) {
+  width: 15%;
+}
+.table th:nth-child(4) {
+  width: 10%;
+}
+.table th:nth-child(5) {
+  width: 10%;
+}
+.table th:nth-child(6) {
+  width: 10%;
+}
+th span{
+  font-size: 13px;
+}
+.totalPrice {
+  font-size: 22px !important;
+  text-align: end !important;
+  font-weight: 900;
+  border-bottom: none !important;
+  padding-right: 30px !important;
+}

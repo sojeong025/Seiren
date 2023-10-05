@@ -5,17 +5,20 @@
 }
 .progressBarContainer {
   width:70%;
-  height: 20px;
+  height: 30px;
   background-color:#f3f3f3;
-  border-radius: 10px;
+  border-radius: 15px;
 }
 .progressBar{
-  height:20px;
-  background-color:#BC7AF9;
-  border-radius: 10px;
+  height:30px;
+  background-color:#defe52;
+  border-right: 2px solid #777;
+  border-radius: 15px;
 }
+
 .button_study {
-  width: 100px;
-  margin-left: 20px;
-  border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    margin-left: 20px;
+    border-radius: 10px;
 }

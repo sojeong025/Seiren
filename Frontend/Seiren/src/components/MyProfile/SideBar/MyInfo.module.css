@@ -1,0 +1,40 @@
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.imageContainer {
+  position: relative;
+}
+
+.profileImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  margin-bottom: 20px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  /* object-fit: cover; */
+}
+
+.nickName {
+  color: #000;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: -0.67px;
+  word-break: break-all;
+}
+
+.editIcon {
+  position: absolute;
+  color: #000;
+  bottom: 20px;
+  right: 3px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 3px;
+  background-color: white;
+}

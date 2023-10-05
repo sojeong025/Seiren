@@ -1,12 +1,141 @@
-.aboutpage {
-    background-color: #000000; /* 배경색 지정 */
-    padding: 20px; /* 패딩 추가 */
-    border-radius: 10px; /* 모서리를 둥글게 만듦 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
-    text-align: center; /* 텍스트 중앙 정렬 */
-    font-size: 24px; /* 폰트 크기 조정 */
-    margin: 20px auto; /* 가운데 정렬 */
-    max-width: 800px; /* 최대 너비 지정 */
-    
-  }
-  
+/* section1 */
+.section1 {
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  padding: 0 220px;
+  height: 100vh;
+}
+.section1_left {
+  width: 30%;
+}
+.section1_right {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
+.section_right_txt {
+  font-size: 34px;
+  font-weight: 700;
+}
+.section_right_context {
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  line-height: 35px;
+}
+.section_right_context span {
+  font-weight: 900;
+}
+.section_right_context div {
+  flex: 1;
+}
+.section1_right hr {
+  width: 100%;
+  margin: 50px 0;
+}
+/* section2 */
+.section2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  height: 100vh;
+}
+.section2_txt,
+.section2_txt2 {
+  color: #fff;
+  font-size: 200px;
+  font-weight: bold;
+  line-height: 250px;
+}
+
+.section2_video {
+  position: absolute;
+}
+
+/* section3 */
+.section3 {
+  background-color: #3a4750;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 80px;
+  background-image: url("../assets/img/main.jpg");
+  background-size: cover;
+}
+.section3_title {
+  padding: 50px;
+  font-size: 40px;
+  font-weight: 900;
+  text-align: center;
+}
+.section3_title span {
+  font-size: 26px;
+  font-weight: 400;
+}
+.section4 {
+  background-color: #040822;
+  color: #fff;
+  display: flex;
+  height: 100vh;
+}
+.store,
+.record,
+.my {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  font-size: 20px;
+  margin: 120px 30px 0px;
+  background-color: #d0dced;
+  padding: 30px 50px;
+  color: #000;
+  width: 30%;
+  height: 70%;
+}
+.store:hover img,
+.record:hover img,
+.my:hover img{
+  transform: scale(1.05);
+  transition: transform 300ms
+}
+.store, .my {
+  background-color: #eff7ff;
+}
+.record {
+  background-color: #f1f3f5;
+}
+.smallTitle {
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  padding-bottom: px;
+  text-decoration: underline;
+
+}
+.smallSummary {
+  font-size: 18px;
+  color: #000;
+  line-height: 30px;
+  word-break: keep-all;
+  text-align: center;
+}
+
+.btn{
+  width: 250px;
+  background-color: #000;
+  color: #fff;
+  height: 50px;
+  line-height: 50px;
+  border: 1px solid black;
+  text-align: center;
+  margin-top: 30px;
+  font-weight: 900;
+}

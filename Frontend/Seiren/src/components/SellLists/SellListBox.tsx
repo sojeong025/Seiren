@@ -1,20 +1,42 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import styles from "./SellListBox.module.css";
+import { customAxios } from "../../libs/axios";
 import { Link } from "react-router-dom";
 
 function SellListBox() {
-  const buyItems = ["노래 제목 1", "노래 제목 2", "노래 제목 3"];
+  const [sellList, setSellList] = useState([]);
+
+  useEffect(() => {
+    customAxios
+      .get("statistics/products")
+      .then(response => {
+        let sellData = response.data.response;
+        console.log('구매상품 체크',response)
+
+        setSellList(sellData);
+      })
+      .catch(error => console.error("API 호출 중 오류 발생:", error));
+  }, []);
 
   return (
-    <div className={styles.sellListBoxContainer}>
-      <h1 className={styles.sellListBoxTitle}>MY Voice</h1>
-      <div className={styles.sellList}>
-        {buyItems.map((item, index) => (
-          <Link to={`/detail/${index}`} key={index} className={styles.sellListItem}>
-            <img src="프로필 이미지 경로" alt="프로필 이미지" />
-            <p>{item}</p>
-          </Link>
-        ))}
+    <div className={styles.container} >
+      <div className={styles.sellListBoxContainer}>
+        <div className={styles.sellListBoxTitle}>개별 통계</div>
+        <div className={styles.sellList}>
+          {sellList.map((item, index) => (
+            <div key={index} className={styles.sellItem}>
+              <Link to={`/sell-list/detail/${item.productId}`} className={styles.productLink}>
+              <img src={item.productImageUrl} alt={item.productTitle} className={styles.pimg} />
+
+
+              <div className={styles.productInfo}>
+                <div className={styles.productTitle}>{item.productTitle}</div>
+                <div className={styles.productTotal}>Total Sales: {item.totalSumCount}</div>
+              </div>
+              </Link>
+            </div>
+          ))}
+        </div> 
       </div>
     </div>
   );

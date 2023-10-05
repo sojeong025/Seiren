@@ -1,54 +1,70 @@
 .voiceItem {
-    display: flex;
-    flex-direction: column;
-    background: rgba(159, 102, 102, 0.81);
-    border-radius: 34px;
-    width: 283px;
-    height: 180px;
-    padding: 10px;
-    position: relative;
-    gap: 10px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    margin: 10px 10px;
+  display: flex;
+  background-color: #fff;
+  box-shadow:
+    rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border-radius: 20px;
+  padding: 30px;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+  width: calc(50% - 20px);
+  color: #000;
 }
-  
-  .profileImage {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-  }
-  
-  .content {
-    flex: 1;
-  }
-  
-  .title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #FFFFFF;
-  }
-  
-  .moodHashtag {
-    font-size: 16px;
-    color: #000000;
-  }
-  
-  .authorDate {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-  }
-  
-  .playButton {
-    background-color: #42857D;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 8px;
-    padding: 5px 15px;
-    cursor: pointer;
-  }
-  
-  .playButton:hover {
-    background-color: #75975B;
-  }
-  
+
+.profileImage {
+  width: 80px;
+  height: 80px;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 900;
+  word-break: keep-all;
+  padding-bottom: 10px;
+}
+
+.moodHashtag {
+  display: inline-block;
+  color: #777;
+  font-size: 12px;
+  margin-right: 8px;
+  padding-bottom: 10px;
+}
+.count {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.count span{
+  color: #ed5808;
+  font-weight: 900;
+}
+.mid {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 10px 20px;
+}
+.right {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.usebtn {
+  background-color: #ed5808;
+  width: 90%;
+  height: 40%;
+  padding: 5px 20px;
+  border-radius: 10px;
+  font-weight: 900;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,20 +1,66 @@
 import { useNavigate } from 'react-router-dom';
 import styles from "./VoiceStudyHeader.module.css"
+import { customAxios } from '../../libs/axios';
+import { useEffect, useState } from 'react';
+import { useRecoilValue,useRecoilState } from 'recoil';
+import { VoiceIdState, RecordCountState } from '../../recoil/RecordAtom';
+import axios from 'axios';
 
-interface VoiceStudyHeaderProps {
-  totalIndex: number; // 전체 script의 개수 받는 props 추가
-  currentIndex: number; // 현재 script의 인덱스 값을 받는 props 추가
-}
-
-const VoiceStudyHeader: React.FC<VoiceStudyHeaderProps> = ({ totalIndex, currentIndex }) => {
+const VoiceStudyHeader: React.FC = () => {
+  const voiceId = useRecoilValue(VoiceIdState);
+  const [recordCount, setRecordCount] = useRecoilState(RecordCountState); 
+  const [totalCount, setTotalCount] = useState(1);
+  const [zipVoice, setZipVoice] = useState("");
   
-  const isButtonDisabled = currentIndex < 9; // 버튼 활성화 여부 판단
+  const accessToken = localStorage.getItem("accessToken");
+
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    navigate('/voice-studying');
-  }
+    customAxios.get(`voices/zip?voiceId=${voiceId}`)
+      .then((res) => {
+        console.log('zip파일 생성',res)
+        setZipVoice(res.data.response)
+  
+        return axios.get(`http://70.12.130.121:1468/upload?voice_id=${voiceId}&zipURL=${res.data.response}`, {
+          headers: {
+            'Authorization' : `Bearer ${accessToken}`
+          }
+        });
+      })
+      .catch((err) => {
+        console.error('zip파일 생성 실패', err)
+      })
 
-  const progress = (currentIndex / totalIndex) * 100;
+    axios.get(`http://70.12.130.121:1468/upload?voice_id=${voiceId}&zipURL=${zipVoice}`)
+      .then((res) => {
+        console.log('목소리 학습 버튼 클릭 시 ai 연결 성공', res)
+        navigate(`/voice-studying/${voiceId}`);
+      })
+      .catch((err) => {
+          console.error(err);
+      });
+  }
+  
+  
+  useEffect(() => {
+    customAxios.get(`records/count/${voiceId}`)
+    .then((res) => {
+      console.log('진행률 요청 성공', res)
+      setRecordCount(res.data.response.recordCount);
+      setTotalCount(res.data.response.totalCount);
+    })
+    .catch((err) => {console.error('진행률 요청 실패', err)})
+  }, [])
+  
+  let progress;
+  if(recordCount <= 100) {
+    progress = (recordCount / 100) * 80;
+  } else{
+    const additionalProgress = ((recordCount - 100) / (totalCount - 100)) * 20
+    progress = 80 + additionalProgress;
+  }
+  const isButtonDisabled = recordCount < 3; 
+
 
   return (
     <div className={styles.header}>
@@ -23,7 +69,7 @@ const VoiceStudyHeader: React.FC<VoiceStudyHeaderProps> = ({ totalIndex, current
       </div>
       {/* isButtonDisabled 값에 따라 버튼의 disabled 속성 설정 */}
       <button className={styles.button_study} disabled={isButtonDisabled}
-      onClick={handleButtonClick}>목소리 학습</button>
+              onClick={handleButtonClick}>목소리 학습</button>
     </div>
   );
 };

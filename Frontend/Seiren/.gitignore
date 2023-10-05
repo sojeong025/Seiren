@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# 로컬과 서버의 Merge를 위해
+AuthenticationService.tsx
+axios.tsx
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

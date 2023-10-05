@@ -1,0 +1,14 @@
+.buyCountContainer {
+  display: flex;
+  flex-direction: row;
+  background-color: #fbfbf7;
+  min-height: 100vh;
+
+}
+.countInfo {
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 300px;
+}

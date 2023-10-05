@@ -12,7 +12,7 @@
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": "latest",
+        "ecmaVersion": 2021, // 올바른 ecmaVersion 값
         "sourceType": "module"
     },
     "plugins": [
@@ -22,11 +22,12 @@
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/no-unused-vars": "off", // 올바른 항목 이름
         "prettier/prettier": [
             "error",
-                {
+            {
                 "endOfLine": "auto"
-            } 
+            }
         ]
     }
 }

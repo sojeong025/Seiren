@@ -1,0 +1,32 @@
+/* 컨테이너 스타일 */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 100%;
+  }
+  /* 커스텀 파일 업로드 버튼 스타일 */
+  .customFileUpload {
+    margin: 10px;
+    background-color: #ed5808;
+    color: white;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 10px 20px; 
+    cursor: pointer;
+  }
+
+  .customFileUpload input[type="file"] {
+    position: absolute;
+    font-size: 100px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+  }
+  
