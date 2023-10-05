@@ -17,13 +17,15 @@ function UseList({ transactionid, checkSend }: UseListProps) {
   const [isWindow, setIsWindow] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [selectKey, setSelectKey] = useState();
+  const [selectUrl, setSelectUrl] = useState("");
 
   useEffect(()=>{
     setIsWindow(true);
   },[])
-  const handleBtn = (idx) =>{
+  const handleBtn = (idx, url) =>{
     setIsPlaying(!isPlaying);
     setSelectKey(idx);
+    setSelectUrl(url);
   }
 
   useEffect(() => {
@@ -71,12 +73,11 @@ function UseList({ transactionid, checkSend }: UseListProps) {
                   {item.createAt.substr(0,10)}
                 </div>
                 <div className={styles.playBtn}>
-                  {isPlaying && selectKey === idx ? <AiFillPauseCircle onClick={() => handleBtn(idx)} className={styles.playBtnChild}/>: <AiFillPlayCircle className={styles.playBtnChild} onClick={() => handleBtn(idx)}/>}
+                  {isPlaying && selectKey === idx ? <AiFillPauseCircle onClick={() => handleBtn(idx, item.mp3Url)} className={styles.playBtnChild}/>: <AiFillPlayCircle className={styles.playBtnChild} onClick={() => handleBtn(idx, item.mp3Url)}/>}
                 </div>
                 <BiSolidDownload onClick={()=>downloadMp3(item.mp3Url, item.text)} className={styles.downBtn}/>
                 <ReactPlayer
-                url={item.mp3Url}
-                muted
+                url={selectUrl === item.mp3Url ? item.mp3Url:""}
                 playing={isPlaying}
                 width={"0%"}
                 height={"0%"}
