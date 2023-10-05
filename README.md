@@ -47,6 +47,8 @@
 <br>
 <img src="./README_assets/aboutPage.gif" width="400px">
 <img src="./README_assets/aboutPage(2).gif" width="400px">
+
+
 <br>
 
 - 플랫폼에 대한 자세한 설명이 적혀있는 페이지
@@ -58,9 +60,8 @@
 ## Store Page
 
 <br>
-![store_1_](/uploads/8d96fe715733efc63cfeac4fd46dd5fe/store_1_.gif)
-![store_2_](/uploads/e6438fe3809461e35185600fd901284d/store_2_.gif)
-
+<img src="/uploads/8d96fe715733efc63cfeac4fd46dd5fe/store_1_.gif" width="400" />
+<img src="/uploads/e6438fe3809461e35185600fd901284d/store_2_.gif" width="400" />
 <br>
 
 - 학습된 AI-Voice를 상품 등록 하면 해당 페이지에서 판매가 가능하다.
