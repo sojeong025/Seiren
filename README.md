@@ -26,7 +26,7 @@
 ## Main Page
 
 <br>
-<img src="./README_assets/mainPage.gif" width="400px">
+<img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif" width="500">
 <br>
 
 - 메인페이지. 네브바에 각 페이지로 갈 수 있는 링크들이 있음.
@@ -36,7 +36,7 @@
 ## Login Page
 
 <br>
-<img src="./README_assets/loginPage.gif" width="400px">
+<img src="/uploads/2aacb8c24e0a0c2636d27daeecbb4d86/loginPage.gif" width="500">
 <br>
 
 - 카카오 로그인 화면이다.
@@ -45,8 +45,8 @@
 ## About Page
 
 <br>
-<img src="./README_assets/aboutPage.gif" width="400px">
-<img src="./README_assets/aboutPage(2).gif" width="400px">
+<img src="/uploads/32ccc43db339a9ed12116fcb20e4dcc3/aboutPage.gif" width="500">
+<img src="/uploads/20b5f7042593edc9a22ac2a87271c8fb/aboutPage_2_.gif" width="500">
 
 
 <br>
@@ -60,8 +60,8 @@
 ## Store Page
 
 <br>
-<img src="/uploads/8d96fe715733efc63cfeac4fd46dd5fe/store_1_.gif" width="400" />
-<img src="/uploads/e6438fe3809461e35185600fd901284d/store_2_.gif" width="400" />
+<img src="/uploads/8d96fe715733efc63cfeac4fd46dd5fe/store_1_.gif" width="500" />
+<img src="/uploads/e6438fe3809461e35185600fd901284d/store_2_.gif" width="500" />
 <br>
 
 - 학습된 AI-Voice를 상품 등록 하면 해당 페이지에서 판매가 가능하다.
@@ -281,39 +281,43 @@
 
 ## 📃 요구사항 명세서
 
-![Alt text](README_assets/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EB%AA%85%EC%84%B8%EC%84%9C(1).PNG)
+<img src="/uploads/9c292c154b9c1a414048690300e731d8/요구사항명세서_1_.PNG"/>
 
-![Alt text](README_assets/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EB%AA%85%EC%84%B8%EC%84%9C(2).PNG)
+<img src="/uploads/8b736ad644021063f32428bbd78a7807/요구사항명세서_2_.PNG"/>
 
-![Alt text](README_assets/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EB%AA%85%EC%84%B8%EC%84%9C(3).PNG)
+<img src="/uploads/b4d831567ba8d698a565841b3f9b8412/요구사항명세서_3_.PNG"/>
 
-![Alt text](README_assets/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EB%AA%85%EC%84%B8%EC%84%9C(4).PNG)
+<img src="/uploads/6cc05dd2d6f40df975303a0791a22aca/요구사항명세서_4_.PNG"/>
+
+
 
 ## 📝 API 명세서
 
-![API(1).png](README_assets/API(1).png)
+<img src="/uploads/80e004e8fc866b0015fda80f1c8ec04b/API_1_.png"/>
 
-![API(2).png](README_assets/API(2).png)
+<img src="/uploads/d6157b98e9d8ed90764bc0628a74bfdc/API_2_.png"/>
 
-![API(3).png](README_assets/API(3).png)
+<img src="/uploads/9b5257a6e62fe9b2de6d946451fd8e8a/API_3_.png"/>
 
-![API(4).png](README_assets/API(4).png)
+<img src="/uploads/7aadb26c23fa044663099434ec58a0af/API_4_.png"/>
 
-![API(5).png](README_assets/API(5).png)
+<img src="/uploads/0c8fbc6120e7b4ab1323d3615b03eb59/API_5_.png"/>
 
-![API(6).png](README_assets/API(6).png)
+<img src="/uploads/07f39ae93f2e24ea1fa217cb4c0f001a/API_6_.png"/>
 
-![API(7).png](README_assets/API(7).png)
+<img src="/uploads/a36b5cd74a4ef63d9d640292ab31008d/API_7_.png"/>
 
-![API(8).png](README_assets/API(8).png)
+<img src="/uploads/6f62a7904da6e57a4fa0593907cdafb3/API_8_.png"/>
 
-![API(9).png](README_assets/API(9).png)
+<img src="/uploads/7fa5376f4b3c62ba491165de6a6c7317/API_9_.png"/>
 
-![API(10).png](README_assets/API(10).png)
+<img src="/uploads/9ae7f0f3c3129d3ed9be14ad92bd5bb1/API_10_.png"/>
+
+
 
 ## 📏 ERD
 
-![ERD](README_assets/ERD.png)
+<img src="/uploads/efab5be1d9c1978c56821e5de9e71d59/ERD.png"/>
 
 
 ## 📐 시스템 아키텍처
@@ -324,7 +328,7 @@
 
 | **[성제현](https://github.com/protofu)**                                                          | **[정소정](https://github.com/sojeong025)**                                                           | **[최진석](https://github.com/choiapple)**                                                               | **[구배성](https://github.com/deerKBS)**                                                               | **[황재영](https://github.com/JJaeki)**                                                              | **라동엽**                                                             |
 |:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|
-| <img title="" src="./README_assets/SJH.png" alt="" width="500"> | <img title="" src="./README_assets/JSJ.png" alt="" width="500"> | <img title="" src="./README_assets/CJS.png" alt="" width="500"> | <img title="" src="./README_assets/KBS.png" alt="" width="500"> | <img title="" src="./README_assets/HJY.png" alt="" width="500"> | <img title="" src="./README_assets/RDY.png" alt="" width="500"> |
+| <img title="" src="/uploads/ae66cf5c3a1b0cfd159d6035dc1f5524/SJH.png" alt="" width="500"> | <img title="" src="/uploads/3fc78fc8638acc7c10f2020b1bafebaf/JSJ.png" alt="" width="500"> | <img title="" src="/uploads/aff04cba1009b64aa036b167c033b0cc/CJS.png" alt="" width="500"> | <img title="" src="/uploads/1d9490cf7bf23efd3e0886878d01ec7c/KBS.png" alt="" width="500"> | <img title="" src="/uploads/66541ff290a9a539a3d87e82943fd568/HJY.png" alt="" width="500"> | <img title="" src="/uploads/7741e56d270cd1f471b93ca2b02ff0ff/RDY.png" alt="" width="500"> |
 | Frontend                                                                                           | Frontend                                                                                           | FullStack                                                                                           | Backend                                                                                            | Backend                                                                                            | AI                                                                                            |
 
 ## 😎 역할 분담
