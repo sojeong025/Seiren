@@ -64,7 +64,7 @@ function NavBar() {
       <div className={styles.content}>
         {/* 로고자리 */}
         <NavLink to="/" className={styles.logo}>
-          Serien
+          Seiren
         </NavLink>
 
         <div className={styles.nav}>

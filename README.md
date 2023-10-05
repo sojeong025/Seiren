@@ -284,7 +284,14 @@
 
 ## Infra
 
-
+- AWS S3
+- AWS EC2
+- Nginx 1.18.0
+- Docker 20.10.12
+- Jenkins
+- Redis
+- Ubuntu 20.04.6 LTS
+- Spring Boot
 
 # 기술 소개
 
