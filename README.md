@@ -277,7 +277,7 @@
 # 설계 문서
 
 
-## 📃 기능 명세서
+## 📃 요구사항 명세서
 
 ![Alt text](README_assets/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EB%AA%85%EC%84%B8%EC%84%9C(1).PNG)
 
@@ -320,10 +320,10 @@
 
 # 팀원 소개
 
-| **[정훈석](https://github.com/AndreaStudy)**                                                          | **[정소정](https://github.com/sojeong025)**                                                           | **[구희영](https://github.com/hi9900)**                                                               | **[강동윤](https://github.com/yty455)**                                                               | **[김성인](https://github.com/ksi2564)**                                                              | **[김승연](https://github.com/ksy00826)**                                                             |
+| **[성제현](https://github.com/protofu)**                                                          | **[정소정](https://github.com/sojeong025)**                                                           | **[최진석](https://github.com/)**                                                               | **[구배성](https://github.com/)**                                                               | **[황재영](https://github.com/)**                                                              | **[라동엽](https://github.com/)**                                                             |
 |:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|
-| <img title="" src="README_assets/55ac68fc918d4490436f82f00dd3f3c4164f2749.png" alt="" width="800"> | <img title="" src="README_assets/690a04ad5a318806b42b791fd7bd47d92f653511.png" alt="" width="800"> | <img title="" src="README_assets/d7bb36dcc1e37676036feaa62e09706509decb54.png" alt="" width="800"> | <img title="" src="README_assets/37b1fff8dbfc3003baec1caf3d36a1f30050762e.png" alt="" width="800"> | <img title="" src="README_assets/4d14c09f98a7285f2c6bd6f795f2f45873fd8697.png" alt="" width="800"> | <img title="" src="README_assets/a99f938e62bd81dd32e82d1182de3a048440b6ee.png" alt="" width="800"> |
-| Frontend                                                                                           | Frontend                                                                                           | Frontend                                                                                           | Backend                                                                                            | Backend                                                                                            | Backend                                                                                            |
+| <img title="" src="./README_assets/SJH.png" alt="" width="800"> | <img title="" src="./README_assets/JSJ.png" alt="" width="800"> | <img title="" src="./README_assets/CJS.png" alt="" width="800"> | <img title="" src="./README_assets/KBS.png" alt="" width="800"> | <img title="" src="./README_assets/HJY.png" alt="" width="800"> | <img title="" src="./README_assets/RDY.png" alt="" width="800"> |
+| Frontend                                                                                           | Frontend                                                                                           | FullStack                                                                                           | Backend                                                                                            | Backend                                                                                            | AI                                                                                            |
 
 ## 😎 역할 분담
 
