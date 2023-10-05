@@ -4,7 +4,7 @@
   width: 100%;
   height: 100px;
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
 }
 .opaque {
   display: flex;
@@ -96,4 +96,7 @@
   width: 50px;
   height: 50px;
   border-radius: 100%;
+}
+.aboutLink a{
+  color: black !important;
 }

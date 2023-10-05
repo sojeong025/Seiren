@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, NavLinkProps } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import { UserState } from "../../recoil/UserAtom";
 import { customAxios } from "../../libs/axios";
@@ -12,7 +12,7 @@ function NavBar() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useRecoilState(UserState);
   const location = useLocation();
-
+  const menuItems = [{ addLink: "/about", className: styles.aboutLink }];
 
   useEffect(() => {
     customAxios.get("user").then(response => {
@@ -55,6 +55,10 @@ function NavBar() {
     <div
       className={`${scrollY !== 0 ? styles.opaque : styles.container} ${
         scrollDirection === "down" ? styles.scrollDown : ""
+      } ${
+        menuItems.some(item => location.pathname === item.addLink)
+          ? menuItems.find(item => location.pathname === item.addLink)?.className
+          : ""
       }`}
     >
       <div className={styles.content}>

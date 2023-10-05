@@ -19,14 +19,15 @@
 .section_right_txt {
   font-size: 34px;
   font-weight: 700;
-  animation: typing 4s steps(100, end);
-  overflow: hidden;
-  white-space: nowrap;
 }
 .section_right_context {
   font-size: 18px;
   display: flex;
   justify-content: space-between;
+  line-height: 35px;
+}
+.section_right_context span {
+  font-weight: 900;
 }
 .section_right_context div {
   flex: 1;
@@ -34,14 +35,6 @@
 .section1_right hr {
   width: 100%;
   margin: 50px 0;
-}
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
 }
 /* section2 */
 .section2 {
@@ -69,23 +62,80 @@
   background-color: #3a4750;
   color: #fff;
   display: flex;
-  height: 100vh;
-  padding-bottom: -150px;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 80px;
+  background-image: url("../assets/img/main.jpg");
+  background-size: cover;
 }
-.left {
-  width: 30%;
+.section3_title {
+  padding: 50px;
+  font-size: 40px;
+  font-weight: 900;
+  text-align: center;
+}
+.section3_title span {
+  font-size: 26px;
+  font-weight: 400;
+}
+.section4 {
+  background-color: #040822;
+  color: #fff;
+  display: flex;
+  height: 100vh;
+}
+.store,
+.record,
+.my {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 30px;
-  padding: 100px;
+  align-items: center;
+  flex: 1;
+  font-size: 20px;
+  margin: 120px 30px 0px;
+  background-color: #d0dced;
+  padding: 30px 50px;
+  color: #000;
+  width: 30%;
+  height: 70%;
 }
-.menu {
-  margin: 50px 0;
-  text-align: end;
-  cursor: pointer;
+.store:hover img,
+.record:hover img,
+.my:hover img{
+  transform: scale(1.05);
+  transition: transform 300ms
 }
-.right {
-  /* border: 1px solid black; */
-  width: 70%;
+.store, .my {
+  background-color: #eff7ff;
+}
+.record {
+  background-color: #f1f3f5;
+}
+.smallTitle {
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  padding-bottom: px;
+  text-decoration: underline;
+
+}
+.smallSummary {
+  font-size: 18px;
+  color: #000;
+  line-height: 30px;
+  word-break: keep-all;
+  text-align: center;
+}
+
+.btn{
+  width: 250px;
+  background-color: #000;
+  color: #fff;
+  height: 50px;
+  line-height: 50px;
+  border: 1px solid black;
+  text-align: center;
+  margin-top: 30px;
+  font-weight: 900;
 }

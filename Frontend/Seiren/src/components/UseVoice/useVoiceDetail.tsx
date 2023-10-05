@@ -21,6 +21,7 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
   const [text, setText] = useState("");
   const mL = Number(200);
   const [textLength, setTextLength] = useState(0);
+  const [checkSend, setCheckSend] = useState(false);
 
   const handleTextChange = event => {
     setText(event.target.value);
@@ -42,11 +43,12 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
       .catch(error => {
         console.error("API 호출 중 오류 발생:", error);
       });
-  }, [productId]);
+  }, [productId, checkSend]);
 
   // 사용 TEXT 서버에 전송 API
   const accessToken = localStorage.getItem("accessToken");
   const marketProduct = async(text) => {
+    console.log(text);
     let response = await axios
       .get(`http://70.12.130.121:1470/synthesize2?voice_id=${voiceDetail.voiceId}&transaction_id=${voiceDetail.transactionId}&text=${text}`,{
       responseType: "blob",
@@ -57,6 +59,11 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
     console.log(response.data);
     // const blobUrl = URL.createObjectURL(response.data);
     // let audio = new Audio(blobUrl);
+    if(checkSend === false){
+      setCheckSend(true);
+    }else{
+      setCheckSend(false);
+    }
   }
 
   // 차감 글자 수
@@ -118,8 +125,8 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
           <hr className={styles.hr} />
 
           {/* history */}
-          <div>
-            <UseList transactionid={voiceDetail.transactionId.toString()} />
+          <div className={styles.scroll}>
+            <UseList transactionid={voiceDetail.transactionId.toString()} checkSend={checkSend}/>
           </div>
         </div>
       </div>

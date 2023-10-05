@@ -6,7 +6,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import styles from "./Filter.module.css"
 import { customAxios } from '../../libs/axios';
 
-function Filter({products, setProducts, setTotal, currentPage}) {
+function Filter({products, setProducts, setTotal, currentPage, setCurrentPage}) {
   const [gender, setGender] = useState<GetData[]>([]);
   const [age, setAge] = useState<GetData[]>([]);
   const [mood, setMood] = useState<GetData[]>([]);
@@ -26,18 +26,22 @@ function Filter({products, setProducts, setTotal, currentPage}) {
   const handleChangeGender = (event: SelectChangeEvent) => {
     const target = event.target as HTMLInputElement;
     setSelectGender(target.value === "-1" ? '' : target.value);
+    setCurrentPage(1);
   };
   const handleChangeAge = (event: SelectChangeEvent) =>{
     const target = event.target as HTMLInputElement;
     setSelectAge(target.value === "-1" ? '' : target.value);
+    setCurrentPage(1);
   }
   const handleChangeMood = (event: SelectChangeEvent) =>{
     const target = event.target as HTMLInputElement;
     setSelectMood(target.value === "-1" ? '' : target.value);
+    setCurrentPage(1);
   }
   const handleChangeSort = (event: SelectChangeEvent) =>{
     const target = event.target as HTMLInputElement;
     setSortType(target.value === "-1" ? '' : target.value);
+    setCurrentPage(1);
   }
 
   useEffect(()=>{
