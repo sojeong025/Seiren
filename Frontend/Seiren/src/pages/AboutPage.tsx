@@ -2,6 +2,9 @@ import styles from "./AboutPage.module.css";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import store from "../assets/AboutAssets/about_store.png";
+import mypage from "../assets/AboutAssets/about_mypage.png";
+import record from "../assets/AboutAssets/about_record.png";
 import YouTube from "react-youtube";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -93,25 +96,25 @@ function AboutPage() {
       <section className={styles.section4}>
         <div className={styles.store}>
           <div>
-            <div>물결이 되어 퍼져나가는 목소리의 아름다움, 당신만의 목소리로 무대에 서세요. </div>
-            <div>당신의 목소리를 다른 사용자와 공유해 보세요. </div>
-            <div>Seiren의 다양한 목소리를 듣고</div>
-            <div>여러가지 콘텐츠에 활용해 보세요.</div>
+            <img src={store} alt="" className={styles.exImg} />
+            <div className={styles.smallTitle}>물결이 되어 퍼져나가는 목소리의 아름다움</div>
+            <div className={styles.smallSummary}>당신의 목소리를 다른 사용자와 공유해 보세요. </div>
+            {/* <div>Seiren의 다양한 목소리를 듣고</div>
+            <div>여러가지 콘텐츠에 활용해 보세요.</div> */}
           </div>
         </div>
 
         <div className={styles.record}>
-          <div>상상하는 모든 것, Seiren과 함께 대화해 보세요.</div>
-          <div>목소리를 녹음하여 자신만의 AI Voice 모델을 만들 수 있습니다.</div>
-          <div>목소리를 대표하는 아바타 및 카테고리를 선택할 수 있습니다.</div>
-          <div>지금 바로 목소리를 등록해보세요!</div>
+          <img src={record} alt="" className={styles.exImg} />
+          <div className={styles.smallTitle}>상상하는 모든 것, Seiren과 함께 대화해 보세요.</div>
+          <div className={styles.smallSummary}>나만의 AI Voice 모델을 만들 수 있습니다.</div>
         </div>
 
         <div className={styles.my}>
-          <div>Seiren과 함께 성장하는 AI 목소리의 여정</div>
-          <div>통계를 통해 목소리의 인기 장르와 트렌드를 파악할 수 있습니다.</div>
-          <div>나의 목소리가 어떤 분야 또는 장르에 적합한지 알아볼 수 있습니다.</div>
-          <div>구매한 목소리를 사용하여 다양한 프로젝트에 적용할 수 있습니다.</div>
+          <img src={mypage} alt="" className={styles.exImg} />
+          <div className={styles.smallTitle}>Seiren과 함께 성장하는 AI 목소리의 여정</div>
+          <div className={styles.smallSummary}>목소리의 인기 장르와 트렌드를 파악할 수 있습니다.</div>
+
         </div>
       </section>
 

@@ -26,7 +26,7 @@
   justify-content: space-between;
   line-height: 35px;
 }
-.section_right_context span{
+.section_right_context span {
   font-weight: 900;
 }
 .section_right_context div {
@@ -58,14 +58,14 @@
 }
 
 /* section3 */
-.section3{
+.section3 {
   background-color: #3a4750;
   color: #fff;
   display: flex;
   justify-content: center;
   height: 100vh;
   padding: 80px;
-  background-image: url("src/assets/img/main.jpg");
+  background-image: url("../assets/img/main.jpg");
   background-size: cover;
 }
 .section3_title {
@@ -74,17 +74,19 @@
   font-weight: 900;
   text-align: center;
 }
-.section3_title span{
+.section3_title span {
   font-size: 26px;
   font-weight: 400;
 }
-.section4{
+.section4 {
   background-color: #040822;
   color: #fff;
   display: flex;
   height: 100vh;
 }
-.store, .record, .my{
+.store,
+.record,
+.my {
   flex: 1;
   font-size: 20px;
   margin: 80px 30px;
@@ -92,4 +94,34 @@
   border-radius: 20px;
   padding: 30px;
   color: #000;
+  width: 30%;
+  height: 70%;
+}
+.store:hover img,
+.record:hover img,
+.my:hover img{
+  transform: scale(1.05);
+  transition: transform 300ms
+}
+.store, .my {
+  background-color: #fefef1;
+}
+.record {
+  background-color: #eff7ff;
+}
+.exImg {
+  width: 100%;
+}
+.store img {
+  margin-top: 65px;
+  margin-bottom: 65px;
+}
+.smallTitle {
+  font-size: 16px;
+  font-weight: 900;
+}
+.smallSummary {
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgb(154, 155, 167);
 }
