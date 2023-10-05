@@ -58,7 +58,8 @@
 ## Store Page
 
 <br>
-<img src="gif_files/10개인일정등록후알림.gif" width="400px">
+![store_1_](/uploads/8d96fe715733efc63cfeac4fd46dd5fe/store_1_.gif)
+![store_2_](/uploads/e6438fe3809461e35185600fd901284d/store_2_.gif)
 
 <br>
 
