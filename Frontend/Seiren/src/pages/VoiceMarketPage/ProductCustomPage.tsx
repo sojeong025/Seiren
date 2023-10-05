@@ -1,6 +1,6 @@
 import styles from './ProductCutomPage.module.css'
 import { customAxios } from '../../libs/axios';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import AWS from "aws-sdk";
 import { motion, AnimatePresence } from 'framer-motion';
@@ -336,8 +336,11 @@ function ProductCustomPage(){
           </div>
       </div>
       <div className={styles.sub}>
-        <div className={styles.submit} onClick={marketProduct}> 
-          등록하기 <BiSolidCheckSquare/> </div>
+        <NavLink to="/voice-market">
+          <div className={styles.submit} onClick={marketProduct}> 
+            등록하기 <BiSolidCheckSquare/>
+            </div>
+        </NavLink>
       </div>
     </div>
   </div>
