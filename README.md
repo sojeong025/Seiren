@@ -320,7 +320,7 @@
 
 # 팀원 소개
 
-| **[성제현](https://github.com/protofu)**                                                          | **[정소정](https://github.com/sojeong025)**                                                           | **[최진석](https://github.com/)**                                                               | **[구배성](https://github.com/)**                                                               | **[황재영](https://github.com/)**                                                              | **[라동엽](https://github.com/)**                                                             |
+| **[성제현](https://github.com/protofu)**                                                          | **[정소정](https://github.com/sojeong025)**                                                           | **[최진석](https://github.com/choiapple)**                                                               | **[구배성](https://github.com/deerKBS)**                                                               | **[황재영](https://github.com/JJaeki)**                                                              | **라동엽**                                                             |
 |:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|
 | <img title="" src="./README_assets/SJH.png" alt="" width="500"> | <img title="" src="./README_assets/JSJ.png" alt="" width="500"> | <img title="" src="./README_assets/CJS.png" alt="" width="500"> | <img title="" src="./README_assets/KBS.png" alt="" width="500"> | <img title="" src="./README_assets/HJY.png" alt="" width="500"> | <img title="" src="./README_assets/RDY.png" alt="" width="500"> |
 | Frontend                                                                                           | Frontend                                                                                           | FullStack                                                                                           | Backend                                                                                            | Backend                                                                                            | AI                                                                                            |
@@ -329,20 +329,20 @@
 
 **Frontend**
 
-- 성제현 : 
+- 성제현 : UX/UI 설계 / 마이페이지 제작 및 api / 뼈대 구축 / 문서화 작업 / 빌드 및 오류 수정
 
-- 정소정 : 
+- 정소정 : UX/UI 설계 / PPT제작 / 영상 제작 / 발표 / 디자인 총괄 / 전 페이지 검수
 
 **Full Stack**
 
-- 최진석 : 
+- 최진석 : API 제작 / front api 연결 / 오류 수정
 
 **Backend**
 
-- 구배성: 
+- 구배성: API 제작 / CI/CD 담당 / 
 
-- 황재영 : 
+- 황재영 : API 제작 / 검색 기능 제작 / DB 관리
 
 **AI**
 
-- 라동엽 : 
+- 라동엽 : Flask 서버 구축 / AI 학습 모델 생성 / 
