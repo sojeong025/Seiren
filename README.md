@@ -182,12 +182,12 @@
 
 - 형상 관리 : Gitlab
 - 이슈 관리 : Jira
-- 커뮤니케이션 : Mattermost, Webex, Notion, Discord
+- 커뮤니케이션 : Mattermost, Notion, Discord
 - 디자인 : Figma, PowerPoint
 
 ## 💻 IDE
 
-- Visual Studio Code `1.18.1`
+- Visual Studio Code `1.83.0`
 - IntelliJ `11.0.19`
 
 ## 📱 Frontend
