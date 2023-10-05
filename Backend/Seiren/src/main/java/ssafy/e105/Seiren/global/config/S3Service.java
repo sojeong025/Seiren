@@ -72,7 +72,7 @@ public class S3Service {
     // tts 음성 파일 s3에 저장
     public String uploadTTSFile(MultipartFile file) {
         try {
-            String fileName = "tts/" + file.getOriginalFilename() + LocalDateTime.now();
+            String fileName = "tts/" + LocalDateTime.now() + file.getOriginalFilename();
             ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentType(file.getContentType());
             InputStream inputStream = file.getInputStream();
