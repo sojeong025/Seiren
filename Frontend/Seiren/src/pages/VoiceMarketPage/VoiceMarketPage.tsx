@@ -83,7 +83,7 @@ function VoiceMarketPage() {
   return (
     <div className={styles.total}>
       <FavoriteVoice />
-      <Filter products={products} setProducts={setProducts} setTotal={updateTotal} currentPage={currentPage} />
+      <Filter products={products} setProducts={setProducts} setTotal={updateTotal} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
       <div className={styles.container}>
         <div className={styles.cards}>
           {products.map(product => (
