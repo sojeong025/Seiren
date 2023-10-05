@@ -16,11 +16,11 @@
 
 # 결과물
 
-- 📽 [UCC](https://youtu.be/o2EBLNdY8w4)
+- 📽 [UCC]()
 
-- 🎤 [중간발표 자료](https://drive.google.com/file/d/1COA8hVxKce2ITqUMMZi81D2oJvRxbZyO/view?usp=sharing)
+- 🎤 [중간발표 자료]()
 
-- 🎤 [최종발표 자료](https://drive.google.com/file/d/1Zd7H1pnseM33wLsKeWNzw6r47Dtfco3s/view?usp=sharing)
+- 🎤 [최종발표 자료]()
 
 
 ## Main Page
@@ -272,33 +272,39 @@
 
 # 기술 소개
 
-- 웹 기반 하이브리드 어플리케이션
+- AI-VOICE 생성
   
-  - `Flutter`를 활용하여 웹 및 앱 플랫폼 모두 사용 가능
+  - 자신의 목소리 여러가지 등록 가능
+  - 다발적 AI-Voice 학습 가능
+  - 적은 량의 데이터로도 양질의 Voice 모델
 
-- 사용자 알림
+- Store 기능
   
-  - `Firebase Cloud Message`를 이용하여 사용자에게 필요한 알림 제공, `Redis`를 이용한 FCM Token 관리
+  - 생성된 AI-Voice 모델 (글자단위) 판매 및 구매 가능
+  - 타인의 AI-Voice 모델 구매 가능 (글자단위)
+  - 생성한 TTS 다운로드 및 바로듣기 가능
 
 - 카카오 로그인
   
   - `OAUTH2` 인증을 이용해 불필요한 개인정보 입력 최소화
 
-- 상품 실시간 예약 랭킹, 최근 본 상품
+- 역동적 디자인
   
-  - in-memory DB인 `Redis`의 sorted set 자료구조를 이용해 실시간 예약 랭킹과 사용자별 최근 본 상품 정보 제공
+  - GSAP을 이용한 애니메이션 추가
+
 
 # 설계 문서
 
-## 🎨 와이어프레임
-
-<img title="" src="README_assets/9005bf0508ad6b1640da37aaf236527847462a4b.jpg" alt="Group 1 (1).jpg" width="702">
 
 ## 📃 기능 명세서
 
-![7.PNG](README_assets/81e14af2401c798e67b35a0a670b9260bb268d45.PNG)
+![Alt text](README_assets/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EB%AA%85%EC%84%B8%EC%84%9C(1).PNG)
 
-![8.PNG](README_assets/5b00a2242164dd377305361c27344280bcff3f91.PNG)
+![Alt text](README_assets/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EB%AA%85%EC%84%B8%EC%84%9C(2).PNG)
+
+![Alt text](README_assets/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EB%AA%85%EC%84%B8%EC%84%9C(3).PNG)
+
+![Alt text](README_assets/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EB%AA%85%EC%84%B8%EC%84%9C(4).PNG)
 
 ## 📝 API 명세서
 
