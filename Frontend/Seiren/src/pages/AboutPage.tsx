@@ -112,7 +112,7 @@ function AboutPage() {
         </div>
 
         <div className={styles.record}>
-          <div className={styles.smallTitle}>제공된 스크립트와 함께 녹음해 보세요</div>
+          <div className={styles.smallTitle}>제공된 스크립트를 녹음해 보세요</div>
           <div className={styles.smallSummary}>
             사용자가 가장 자연스럽고 섬세한 음성을 경험할 수 있도록, 
             녹음된 목소리를 학습하고 있습니다. 최소 100개의 녹음된 목소리를 통해
@@ -125,7 +125,7 @@ function AboutPage() {
         </div>
 
         <div className={styles.my}>
-          <div className={styles.smallTitle}>사용자 데이터를 한 번에 확인해보세요</div>
+          <div className={styles.smallTitle}>데이터를 한 번에 확인해보세요</div>
           <div className={styles.smallSummary}>
             프로필, 판매 내역, 구매 내역, 사용의 개별 탭에 따라 목소리 관리, 통계 차트, 
             전체 구매 및 구매한 보이스 사용을 통해 실시간 데이터 확인 및 관리 할 수 있습니다
