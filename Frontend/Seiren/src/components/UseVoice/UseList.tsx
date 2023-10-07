@@ -33,7 +33,6 @@ function UseList({ transactionid, checkSend }: UseListProps) {
       .get(`transactions/history?transactionid=${transactionid}&page=1`) 
       .then(response => {
         const responseData = response.data.response;
-
         console.log("useList : ", responseData);
         setUseList(responseData);
       })

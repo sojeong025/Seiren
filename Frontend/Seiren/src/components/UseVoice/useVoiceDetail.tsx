@@ -49,15 +49,13 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
   const accessToken = localStorage.getItem("accessToken");
   const marketProduct = async text => {
     console.log(text);
-    let response = await axios.get(
-      `http://70.12.130.121:1470/synthesize2?voice_id=${voiceDetail.voiceId}&transaction_id=${voiceDetail.transactionId}&text=${text}`,
-      {
-        responseType: "blob",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-    );
+    let response = await axios
+      .get(`http://70.12.130.121:1470/synthesize2?voice_id=${voiceDetail.voiceId}&transaction_id=${voiceDetail.transactionId}&text=${text}`,{
+      responseType: "blob",
+      headers: {
+        'Authorization' : `Bearer ${accessToken}`
+      }
+    });
     console.log(response.data);
     // const blobUrl = URL.createObjectURL(response.data);
     // let audio = new Audio(blobUrl);

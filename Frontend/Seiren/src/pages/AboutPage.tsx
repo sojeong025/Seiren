@@ -85,7 +85,7 @@ function AboutPage() {
           SHOW SHOW
         </div>
         <div className={styles.section2_video} ref={videoRef}>
-          <YouTube videoId="9EbEfCqpu8U" opts={opts}/>
+          <YouTube videoId="2VDcku13lkk" opts={opts}/>
         </div>
       </section>
 
