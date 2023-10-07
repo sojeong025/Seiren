@@ -179,7 +179,7 @@ function ProductCustomPage() {
       })
       .catch(err => console.log(err));
 
-    generateRandomAvatar();
+    // generateRandomAvatar();
   }, [voiceId]);
 
   const marketProduct = async () => {
