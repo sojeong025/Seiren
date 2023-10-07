@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SERVER_ADDRESS = `http://j9e105.p.ssafy.io`;
+const SERVER_ADDRESS = `https://j9e105.p.ssafy.io`;
 
 export const customAxios = axios.create({
   baseURL: `${SERVER_ADDRESS}/api/`,
@@ -10,14 +10,14 @@ export const customAxios = axios.create({
 });
 
 customAxios.interceptors.request.use(
-  (config) => {
+  config => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   },
-  (error) => {
+  error => {
     return Promise.reject(error);
   },
 );
