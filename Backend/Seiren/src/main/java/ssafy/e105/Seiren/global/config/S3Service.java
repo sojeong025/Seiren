@@ -6,6 +6,7 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
@@ -81,6 +82,17 @@ public class S3Service {
         } catch (Exception e) {
             e.printStackTrace();
             throw new BaseException(new ApiError("upload tts file 실패", 0));
+        }
+    }
+
+    public String uploadRecordFile(File file) {
+        try {
+            String fileName = "records/" + file.getName();
+            amazonS3Client.putObject(bucket, fileName, file);
+            return amazonS3Client.getResourceUrl(bucket, fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BaseException(new ApiError("upload record file 실패", 0));
         }
     }
 
