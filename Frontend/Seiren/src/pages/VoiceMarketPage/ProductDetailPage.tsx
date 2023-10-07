@@ -108,7 +108,7 @@ function ProductDetailPage() {
   const accessToken = localStorage.getItem("accessToken");
   const marketProduct = async text => {
     let response = await axios.get(
-      `https://j9e105.p.ssafy.io/ai1/synthesize3?voice_id=${productDetail.voiceId}&product_id=${productId}&text=${text}`,
+      `https://j9e105.p.ssafy.io/ai2/synthesize3?voice_id=${productDetail.voiceId}&product_id=${productId}&text=${text}`,
       {
         responseType: "blob",
         headers: {
