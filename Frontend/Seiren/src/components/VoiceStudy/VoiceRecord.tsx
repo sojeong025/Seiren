@@ -43,7 +43,6 @@ const VoiceRecord = () => {
       setStream(stream);
       setMedia(mediaRecoder as MediaRecorder);
 
-
       mediaRecoder.ondataavailable = function (e) {
         if (e.data.size > 0) {
           let blobURL = URL.createObjectURL(e.data);
