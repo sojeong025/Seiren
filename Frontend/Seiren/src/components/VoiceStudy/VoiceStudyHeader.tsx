@@ -22,7 +22,7 @@ const VoiceStudyHeader: React.FC = () => {
         console.log("zip파일 생성", res);
         setZipVoice(res.data.response);
 
-        return axios.get(`https://j9e105.p.ssafy.io/ai1/upload?voice_id=${voiceId}&zipURL=${res.data.response}`, {
+        return axios.get(`https://j9e105.p.ssafy.io/ai2/upload?voice_id=${voiceId}&zipURL=${res.data.response}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
