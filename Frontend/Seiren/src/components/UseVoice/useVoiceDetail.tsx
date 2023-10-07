@@ -4,8 +4,8 @@ import { customAxios } from "../../libs/axios";
 import styles from "./UseVoiceDetail.module.css";
 import SideBar from "../common/SideBar";
 import UseList from "./UseList";
-import { RxDot } from "react-icons/rx"
-import { VscSend } from "react-icons/vsc"
+import { RxDot } from "react-icons/rx";
+import { VscSend } from "react-icons/vsc";
 import axios from "axios";
 
 const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({ setIsNavBarVisible }) => {
@@ -25,20 +25,20 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
 
   const handleTextChange = event => {
     setText(event.target.value);
-    setTextLength(event.target.value.length)
+    setTextLength(event.target.value.length);
   };
 
-  // 목소리 (상품) 상세 정보 GET 
+  // 목소리 (상품) 상세 정보 GET
   useEffect(() => {
     customAxios
       .get(`transactions/detail/${productId}`)
       .then(response => {
         const voiceDetailData = response.data.response;
-        console.log('상품 상세정보 api ', response)
+        console.log("상품 상세정보 api ", response);
 
         setVoiceDetail(voiceDetailData);
-        console.log('보이스 아이디', voiceDetailData.voiceId)
-        console.log('트렌젝션아이디',voiceDetailData.transactionId)
+        console.log("보이스 아이디", voiceDetailData.voiceId);
+        console.log("트렌젝션아이디", voiceDetailData.transactionId);
       })
       .catch(error => {
         console.error("API 호출 중 오류 발생:", error);
@@ -47,7 +47,7 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
 
   // 사용 TEXT 서버에 전송 API
   const accessToken = localStorage.getItem("accessToken");
-  const marketProduct = async(text) => {
+  const marketProduct = async text => {
     console.log(text);
     let response = await axios
       .get(`http://70.12.130.121:1470/synthesize2?voice_id=${voiceDetail.voiceId}&transaction_id=${voiceDetail.transactionId}&text=${text}`,{
@@ -59,15 +59,14 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
     console.log(response.data);
     // const blobUrl = URL.createObjectURL(response.data);
     // let audio = new Audio(blobUrl);
-    if(checkSend === false){
+    if (checkSend === false) {
       setCheckSend(true);
-    }else{
+    } else {
       setCheckSend(false);
     }
-  }
+  };
 
   // 차감 글자 수
-
 
   // 상세 정보가 로딩 중인 경우 로딩 표시
   if (!voiceDetail) {
@@ -85,15 +84,18 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
             <div className={styles.title}>{voiceDetail.productTitle}</div>
             <div className={styles.summary}>{voiceDetail.summary}</div>
 
-            <div className={styles.remain}> <RxDot/> <span>사용 가능</span>한 글자 수 : <span>{voiceDetail.remainLetter}</span>자 </div>
-            <div className={styles.total}> <RxDot/>  <span>구매</span>한 총 글자 수 :<span>{voiceDetail.totalCount}</span>자</div>
+            <div className={styles.remain}>
+              {" "}
+              <RxDot /> <span>사용 가능</span>한 글자 수 : <span>{voiceDetail.remainLetter}</span>자{" "}
+            </div>
+            <div className={styles.total}>
+              {" "}
+              <RxDot /> <span>구매</span>한 총 글자 수 :<span>{voiceDetail.totalCount}</span>자
+            </div>
             <div className={styles.alert}>한 번에 최대 200자까지만 사용 가능합니다.</div>
-
           </div>
           <Link to="/use-voice">
-            <div className={styles.select}>
-              AI 목소리 선택
-            </div>
+            <div className={styles.select}>AI 목소리 선택</div>
           </Link>
         </div>
 
@@ -103,21 +105,19 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
         <div className={styles.right}>
           {/* text창 */}
           <div className={styles.inputContainer}>
-          <div className={styles.textBox}>
-          </div>
-          <div className={styles.textcontain}>
-            
-            <textarea
-              value={text}
-              onChange={handleTextChange}
-              maxLength={mL}
-              placeholder="사용하실 텍스트를 입력하세요"
-              className={styles.textarea}
-            />
-            <div onClick= {() => marketProduct(text)} className={styles.button}>
-              <VscSend />
+            <div className={styles.textBox}></div>
+            <div className={styles.textcontain}>
+              <textarea
+                value={text}
+                onChange={handleTextChange}
+                maxLength={mL}
+                placeholder="사용하실 텍스트를 입력하세요"
+                className={styles.textarea}
+              />
+              <div onClick={() => marketProduct(text)} className={styles.button}>
+                <VscSend />
+              </div>
             </div>
-          </div>
             <div className={styles.characterCount}>{text.length}자 / 200자</div>
             <div></div>
           </div>
@@ -126,7 +126,7 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
 
           {/* history */}
           <div className={styles.scroll}>
-            <UseList transactionid={voiceDetail.transactionId.toString()} checkSend={checkSend}/>
+            <UseList transactionid={voiceDetail.transactionId.toString()} checkSend={checkSend} />
           </div>
         </div>
       </div>
