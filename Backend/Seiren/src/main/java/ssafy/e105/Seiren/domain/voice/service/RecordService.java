@@ -78,12 +78,11 @@ public class RecordService {
             // 파일 형식 변환
             File tempFile = File.createTempFile("audio", "tmp");
             file.transferTo(tempFile);
-            File outputWav = File.createTempFile(String.valueOf(voiceId) + "-" + scriptId,
-                    ".wav");
+            File outputWav = File.createTempFile("tmp", ".wav");
             convertToWavWithSampleRate(tempFile, outputWav, 22050.0f);
 
             // s3 저장
-            String url = s3Service.uploadRecordFile(outputWav);
+            String url = s3Service.uploadRecordFile(outputWav, voiceId, scriptId);
 
             // db 저장
             recordRepository.save(Record.toEntity(voice, scriptService.getScript(scriptId), url));

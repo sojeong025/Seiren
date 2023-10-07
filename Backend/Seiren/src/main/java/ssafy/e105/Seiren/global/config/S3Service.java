@@ -85,9 +85,9 @@ public class S3Service {
         }
     }
 
-    public String uploadRecordFile(File file) {
+    public String uploadRecordFile(File file, Long voiceId, Long scriptId) {
         try {
-            String fileName = "records/" + file.getName();
+            String fileName = "records/" + voiceId + "-" + scriptId;
             amazonS3Client.putObject(bucket, fileName, file);
             return amazonS3Client.getResourceUrl(bucket, fileName);
         } catch (Exception e) {
