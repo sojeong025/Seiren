@@ -114,27 +114,27 @@ public class KakaoService {
         JSONObject account = (JSONObject) jsonObj.get("kakao_account");
         JSONObject profile = (JSONObject) account.get("profile");
 
-        long id = (long) jsonObj.get("id");
+        String id = String.valueOf(jsonObj.get("id"));
         String email = String.valueOf(account.get("email"));
-//        String nickname = String.valueOf(profile.get("nickname"));
+        String nickname = String.valueOf(profile.get("nickname"));
         String profileImg = String.valueOf(profile.get("profile_image_url"));
 
-        Optional<User> user = userRepository.findByEmail(email);
-        String nickname = generateUniqueNickname();
+        Optional<User> user = userRepository.findByEmail(id);
+//        String nickname = generateUniqueNickname();
 
         if (user.isEmpty()) {
-            userRepository.save(User.toEntity(email, nickname, profileImg, passwordEncoder));
+            userRepository.save(User.toEntity(id, nickname, profileImg, passwordEncoder));
             userRepository.flush();
         }
 
-        Optional<User> oauthUser = userRepository.findByEmail(email);
+        Optional<User> oauthUser = userRepository.findByEmail(id);
 
         try {
             log.info("email = {}", oauthUser.get().getEmail());
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            email,
-                            email
+                            id,
+                            id
                     )
             );
 
