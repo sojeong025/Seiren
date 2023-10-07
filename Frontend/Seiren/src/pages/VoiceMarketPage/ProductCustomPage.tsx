@@ -169,6 +169,7 @@ function ProductCustomPage() {
   };
 
   useEffect(() => {
+    console.log("보이스아이디", voiceId);
     customAxios
       .get(`voices/${voiceId}`)
       .then(res => {
