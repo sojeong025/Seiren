@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { customAxios } from "../../../libs/axios";
+import { VoiceIdState } from "../../../recoil/RecordAtom";
 import State from "./State";
+import { useRecoilState } from "recoil";
 import UploadImgOri from "../../common/UploadImgOri";
 import SideBar from "../../../components/common/SideBar";
 import styles from "./YourVoiceDetail.module.css";
@@ -17,6 +19,8 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
   const navigate = useNavigate();
   const [checkState, setCheckState] = useState(false);
 
+  const [recoilVoiceId, setRecoilVoiceId] = useRecoilState(VoiceIdState);
+
   useEffect(() => {
     setIsNavBarVisible(false); // 네비게이션 바 숨기기
 
@@ -26,6 +30,7 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
   }, [setIsNavBarVisible]);
 
   useEffect(() => {
+    setRecoilVoiceId(voiceId);
     customAxios
       .get(`voices/${voiceId}`)
       .then(response => {
@@ -34,6 +39,7 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
         setVoiceTitle(voiceDetailData.voiceTitle); // voiceTitle 초기값 설정
         setMemo(voiceDetailData.memo); // memo 초기값 설정
         setVoiceAvatarUrl(voiceDetailData.voiceAvatarUrl);
+        // setVoiceId(voiceId)
         console.log(voiceDetailData);
       })
       .catch(error => {
@@ -115,10 +121,10 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
       2,
       "0",
     )}`}&skinColor=${skinColorRandom}&hairColor=${hairColorRandom}`;
-  
+
     // 새로운 아바타 URL을 상태로 업데이트
     setVoiceAvatarUrl(dicebearUrl);
-  
+
     console.log(dicebearUrl);
   };
 
@@ -165,7 +171,7 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
                     />
                   </div>
                 </div>
-                  <div className={styles.minMemo}>상품 설명</div>
+                <div className={styles.minMemo}>상품 설명</div>
                 <div className={styles.memo}>
                   <input
                     type="text"
@@ -177,11 +183,11 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
               </>
             ) : (
               <>
-                  <div className={styles.minTitle} >상품 제목</div>
+                <div className={styles.minTitle}>상품 제목</div>
                 <div className={styles.voiceTitle}>
                   <div>{voiceDetail.voiceTitle}</div>
                 </div>
-                  <div className={styles.minMemo} >상품 설명</div>
+                <div className={styles.minMemo}>상품 설명</div>
                 <div className={styles.memo}>
                   <div>{voiceDetail.memo}</div>
                 </div>
