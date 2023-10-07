@@ -2,17 +2,28 @@ import { useNavigate } from "react-router-dom";
 import styles from "./VoiceStudyHeader.module.css";
 import { customAxios } from "../../libs/axios";
 import { useEffect, useState } from "react";
-import { useRecoilValue, useRecoilState } from "recoil";
-import { VoiceIdState, RecordCountState } from "../../recoil/RecordAtom";
+import { useRecoilState } from "recoil";
+import { RecordCountState } from "../../recoil/RecordAtom";
 import axios from "axios";
 
 const VoiceStudyHeader: React.FC = () => {
-  const voiceId = useRecoilValue(VoiceIdState);
+  const [voiceId, setVoiceId] = useState();
   const [recordCount, setRecordCount] = useRecoilState(RecordCountState);
   const [totalCount, setTotalCount] = useState(1);
   const [zipVoice, setZipVoice] = useState("");
 
   const accessToken = localStorage.getItem("accessToken");
+
+  useEffect(() => {
+    customAxios.get("progressingVoices")
+      .then((res) => {
+          console.log(`학습완료시에서 voiceId:`, res.data.response.voiceId)
+          setVoiceId(res.data.response.voiceId);
+        })
+        .catch((error) => {
+          console.error('학습완료시에서 오류:', error);
+        })
+    }, [voiceId]);
 
   const navigate = useNavigate();
   const handleButtonClick = () => {
