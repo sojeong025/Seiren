@@ -57,6 +57,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS); // jwt token으로 인증 > 세션 필요없음
 
         http.authorizeHttpRequests((req) -> req
+                        .requestMatchers(new IpAddressMatcher("175.209.203.185")).permitAll() // AI서버 요청 허용
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/login/oauth2/code/kakao"))
                         .permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/user/signup")).permitAll()
