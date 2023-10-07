@@ -123,6 +123,7 @@ spring:
       username: ${spring.datasource.username}
       password: ${spring.datasource.password}
       driver-class-name: ${spring.datasource.driver-class-name}
+      max-lifetime: 1800000 # 30분
       data-source-properties:
         rewriteBatchedStatements: true
   data:
