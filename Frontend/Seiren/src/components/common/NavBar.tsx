@@ -5,6 +5,7 @@ import { UserState } from "../../recoil/UserAtom";
 import { customAxios } from "../../libs/axios";
 import Logout from "./Logout";
 import { useRecoilState } from "recoil";
+import {EventSourcePolyfill} from "event-source-polyfill";
 
 function NavBar() {
   const [scrollDirection, setScrollDirection] = useState<string | ((prevState: string) => string)>("up");
@@ -18,6 +19,46 @@ function NavBar() {
     { addLink: "/voice-market", className: styles.storeLink },
     { addLink: "/purchase/", className: styles.aboutLink },
   ];
+
+  const EventSource = EventSourcePolyfill;
+  const accessToken = localStorage.getItem("accessToken");
+
+  useEffect(()=>{
+    if(isKakaoLoggedIn){
+      let eventSource;
+      const fetchSse = async () =>{
+        try{
+          eventSource = new EventSource(`http://j9e105.p.ssafy.io:8082/api/sse/connect`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`
+            },
+            withCredentials:true,
+          });
+          /* 연결 */
+          eventSource.onopen = async (e) =>{
+            const res = await e;
+            console.log(res)
+          }
+          /* EVENTSOURCE ONMESSAGE */
+          eventSource.onmessage = async (e) =>{
+            const res = await e.data;
+            console.log(res);
+          };
+
+          eventSource.onerror = async (event) =>{
+            if(!event.error.message.includes("No activity")){
+              eventSource.close();
+            }
+          }
+        }catch(error){
+          console.log(error);
+        }
+      };
+      fetchSse();
+      return () => eventSource.close();
+    }
+  })
 
   useEffect(() => {
     customAxios.get("user").then(response => {
