@@ -60,7 +60,7 @@ function NavBar() {
       fetchSse();
       return () => eventSource.close();
     }
-  },[isKakaoLoggedIn])
+  })
 
   useEffect(() => {
     customAxios.get("user").then(response => {
