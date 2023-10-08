@@ -24,6 +24,8 @@ function NavBar() {
   const accessToken = localStorage.getItem("accessToken");
 
   useEffect(()=>{
+    console.log(isKakaoLoggedIn);
+    console.log("sse 연결 요청");
     if(isKakaoLoggedIn){
       let eventSource;
       const fetchSse = async () =>{
