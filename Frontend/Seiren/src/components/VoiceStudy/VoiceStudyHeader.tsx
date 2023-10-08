@@ -66,7 +66,7 @@ const VoiceStudyHeader: React.FC = () => {
       .catch(err => {
         console.error("진행률 요청 실패", err);
       });
-  }, []);
+  }, [voiceId]);
 
   let progress;
   if (recordCount <= 100) {
