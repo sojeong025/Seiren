@@ -5,20 +5,27 @@
   display: flex;
   align-items: center;
 }
-.search{
+.search {
   display: flex;
   align-items: center;
 }
-.searchbar{
+.searchbar {
   height: 50px;
   width: 50vw;
-  border-radius: 4px;
+  border-radius: 1.5rem;
   border: 0.8px solid #ddd;
   font-size: 16px;
-  padding: 10px;
-  font-family: 'S-CoreDream-4Regular';
+  padding: 15px;
+  font-family: "S-CoreDream-4Regular";
   margin-left: 30px;
 }
-.searchbar:focus{
+.searchbar:focus {
   outline: none;
+}
+
+.searchButton {
+  background-color: transparent;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
 }
