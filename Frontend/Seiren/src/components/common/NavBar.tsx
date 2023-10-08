@@ -28,7 +28,7 @@ function NavBar() {
     console.log(isKakaoLoggedIn);
     console.log("sse 연결 요청");
     if(isKakaoLoggedIn){
-      let eventSource = new EventSource;
+      let eventSource;
       async function fetchSse(){
         try{
           eventSource = new EventSource(`http://j9e105.p.ssafy.io:8082/api/sse/connect`,
