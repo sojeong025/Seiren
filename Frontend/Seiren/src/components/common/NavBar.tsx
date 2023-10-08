@@ -5,7 +5,8 @@ import { UserState } from "../../recoil/UserAtom";
 import { customAxios } from "../../libs/axios";
 import Logout from "./Logout";
 import { useRecoilState } from "recoil";
-import {EventSourcePolyfill} from "event-source-polyfill";
+// import { EventSourcePolyfill, NativeEventSource } from "event-source-polyfill";
+import EventSource from 'react-native-event-source';
 
 function NavBar() {
   const [scrollDirection, setScrollDirection] = useState<string | ((prevState: string) => string)>("up");
@@ -20,22 +21,21 @@ function NavBar() {
     { addLink: "/purchase/", className: styles.aboutLink },
   ];
 
-  const EventSource = EventSourcePolyfill;
+  // const EventSource = EventSourcePolyfill || NativeEventSource;
   const accessToken = localStorage.getItem("accessToken");
 
   useEffect(()=>{
     console.log(isKakaoLoggedIn);
     console.log("sse 연결 요청");
     if(isKakaoLoggedIn){
-      let eventSource;
-      const fetchSse = async () =>{
+      let eventSource = new EventSource;
+      async function fetchSse(){
         try{
           eventSource = new EventSource(`http://j9e105.p.ssafy.io:8082/api/sse/connect`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`
-            },
-            withCredentials:true,
+            }
           });
           /* 연결 */
           eventSource.onopen = async (e) =>{
@@ -60,7 +60,7 @@ function NavBar() {
       fetchSse();
       return () => eventSource.close();
     }
-  })
+  },[isKakaoLoggedIn])
 
   useEffect(() => {
     customAxios.get("user").then(response => {
