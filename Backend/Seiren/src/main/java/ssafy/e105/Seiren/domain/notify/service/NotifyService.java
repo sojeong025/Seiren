@@ -1,6 +1,7 @@
 package ssafy.e105.Seiren.domain.notify.service;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,10 @@ public class NotifyService {
 
     @Transactional
     public List<NotifyResponse> getNotifyList(HttpServletRequest request) {
-        List<Notify> notifyList = notifyRepository.findByUserIdAndCreatedAtAfter(
-                userService.getUser(request).getId());
+        LocalDateTime oneWeekAgo = LocalDateTime.now().minusWeeks(1);
+        List<Notify> notifyList = notifyRepository.findByUserAndCreatedAtAfter(
+                userService.getUser(request), oneWeekAgo);
+
         List<NotifyResponse> notifyResponseList = notifyList.stream()
                 .map(notify -> new NotifyResponse(notify))
                 .collect(Collectors.toList());
