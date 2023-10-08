@@ -48,7 +48,7 @@ const Script: React.FC = () => {
 
   // 스크립트 get
   useEffect(() => {
-    customAxios
+    scriptId && customAxios
       .get(`nextScripts/${scriptId}`)
       .then(res => {
         // console.log('다음 스크립트 get 요청 성공 내용은', res.data.response.script)
@@ -63,7 +63,7 @@ const Script: React.FC = () => {
 
   // 다음 스크립트 get
   useEffect(() => {
-    customAxios
+    nextScriptId && customAxios
       .get(`nextScripts/${nextScriptId}`)
       .then(res => {
         // console.log('두번째 스크립트 get 요청 성공 다음 스크립트 내용은', res.data.response.script)

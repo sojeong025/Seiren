@@ -56,7 +56,7 @@ const VoiceStudyHeader: React.FC = () => {
   };
 
   useEffect(() => {
-    customAxios
+    voiceId && customAxios
       .get(`records/count/${voiceId}`)
       .then(res => {
         // console.log("진행률 요청 성공", res);
