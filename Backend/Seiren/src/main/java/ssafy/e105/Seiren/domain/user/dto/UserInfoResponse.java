@@ -13,4 +13,5 @@ public class UserInfoResponse {
 
     private String nickname;
     private String profileImg;
+    private Long userId;
 }
