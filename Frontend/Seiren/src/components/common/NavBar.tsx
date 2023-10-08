@@ -88,6 +88,13 @@ function NavBar() {
     navigate("/login");
   };
 
+  const handleAlert = () => {
+      customAxios.get("notifies")
+      .then((res)=>{
+        console.log(res);
+      })
+  }
+
   return (
     <div
       className={`${scrollY !== 0 ? styles.opaque : styles.container} ${
@@ -117,6 +124,7 @@ function NavBar() {
           <NavLink to="/my-page" className={location.pathname === "/my-page" ? styles.activeLink : ""}>
             MyPage
           </NavLink>
+          <button onClick={()=>handleAlert()}>알림 요청</button>
 
           {isKakaoLoggedIn ? (
             <>
