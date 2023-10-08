@@ -6,7 +6,7 @@ import { customAxios } from "../../libs/axios";
 import Logout from "./Logout";
 import { useRecoilState } from "recoil";
 // import { EventSourcePolyfill, NativeEventSource } from "event-source-polyfill";
-import EventSource from 'react-native-event-source';
+// import EventSource from 'react-native-event-source';
 
 function NavBar() {
   const [scrollDirection, setScrollDirection] = useState<string | ((prevState: string) => string)>("up");
@@ -15,6 +15,7 @@ function NavBar() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useRecoilState(UserState);
   const location = useLocation();
+  const [userId, setUserId] = useState();
   const menuItems = [
     { addLink: "/about", className: styles.aboutLink },
     { addLink: "/voice-market", className: styles.storeLink },
@@ -31,12 +32,7 @@ function NavBar() {
       let eventSource;
       async function fetchSse(){
         try{
-          eventSource = new EventSource(`http://j9e105.p.ssafy.io:8082/api/sse/connect`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`
-            }
-          });
+          eventSource = new EventSource(`http://j9e105.p.ssafy.io:8082/api/sse/connect/${userId}`);
           /* 연결 */
           eventSource.onopen = async (e) =>{
             const res = await e;
@@ -71,6 +67,7 @@ function NavBar() {
         profileImage: userData.profileImg,
       };
       setUserInfo(updatedUserData);
+      setUserId(userData.userId);
     });
   }, [location]);
 
