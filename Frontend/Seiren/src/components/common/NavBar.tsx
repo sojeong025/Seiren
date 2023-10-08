@@ -34,17 +34,17 @@ function NavBar() {
         try{
           eventSource = new EventSource(`https://j9e105.p.ssafy.io/api/sse/connect?userId=${userId}`);
           /* 연결 */
-          eventSource.onopen = async (e) =>{
-            const res = await e;
+          eventSource.onopen = (e) =>{
+            const res = e;
             console.log(res)
           }
           /* EVENTSOURCE ONMESSAGE */
-          eventSource.onmessage = async (e) =>{
-            const res = await e.data;
+          eventSource.onmessage = (e) =>{
+            const res = e.data;
             console.log(res);
           };
 
-          eventSource.onerror = async (event) =>{
+          eventSource.onerror = (event) =>{
             if(!event.error.message.includes("No activity")){
               eventSource.close();
             }
