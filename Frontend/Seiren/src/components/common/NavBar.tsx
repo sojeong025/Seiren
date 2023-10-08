@@ -13,7 +13,10 @@ function NavBar() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useRecoilState(UserState);
   const location = useLocation();
-  const menuItems = [{ addLink: "/about", className: styles.aboutLink }];
+  const menuItems = [
+    { addLink: "/about", className: styles.aboutLink },
+    { addLink: "/voice-market", className: styles.storeLink },
+  ];
 
   useEffect(() => {
     customAxios.get("user").then(response => {
