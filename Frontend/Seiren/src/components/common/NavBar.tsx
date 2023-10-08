@@ -3,6 +3,7 @@ import { NavLink, useLocation, useNavigate, NavLinkProps } from "react-router-do
 import styles from "./NavBar.module.css";
 import { UserState } from "../../recoil/UserAtom";
 import { customAxios } from "../../libs/axios";
+import Logout from "./Logout";
 import { useRecoilState } from "recoil";
 
 function NavBar() {
@@ -74,7 +75,10 @@ function NavBar() {
           <NavLink to="/my-page">MyPage</NavLink>
 
           {isKakaoLoggedIn ? (
-            userInfo.profileImage && <img className={styles.proImg} src={userInfo.profileImage} alt="Profile" />
+            <>
+              {userInfo.profileImage && <img className={styles.proImg} src={userInfo.profileImage} alt="Profile" />}
+              <Logout />
+            </>
           ) : (
             <div className={styles.login} onClick={handleLoginClick}>
               LOGIN
