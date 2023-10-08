@@ -32,7 +32,8 @@ public class SseController {
     }
 
     @GetMapping("/api/sse/test")
-    public void test(@RequestParam Long userId, @RequestParam String str) {
-        sseService.test(userId, str);
+    public void test(HttpServletRequest request, @RequestParam NotificationType type,
+            @RequestParam String str) {
+        sseService.sendTest(request, type, str);
     }
 }
