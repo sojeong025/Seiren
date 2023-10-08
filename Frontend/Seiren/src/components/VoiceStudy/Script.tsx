@@ -15,7 +15,6 @@ const Script: React.FC = () => {
 
   const [recordingStatus, setRecordingStatus] = useRecoilState(RecordingState);
   const [voiceId, setVoiceId] = useState();
-  const [checkScript, setCheckScript] = useState(false);
 
   useEffect(() => {
     customAxios
@@ -49,7 +48,7 @@ const Script: React.FC = () => {
 
   // 스크립트 get
   useEffect(() => {
-    scriptId && customAxios
+    customAxios
       .get(`nextScripts/${scriptId}`)
       .then(res => {
         // console.log('다음 스크립트 get 요청 성공 내용은', res.data.response.script)
@@ -64,21 +63,16 @@ const Script: React.FC = () => {
 
   // 다음 스크립트 get
   useEffect(() => {
-    nextScriptId && customAxios
+    customAxios
       .get(`nextScripts/${nextScriptId}`)
       .then(res => {
         // console.log('두번째 스크립트 get 요청 성공 다음 스크립트 내용은', res.data.response.script)
         setNextScript(res.data.response.script);
-        setCheckScript(!checkScript);
       })
       .catch(err => {
         console.error("두번째 스크립트 get요청 실패다", err);
       });
   }, [nextScriptId]);
-
-  useEffect(()=>{
-
-  },[checkScript])
 
   const goNext = async () => {
     // console.log(`gonext`)
