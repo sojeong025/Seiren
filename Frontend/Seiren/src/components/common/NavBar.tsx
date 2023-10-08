@@ -33,18 +33,9 @@ function NavBar() {
       async function fetchSse(){
         try{
           eventSource = new EventSource(`https://j9e105.p.ssafy.io/api/sse/connect?userId=${userId}`);
-          /* 연결 */
-          eventSource.onopen = (e) =>{
-            const res = e;
-            console.log(res)
-          }
-          /* EVENTSOURCE ONMESSAGE */
-          eventSource.onmessage = (e) =>{
-            const res = e.data;
-            console.log(res);
-          };
           eventSource.addEventListener('CONNECT', e=>{console.log(e);});
-
+          eventSource.addEventListener('TRAINING', e=>{console.log(e);});
+          eventSource.addEventListener('PURCHASE', e=>{console.log(e);});
           eventSource.onerror = (event) =>{
             if(!event.error.message.includes("No activity")){
               eventSource.close();
