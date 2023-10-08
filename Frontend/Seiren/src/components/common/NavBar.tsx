@@ -53,7 +53,7 @@ function NavBar() {
   },[isKakaoLoggedIn, userId])
 
   useEffect(() => {
-    customAxios.get("user").then(response => {
+    accessToken && customAxios.get("user").then(response => {
       let userData = response.data.response;
 
       let updatedUserData = {
