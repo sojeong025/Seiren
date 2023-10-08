@@ -43,7 +43,8 @@
     "recoil": "^0.7.7",
     "slick-carousel": "^1.8.1",
     "standardized-audio-context": "^25.3.57",
-    "styled-components": "^5.3.11"
+    "styled-components": "^5.3.11",
+    "wavefile": "^11.0.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
