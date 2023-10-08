@@ -104,3 +104,7 @@
 .storeLink {
   background-color: black;
 }
+
+.activeLink {
+  text-decoration: underline;
+}

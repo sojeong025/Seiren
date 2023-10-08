@@ -73,10 +73,18 @@ function NavBar() {
         </NavLink>
 
         <div className={styles.nav}>
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/voice-market">Store</NavLink>
-          <NavLink to="/voice-study">Record</NavLink>
-          <NavLink to="/my-page">MyPage</NavLink>
+          <NavLink to="/about" className={location.pathname === "/about" ? styles.activeLink : ""}>
+            About
+          </NavLink>
+          <NavLink to="/voice-market" className={location.pathname === "/voice-market" ? styles.activeLink : ""}>
+            Store
+          </NavLink>
+          <NavLink to="/voice-study" className={location.pathname === "/voice-study" ? styles.activeLink : ""}>
+            Record
+          </NavLink>
+          <NavLink to="/my-page" className={location.pathname === "/my-page" ? styles.activeLink : ""}>
+            MyPage
+          </NavLink>
 
           {isKakaoLoggedIn ? (
             <>
