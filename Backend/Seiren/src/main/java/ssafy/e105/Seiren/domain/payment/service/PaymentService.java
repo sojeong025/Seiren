@@ -20,6 +20,8 @@ import ssafy.e105.Seiren.domain.transaction.repository.TransactionDescriptionRep
 import ssafy.e105.Seiren.domain.transaction.repository.TransactionRepository;
 import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.repository.UserRepository;
+import ssafy.e105.Seiren.global.common.sse.NotificationType;
+import ssafy.e105.Seiren.global.common.sse.SseService;
 import ssafy.e105.Seiren.global.error.type.BaseException;
 import ssafy.e105.Seiren.global.jwt.JwtTokenProvider;
 import ssafy.e105.Seiren.global.utils.ApiError;
@@ -35,6 +37,7 @@ public class PaymentService {
     private final PurposeRepository purposeRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
+    private final SseService sseService;
 
     @Transactional
     public void purchaseProduct(HttpServletRequest request, PurchaseDto purchaseDto) {
@@ -54,6 +57,11 @@ public class PaymentService {
         transaction.update(purchaseDto);
         transactionDescriptionRepository.save(
                 TransactionDescription.toEntity(purchaseDto, transaction, purpose, product));
+
+        // sse 알림 & notify 추가
+        String msg = buyer.getNickname() + "님이 " + product.getProductTitle() + "상품을 "
+                + purchaseDto.getBuyLetterCount() + "글자 구매하셨습니다.";
+        sseService.send(seller, NotificationType.PURCHASE, msg);
     }
 
     private Purpose getPurpose(Long purposeId) {
