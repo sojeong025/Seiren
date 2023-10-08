@@ -7,13 +7,13 @@ const LogoutButton: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogout = async() => {
-    // 로컬 스토리지의 모든 항목 삭제
-    localStorage.clear();
+
     await customAxios.delete("sse/disconnect")
     .then((res)=>{
       console.log(res);
     }).catch(error => console.log(error))
-
+    // 로컬 스토리지의 모든 항목 삭제
+    localStorage.clear();
     // 로그아웃 후 메인 페이지로 이동
     navigate("/");
   };
