@@ -1,7 +1,15 @@
 .logout {
+  font-family: "LeferiPoint-SpecialA";
+  font-size: 20px;
   border: 2px solid #fff;
+  background-color: transparent;
+  color: white;
   line-height: 30px;
-  padding: 5px 10px 0;
+  padding: 5px 10px 4px;
   border-radius: 10%;
   transition: transform 0.2s;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
