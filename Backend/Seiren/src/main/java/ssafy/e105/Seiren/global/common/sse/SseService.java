@@ -6,7 +6,11 @@ import java.io.IOException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+import ssafy.e105.Seiren.domain.notify.entity.Notify;
+import ssafy.e105.Seiren.domain.notify.repository.NotifyRepository;
+import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.service.UserService;
 
 @Service
@@ -14,7 +18,7 @@ import ssafy.e105.Seiren.domain.user.service.UserService;
 public class SseService {
 
     private final EmitterRepository emitterRepository;
-    //    private final NotifyRepository notifyRepository;
+    private final NotifyRepository notifyRepository;
     private final UserService userService;
 
     // subscribe 연결 설정
@@ -50,51 +54,62 @@ public class SseService {
         emitterRepository.deleteById(userService.getUser(request).getId());
     }
 
-//    // 이벤트 전송 메소드
-//    @Transactional
-//    public void send(User user, NotificationType type, String content) {
-//        Notify notify = new Notify(content, type, user);
-//        Long userId = user.getId();
-//
-//        Optional<SseEmitter> optionalEmitter = emitterRepository.findByUserId(userId);
-//
-//        // 연결되어 있지 않은 경우
-//        if (optionalEmitter.isEmpty()) {
-//            notify.setIsRead(false);
-//            notifyRepository.save(notify);
-//            return;
-//        }
-//
-//        SseEmitter emitter = optionalEmitter.get();
-//
-//        try {
-//            emitter.send(SseEmitter.event()
-//                    .name(String.valueOf(type))
-//                    .data(content));
-//            notify.setIsRead(true);
-//
-//        } catch (IOException e) {
-//            emitterRepository.deleteById(userId);
-//            notify.setIsRead(false);
-//        }
-//
-//        notifyRepository.save(notify);
-//    }
+    @Transactional
+    public void send(User user, NotificationType type, String content) {
+        Notify notify = new Notify(content, type, user);
+        Long userId = user.getId();
 
-    public void test(Long userId, String str) {
-        Optional<SseEmitter> oEmitter = emitterRepository.findByUserId(userId);
-        if (oEmitter.isEmpty()) {
-            System.out.println("존재하지 않는 연결입니다.");
+        Optional<SseEmitter> optionalEmitter = emitterRepository.findByUserId(userId);
+
+        // 연결되어 있지 않은 경우
+        if (optionalEmitter.isEmpty()) {
+            notifyRepository.save(notify);
             return;
         }
+
+        // 연결되어 있는 경우
+        SseEmitter emitter = optionalEmitter.get();
+
         try {
-            oEmitter.get().send(SseEmitter.event()
-                    .name("CONNECT")
-                    .data(str));
-            System.out.println("연결 성공");
+            emitter.send(SseEmitter.event()
+                    .name(String.valueOf(type))
+                    .data(content));
+            notify.update();
+
         } catch (IOException e) {
-            System.out.println("연결 실패");
             emitterRepository.deleteById(userId);
         }
+
+        notifyRepository.save(notify);
+    }
+
+    @Transactional
+    public void sendTest(HttpServletRequest request, NotificationType type, String content) {
+        User user = userService.getUser(request);
+        Notify notify = new Notify(content, type, user);
+        Long userId = user.getId();
+
+        Optional<SseEmitter> optionalEmitter = emitterRepository.findByUserId(userId);
+
+        // 연결되어 있지 않은 경우
+        if (optionalEmitter.isEmpty()) {
+            notifyRepository.save(notify);
+            return;
+        }
+
+        // 연결되어 있는 경우
+        SseEmitter emitter = optionalEmitter.get();
+
+        try {
+            emitter.send(SseEmitter.event()
+                    .name(String.valueOf(type))
+                    .data(content));
+            notify.update();
+
+        } catch (IOException e) {
+            emitterRepository.deleteById(userId);
+        }
+
+        notifyRepository.save(notify);
     }
 }
