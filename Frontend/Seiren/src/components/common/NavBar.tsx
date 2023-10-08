@@ -43,6 +43,7 @@ function NavBar() {
             const res = e.data;
             console.log(res);
           };
+          eventSource.addEventListener('CONNECT', e=>{console.log(e);});
 
           eventSource.onerror = (event) =>{
             if(!event.error.message.includes("No activity")){
