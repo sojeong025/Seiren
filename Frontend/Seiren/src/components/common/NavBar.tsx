@@ -16,6 +16,7 @@ function NavBar() {
   const menuItems = [
     { addLink: "/about", className: styles.aboutLink },
     { addLink: "/voice-market", className: styles.storeLink },
+    { addLink: "/purchase/", className: styles.aboutLink },
   ];
 
   useEffect(() => {
@@ -60,8 +61,8 @@ function NavBar() {
       className={`${scrollY !== 0 ? styles.opaque : styles.container} ${
         scrollDirection === "down" ? styles.scrollDown : ""
       } ${
-        menuItems.some(item => location.pathname === item.addLink)
-          ? menuItems.find(item => location.pathname === item.addLink)?.className
+        menuItems.some(item => location.pathname.startsWith(item.addLink))
+          ? menuItems.find(item => location.pathname.startsWith(item.addLink))?.className
           : ""
       }`}
     >
