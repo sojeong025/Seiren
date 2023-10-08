@@ -59,7 +59,7 @@ public class PaymentService {
                 TransactionDescription.toEntity(purchaseDto, transaction, purpose, product));
 
         // sse 알림 & notify 추가
-        String msg = buyer.getNickname() + "님이 " + product.getProductTitle() + "상품을 "
+        String msg = buyer.getNickname() + " 님이 \"" + product.getProductTitle() + "\" 상품을 "
                 + purchaseDto.getBuyLetterCount() + "글자 구매하셨습니다.";
         sseService.send(seller, NotificationType.PURCHASE, msg);
     }
