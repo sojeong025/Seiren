@@ -18,11 +18,11 @@ public class SseController {
     private final SseService sseService;
 
     @GetMapping(value = "/api/sse/connect", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public SseEmitter connect(HttpServletRequest request, HttpServletResponse response) {
+    public SseEmitter connect(@RequestParam Long userId, HttpServletResponse response) {
         response.addHeader("X-Accel-Buffering", "no"); // nginx 관련 설정
 
         SseEmitter sseEmitter = new SseEmitter(TIMEOUT);
-        sseEmitter = sseService.subscribe(request, sseEmitter);
+        sseEmitter = sseService.subscribe(userId, sseEmitter);
         return sseEmitter;
     }
 

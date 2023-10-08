@@ -18,9 +18,7 @@ public class SseService {
     private final UserService userService;
 
     // subscribe 연결 설정
-    public SseEmitter subscribe(HttpServletRequest request, SseEmitter sseEmitter) {
-        Long userId = userService.getUser(request).getId();
-
+    public SseEmitter subscribe(Long userId, SseEmitter sseEmitter) {
         sseEmitter = emitterRepository.save(userId, sseEmitter);
         sseEmitter.onCompletion(() -> {
             emitterRepository.deleteById(userId);
