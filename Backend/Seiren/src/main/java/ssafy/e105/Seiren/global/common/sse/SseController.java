@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -28,5 +29,10 @@ public class SseController {
     @DeleteMapping("/api/sse/disconnect")
     public void disconnect(HttpServletRequest request) {
         sseService.disConnect(request);
+    }
+
+    @GetMapping("/api/sse/test")
+    public void test(@RequestParam Long userId, @RequestParam String str) {
+        sseService.test(userId, str);
     }
 }
