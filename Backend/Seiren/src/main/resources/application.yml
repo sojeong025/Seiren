@@ -28,6 +28,7 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+    open-in-view: false
   security:
     user:
       password: 1234
