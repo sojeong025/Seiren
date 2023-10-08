@@ -28,11 +28,11 @@ function NavBar() {
   useEffect(()=>{
     console.log(isKakaoLoggedIn);
     console.log("sse 연결 요청");
-    if(isKakaoLoggedIn){
+    if(isKakaoLoggedIn && userId){
       let eventSource;
       async function fetchSse(){
         try{
-          eventSource = new EventSource(`http://j9e105.p.ssafy.io:8082/api/sse/connect/${userId}`);
+          eventSource = new EventSource(`https://j9e105.p.ssafy.io/api/sse/connect?userId=${userId}`);
           /* 연결 */
           eventSource.onopen = async (e) =>{
             const res = await e;
