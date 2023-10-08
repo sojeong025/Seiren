@@ -38,7 +38,9 @@ public class SseService {
             emitter.send(SseEmitter.event()
                     .name("CONNECT")
                     .data("connect OK"));
+            System.out.println("연결 성공");
         } catch (IOException e) {
+            System.out.println("연결 실패");
             emitterRepository.deleteById(userId);
         }
     }
