@@ -9,10 +9,10 @@ export const AuthenticationService = {
 
   kakaoLogin: async function (code: string): Promise<AxiosResponse> {
     try {
-      console.log("Received code:", code);
-      const response = await axios.get(`https://j9e105.p.ssafy.io/api/login/oauth2/code/kakao?code=${code}`);
-      console.log("kakaoLogin 성공");
-      console.log(response.data);
+      // console.log("Received code:", code);
+      const response = await axios.get(`http://j9e105.p.ssafy.io:8082/api/login/oauth2/code/kakao?code=${code}`);
+      // console.log("kakaoLogin 성공");
+      // console.log(response.data);
 
       // 토큰을 로컬 스토리지에 저장[오류??]
       localStorage.setItem("accessToken", response.data.accessToken);

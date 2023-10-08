@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import AWS from "aws-sdk";
 
-function UploadAudio(){
+function UploadAudio() {
   const [audioUrl, setAudioUrl] = useState(null);
   const audioRef = useRef<HTMLInputElement | null>(null);
 
@@ -31,14 +31,13 @@ function UploadAudio(){
     const promise = upload.promise();
     promise.then(
       function (data) {
-        console.log(data)
         setAudioUrl(data.Location);
       },
       function (err) {
         return err("음성 업로드 실패");
-      }
+      },
     );
   };
-};
+}
 
 export default UploadAudio;

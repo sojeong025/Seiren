@@ -138,13 +138,13 @@ function ProductCustomPage() {
       "0",
     )}`}&skinColor=${skinColorRandom}&hairColor=${hairColorRandom}`;
 
-    console.log(dicebearUrl);
+    // console.log(dicebearUrl);
     setProductImg(dicebearUrl);
   };
 
   const handleTitleChange = e => {
     setTitle(e.target.value);
-    console.log(title);
+    // console.log(title);
   };
   const handleSummaryChange = e => {
     setSummary(e.target.value);
@@ -169,11 +169,11 @@ function ProductCustomPage() {
   };
 
   useEffect(() => {
-    console.log("보이스아이디", voiceId);
+    // console.log("보이스아이디", voiceId);
     customAxios
       .get(`voices/${voiceId}`)
       .then(res => {
-        console.log("장터 등록하기 위해 정보 가져오기", res);
+        // console.log("장터 등록하기 위해 정보 가져오기", res);
         setTitle(res.data.response.voiceTitle);
         setSummary(res.data.response.memo);
         setProductImg(res.data.response.voiceAvatarUrl);
@@ -219,12 +219,12 @@ function ProductCustomPage() {
       previewUrls: [url1, url2, url3],
     };
 
-    console.log(productData);
+    // console.log(productData);
 
     customAxios
       .post("product", productData)
       .then(res => {
-        console.log("장터에 올리기 성공", res);
+        // console.log("장터에 올리기 성공", res);
         // navigate('/sell-list') 오류 해결
       })
       .catch(err => console.log(err));
@@ -243,7 +243,7 @@ function ProductCustomPage() {
     });
 
     const result = await upload.promise();
-    console.log(result.Location);
+    // console.log(result.Location);
 
     return result.Location;
   };

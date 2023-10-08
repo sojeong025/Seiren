@@ -8,9 +8,9 @@
 }
 .opaque {
   display: flex;
-  font-family: 'LeferiPoint-SpecialA';
+  font-family: "LeferiPoint-SpecialA";
   height: 100px;
-  opacity: .9;
+  opacity: 0.9;
   width: 100%;
   position: fixed;
   z-index: 1;
@@ -27,7 +27,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: 'LeferiPoint-SpecialA';
+  font-family: "LeferiPoint-SpecialA";
   transition: opacity 0.3s ease; /* opacity 속성에 대한 전환 효과 추가 */
   opacity: 1; /* 초기에는 보이도록 설정 */
   margin-left: 240px;
@@ -97,6 +97,14 @@
   height: 50px;
   border-radius: 100%;
 }
-.aboutLink a{
+.aboutLink a {
   color: black !important;
+}
+
+.storeLink {
+  background-color: black;
+}
+
+.activeLink {
+  text-decoration: underline;
 }

@@ -35,22 +35,15 @@ function UploadImgOri({ imgUrl, setImgUrl }) {
     const promise = upload.promise();
     promise
       .then(function (data) {
-        console.log(data.Location);
         setImgUrl(data.Location);
         setPreImg(data.Location);
       })
-      .catch(function (err) {
-        console.error("사진 업로드 실패:", err);
-      });
+      .catch(function (err) {});
   };
 
   return (
     <div className={styles.container}>
-      {preImg ? (
-        <img src={preImg} alt="" className={styles.img} />
-      ) : (
-        <img src={imgUrl} alt="" className={styles.img} />
-      )}
+      {preImg ? <img src={preImg} alt="" className={styles.img} /> : <img src={imgUrl} alt="" className={styles.img} />}
       <label className={styles.customFileUpload}>
         <input type="file" accept="image/*" ref={imgRef} onChange={onChangeTrack} />
         이미지 선택

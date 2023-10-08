@@ -13,7 +13,11 @@ function NavBar() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useRecoilState(UserState);
   const location = useLocation();
-  const menuItems = [{ addLink: "/about", className: styles.aboutLink }];
+  const menuItems = [
+    { addLink: "/about", className: styles.aboutLink },
+    { addLink: "/voice-market", className: styles.storeLink },
+    { addLink: "/purchase/", className: styles.aboutLink },
+  ];
 
   useEffect(() => {
     customAxios.get("user").then(response => {
@@ -24,8 +28,6 @@ function NavBar() {
         profileImage: userData.profileImg,
       };
       setUserInfo(updatedUserData);
-      console.log(updatedUserData.nickname);
-      console.log("recoil 저장 성공");
     });
   }, [location]);
 
@@ -57,8 +59,8 @@ function NavBar() {
       className={`${scrollY !== 0 ? styles.opaque : styles.container} ${
         scrollDirection === "down" ? styles.scrollDown : ""
       } ${
-        menuItems.some(item => location.pathname === item.addLink)
-          ? menuItems.find(item => location.pathname === item.addLink)?.className
+        menuItems.some(item => location.pathname.startsWith(item.addLink))
+          ? menuItems.find(item => location.pathname.startsWith(item.addLink))?.className
           : ""
       }`}
     >
@@ -69,10 +71,18 @@ function NavBar() {
         </NavLink>
 
         <div className={styles.nav}>
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/voice-market">Store</NavLink>
-          <NavLink to="/voice-study">Record</NavLink>
-          <NavLink to="/my-page">MyPage</NavLink>
+          <NavLink to="/about" className={location.pathname === "/about" ? styles.activeLink : ""}>
+            About
+          </NavLink>
+          <NavLink to="/voice-market" className={location.pathname === "/voice-market" ? styles.activeLink : ""}>
+            Store
+          </NavLink>
+          <NavLink to="/voice-study" className={location.pathname === "/voice-study" ? styles.activeLink : ""}>
+            Record
+          </NavLink>
+          <NavLink to="/my-page" className={location.pathname === "/my-page" ? styles.activeLink : ""}>
+            MyPage
+          </NavLink>
 
           {isKakaoLoggedIn ? (
             <>

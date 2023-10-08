@@ -87,7 +87,7 @@ const SellDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> =
           productImageUrl: updatedData.productImageUrl,
           price: updatedData.price,
         }));
-        console.log(response);
+        // console.log(response);
       })
       .catch(error => {
         console.error("수정 중 오류 발생:", error);
@@ -113,7 +113,12 @@ const SellDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> =
           <div className={styles.mid}>
             <div className={styles.title}>
               {isEditing ? (
-                <input className={styles.edittitle} type="text" value={productTitle} onChange={e => setProductTitle(e.target.value)} />
+                <input
+                  className={styles.edittitle}
+                  type="text"
+                  value={productTitle}
+                  onChange={e => setProductTitle(e.target.value)}
+                />
               ) : (
                 product.productTitle
               )}
@@ -122,7 +127,12 @@ const SellDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> =
             <p className={styles.summary}>
               {" "}
               {isEditing ? (
-                <input className={styles.editsummary} type="text" value={summary} onChange={e => setSummary(e.target.value)} />
+                <input
+                  className={styles.editsummary}
+                  type="text"
+                  value={summary}
+                  onChange={e => setSummary(e.target.value)}
+                />
               ) : (
                 product.summary
               )}
@@ -131,15 +141,19 @@ const SellDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> =
           <div className={styles.right}>
             <div className={styles.price}>
               <span className={styles.pricetxt}>
-              {isEditing ? (
-                <input className={styles.editprice} type="number" value={price} onChange={e => setPrice(e.target.value)} />
-              ) : (
-                product.price
-              )}
-              </span> <span className={styles.one}>원</span>
-              
+                {isEditing ? (
+                  <input
+                    className={styles.editprice}
+                    type="number"
+                    value={price}
+                    onChange={e => setPrice(e.target.value)}
+                  />
+                ) : (
+                  product.price
+                )}
+              </span>{" "}
+              <span className={styles.one}>원</span>
               <span className={styles.txt}> (단위 : 자)</span>
-              
             </div>
             <div className={styles.btn}>
               {isEditing && <button onClick={handleSaveClick}>저장</button>}

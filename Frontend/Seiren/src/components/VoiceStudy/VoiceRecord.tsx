@@ -3,10 +3,12 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { RecordingState, AudioDataState } from "../../recoil/RecordAtom";
 import styles from "./VoiceRecord.module.css";
 import { BsFillMicFill, BsStopFill, BsPlayFill } from "react-icons/bs";
-import { WaveFile } from 'wavefile';
+import { WaveFile } from "wavefile";
 
 declare global {
-  interface Window { webkitAudioContext: typeof AudioContext }
+  interface Window {
+    webkitAudioContext: typeof AudioContext;
+  }
 }
 
 const VoiceRecord = () => {
@@ -18,7 +20,6 @@ const VoiceRecord = () => {
   const [audioUrl, setAudioUrl] = useState<Blob | string | ArrayBuffer | null>(null); // 녹음된 오디오 데이터의 Url 저장
   const [disabled, setDisabled] = useState<boolean>(true);
   const setAudioData = useSetRecoilState(AudioDataState);
-
 
   // 사용자가 음성 녹음을 시작했을 때
   const onRecAudio = () => {
@@ -35,7 +36,6 @@ const VoiceRecord = () => {
       return source;
     }
 
-
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream: MediaStream) => {
       var mediaRecorder = new MediaRecorder(stream);
       mediaRecorder.start();
@@ -50,35 +50,34 @@ const VoiceRecord = () => {
       mediaRecorder.ondataavailable = async function (e) {
         if (e.data.size > 0) {
           let blobURL = URL.createObjectURL(e.data);
-          console.log("Blob URL:", blobURL);
+          // console.log("Blob URL:", blobURL);
 
           if (blobURL) {
-
             // Fetch the audio data as an ArrayBuffer
-            let response= await fetch(blobURL);
-            let arrayBuffer= await response.arrayBuffer();
+            let response = await fetch(blobURL);
+            let arrayBuffer = await response.arrayBuffer();
 
-            // Decode the audio data into PCM format using Web Audio API 
+            // Decode the audio data into PCM format using Web Audio API
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            let audioBuffer= await audioCtx.decodeAudioData(arrayBuffer);
+            let audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
 
             // Create a wavefile instance and convert the PCM data to wav file format.
-            let wav=new WaveFile();
-          
-            for(let channel=0; channel<audioBuffer.numberOfChannels; channel++){
-                let samples=audioBuffer.getChannelData(channel);
-                let int16Samples= Int16Array.from(samples.map(n => n *32767));
-                wav.fromScratch(1,audioBuffer.sampleRate,'16',int16Samples); 
+            let wav = new WaveFile();
+
+            for (let channel = 0; channel < audioBuffer.numberOfChannels; channel++) {
+              let samples = audioBuffer.getChannelData(channel);
+              let int16Samples = Int16Array.from(samples.map(n => n * 32767));
+              wav.fromScratch(1, audioBuffer.sampleRate, "16", int16Samples);
             }
-            console.log("wav buffer:", wav.toBuffer());
+            // console.log("wav buffer:", wav.toBuffer());
 
             // Convert the wav file to a Blob and set it as the current audioUrl
             let wavBuffer = wav.toBuffer();
-            let wavBlob = new Blob([wavBuffer], { type: 'audio/wav' });
-            let wavURL=URL.createObjectURL(wavBlob);
-            
-            console.log('녹음시 wavURL은:',wavURL)
-            console.log('녹음시 wavBlob은:',wavBlob)
+            let wavBlob = new Blob([wavBuffer], { type: "audio/wav" });
+            let wavURL = URL.createObjectURL(wavBlob);
+
+            // console.log('녹음시 wavURL은:',wavURL)
+            // console.log('녹음시 wavBlob은:',wavBlob)
             setAudioUrl(wavURL);
             setAudioData(wavBlob);
           }
@@ -94,7 +93,7 @@ const VoiceRecord = () => {
       if (stream) {
         stream.getAudioTracks().forEach(function (track) {
           track.stop();
-          console.log("멈췄다");
+          // console.log("멈췄다");
         });
       }
     }
@@ -109,12 +108,12 @@ const VoiceRecord = () => {
   };
 
   const play = () => {
-    var audio = new Audio(audioUrl as string);  // Use the original Blob URL
+    var audio = new Audio(audioUrl as string); // Use the original Blob URL
     audio.loop = false;
     audio.volume = 1;
 
     audio.play();
-};
+  };
 
   return (
     <div>

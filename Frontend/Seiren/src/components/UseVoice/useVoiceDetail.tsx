@@ -34,11 +34,11 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
       .get(`transactions/detail/${productId}`)
       .then(response => {
         const voiceDetailData = response.data.response;
-        console.log("상품 상세정보 api ", response);
+        // console.log("상품 상세정보 api ", response);
 
         setVoiceDetail(voiceDetailData);
-        console.log("보이스 아이디", voiceDetailData.voiceId);
-        console.log("트렌젝션아이디", voiceDetailData.transactionId);
+        // console.log("보이스 아이디", voiceDetailData.voiceId);
+        // console.log("트렌젝션아이디", voiceDetailData.transactionId);
       })
       .catch(error => {
         console.error("API 호출 중 오류 발생:", error);
@@ -48,7 +48,7 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
   // 사용 TEXT 서버에 전송 API
   const accessToken = localStorage.getItem("accessToken");
   const marketProduct = async text => {
-    console.log(text);
+    // console.log(text);
     let response = await axios.get(
       `https://j9e105.p.ssafy.io/ai2/synthesize2?voice_id=${voiceDetail.voiceId}&transaction_id=${voiceDetail.transactionId}&text=${text}`,
       {
@@ -58,7 +58,7 @@ const UseVoiceDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void 
         },
       },
     );
-    console.log(response.data);
+    // console.log(response.data);
     // const blobUrl = URL.createObjectURL(response.data);
     // let audio = new Audio(blobUrl);
     if (checkSend === false) {
