@@ -5,7 +5,7 @@ import styles from "./YourVoiceDetail.module.css";
 
 function EditVoiceDetail() {
   const { voiceId } = useParams();
-  const [voiceDetail, setVoiceDetail] = useState<{ voiceTitle: string, memo: string, voiceAvatarUrl: string }>({
+  const [voiceDetail, setVoiceDetail] = useState<{ voiceTitle: string; memo: string; voiceAvatarUrl: string }>({
     voiceTitle: "",
     memo: "",
     voiceAvatarUrl: "",
@@ -17,11 +17,11 @@ function EditVoiceDetail() {
   useEffect(() => {
     customAxios
       .get(`voices/${voiceId}`)
-      .then((response) => {
+      .then(response => {
         const voiceDetailData = response.data.response;
         setVoiceDetail(voiceDetailData);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("API 호출 중 오류 발생:", error);
       });
   }, [voiceId]);
@@ -38,12 +38,12 @@ function EditVoiceDetail() {
 
     customAxios
       .put(`voices/${voiceId}`, updatedData)
-      .then((response) => {
-        console.log("수정 완료:", response.data);
+      .then(response => {
+        // console.log("수정 완료:", response.data);
         setVoiceDetail(response.data);
         setIsEditing(false);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("수정 중 오류 발생:", error);
       });
   };
@@ -56,11 +56,7 @@ function EditVoiceDetail() {
     <div className={styles.YourVoiceDetailContainer}>
       {isEditing ? (
         <>
-          <input
-            type="text"
-            ref={voiceTitleRef}
-            defaultValue={voiceDetail.voiceTitle}
-          />
+          <input type="text" ref={voiceTitleRef} defaultValue={voiceDetail.voiceTitle} />
           <textarea ref={memoRef} defaultValue={voiceDetail.memo} />
           <button onClick={handleSaveClick}>저장</button>
         </>

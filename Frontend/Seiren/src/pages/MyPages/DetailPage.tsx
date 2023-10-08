@@ -17,17 +17,16 @@ interface RouteParams {
   [key: string]: string;
 }
 
-
 const DetailPage: React.FC = () => {
   const { index } = useParams<RouteParams>();
   const [productData, setProductData] = useState<ProductData | null>(null);
 
   useEffect(() => {
     customAxios
-      .get('transactions/detail/' + index)
+      .get("transactions/detail/" + index)
       .then(response => {
         const responseData = response.data;
-        console.log(responseData);
+        // console.log(responseData);
         setProductData(responseData);
       })
       .catch(error => {
@@ -37,7 +36,7 @@ const DetailPage: React.FC = () => {
 
   return (
     <div className={styles.detailContainer}>
-      <SideBar/>
+      <SideBar />
       <h1>Detail Page</h1>
       {productData && (
         <>

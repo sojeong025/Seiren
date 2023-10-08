@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import AWS from "aws-sdk";
 import styles from "./UploadImg.module.css";
 
-function UploadImg({ imgUrl, setImgUrl}) {
+function UploadImg({ imgUrl, setImgUrl }) {
   const imgRef = useRef(null);
   const [previewUrl, setPreviewUrl] = useState(imgUrl || null); // Set initial previewUrl with imgUrl if available
 
@@ -50,25 +50,16 @@ function UploadImg({ imgUrl, setImgUrl}) {
     const promise = upload.promise();
     promise.then(
       function (data) {
-        console.log(data);
         setImgUrl(data.Location);
       },
-      function (err) {
-        console.error("사진 업로드 실패", err);
-      }
+      function (err) {},
     );
   };
 
   return (
     <div className={styles.file_input}>
-      {previewUrl && (
-        <img
-          src={previewUrl}
-          alt="미리보기"
-          className={styles.preimg}
-        />
-      )}
-        <div>
+      {previewUrl && <img src={previewUrl} alt="미리보기" className={styles.preimg} />}
+      <div>
         <label className={styles.customFileLabel} htmlFor="file">
           이미지 선택
         </label>

@@ -6,7 +6,7 @@ import styles from "./State.module.css";
 function State({ voiceDetail, checkState, setCheckState }) {
   const [buttonText, setButtonText] = useState("");
   const navigate = useNavigate(); // useNavigate 훅 사용
-  
+
   useEffect(() => {
     switch (voiceDetail.state) {
       case 0:
@@ -28,21 +28,20 @@ function State({ voiceDetail, checkState, setCheckState }) {
     }
   }, [voiceDetail]);
 
-
   const handleButtonClick = () => {
     if (voiceDetail.productId) {
       customAxios
         .put(`product/state/${voiceDetail.productId}`)
         .then(response => {
-          console.log(response);
-          if(checkState === false){
+          // console.log(response);
+          if (checkState === false) {
             setCheckState(true);
-          }else{
+          } else {
             setCheckState(false);
           }
         })
         .catch(error => {
-          console.error("API 호출 중 오류 발생:", error);
+          // console.error("API 호출 중 오류 발생:", error);
         });
     }
 
@@ -63,18 +62,10 @@ function State({ voiceDetail, checkState, setCheckState }) {
   return (
     <div className={styles.box}>
       {/* 텍스트 렌더링 */}
-      {(voiceDetail.state === 0 || voiceDetail.state === 1) && (
-        <p className={styles.text}>녹음을 완료해 주세요</p>
-      )}
-      {voiceDetail.state === 2 && (
-        <p className={styles.text}>판매 등록 해주세요!</p>
-      )}
-      {voiceDetail.state === 3 && (
-        <p className={styles.text}>판매 중</p>
-      )}
-      {voiceDetail.state === 4 && (
-        <p className={styles.text}>판매 중지</p>
-      )}
+      {(voiceDetail.state === 0 || voiceDetail.state === 1) && <p className={styles.text}>녹음을 완료해 주세요</p>}
+      {voiceDetail.state === 2 && <p className={styles.text}>판매 등록 해주세요!</p>}
+      {voiceDetail.state === 3 && <p className={styles.text}>판매 중</p>}
+      {voiceDetail.state === 4 && <p className={styles.text}>판매 중지</p>}
 
       {/* 버튼 렌더링 */}
       {buttonText && (

@@ -37,10 +37,10 @@ function EditProfileModal() {
 
   // 닉네임 중복 체크 함수
   const checkNicknameAvailability = async (nickname: string) => {
-    if(validateNickname(nickname)){
+    if (validateNickname(nickname)) {
       try {
         const response = await customAxios.get("user/nicknames/check", { params: { nickname } });
-        console.log(response.data.response);
+        // console.log(response.data.response);
         if (!response.data.response) {
           setError("이미 사용 중인 닉네임 입니다.");
           setIsNicknameAvailable(null);
@@ -55,7 +55,7 @@ function EditProfileModal() {
           }
         }
       } catch (error) {
-        console.error("이미 사용 중인 닉네임 입니다.:", error);
+        // console.error("이미 사용 중인 닉네임 입니다.:", error);
         setError("이미 사용 중인 닉네임 입니다.");
       }
     }
@@ -108,7 +108,7 @@ function EditProfileModal() {
       // 성공적으로 제출되면 모달을 닫음
       setModalIsOpen(false);
     } catch (error) {
-      console.error("프로필 변경 중 오류 발생:", error);
+      // console.error("프로필 변경 중 오류 발생:", error);
       setError("프로필 변경 중 오류 발생");
     } finally {
       setIsSubmitting(false);
@@ -134,48 +134,40 @@ function EditProfileModal() {
             {/* 이미지 바꾸는 곳 */}
             <div>
               <EditImage />
-              
             </div>
             {/* 닉네임 바꾸는 곳 */}
             <div>
               <div className={styles.formGroup}>
-                
                 <div className={styles.nicknameWrab}>
-                <label htmlFor="newNickname">닉네임 </label>
+                  <label htmlFor="newNickname">닉네임 </label>
                 </div>
-              
-                  <div className={styles.inputWrab}>
-                
-                    <div className={styles.inputWrab2}>
+
+                <div className={styles.inputWrab}>
+                  <div className={styles.inputWrab2}>
                     <input
-                    type="text"
-                    id="newNickname"
-                    value={newNickname}
-                    onChange={handleNicknameChange}
-                    disabled={isSubmitting}
-                    className={styles.inputField} // CSS 모듈에서 정의한 클래스를 사용
-                  />
-                  <div className={styles.buttonWrab}>
-                  <button
-                  onClick={handleCheckNickname}
-                  disabled={isSubmitting}
-                  className={styles.checkButton} // CSS 모듈에서 정의한 클래스를 사용
-                >
-                  중복 확인
-                </button>
-                  </div>
+                      type="text"
+                      id="newNickname"
+                      value={newNickname}
+                      onChange={handleNicknameChange}
+                      disabled={isSubmitting}
+                      className={styles.inputField} // CSS 모듈에서 정의한 클래스를 사용
+                    />
+                    <div className={styles.buttonWrab}>
+                      <button
+                        onClick={handleCheckNickname}
+                        disabled={isSubmitting}
+                        className={styles.checkButton} // CSS 모듈에서 정의한 클래스를 사용
+                      >
+                        중복 확인
+                      </button>
                     </div>
-                    <div className={styles.messageWrap}>
+                  </div>
+                  <div className={styles.messageWrap}>
                     {error && <div className={styles.error}>{error}</div>}
                     {nicknameMessage && <div className={styles.message}>{nicknameMessage}</div>}
-                    </div>
-                  
                   </div>
-                 
-                  
-                
+                </div>
               </div>
-
             </div>
           </div>
           <div className={styles.buttons}>
@@ -194,7 +186,7 @@ function EditProfileModal() {
               취소
             </button>
           </div>
-          <UserDelete/>          
+          <UserDelete />
         </div>
       }
       open={modalIsOpen}

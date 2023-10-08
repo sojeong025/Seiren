@@ -26,7 +26,7 @@ function SellDetailList({ productId }: SellDetailListProps) {
       .get(`statistics/${productId}`)
       .then(response => {
         const responseData = response.data.response;
-        console.log(responseData);
+        // console.log(responseData);
         responseData.forEach(item => {
           totalPrice += item.price * item.buyLetterCount;
         });

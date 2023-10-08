@@ -30,7 +30,7 @@ function EditImage() {
     customAxios
       .put("user/profileimg", { profileImgUrl: uploadedImageUrl }) // PUT 요청과 함께 데이터 전송
       .then(response => {
-        console.log(response);
+        // console.log(response);
       })
       .catch(error => console.error("API 호출 중 오류 발생:", error));
   }, [uploadedImageUrl]); // uploadedImageUrl이 변경될 때마다 이 useEffect가 실행됨
@@ -49,13 +49,11 @@ function EditImage() {
   return (
     <div className={styles.changeImg}>
       <div className={styles.textWrab}>
-      <div className={styles.text}>
-        프로필 이미지
-      </div>
+        <div className={styles.text}>프로필 이미지</div>
       </div>
       <div className={styles.EditContainer}>
         <div className={styles.upload}>
-        <UploadImg imgUrl={uploadedImageUrl} setImgUrl={setUploadedImageUrl} />
+          <UploadImg imgUrl={uploadedImageUrl} setImgUrl={setUploadedImageUrl} />
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ import axios from "axios";
 
 function ProductDetailPage() {
   const { productId } = useParams();
-  console.log(productId);
+  // console.log(productId);
   const [productDetail, setProductDetail] = useState(null);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -55,9 +55,9 @@ function ProductDetailPage() {
         .get(`product/${productId}`)
         .then(response => {
           const responseData = response.data.response;
-          console.log("목소리 상세 정보 받아오기", responseData);
+          // console.log("목소리 상세 정보 받아오기", responseData);
           setProductDetail(responseData);
-          console.log("사진 url 체크", responseData.productImageUrl);
+          // console.log("사진 url 체크", responseData.productImageUrl);
         })
         .catch(error => {
           console.error("API 호출 중 오류 발생:", error);
@@ -69,7 +69,7 @@ function ProductDetailPage() {
     customAxios
       .get(`preview/${productId}`)
       .then(res => {
-        console.log("미리듣기 음성파일 url 받아오기", res);
+        // console.log("미리듣기 음성파일 url 받아오기", res);
         const previewUrls = res.data.response.previewUrls;
         setAudio1(previewUrls[0]);
         setAudio2(previewUrls[1]);
@@ -77,16 +77,16 @@ function ProductDetailPage() {
       })
       .catch(err => console.log(err));
   }, []);
-  console.log("첫번째 오디오", audio1);
-  console.log("두번째 오디오", audio2);
-  console.log("세번째 오디오", audio3);
+  // console.log("첫번째 오디오", audio1);
+  // console.log("두번째 오디오", audio2);
+  // console.log("세번째 오디오", audio3);
 
   const handleLikeClick = () => {
     if (isLiked) {
       customAxios
         .delete(`wish/${productId}`)
         .then(response => {
-          console.log(response.data);
+          // console.log(response.data);
           setIsLiked(false);
         })
         .catch(error => {
@@ -96,7 +96,7 @@ function ProductDetailPage() {
       customAxios
         .post(`wish/${productId}`)
         .then(response => {
-          console.log(response.data);
+          // console.log(response.data);
           setIsLiked(true);
         })
         .catch(error => {
@@ -116,7 +116,7 @@ function ProductDetailPage() {
         },
       },
     );
-    console.log(response.data);
+    // console.log(response.data);
     const blobUrl = URL.createObjectURL(response.data);
     let audio = new Audio(blobUrl);
 
@@ -130,7 +130,7 @@ function ProductDetailPage() {
 
   useEffect(() => {
     customAxios.get(`tts/count/${productId}`).then(res => {
-      console.log("체험판 3번 듣는거 남은 횟수 체크", res);
+      // console.log("체험판 3번 듣는거 남은 횟수 체크", res);
       setUseCount(res.data.response);
     });
   }, [checkPre]);

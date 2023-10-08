@@ -11,10 +11,9 @@ function YourVoice() {
   const [state, setState] = useState();
 
   useEffect(() => {
-    customAxios.get("user")
-      .then(response => {
-        setNickname(response.data.response.nickname)
-      })
+    customAxios.get("user").then(response => {
+      setNickname(response.data.response.nickname);
+    });
   }, []);
 
   useEffect(() => {
@@ -22,15 +21,14 @@ function YourVoice() {
       .get("voices")
       .then(response => {
         const responseData = response.data.response;
-        console.log("yourVoice : ", responseData);
+        // console.log("yourVoice : ", responseData);
         setMyVoice(responseData);
-        setState(responseData.state)
+        setState(responseData.state);
       })
       .catch(error => {
-        console.log("내 목소리 API 호출 중 오류 발생:", error);
+        // console.log("내 목소리 API 호출 중 오류 발생:", error);
       });
   }, []);
-
 
   return (
     <div className={styles.YourVoiceContainer}>
@@ -39,20 +37,26 @@ function YourVoice() {
         {myVoice.map(item => (
           <div className={styles.myvoice} key={item.voiceId}>
             <Link to={`/your-voice-detail/${item.voiceId}`}>
-            <img className={styles.pimg} src={item.voiceAvatarUrl} alt={item.title} />
-            
-            <div className={styles.hoverState}>
-              {(() => {
-                switch (item.state) {
-                  case 0: return "녹음 중";
-                  case 1: return "학습 중";
-                  case 2: return "학습 완료";
-                  case 3: return "판매 중";
-                  case 4: return "판매 중단";
-                  default: return "";
-                }
-              })()}
-            </div>
+              <img className={styles.pimg} src={item.voiceAvatarUrl} alt={item.title} />
+
+              <div className={styles.hoverState}>
+                {(() => {
+                  switch (item.state) {
+                    case 0:
+                      return "녹음 중";
+                    case 1:
+                      return "학습 중";
+                    case 2:
+                      return "학습 완료";
+                    case 3:
+                      return "판매 중";
+                    case 4:
+                      return "판매 중단";
+                    default:
+                      return "";
+                  }
+                })()}
+              </div>
             </Link>
           </div>
         ))}

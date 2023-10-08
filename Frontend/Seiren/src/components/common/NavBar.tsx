@@ -28,8 +28,6 @@ function NavBar() {
         profileImage: userData.profileImg,
       };
       setUserInfo(updatedUserData);
-      console.log(updatedUserData.nickname);
-      console.log("recoil 저장 성공");
     });
   }, [location]);
 

@@ -47,7 +47,7 @@ function Filter({ products, setProducts, setTotal, currentPage, setCurrentPage }
 
   useEffect(() => {
     customAxios.get("categories").then(res => {
-      console.log(res.data.response[0].children[0]);
+      // console.log(res.data.response[0].children[0]);
       setGender(res.data.response[0].children[0].children);
       setAge(res.data.response[0].children[1].children);
       setMood(res.data.response[0].children[2].children);
@@ -61,13 +61,13 @@ function Filter({ products, setProducts, setTotal, currentPage, setCurrentPage }
       )
       .then(res => {
         setTotal(res.data.response.totalPageNum);
-        console.log(res.data.response.productDtoList);
+        // console.log(res.data.response.productDtoList);
         setProducts(res.data.response.productDtoList);
       });
   }, [selectMood, selectAge, selectGender, sortType, currentPage]);
 
   const searchChange = e => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setSearch(e.target.value);
   };
 
@@ -78,7 +78,7 @@ function Filter({ products, setProducts, setTotal, currentPage, setCurrentPage }
         `products?nickname=${search}&age=${selectAge}&mood=${selectMood}&gender=${selectGender}&sortType=${sortType}&page=${currentPage}`,
       )
       .then(res => {
-        console.log(res.data.response.productDtoList);
+        // console.log(res.data.response.productDtoList);
         setProducts(res.data.response.productDtoList);
       });
   };

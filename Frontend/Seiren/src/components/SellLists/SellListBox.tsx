@@ -11,7 +11,7 @@ function SellListBox() {
       .get("statistics/products")
       .then(response => {
         let sellData = response.data.response;
-        console.log('구매상품 체크',response)
+        // console.log('구매상품 체크',response)
 
         setSellList(sellData);
       })
@@ -19,24 +19,23 @@ function SellListBox() {
   }, []);
 
   return (
-    <div className={styles.container} >
+    <div className={styles.container}>
       <div className={styles.sellListBoxContainer}>
         <div className={styles.sellListBoxTitle}>개별 통계</div>
         <div className={styles.sellList}>
           {sellList.map((item, index) => (
             <div key={index} className={styles.sellItem}>
               <Link to={`/sell-list/detail/${item.productId}`} className={styles.productLink}>
-              <img src={item.productImageUrl} alt={item.productTitle} className={styles.pimg} />
+                <img src={item.productImageUrl} alt={item.productTitle} className={styles.pimg} />
 
-
-              <div className={styles.productInfo}>
-                <div className={styles.productTitle}>{item.productTitle}</div>
-                <div className={styles.productTotal}>Total Sales: {item.totalSumCount}</div>
-              </div>
+                <div className={styles.productInfo}>
+                  <div className={styles.productTitle}>{item.productTitle}</div>
+                  <div className={styles.productTotal}>Total Sales: {item.totalSumCount}</div>
+                </div>
               </Link>
             </div>
           ))}
-        </div> 
+        </div>
       </div>
     </div>
   );

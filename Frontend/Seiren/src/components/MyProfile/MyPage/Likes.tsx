@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { likeListState } from "../../../recoil/UserAtom";
 import { customAxios } from "../../../libs/axios";
@@ -10,14 +10,14 @@ function Likes() {
 
   useEffect(() => {
     customAxios
-      .get("wish") 
+      .get("wish")
       .then(response => {
         const responseData = response.data;
         const likeslist = responseData && responseData.response.wishList ? responseData.response.wishList : [];
         setWishList(likeslist);
       })
       .catch(error => {
-        console.error("API 호출 중 오류 발생:", error);
+        // console.error("API 호출 중 오류 발생:", error);
       });
   }, [setWishList]);
 
@@ -29,7 +29,6 @@ function Likes() {
           <div key={item.productId} className={styles.card}>
             <Link to={`/product/${item.productId}`}>
               <img className={styles.pimg} src={item.productImageUrl} alt={item.title} />
-
 
               <div className={styles.titleOverlay}>
                 <div className={styles.title}>{item.title}</div>

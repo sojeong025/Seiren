@@ -21,26 +21,26 @@ function BuyListBox() {
         setTotalAmount(response.data.response);
       })
       .catch(error => {
-        console.error("API 호출 중 오류 발생:", error);
+        // console.error("API 호출 중 오류 발생:", error);
       });
   }, []);
-  
+
   useEffect(() => {
     customAxios
-    .get(`transactions/receipt?page=${currentPage}`)
-    .then(response => {
+      .get(`transactions/receipt?page=${currentPage}`)
+      .then(response => {
         const data = response.data.response;
         setPurchaseData(data);
       })
       .catch(error => {
-        console.error("API 호출 중 오류 발생:", error);
+        // console.error("API 호출 중 오류 발생:", error);
       });
   }, [currentPage]);
-  
+
   const onPageChange = pageNumber => {
     setCurrentPage(pageNumber);
   };
-  
+
   useEffect(() => {
     let totalPrice = 0;
     for (let i = 1; i <= Math.ceil(totalAmount / itemsPerPage); i++) {
@@ -55,12 +55,11 @@ function BuyListBox() {
           setTotalPrice(totalPrice);
         })
         .catch(error => {
-          console.error("API 호출 중 오류 발생:", error);
+          // console.error("API 호출 중 오류 발생:", error);
         });
     }
   }, [totalAmount, itemsPerPage]);
-  
-  
+
   return (
     <div className={styles.buyListBox}>
       <div className={styles.buyCount}>

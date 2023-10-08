@@ -40,10 +40,10 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
         setMemo(voiceDetailData.memo); // memo 초기값 설정
         setVoiceAvatarUrl(voiceDetailData.voiceAvatarUrl);
         // setVoiceId(voiceId)
-        console.log(voiceDetailData);
+        // console.log(voiceDetailData);
       })
       .catch(error => {
-        console.error("API 호출 중 오류 발생:", error);
+        // console.error("API 호출 중 오류 발생:", error);
       });
   }, [voiceId, checkState]);
 
@@ -69,10 +69,10 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
           memo: updatedData.memo,
           voiceAvatarUrl: updatedData.voiceAvatarUrl,
         }));
-        console.log(response);
+        // console.log(response);
       })
       .catch(error => {
-        console.error("수정 중 오류 발생:", error);
+        // console.error("수정 중 오류 발생:", error);
       });
   };
 
@@ -125,14 +125,14 @@ function EditVoiceDetail({ setIsNavBarVisible }) {
     // 새로운 아바타 URL을 상태로 업데이트
     setVoiceAvatarUrl(dicebearUrl);
 
-    console.log(dicebearUrl);
+    // console.log(dicebearUrl);
   };
 
   const handleDeleteClick = () => {
     customAxios
       .delete(`voices/${voiceId}`)
       .then(res => {
-        console.log("내 목소리 삭제 성공", res);
+        // console.log("내 목소리 삭제 성공", res);
         navigate("/my-page");
       })
       .catch(err => console.log(err));
