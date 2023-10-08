@@ -29,5 +29,4 @@ public class SseController {
     public void disconnect(HttpServletRequest request) {
         sseService.disConnect(request);
     }
-
 }

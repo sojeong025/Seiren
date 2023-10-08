@@ -23,6 +23,7 @@ public class SseService {
         sseEmitter = emitterRepository.save(userId, sseEmitter);
         sseEmitter.onCompletion(() -> {
             emitterRepository.deleteById(userId);
+            System.out.println("연결 종료");
         });
         sseEmitter.onTimeout(sseEmitter::complete);
 
