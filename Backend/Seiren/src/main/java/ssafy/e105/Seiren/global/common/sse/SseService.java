@@ -3,6 +3,7 @@ package ssafy.e105.Seiren.global.common.sse;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -81,4 +82,21 @@ public class SseService {
 //
 //        notifyRepository.save(notify);
 //    }
+
+    public void test(Long userId, String str) {
+        Optional<SseEmitter> oEmitter = emitterRepository.findByUserId(userId);
+        if (oEmitter.isEmpty()) {
+            System.out.println("존재하지 않는 연결입니다.");
+            return;
+        }
+        try {
+            oEmitter.get().send(SseEmitter.event()
+                    .name("CONNECT")
+                    .data(str));
+            System.out.println("연결 성공");
+        } catch (IOException e) {
+            System.out.println("연결 실패");
+            emitterRepository.deleteById(userId);
+        }
+    }
 }
