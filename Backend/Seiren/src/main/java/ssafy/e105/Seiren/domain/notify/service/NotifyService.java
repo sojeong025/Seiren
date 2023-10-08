@@ -20,7 +20,8 @@ public class NotifyService {
 
     @Transactional
     public List<NotifyResponse> getNotifyList(HttpServletRequest request) {
-        List<Notify> notifyList = notifyRepository.findByUser(userService.getUser(request));
+        List<Notify> notifyList = notifyRepository.findByUserIdAndCreatedAtAfter(
+                userService.getUser(request).getId());
         List<NotifyResponse> notifyResponseList = notifyList.stream()
                 .map(notify -> new NotifyResponse(notify))
                 .collect(Collectors.toList());
