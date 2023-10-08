@@ -37,7 +37,9 @@ function NavBar() {
           eventSource.addEventListener('TRAINING', e=>{console.log(e);});
           eventSource.addEventListener('PURCHASE', e=>{console.log(e);});
           eventSource.onerror = (event) =>{
-            if(!event.error.message.includes("No activity")){
+            if(event.currentTarget.readyState === EventSource.CLOSED){
+              setTimeout(fetchSse, 5000);
+            }else if (!event.error.message.includes("No activity")) {
               eventSource.close();
             }
           }
@@ -48,7 +50,7 @@ function NavBar() {
       fetchSse();
       return () => eventSource.close();
     }
-  })
+  },[isKakaoLoggedIn, userId])
 
   useEffect(() => {
     customAxios.get("user").then(response => {
