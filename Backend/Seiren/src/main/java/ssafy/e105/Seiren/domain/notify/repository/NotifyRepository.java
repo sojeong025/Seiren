@@ -10,5 +10,5 @@ public interface NotifyRepository extends JpaRepository<Notify, Long> {
 
     List<Notify> findByUserAndCreatedAtAfter(User user, LocalDateTime dateTime);
 
-    Integer findByUserAndIsReadFalse(User user);
+    Integer CountByUserAndIsReadFalse(User user);
 }
