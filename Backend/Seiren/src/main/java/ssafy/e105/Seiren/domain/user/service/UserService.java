@@ -22,6 +22,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ssafy.e105.Seiren.domain.notify.repository.NotifyRepository;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
 import ssafy.e105.Seiren.domain.user.dto.ProfileImgRequest;
@@ -52,6 +53,7 @@ public class UserService {
     private final RedisTemplate<String, String> redisTemplate;
     private final ProductRepository productRepository;
     private final VoiceRepository voiceRepository;
+    private final NotifyRepository notifyRepository;
 
     @Transactional
     public RegisterResDto signup(RegisterReqDto registerReqDto) {
@@ -172,6 +174,7 @@ public class UserService {
                 .userId(user.getId())
                 .nickname(user.getNickname())
                 .profileImg(user.getProfileImg())
+                .newNotifyCount(notifyRepository.findByUserAndIsReadFalse(user))
                 .build();
     }
 
