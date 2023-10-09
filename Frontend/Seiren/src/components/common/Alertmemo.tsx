@@ -4,7 +4,7 @@ import { customAxios } from "../../libs/axios";
 import { BiSolidMicrophone } from "react-icons/bi";
 import styles from "./Alertmemo.module.css";
 
-function AlertMemo({alertNum}) {
+function AlertMemo({alertNum, setAlertNum}) {
   const navigate = useNavigate();
 
   const [ notificationType, setNotificationType] = useState([]);
@@ -19,10 +19,12 @@ function AlertMemo({alertNum}) {
         const alerts = res.data.response;
         const contentArray = alerts.map(alert => alert.content);
         setAlertContent(contentArray);
+        console.log("상태확인", res)
         const typeArray = res.data.response.map(type => type.notificationType)
         setNotificationType(typeArray)
         const timeArray = res.data.response.map(time => time.createdAt)
         setCreated(timeArray)
+        setAlertNum(0);
       });
     }
   }, [isAlertOpen]);

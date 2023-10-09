@@ -27,18 +27,18 @@
   width: 250px;
   height: 250px;
   object-fit: cover;
-  border-radius: 100%;
 }
 .title {
-  font-size: 60px;
+  font-size: 24px;
+  word-break: keep-all;
   font-weight: 900;
+  line-height: 40px;
+  margin-top: 30px;
 }
 .mood {
   display: inline-block;
   color: #777;
-  font-size: 20px;
-  margin-right: 8px;
-  padding-bottom: 10px;
+  font-size: 18px;
 }
 .summary {
   width: 100%;
@@ -48,46 +48,52 @@
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   border-radius: 20px;
   padding: 20px;
-  border: 2px solid black;
+  border: 1px solid #777;
+  height: 80px;
 }
 .left {
   width: 25%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-right: 20px;
 }
 .mid {
   width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.midTop{
+  display: flex;
+  flex-direction: column;
 }
 .right {
   width: 30%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  gap: 40px;
-  flex-direction: column;
+  align-items: end;
+  justify-content: end;
 }
-.price {
+.btn{
+  display: flex;
+  align-items: end;
+  justify-content: end;
 }
-.btn button {
-  background-color: #ed5808;
-  color: white;
-  border: none;
-  border-radius: 1.5rem;
-  padding: 10px 20px;
+.btn div {
+  /* background-color: #ed5808; */
+  color: #000;
   cursor: pointer;
-  width: 150px;
-  height: 70px;
-
-}
-.pricetxt{
   font-size: 40px;
 }
-.one {
+.price {
+  font-weight: 900;
+}
+.pricetxt{
   font-size: 20px;
+}
+.one {
+  font-size: 18px;
 }
 .txt {
   font-size: 13px;
@@ -102,12 +108,11 @@
   outline: none;
 }
 .edittitle{
-  width: 400px; /* 너비 설정 */
   height: 60px; /* 높이 설정 */
   padding: 5px; /* 내부 여백 설정 */
   border: 1px solid #ccc; /* 테두리 스타일 및 색상 설정 */
   border-radius: 4px; /* 테두리 모서리 둥글게 설정 */
-  font-size: 60px; /* 폰트 크기 설정 */
+  font-size: 24px; /* 폰트 크기 설정 */
   outline: none;
   font-weight: 900;
 }

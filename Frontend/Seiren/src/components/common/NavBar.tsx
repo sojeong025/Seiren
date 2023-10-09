@@ -40,15 +40,17 @@ function NavBar() {
           eventSource = new EventSource(`https://j9e105.p.ssafy.io/api/sse/connect?userId=${userId}`);
           eventSource.addEventListener("CONNECT", e => {
             console.log(e);
+            handleAlert();
           });
           eventSource.addEventListener("TRAINING", e => {
             console.log(e);
+            handleAlert();
           });
           eventSource.addEventListener("PURCHASE", e => {
             console.log(e);
+            handleAlert();
           });
-          // handleAlert();
-          setAlert(!alert);
+          console.log("alert상태변경 확인", alert)
           eventSource.onerror = event => {
             if (event.currentTarget.readyState === EventSource.CLOSED) {
               setTimeout(fetchSse, 5000);
@@ -77,7 +79,7 @@ function NavBar() {
         setUserId(userData.userId);
         setAlertNum(userData.newNotifyCount)
       });
-  }, [location, alert]);
+  }, [location]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -102,12 +104,19 @@ function NavBar() {
     navigate("/login");
   };
 
-  // const handleAlert = () => {
-  //   customAxios.get("notifies").then(res => {
-  //     setalert(res.data.response.length);
-  //     console.log("알람", res.data.response);
-  //   });
-  // };
+  const handleAlert = () => {
+    accessToken &&
+      customAxios.get("user").then(response => {
+        let userData = response.data.response;
+        let updatedUserData = {
+          nickname: userData.nickname,
+          profileImage: userData.profileImg,
+        };
+        setUserInfo(updatedUserData);
+        setUserId(userData.userId);
+        setAlertNum(userData.newNotifyCount)
+      });
+  };
 
   const handleProfileClick = () => {
     setIsLogoutOpen(!isLogoutOpen); // 프로필 이미지 클릭 시 isLogoutOpen 값을 반전
@@ -155,7 +164,7 @@ function NavBar() {
                   alt="Profile"
                   onClick={handleProfileClick}/>
                 }
-                <Alertmemo alertNum={alertNum}/>
+                <Alertmemo alertNum={alertNum} setAlertNum={setAlertNum}/>
                 <div className={styles.logout}>
                   {isLogoutOpen && <Logout />}
                 </div>
