@@ -5,12 +5,13 @@ import { UserState } from "../../recoil/UserAtom";
 import { customAxios } from "../../libs/axios";
 import Logout from "./Logout";
 import { useRecoilState } from "recoil";
-import { HiOutlineBellAlert } from "react-icons/hi2";
+import { MdOutlineLogin } from "react-icons/md";
 import Alertmemo from "./Alertmemo";
 // import { EventSourcePolyfill, NativeEventSource } from "event-source-polyfill";
 // import EventSource from 'react-native-event-source';
 
 function NavBar() {
+  const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const [scrollDirection, setScrollDirection] = useState<string | ((prevState: string) => string)>("up");
   const [scrollY, setScrollY] = useState(0);
   const isKakaoLoggedIn = localStorage.getItem("kakaoLogin") === "true";
@@ -108,6 +109,10 @@ function NavBar() {
   //   });
   // };
 
+  const handleProfileClick = () => {
+    setIsLogoutOpen(!isLogoutOpen); // 프로필 이미지 클릭 시 isLogoutOpen 값을 반전
+  };
+
   return (
     location.pathname !== "/my-page" && <div
       className={`${scrollY !== 0 ? styles.opaque : styles.container} ${
@@ -124,31 +129,43 @@ function NavBar() {
           Seiren
         </NavLink>
 
-        <div className={styles.nav}>
-          <NavLink to="/about" className={location.pathname === "/about" ? styles.activeLink : ""}>
-            About
-          </NavLink>
-          <NavLink to="/voice-market" className={location.pathname === "/voice-market" ? styles.activeLink : ""}>
-            Store
-          </NavLink>
-          <NavLink to="/voice-study" className={location.pathname === "/voice-study" ? styles.activeLink : ""}>
-            Record
-          </NavLink>
-          <NavLink to="/my-page" className={location.pathname === "/my-page" ? styles.activeLink : ""}>
-            MyPage
-          </NavLink>
+        <div className={styles.top}>
+          <div className={styles.nav}>
+            <NavLink to="/about" className={location.pathname === "/about" ? styles.activeLink : ""}>
+              About
+            </NavLink>
+            <NavLink to="/voice-market" className={location.pathname === "/voice-market" ? styles.activeLink : ""}>
+              Store
+            </NavLink>
+            <NavLink to="/voice-study" className={location.pathname === "/voice-study" ? styles.activeLink : ""}>
+              Record
+            </NavLink>
+            <NavLink to="/my-page" className={location.pathname === "/my-page" ? styles.activeLink : ""}>
+              Mypage
+            </NavLink>
+          </div>
 
-          {isKakaoLoggedIn ? (
-            <>
-              <Alertmemo alertNum={alertNum}/>
-              {userInfo.profileImage && <img className={styles.proImg} src={userInfo.profileImage} alt="Profile" />}
-              <Logout />
-            </>
-          ) : (
-            <div className={styles.login} onClick={handleLoginClick}>
-              LOGIN
-            </div>
-          )}
+          <div className={styles.profile}>
+            {isKakaoLoggedIn ? (
+              <>
+                {userInfo.profileImage && 
+                <img 
+                  className={styles.proImg} 
+                  src={userInfo.profileImage} 
+                  alt="Profile"
+                  onClick={handleProfileClick}/>
+                }
+                <Alertmemo alertNum={alertNum}/>
+                <div className={styles.logout}>
+                  {isLogoutOpen && <Logout />}
+                </div>
+              </>
+            ) : (
+              <div className={styles.login} onClick={handleLoginClick}>
+                <MdOutlineLogin/> &nbsp; Login
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

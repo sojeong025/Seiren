@@ -1,11 +1,25 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { RecordState } from "../../recoil/RecordAtom";
 import { BsFillMicFill, BsRobot, BsCheckCircleFill } from "react-icons/bs";
 import styles from "./VoiceState.module.css";
+import { useEffect, useState } from "react";
+import { customAxios } from "../../libs/axios";
 
 function VoiceState() {
   const recordState = useRecoilValue(RecordState);
+  const [ voiceId, setVoiceId ] = useState(); 
+
+  useEffect(() => {
+    customAxios.get("progressingVoices")
+      .then((res) => {
+        console.log(`voiceId:`, res.data.response.voiceId)
+        setVoiceId(res.data.response.voiceId);
+      })
+      .catch((error) => {
+        console.error('목소리 상태 호출 중 오류:', error);
+      });
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -39,7 +53,7 @@ function VoiceState() {
               학습은 최대 1시간 정도 소요됩니다.
             </div>
 
-            <NavLink to="/voice-studying" onClick={e => recordState !== 1 && e.preventDefault()}>
+            <NavLink to={`/voice-studying/${voiceId}`} onClick={e => recordState !== 1 && e.preventDefault()}>
               <div className={`${styles.btn} ${recordState !== 1 && styles.disabled}`}>학습하기</div>
             </NavLink>
           </div>
