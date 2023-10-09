@@ -5,6 +5,8 @@ import { UserState } from "../../recoil/UserAtom";
 import { customAxios } from "../../libs/axios";
 import Logout from "./Logout";
 import { useRecoilState } from "recoil";
+import { HiOutlineBellAlert } from "react-icons/hi2";
+import Alertmemo from "./Alertmemo";
 // import { EventSourcePolyfill, NativeEventSource } from "event-source-polyfill";
 // import EventSource from 'react-native-event-source';
 
@@ -16,6 +18,7 @@ function NavBar() {
   const [userInfo, setUserInfo] = useRecoilState(UserState);
   const location = useLocation();
   const [userId, setUserId] = useState();
+  const [alert, setalert] = useState();
   const menuItems = [
     { addLink: "/about", className: styles.aboutLink },
     { addLink: "/voice-market", className: styles.storeLink },
@@ -25,44 +28,52 @@ function NavBar() {
   // const EventSource = EventSourcePolyfill || NativeEventSource;
   const accessToken = localStorage.getItem("accessToken");
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(isKakaoLoggedIn);
     console.log("sse 연결 요청");
-    if(isKakaoLoggedIn && userId){
+    if (isKakaoLoggedIn && userId) {
       let eventSource;
-      async function fetchSse(){
-        try{
+      async function fetchSse() {
+        try {
           eventSource = new EventSource(`https://j9e105.p.ssafy.io/api/sse/connect?userId=${userId}`);
-          eventSource.addEventListener('CONNECT', e=>{console.log(e);});
-          eventSource.addEventListener('TRAINING', e=>{console.log(e);});
-          eventSource.addEventListener('PURCHASE', e=>{console.log(e);});
-          eventSource.onerror = (event) =>{
-            if(event.currentTarget.readyState === EventSource.CLOSED){
+          eventSource.addEventListener("CONNECT", e => {
+            console.log(e);
+          });
+          eventSource.addEventListener("TRAINING", e => {
+            console.log(e);
+          });
+          eventSource.addEventListener("PURCHASE", e => {
+            console.log(e);
+          });
+          handleAlert();
+          eventSource.onerror = event => {
+            if (event.currentTarget.readyState === EventSource.CLOSED) {
               setTimeout(fetchSse, 5000);
-            }else if (!event.error.message.includes("No activity")) {
+            } else if (!event.error.message.includes("No activity")) {
               eventSource.close();
             }
-          }
-        }catch(error){
+          };
+        } catch (error) {
           console.log(error);
         }
-      };
+      }
       fetchSse();
       return () => eventSource.close();
     }
-  },[isKakaoLoggedIn, userId])
+  }, [isKakaoLoggedIn, userId]);
 
   useEffect(() => {
-    accessToken && customAxios.get("user").then(response => {
-      let userData = response.data.response;
+    accessToken &&
+      customAxios.get("user").then(response => {
+        let userData = response.data.response;
 
-      let updatedUserData = {
-        nickname: userData.nickname,
-        profileImage: userData.profileImg,
-      };
-      setUserInfo(updatedUserData);
-      setUserId(userData.userId);
-    });
+        let updatedUserData = {
+          nickname: userData.nickname,
+          profileImage: userData.profileImg,
+        };
+        setUserInfo(updatedUserData);
+        setUserId(userData.userId);
+      });
   }, [location]);
 
   useEffect(() => {
@@ -89,11 +100,11 @@ function NavBar() {
   };
 
   const handleAlert = () => {
-      customAxios.get("notifies")
-      .then((res)=>{
-        console.log(res);
-      })
-  }
+    customAxios.get("notifies").then(res => {
+      setalert(res.data.response.length);
+      console.log("알람", res.data.response);
+    });
+  };
 
   return (
     <div
@@ -124,10 +135,10 @@ function NavBar() {
           <NavLink to="/my-page" className={location.pathname === "/my-page" ? styles.activeLink : ""}>
             MyPage
           </NavLink>
-          <button onClick={()=>handleAlert()}>알림 요청</button>
 
           {isKakaoLoggedIn ? (
             <>
+              <Alertmemo />
               {userInfo.profileImage && <img className={styles.proImg} src={userInfo.profileImage} alt="Profile" />}
               <Logout />
             </>
