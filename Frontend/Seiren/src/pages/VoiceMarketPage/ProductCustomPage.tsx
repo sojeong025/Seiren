@@ -1,6 +1,6 @@
 import styles from "./ProductCutomPage.module.css";
 import { customAxios } from "../../libs/axios";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AWS from "aws-sdk";
 import { motion, AnimatePresence } from "framer-motion";
@@ -46,7 +46,7 @@ function ProductCustomPage() {
   // maxLength
   const mL = Number(20);
 
-  const voiceId = useRecoilValue(VoiceIdState);
+  const voiceId = useParams().voiceId;
   // const voiceId = 18
   const [title, setTitle] = useState();
   const [summary, setSummary] = useState();
@@ -173,14 +173,12 @@ function ProductCustomPage() {
     customAxios
       .get(`voices/${voiceId}`)
       .then(res => {
-        // console.log("장터 등록하기 위해 정보 가져오기", res);
+        console.log("장터 등록하기 위해 정보 가져오기", res);
         setTitle(res.data.response.voiceTitle);
         setSummary(res.data.response.memo);
         setProductImg(res.data.response.voiceAvatarUrl);
       })
       .catch(err => console.log(err));
-
-    // generateRandomAvatar();
   }, [voiceId]);
 
   const marketProduct = async () => {
@@ -254,7 +252,7 @@ function ProductCustomPage() {
         <div className={styles.infor}>
           {/* 좌측엔 이미지만 */}
           <div className={styles.product_img}>
-            <img src={productImg} alt="이미지" />
+            { productImg && <img src={productImg} alt="이미지" />}
             <div className={styles.btn_random} onClick={generateRandomAvatar}>
               Randomize <LiaRandomSolid />
             </div>
