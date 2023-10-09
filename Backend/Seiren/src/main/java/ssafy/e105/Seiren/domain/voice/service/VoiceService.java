@@ -137,11 +137,14 @@ public class VoiceService {
     }
 
     @Transactional
-    public void updateVoiceState2(HttpServletRequest request, Long voiceId) {
-        User user = userService.getUser(request);
-        Voice voice = voiceRepository.findOneByUser_IdAndVoiceId(
-                user.getId(), voiceId).orElseThrow(() -> new BaseException(
-                new ApiError(UNMACHED_VOICE_USER.getMessage(), UNMACHED_VOICE_USER.getCode())));
+    public void updateVoiceState2(Long voiceId) { //HttpServletRequest request
+//        User user = userService.getUser(request);
+//        Voice voice = voiceRepository.findOneByUser_IdAndVoiceId(
+//                user.getId(), voiceId).orElseThrow(() -> new BaseException(
+//                new ApiError(UNMACHED_VOICE_USER.getMessage(), UNMACHED_VOICE_USER.getCode())));
+        Voice voice = voiceRepository.findById(voiceId)
+                .orElseThrow(() -> new BaseException(new ApiError("존재하지 않는 음성입니다.", 0)));
+        User user = voice.getUser();
         try {
             voice.update(2);
         } catch (Exception e) {
