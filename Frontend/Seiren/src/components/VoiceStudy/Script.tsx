@@ -20,7 +20,7 @@ const Script: React.FC = () => {
     customAxios
       .get("progressingVoices")
       .then(res => {
-        // console.log(`스크립트 페이지에서 voiceId:`, res.data.response.voiceId)
+        console.log(`스크립트 페이지에서 voiceId:`, res.data.response.voiceId)
         setVoiceId(res.data.response.voiceId);
       })
       .catch(error => {
@@ -38,7 +38,7 @@ const Script: React.FC = () => {
       customAxios
         .get(`records/recent/${voiceId}`)
         .then(res => {
-          // console.log('스크립트 get 요청 성공 ID는', res.data.response)
+          console.log('스크립트 get 요청 성공 ID는', res.data.response)
           setScriptId(res.data.response);
         })
         .catch(err => {
@@ -76,6 +76,10 @@ const Script: React.FC = () => {
 
   const goNext = async () => {
     // console.log(`gonext`)
+    if (recordingStatus !== "stopped"){
+      alert("녹음이 완료되어야 다음으로 넘어갈 수 있습니다.");
+      return;
+    }
     if (recordingStatus === "stopped") {
       let blob = new Blob([audioUrl], { type: "audio/wav" });
       let url = URL.createObjectURL(blob);
@@ -141,8 +145,11 @@ const Script: React.FC = () => {
         >
           다시 녹음
         </div>
-        <div className={styles.next} onClick={goNext}>
-          다음
+        <div
+          className={recordingStatus === "stopped" ? styles.next : styles.nextDisabled}
+          onClick={goNext}
+        >
+          {recordingStatus === "stopped" ? "다음" : "녹음 필요"}
         </div>
       </div>
     </div>

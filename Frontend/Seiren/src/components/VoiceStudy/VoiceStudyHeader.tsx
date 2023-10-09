@@ -2,13 +2,11 @@ import { useNavigate } from "react-router-dom";
 import styles from "./VoiceStudyHeader.module.css";
 import { customAxios } from "../../libs/axios";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { RecordCountState } from "../../recoil/RecordAtom";
 import axios from "axios";
 
 const VoiceStudyHeader: React.FC = () => {
   const [voiceId, setVoiceId] = useState();
-  const [recordCount, setRecordCount] = useRecoilState(RecordCountState);
+  const [recordCount, setRecordCount] = useState(0);
   const [totalCount, setTotalCount] = useState(1);
   const [zipVoice, setZipVoice] = useState("");
 
@@ -18,13 +16,13 @@ const VoiceStudyHeader: React.FC = () => {
     customAxios
       .get("progressingVoices")
       .then(res => {
-        // console.log(`학습완료시에서 voiceId:`, res.data.response.voiceId)
+        console.log(`progressbar voiceId:`, res.data.response.voiceId)
         setVoiceId(res.data.response.voiceId);
       })
       .catch(error => {
         console.error("학습완료시에서 오류:", error);
       });
-  }, [voiceId]);
+  }, []);
 
   const navigate = useNavigate();
   const handleButtonClick = () => {
@@ -56,36 +54,43 @@ const VoiceStudyHeader: React.FC = () => {
   };
 
   useEffect(() => {
-    customAxios
+    voiceId && customAxios
       .get(`records/count/${voiceId}`)
       .then(res => {
-        // console.log("진행률 요청 성공", res);
+        console.log("진행률 요청 성공", res);
         setRecordCount(res.data.response.recordCount);
+        console.log("현재 녹음 파일 개수는:", recordCount)
         setTotalCount(res.data.response.totalCount);
       })
       .catch(err => {
         console.error("진행률 요청 실패", err);
       });
-  }, []);
+  }, [voiceId]);
 
   let progress;
   if (recordCount <= 100) {
-    progress = (recordCount / 100) * 80;
+    progress = (recordCount / 100) * 90;
   } else {
     const additionalProgress = ((recordCount - 100) / (totalCount - 100)) * 20;
-    progress = 80 + additionalProgress;
+    progress = 90 + additionalProgress;
   }
   const isButtonDisabled = recordCount < 3;
 
   return (
-    <div className={styles.header}>
-      <div className={styles.progressBarContainer}>
-        <div className={styles.progressBar} style={{ width: `${progress}%` }} />
+    <div>
+      <div className={styles.recordCount}>
+        Voice Count : {recordCount}
       </div>
-      {/* isButtonDisabled 값에 따라 버튼의 disabled 속성 설정 */}
-      <button className={styles.button_study} disabled={isButtonDisabled} onClick={handleButtonClick}>
-        목소리 학습
-      </button>
+      
+      <div className={styles.header}>
+        <div className={styles.progressBarContainer}>
+          <div className={styles.progressBar} style={{ width: `${progress}%` }} />
+        </div>
+        {/* isButtonDisabled 값에 따라 버튼의 disabled 속성 설정 */}
+        <button className={styles.button_study} disabled={isButtonDisabled} onClick={handleButtonClick}>
+          + 목소리 생성
+        </button>
+      </div>
     </div>
   );
 };
