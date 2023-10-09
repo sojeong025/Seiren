@@ -8,7 +8,7 @@ import ssafy.e105.Seiren.domain.user.entity.User;
 
 public interface NotifyRepository extends JpaRepository<Notify, Long> {
 
-    List<Notify> findByUserAndCreatedAtAfter(User user, LocalDateTime dateTime);
+    List<Notify> findByUserAndCreatedAtAfterOrderByCreatedAtDesc(User user, LocalDateTime dateTime);
 
     Integer countByUserAndIsReadFalse(User user);
 }

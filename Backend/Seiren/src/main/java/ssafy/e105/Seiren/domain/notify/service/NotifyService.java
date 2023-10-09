@@ -22,7 +22,7 @@ public class NotifyService {
     @Transactional
     public List<NotifyResponse> getNotifyList(HttpServletRequest request) {
         LocalDateTime oneWeekAgo = LocalDateTime.now().minusWeeks(1);
-        List<Notify> notifyList = notifyRepository.findByUserAndCreatedAtAfter(
+        List<Notify> notifyList = notifyRepository.findByUserAndCreatedAtAfterOrderByCreatedAtDesc(
                 userService.getUser(request), oneWeekAgo);
 
         List<NotifyResponse> notifyResponseList = notifyList.stream()
