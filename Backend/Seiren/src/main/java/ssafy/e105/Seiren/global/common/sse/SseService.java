@@ -74,7 +74,7 @@ public class SseService {
             emitter.send(SseEmitter.event()
                     .name(String.valueOf(type))
                     .data(content));
-            notify.update();
+//            notify.update(); // front에서 다른 방식으로 구현해서 일단 주석처리
 
         } catch (IOException e) {
             emitterRepository.deleteById(userId);
