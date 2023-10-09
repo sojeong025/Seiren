@@ -174,7 +174,7 @@ public class UserService {
                 .userId(user.getId())
                 .nickname(user.getNickname())
                 .profileImg(user.getProfileImg())
-                .newNotifyCount(notifyRepository.CountByUserAndIsReadFalse(user))
+//                .newNotifyCount(notifyRepository.CountByUserAndIsReadFalse(user))
                 .build();
     }
 
