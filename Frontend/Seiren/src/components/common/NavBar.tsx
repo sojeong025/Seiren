@@ -18,7 +18,7 @@ function NavBar() {
   const [userInfo, setUserInfo] = useRecoilState(UserState);
   const location = useLocation();
   const [userId, setUserId] = useState();
-  const [alert, setalert] = useState();
+  const [alert, setAlert] = useState(false);
   const menuItems = [
     { addLink: "/about", className: styles.aboutLink },
     { addLink: "/voice-market", className: styles.storeLink },
@@ -46,7 +46,8 @@ function NavBar() {
           eventSource.addEventListener("PURCHASE", e => {
             console.log(e);
           });
-          handleAlert();
+          // handleAlert();
+          setAlert(!alert);
           eventSource.onerror = event => {
             if (event.currentTarget.readyState === EventSource.CLOSED) {
               setTimeout(fetchSse, 5000);
@@ -75,7 +76,7 @@ function NavBar() {
         setUserId(userData.userId);
         setAlertNum(userData.newNotifyCount)
       });
-  }, [location]);
+  }, [location, alert]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,12 +101,12 @@ function NavBar() {
     navigate("/login");
   };
 
-  const handleAlert = () => {
-    customAxios.get("notifies").then(res => {
-      setalert(res.data.response.length);
-      console.log("알람", res.data.response);
-    });
-  };
+  // const handleAlert = () => {
+  //   customAxios.get("notifies").then(res => {
+  //     setalert(res.data.response.length);
+  //     console.log("알람", res.data.response);
+  //   });
+  // };
 
   return (
     location.pathname !== "/my-page" && <div
