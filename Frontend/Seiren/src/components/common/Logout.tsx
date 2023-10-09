@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Logout.module.css";
 import { customAxios } from "../../libs/axios";
+import { MdOutlineLogout } from "react-icons/md"
 
 const LogoutButton: React.FC = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const LogoutButton: React.FC = () => {
 
   return (
     <button onClick={handleLogout} className={styles.logout}>
-      Logout
+      <MdOutlineLogout/> &nbsp;Logout
     </button>
   );
 };
