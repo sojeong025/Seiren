@@ -69,8 +69,8 @@ public class VoiceController {
     }
 
     @PutMapping("/api/voices/state")
-    public ApiResult<?> modifyVoiceState2(HttpServletRequest request, @RequestParam Long voiceId) {
-        voiceService.updateVoiceState2(request, voiceId);
+    public ApiResult<?> modifyVoiceState2(@RequestParam Long voiceId) { //HttpServletRequest request
+        voiceService.updateVoiceState2(voiceId);
         return ApiUtils.success("voice state 1에서 2로 변경");
     }
 

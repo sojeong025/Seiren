@@ -78,6 +78,8 @@ public class SecurityConfig {
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/actuator/health")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/categories")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/sse/connect")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/api/voices/state"))
+                        .permitAll() // 시연을 위해서 허용
                         .anyRequest().authenticated()
                 )   // 다음 리퀘스트에 대한 사용권한 체크
                 .exceptionHandling()
