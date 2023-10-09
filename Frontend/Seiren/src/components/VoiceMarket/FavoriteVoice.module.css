@@ -21,23 +21,11 @@
   padding-top: 50px;
   padding-bottom: 15px;
   font-size: 50px;
-  line-height: 70px;
+  line-height: 80px;
   font-weight: 900;
   font-family: 'SEBANG_Gothic_Bold';
   color: #ddd;
 }
 .text span{
   color: #d0dced;
-}
-.english, .english2{
-  font-family: 'TAEBAEKmilkyway';
-  font-size: 26px;
-  padding-left: 20px;
-  color: #ddd;
-  text-decoration: underline;
-  font-style: italic;
-}
-.english2{
-  padding-top: 3px;
-  padding-left: 60px;
 }
