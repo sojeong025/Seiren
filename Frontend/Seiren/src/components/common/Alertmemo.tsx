@@ -1,29 +1,17 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; 
 import { customAxios } from "../../libs/axios";
 import { BiSolidMicrophone } from "react-icons/bi";
 import styles from "./Alertmemo.module.css";
-import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
-import { styled } from '@mui/material/styles';
-
-
 
 function AlertMemo({alertNum}) {
-  const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
-    <Tooltip {...props} classes={{ popper: className }} />
-  ))(({ theme }) => ({
-    [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: theme.palette.common.white,
-      color: '#000',
-      fontSize: 14,
-      fontFamily: 'S-CoreDream-4Regular',
-      borderRadius: '20px',
-      padding: '10px 15px',
-      border: '2px solid #ed5808',
-    },
-  }));
+  const navigate = useNavigate();
+
+  const [ notificationType, setNotificationType] = useState([]);
+  const [ created, setCreated ] = useState([]);
   
   const [alertContent, setAlertContent] = useState([]);
-  const [isAlertOpen, setIsAlertOpen] = useState(false); // 알람 팝업 열림 여부 상태 추가
+  const [isAlertOpen, setIsAlertOpen] = useState(false); 
 
   useEffect(() => {
     if(isAlertOpen){
@@ -31,7 +19,10 @@ function AlertMemo({alertNum}) {
         const alerts = res.data.response;
         const contentArray = alerts.map(alert => alert.content);
         setAlertContent(contentArray);
-        console.log("asd", contentArray);
+        const typeArray = res.data.response.map(type => type.notificationType)
+        setNotificationType(typeArray)
+        const timeArray = res.data.response.map(time => time.createdAt)
+        setCreated(timeArray)
       });
     }
   }, [isAlertOpen]);
@@ -41,24 +32,59 @@ function AlertMemo({alertNum}) {
     setIsAlertOpen(!isAlertOpen);
   };
 
+  const handleBoxClick = (notificationType) => {
+    switch(notificationType) {
+    case "PURCHASE":
+      navigate("/sell-list");
+      break;
+    case "TRAINING":
+      navigate("/voice-finish");
+    break;
+    default: break;
+    }
+  }
+
+  function isToday(dateString) {
+    var today = new Date();
+    var dateCheck = new Date(dateString);
+  
+    return dateCheck.getDate() == today.getDate() &&
+      dateCheck.getMonth() == today.getMonth() &&
+      dateCheck.getFullYear() == today.getFullYear();
+  }
+
   return (
     <div className={styles.alert} onClick={toggleAlert}>
-      <LightTooltip title="알림 확인" arrow>
-        <div className={styles.alerticon}><BiSolidMicrophone size={40} /></div>
-      </LightTooltip>
-        <div className={styles.alertNum}>{alertNum}</div>
+      <div className={styles.alerticon}><BiSolidMicrophone size={40} /></div>
+      <div className={styles.alertNum}>{alertNum}</div>
 
       {isAlertOpen && (
         <div className={styles.alertPopup}>
-          <div className={styles.content}>
-            {alertContent.map((content, index) => (
-              <div key={index}>{content}</div>
+        <div className={styles.content}>
+          <div className={styles.text}>오늘 받은 알림</div>
+            {alertContent.map((content,index) =>
+            (
+              isToday(created[index]) && (
+                <div key={index} onClick={() => handleBoxClick(notificationType[index])}>
+                <div className={styles.box}>{content}</div>
+              </div>
+            )
+          ))}
+
+          <div className={styles.text}>이전 알림</div>
+          {alertContent.map((content,index) =>
+            (
+              !isToday(created[index]) && (
+                <div key={index} onClick={() => handleBoxClick(notificationType[index])}>
+                <div className={styles.box}>{content}</div>
+              </div>
+              )
             ))}
-          </div>
         </div>
-      )}
-    </div>
-  );
-}
+        
+        </div>)}
+      </div>);
+    }
 
 export default AlertMemo;
+
