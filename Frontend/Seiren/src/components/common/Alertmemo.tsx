@@ -9,13 +9,15 @@ function AlertMemo({alertNum}) {
   const [isAlertOpen, setIsAlertOpen] = useState(false); // 알람 팝업 열림 여부 상태 추가
 
   useEffect(() => {
-    customAxios.get("notifies").then(res => {
-      const alerts = res.data.response;
-      const contentArray = alerts.map(alert => alert.content);
-      setAlertContent(contentArray);
-      console.log("asd", contentArray);
-    });
-  }, []);
+    if(isAlertOpen){
+      customAxios.get("notifies").then(res => {
+        const alerts = res.data.response;
+        const contentArray = alerts.map(alert => alert.content);
+        setAlertContent(contentArray);
+        console.log("asd", contentArray);
+      });
+    }
+  }, [isAlertOpen]);
   
 
   const toggleAlert = () => {
