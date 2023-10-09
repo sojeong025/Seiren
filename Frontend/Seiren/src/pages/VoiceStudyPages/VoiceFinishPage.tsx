@@ -56,7 +56,7 @@ function VoiceFinishPage() {
           <div className={styles.market_img}>
             <img src={mypageimg} alt="마이페이지" />
           </div>
-          <NavLink to="/product-custom">
+          <NavLink to={`/product-custom/${voiceId}`}>
             <div className={styles.market_link}>스토어에 등록하기</div>
           </NavLink>
           <div className={styles.market_txt}>공유 및 수익 창출</div>
