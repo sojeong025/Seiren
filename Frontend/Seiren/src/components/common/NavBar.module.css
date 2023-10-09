@@ -108,3 +108,23 @@
 .activeLink {
   text-decoration: underline;
 }
+
+.alert {
+  background-color: transparent;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.alertNum {
+  position: absolute;
+  top: -2px;
+  right: 5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+}
