@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./VoiceStudyHeader.module.css";
 import { customAxios } from "../../libs/axios";
 import { useEffect, useState } from "react";
@@ -25,33 +25,33 @@ const VoiceStudyHeader: React.FC = () => {
   }, []);
 
   const navigate = useNavigate();
-  const handleButtonClick = () => {
-    customAxios
-      .get(`voices/zip?voiceId=${voiceId}`)
-      .then(res => {
-        // console.log("zip파일 생성", res);
-        setZipVoice(res.data.response);
+  // const handleButtonClick = () => {
+  //   customAxios
+  //     .get(`voices/zip?voiceId=${voiceId}`)
+  //     .then(res => {
+  //       console.log("zip파일 생성", res);
+  //       setZipVoice(res.data.response);
 
-        return axios.get(`https://j9e105.p.ssafy.io/ai1/upload?voice_id=${voiceId}&zipURL=${res.data.response}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-      })
-      .catch(err => {
-        console.error("zip파일 생성 실패", err);
-      });
+  //       return axios.get(`https://j9e105.p.ssafy.io/ai1/upload?voice_id=${voiceId}&zipURL=${res.data.response}`, {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.error("zip파일 생성 실패", err);
+  //     });
 
-    axios
-      .get(`https://j9e105.p.ssafy.io/ai1/upload?voice_id=${voiceId}&zipURL=${zipVoice}`)
-      .then(res => {
-        // console.log("목소리 학습 버튼 클릭 시 ai 연결 성공", res);
-        navigate(`/voice-studying/${voiceId}`);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  };
+  //   axios
+  //     .get(`https://j9e105.p.ssafy.io/ai1/upload?voice_id=${voiceId}&zipURL=${zipVoice}`)
+  //     .then(res => {
+  //       console.log("목소리 학습 버튼 클릭 시 ai 연결 성공", res);
+  //       navigate(`/voice-studying/${voiceId}`);
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //     });
+  // };
 
   useEffect(() => {
     voiceId && customAxios
@@ -87,9 +87,12 @@ const VoiceStudyHeader: React.FC = () => {
           <div className={styles.progressBar} style={{ width: `${progress}%` }} />
         </div>
         {/* isButtonDisabled 값에 따라 버튼의 disabled 속성 설정 */}
-        <button className={styles.button_study} disabled={isButtonDisabled} onClick={handleButtonClick}>
+        <Link to={`/voice-studying/${voiceId}`}>
+{/* `        <button className={styles.button_study} disabled={isButtonDisabled} onClick={handleButtonClick}> */}
+`        <button className={styles.button_study} disabled={isButtonDisabled}>
           + 목소리 생성
-        </button>
+          </button>
+        </Link>
       </div>
     </div>
   );

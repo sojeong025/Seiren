@@ -2,6 +2,11 @@
   padding-top: 100px;
   margin-left: 220px;
   margin-right: 220px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .contain{
   display: flex;
@@ -33,6 +38,10 @@
 .sidetext{
   font-weight: 400;
   font-size: 20px;
+  line-height: 35px;
+}
+.sidetext span{
+  font-weight: 900;
 }
 .img{
   width: 500px;

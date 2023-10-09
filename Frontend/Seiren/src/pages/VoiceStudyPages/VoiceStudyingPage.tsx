@@ -20,8 +20,9 @@ function VoiceStudyingPage() {
           </div>
           <hr />
           <div className={styles.sidetext}>
-            완료 후 자동으로 페이지가 전환돼요. <br/>
-            학습을 완료하는 데는 대략 1시간이 소요됩니다.
+            완료 후 자동으로 <span>페이지가 전환</span>돼요 <br/>
+            <span>알림을 통해</span> 학습 완료를 알 수 있어요 <br/>
+            학습을 완료하는 데는 <span>최소 30분이 소요</span>됩니다
           </div>
         </div>
       </div>
