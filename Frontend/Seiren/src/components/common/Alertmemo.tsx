@@ -12,7 +12,7 @@ function AlertMemo() {
     customAxios.get("notifies").then(res => {
       const alerts = res.data.response;
       const contentArray = alerts.map(alert => alert.content);
-      setAlertNum(alerts.length);
+      setAlertNum(alerts.newNotifyCount);
       setAlertContent(contentArray);
       console.log("asd", contentArray);
     });
