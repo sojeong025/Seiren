@@ -27,7 +27,7 @@ function NavBar() {
 
   // const EventSource = EventSourcePolyfill || NativeEventSource;
   const accessToken = localStorage.getItem("accessToken");
-
+  // console.log(location.pathname);
   useEffect(() => {
     console.log(isKakaoLoggedIn);
     console.log("sse 연결 요청");
@@ -107,7 +107,7 @@ function NavBar() {
   };
 
   return (
-    <div
+    location.pathname !== "/my-page" && <div
       className={`${scrollY !== 0 ? styles.opaque : styles.container} ${
         scrollDirection === "down" ? styles.scrollDown : ""
       } ${

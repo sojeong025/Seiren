@@ -17,13 +17,13 @@ const MyPage: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> = ({
   const [twoOrMoreCount, setTwoOrMoreCount] = useState(0);
 
 
-  useEffect(() => {
-    setIsNavBarVisible(false);
+  // useEffect(() => {
+  //   setIsNavBarVisible(false);
 
-    return () => {
-      setIsNavBarVisible(true);
-    };
-  }, [setIsNavBarVisible]);
+  //   return () => {
+  //     setIsNavBarVisible(true);
+  //   };
+  // }, [setIsNavBarVisible]);
 
   useEffect(() => {
     customAxios.get('user').then((response) => {
