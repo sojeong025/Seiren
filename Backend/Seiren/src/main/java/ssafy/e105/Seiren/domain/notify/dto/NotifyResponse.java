@@ -21,6 +21,6 @@ public class NotifyResponse {
         this.content = notify.getContent();
         this.isRead = notify.getIsRead();
         this.notificationType = notify.getNotificationType();
-        this.createdAt = notify.getCreatedAt();
+        this.createdAt = notify.getCreatedAt().plusHours(9);
     }
 }
