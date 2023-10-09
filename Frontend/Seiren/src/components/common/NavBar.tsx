@@ -24,6 +24,7 @@ function NavBar() {
     { addLink: "/voice-market", className: styles.storeLink },
     { addLink: "/purchase/", className: styles.aboutLink },
   ];
+  const [alertNum, setAlertNum] = useState(0); // 초기값을 0으로 설정
 
   // const EventSource = EventSourcePolyfill || NativeEventSource;
   const accessToken = localStorage.getItem("accessToken");
@@ -66,13 +67,13 @@ function NavBar() {
     accessToken &&
       customAxios.get("user").then(response => {
         let userData = response.data.response;
-
         let updatedUserData = {
           nickname: userData.nickname,
           profileImage: userData.profileImg,
         };
         setUserInfo(updatedUserData);
         setUserId(userData.userId);
+        setAlertNum(userData.newNotifyCount)
       });
   }, [location]);
 
@@ -138,7 +139,7 @@ function NavBar() {
 
           {isKakaoLoggedIn ? (
             <>
-              <Alertmemo />
+              <Alertmemo alertNum={alertNum}/>
               {userInfo.profileImage && <img className={styles.proImg} src={userInfo.profileImage} alt="Profile" />}
               <Logout />
             </>
