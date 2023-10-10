@@ -5,7 +5,12 @@ import { useState, useEffect } from "react";
 import styles from "./Script.module.css";
 import * as AWS from "aws-sdk";
 
-const Script: React.FC = () => {
+interface nextCheck{
+  next:boolean;
+  setNext:React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Script: React.FC<nextCheck> = ({next, setNext}) => {
   const [recordCount, setRecordCount] = useRecoilState(RecordCountState);
 
   // 스크립트 state설정
@@ -75,6 +80,7 @@ const Script: React.FC = () => {
   }, [nextScriptId]);
 
   const goNext = async () => {
+    
     // console.log(`gonext`)
     if (recordingStatus !== "stopped"){
       alert("녹음이 완료되어야 다음으로 넘어갈 수 있습니다.");
@@ -96,7 +102,7 @@ const Script: React.FC = () => {
       // Here, you can set the filename for your wav file.
       formData.append("file", wavBlob, "filename.wav");
 
-      customAxios
+      await customAxios
         .post(`records?voiceId=${voiceId}&scriptId=${nextScriptId}`, formData)
         .then(res => {
           // console.log("녹음하고 보낸거"+res.data.response);
@@ -106,7 +112,7 @@ const Script: React.FC = () => {
         });
     }
 
-    customAxios
+    await customAxios
       .get(`records/count/${voiceId}`)
       .then(res => {
         // console.log('진행률 요청 성공', res)
@@ -117,13 +123,14 @@ const Script: React.FC = () => {
       });
 
     setScriptId(nextScriptId);
-    customAxios.get(`nextScripts/${nextScriptId}`).then(res => {
+    await customAxios.get(`nextScripts/${nextScriptId}`).then(res => {
       // console.log(`넘어가기 성공`, res)
     });
     if (recordingStatus === "stopped") {
       // console.log("녹음이 완료되었습니다. 다음으로 넘어갑니다.")
       setRecordingStatus("idle");
     }
+    setNext(!next);
   };
 
   return (

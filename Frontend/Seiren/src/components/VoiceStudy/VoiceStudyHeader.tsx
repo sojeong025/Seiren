@@ -4,7 +4,11 @@ import { customAxios } from "../../libs/axios";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const VoiceStudyHeader: React.FC = () => {
+interface nextCheck{
+  next:boolean;
+}
+
+const VoiceStudyHeader: React.FC<nextCheck> = ({next}) => {
   const [voiceId, setVoiceId] = useState();
   const [recordCount, setRecordCount] = useState(0);
   const [totalCount, setTotalCount] = useState(1);
@@ -65,7 +69,11 @@ const VoiceStudyHeader: React.FC = () => {
       .catch(err => {
         console.error("진행률 요청 실패", err);
       });
-  }, [voiceId]);
+  }, [voiceId, next]);
+
+  useEffect(()=>{
+    console.log(recordCount);
+  },[recordCount])
 
   let progress;
   if (recordCount <= 100) {
@@ -74,7 +82,7 @@ const VoiceStudyHeader: React.FC = () => {
     const additionalProgress = ((recordCount - 100) / (totalCount - 100)) * 20;
     progress = 90 + additionalProgress;
   }
-  const isButtonDisabled = recordCount < 3;
+  const isButtonDisabled = recordCount < 2;
 
   return (
     <div>
