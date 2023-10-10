@@ -119,17 +119,16 @@ const SellDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> =
                 )}
               </div>
               <p className={styles.summary}>
-                {" "}
                 {isEditing ? (
-                  <input
+                  <textarea
                   className={styles.editsummary}
-                  type="text"
                   value={summary}
                   onChange={e => setSummary(e.target.value)}
                   />
                   ) : (
                     product.summary
                     )}
+                    
               </p>
             </div>
             <div className={styles.price}>
@@ -147,7 +146,7 @@ const SellDetail: React.FC<{ setIsNavBarVisible: (visible: boolean) => void }> =
                 )}
               </span>{" "}
               <span className={styles.one}>원</span>
-              <span className={styles.txt}> (단위 : 자)</span>
+              <span className={styles.txt}> 단위 : 글자수(자) </span>
             </div>
           </div>
           <div className={styles.right}>
