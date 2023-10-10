@@ -53,7 +53,7 @@ function NavBar() {
           console.log("alert상태변경 확인", alert)
           eventSource.onerror = event => {
             if (event.currentTarget.readyState === EventSource.CLOSED) {
-              setTimeout(fetchSse, 5000);
+              setTimeout(fetchSse, 2000);
             } else if (!event.error.message.includes("No activity")) {
               eventSource.close();
             }
