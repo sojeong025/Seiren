@@ -17,7 +17,7 @@
 
 # 결과물
 
-- 📽 [UCC]()
+- 📽 [UCC](https://www.youtube.com/watch?v=2VDcku13lkk)
 
 - 🎤 [중간발표 자료]()
 
