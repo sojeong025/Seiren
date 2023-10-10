@@ -26,11 +26,13 @@
 ## Main Page
 
 <br>
-<img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif" width="400">
+<img src="/uploads/5f22ed5ab3988654e096a147b9c6df44/Main.gif" width="400">
+<img src="/uploads/b8b54f5f559a39a3219f5e7197c00965/Mainalert.gif" width="400">
+
 <br>
 
 - 메인페이지. 네브바에 각 페이지로 갈 수 있는 링크들이 있음.
-- 사이트의 대략적인 느낌을 얻을 수 있습니다.
+- 마이크 모양의 알람버튼을 클릭하여 소식을 볼 수 있습니다.
 
 
 ## Login Page
@@ -322,7 +324,7 @@
 
 ## 📐 시스템 아키텍처
 
-<img src="/uploads/62e9409e4baf25518fbeaff640d8f493/아키텍쳐.png"/>
+<img src="/uploads/f7e9e729ffa4c5e7e01ce101a17b0845/image__11_.png"/>
 
 # 팀원 소개
 
