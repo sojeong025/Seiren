@@ -28,29 +28,12 @@
   height: 250px;
   object-fit: cover;
 }
-.title {
-  font-size: 24px;
-  word-break: keep-all;
-  font-weight: 900;
-  line-height: 40px;
-  margin-top: 30px;
-}
 .mood {
   display: inline-block;
   color: #777;
   font-size: 18px;
 }
-.summary {
-  width: 100%;
-  background-color: #fff;
-  box-shadow:
-    rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-  border-radius: 20px;
-  padding: 20px;
-  border: 1px solid #777;
-  height: 80px;
-}
+
 .left {
   width: 25%;
   display: flex;
@@ -86,42 +69,76 @@
   cursor: pointer;
   font-size: 40px;
 }
+.one {
+  font-size: 18px;
+}
+.txt {
+  font-size: 13px;
+  color: gray;
+}
+
+
+.title {
+  font-size: 24px;
+  word-break: keep-all;
+  font-weight: 900;
+  line-height: 40px;
+  margin-top: 30px;
+  width: 500px;
+}
+
+.edittitle{
+  height: 60px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 24px;
+  outline: none;
+  font-weight: 900;
+  width: 100%;
+
+}
+
+.editsummary {
+  width: 100%;
+  font-size: 16px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  height: 100%;
+  background-color: transparent;
+}
+
+
+.summary {
+  width: 100%;
+  background-color: #fff;
+  box-shadow:
+  rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+  rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border-radius: 20px;
+  padding: 10px;
+  border: 1px solid #777;
+  height: 150px;
+}
+
+
+
+
+
 .price {
   font-weight: 900;
 }
 .pricetxt{
   font-size: 20px;
 }
-.one {
-  font-size: 18px;
-}
-.txt {
-  font-size: 13px;
-}
-.editprice{
-  width: 100px; /* 너비 설정 */
-  height: 50px; /* 높이 설정 */
-  padding: 5px; /* 내부 여백 설정 */
-  border: 1px solid #ccc; /* 테두리 스타일 및 색상 설정 */
-  border-radius: 4px; /* 테두리 모서리 둥글게 설정 */
-  font-size: 40px; /* 폰트 크기 설정 */
-  outline: none;
-}
-.edittitle{
-  height: 60px; /* 높이 설정 */
-  padding: 5px; /* 내부 여백 설정 */
-  border: 1px solid #ccc; /* 테두리 스타일 및 색상 설정 */
-  border-radius: 4px; /* 테두리 모서리 둥글게 설정 */
-  font-size: 24px; /* 폰트 크기 설정 */
-  outline: none;
-  font-weight: 900;
-}
-.editsummary {
-  width: 400px;
-  font-size: 20px;
-  border-radius: 20px;
+.editprice {
+  width: 100px;
+  height: 30px;
   padding: 5px;
+  border: 2px solid #000; 
+  border-radius: 1.5rem;
+  font-size: 20px;
   outline: none;
-  border: 1px solid transparent;
-  height: 120px;
+  text-align: right;
 }
