@@ -13,6 +13,18 @@ function AlertMemo({alertNum, setAlertNum}) {
   const [alertContent, setAlertContent] = useState([]);
   const [isAlertOpen, setIsAlertOpen] = useState(false); 
 
+  const menuItems = [
+    { addLink: "/about", className: styles.aboutLink },
+  ];
+// 현재 페이지의 경로
+const currentPath = location.pathname;
+
+// "/about" 링크에 해당하는 클래스 이름 찾기
+const menuItem = menuItems.find(item => currentPath.startsWith(item.addLink));
+
+// 클래스 이름을 동적으로 설정
+const className = menuItem ? `${styles.alerticon} ${menuItem.className}` : styles.alerticon;
+
   useEffect(() => {
     if(isAlertOpen){
       customAxios.get("notifies").then(res => {
@@ -57,7 +69,7 @@ function AlertMemo({alertNum, setAlertNum}) {
 
   return (
     <div className={styles.alert} onClick={toggleAlert}>
-      <div className={styles.alerticon}><BiSolidMicrophone size={40} /></div>
+      <div className={className}><BiSolidMicrophone size={40} /></div>
       <div className={styles.alertNum}>{alertNum}</div>
 
       {isAlertOpen && (
