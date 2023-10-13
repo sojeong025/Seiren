@@ -31,7 +31,7 @@ const className = menuItem ? `${styles.alerticon} ${menuItem.className}` : style
         const alerts = res.data.response;
         const contentArray = alerts.map(alert => alert.content);
         setAlertContent(contentArray);
-        console.log("상태확인", res)
+        // console.log("상태확인", res)
         const typeArray = res.data.response.map(type => type.notificationType)
         setNotificationType(typeArray)
         const timeArray = res.data.response.map(time => time.createdAt)

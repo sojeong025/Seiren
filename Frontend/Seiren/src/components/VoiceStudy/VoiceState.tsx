@@ -13,7 +13,7 @@ function VoiceState() {
   useEffect(() => {
     customAxios.get("progressingVoices")
       .then((res) => {
-        console.log(`voiceId:`, res.data.response.voiceId)
+        // console.log(`voiceId:`, res.data.response.voiceId)
         setVoiceId(res.data.response.voiceId);
       })
       .catch((error) => {
