@@ -20,11 +20,11 @@ const VoiceStudyHeader: React.FC<nextCheck> = ({next}) => {
     customAxios
       .get("progressingVoices")
       .then(res => {
-        console.log(`progressbar voiceId:`, res.data.response.voiceId)
+        // console.log(`progressbar voiceId:`, res.data.response.voiceId)
         setVoiceId(res.data.response.voiceId);
       })
       .catch(error => {
-        console.error("학습완료시에서 오류:", error);
+        console.error(error);
       });
   }, []);
 
@@ -33,7 +33,7 @@ const VoiceStudyHeader: React.FC<nextCheck> = ({next}) => {
     customAxios
       .get(`voices/zip?voiceId=${voiceId}`)
       .then(res => {
-        console.log("zip파일 생성", res);
+        // console.log("zip파일 생성", res);
         setZipVoice(res.data.response);
 
         return axios.get(`https://j9e105.p.ssafy.io/ai1/upload?voice_id=${voiceId}&zipURL=${res.data.response}`, {
@@ -43,13 +43,13 @@ const VoiceStudyHeader: React.FC<nextCheck> = ({next}) => {
         });
       })
       .catch(err => {
-        console.error("zip파일 생성 실패", err);
+        console.error(err);
       });
 
     axios
       .get(`https://j9e105.p.ssafy.io/ai1/upload?voice_id=${voiceId}&zipURL=${zipVoice}`)
       .then(res => {
-        console.log("목소리 학습 버튼 클릭 시 ai 연결 성공", res);
+        // console.log("목소리 학습 버튼 클릭 시 ai 연결 성공", res);
         navigate(`/voice-studying/${voiceId}`);
       })
       .catch(err => {
@@ -61,9 +61,9 @@ const VoiceStudyHeader: React.FC<nextCheck> = ({next}) => {
     voiceId && customAxios
       .get(`records/count/${voiceId}`)
       .then(res => {
-        console.log("진행률 요청 성공", res);
+        // console.log("진행률 요청 성공", res);
         setRecordCount(res.data.response.recordCount);
-        console.log("현재 녹음 파일 개수는:", recordCount)
+        // console.log("현재 녹음 파일 개수는:", recordCount)
         setTotalCount(res.data.response.totalCount);
       })
       .catch(err => {
@@ -72,7 +72,7 @@ const VoiceStudyHeader: React.FC<nextCheck> = ({next}) => {
   }, [voiceId, next]);
 
   useEffect(()=>{
-    console.log(recordCount);
+    // console.log(recordCount);
   },[recordCount])
 
   let progress;
