@@ -29,33 +29,33 @@ const VoiceStudyHeader: React.FC<nextCheck> = ({next}) => {
   }, []);
 
   const navigate = useNavigate();
-  // const handleButtonClick = () => {
-  //   customAxios
-  //     .get(`voices/zip?voiceId=${voiceId}`)
-  //     .then(res => {
-  //       console.log("zip파일 생성", res);
-  //       setZipVoice(res.data.response);
+  const handleButtonClick = () => {
+    customAxios
+      .get(`voices/zip?voiceId=${voiceId}`)
+      .then(res => {
+        console.log("zip파일 생성", res);
+        setZipVoice(res.data.response);
 
-  //       return axios.get(`https://j9e105.p.ssafy.io/ai1/upload?voice_id=${voiceId}&zipURL=${res.data.response}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.error("zip파일 생성 실패", err);
-  //     });
+        return axios.get(`https://j9e105.p.ssafy.io/ai1/upload?voice_id=${voiceId}&zipURL=${res.data.response}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+      })
+      .catch(err => {
+        console.error("zip파일 생성 실패", err);
+      });
 
-  //   axios
-  //     .get(`https://j9e105.p.ssafy.io/ai1/upload?voice_id=${voiceId}&zipURL=${zipVoice}`)
-  //     .then(res => {
-  //       console.log("목소리 학습 버튼 클릭 시 ai 연결 성공", res);
-  //       navigate(`/voice-studying/${voiceId}`);
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //     });
-  // };
+    axios
+      .get(`https://j9e105.p.ssafy.io/ai1/upload?voice_id=${voiceId}&zipURL=${zipVoice}`)
+      .then(res => {
+        console.log("목소리 학습 버튼 클릭 시 ai 연결 성공", res);
+        navigate(`/voice-studying/${voiceId}`);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
 
   useEffect(() => {
     voiceId && customAxios
@@ -82,7 +82,7 @@ const VoiceStudyHeader: React.FC<nextCheck> = ({next}) => {
     const additionalProgress = ((recordCount - 100) / (totalCount - 100)) * 20;
     progress = 90 + additionalProgress;
   }
-  const isButtonDisabled = recordCount < 2;
+  const isButtonDisabled = recordCount < 100;
 
   return (
     <div>
@@ -96,8 +96,7 @@ const VoiceStudyHeader: React.FC<nextCheck> = ({next}) => {
         </div>
         {/* isButtonDisabled 값에 따라 버튼의 disabled 속성 설정 */}
         <Link to={`/voice-studying/${voiceId}`}>
-{/* `        <button className={styles.button_study} disabled={isButtonDisabled} onClick={handleButtonClick}> */}
-`        <button className={styles.button_study} disabled={isButtonDisabled}>
+`        <button className={styles.button_study} disabled={isButtonDisabled} onClick={handleButtonClick}>
           + 목소리 생성
           </button>
         </Link>
