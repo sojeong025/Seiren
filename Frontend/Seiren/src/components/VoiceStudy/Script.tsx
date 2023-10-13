@@ -25,7 +25,7 @@ const Script: React.FC<nextCheck> = ({next, setNext}) => {
     customAxios
       .get("progressingVoices")
       .then(res => {
-        console.log(`스크립트 페이지에서 voiceId:`, res.data.response.voiceId)
+        // console.log(`스크립트 페이지에서 voiceId:`, res.data.response.voiceId)
         setVoiceId(res.data.response.voiceId);
       })
       .catch(error => {
@@ -43,7 +43,7 @@ const Script: React.FC<nextCheck> = ({next, setNext}) => {
       customAxios
         .get(`records/recent/${voiceId}`)
         .then(res => {
-          console.log('스크립트 get 요청 성공 ID는', res.data.response)
+          // console.log('스크립트 get 요청 성공 ID는', res.data.response)
           setScriptId(res.data.response);
         })
         .catch(err => {
