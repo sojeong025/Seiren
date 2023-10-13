@@ -22,14 +22,14 @@ function SellListBox() {
 
   useEffect(() => {
     if (selectedMonth) {
-      console.log(selectedMonth);
+      // console.log(selectedMonth);
       const requestData = { month: selectedMonth };
 
       customAxios
         .get(`statistics/month`, { params: requestData })
         .then(response => {
           const responseData = response.data.response;
-          console.log('판매내역 확인', response)
+          // console.log('판매내역 확인', response)
 
           // 리스폰스 데이터를 배열로 변환하고 날짜 오름차순으로 정렬
           const salesDataArray = Object.keys(responseData)

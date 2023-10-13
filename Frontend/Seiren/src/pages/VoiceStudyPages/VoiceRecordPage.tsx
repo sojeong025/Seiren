@@ -6,7 +6,7 @@ import styles from './VoiceRecordPage.module.css'
 
 function VoiceRecordPage() {
   const [nextCheck, setNextCheck] = useState(false);
-  console.log(nextCheck);
+  // console.log(nextCheck);
   return (
     <div className={styles.total}>
       <VoiceStudyHeader next={nextCheck}/> 
