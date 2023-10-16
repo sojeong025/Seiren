@@ -23,23 +23,27 @@ public class ScriptController {
 
     private final ScriptService scriptService;
 
+    @Operation(summary = "다음 script")
     @GetMapping("/api/nextScripts/{scriptId}")
     public ApiResult<?> getNextScript(@PathVariable Long scriptId) {
         return ApiUtils.success(scriptService.getNextScript(scriptId));
     }
 
+    @Operation(summary = "script 추가")
     @PostMapping("/api/scripts")
     public ApiResult<?> addScripts(String script) {
         scriptService.insertScript(script);
         return ApiUtils.success("스크립트 추가 완료");
     }
 
+    @Operation(summary = "script 수정")
     @PutMapping("/api/scripts")
     public ApiResult<?> updateScripts(@RequestBody ScriptRequest scriptRequest) {
         scriptService.updateScript(scriptRequest);
         return ApiUtils.success("스크립트 수정 완료");
     }
 
+    @Operation(summary = "script 삭제")
     @DeleteMapping("/api/scripts/{scriptId}")
     public ApiResult<?> deleteScripts(@PathVariable Long scriptId) {
         scriptService.deleteScript(scriptId);
