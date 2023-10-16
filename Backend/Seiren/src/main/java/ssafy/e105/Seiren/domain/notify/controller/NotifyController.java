@@ -1,5 +1,6 @@
 package ssafy.e105.Seiren.domain.notify.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ public class NotifyController {
 
     private final NotifyService notifyService;
 
+    @Operation(summary = "일주일 이내의 알림 리스트")
     @GetMapping("/api/notifies")
     public ApiResult<?> getNotifies(HttpServletRequest request) {
         return ApiUtils.success(notifyService.getNotifyList(request));
