@@ -30,6 +30,8 @@ import ssafy.e105.Seiren.domain.voice.dto.VoiceStateDto;
 import ssafy.e105.Seiren.domain.voice.entity.Record;
 import ssafy.e105.Seiren.domain.voice.entity.Voice;
 import ssafy.e105.Seiren.domain.voice.repository.VoiceRepository;
+import ssafy.e105.Seiren.global.common.sse.NotificationType;
+import ssafy.e105.Seiren.global.common.sse.SseService;
 import ssafy.e105.Seiren.global.config.S3Service;
 import ssafy.e105.Seiren.global.error.type.BaseException;
 import ssafy.e105.Seiren.global.utils.ApiError;
@@ -46,6 +48,7 @@ public class VoiceService {
     private final RecordService recordService;
     private final ScriptService scriptService;
     private final ProductService productService;
+    private final SseService sseService;
 
     public VoiceDto getCurrentVoiceId(HttpServletRequest request) {
         List<Voice> list = voiceRepository.findByUser_IdAndStateLessThanAndIsDeleteFalseOrderByCreatedAtDesc(
@@ -60,16 +63,7 @@ public class VoiceService {
     public List<VoiceDto> getVoiceList(HttpServletRequest request) {
         List<Voice> voiceList = voiceRepository.findByUser_IdAndIsDeleteFalseOrderByVoiceIdDesc(
                 userService.getUser(request).getId());
-//        return voiceList.stream()
-//                .map(voice -> {
-//                    Integer state = Optional.ofNullable(voice.getProduct())
-//                            .map(product -> product.getState() ? 1 : 2)
-//                            .orElse(0); //0:등록X, 1:등록&판매, 2:등록&판매중지
-//                    return new VoiceDto(voice.getVoiceId(), voice.getVoiceTitle(),
-//                            voice.getVoiceAvatarUrl(),
-//                            voice.getCreatedAt(), state);
-//                })
-//                .collect(Collectors.toList()); // voice table에 state column을 넣기 이전의 코드
+
         return voiceList.stream()
                 .map(voice -> new VoiceDto(voice.getVoiceId(), voice.getVoiceTitle(),
                         voice.getVoiceAvatarUrl(),
@@ -143,16 +137,24 @@ public class VoiceService {
     }
 
     @Transactional
-    public void updateVoiceState2(HttpServletRequest request, Long voiceId) {
-        Voice voice = voiceRepository.findOneByUser_IdAndVoiceId(
-                userService.getUser(request).getId(), voiceId).orElseThrow(() -> new BaseException(
-                new ApiError(UNMACHED_VOICE_USER.getMessage(), UNMACHED_VOICE_USER.getCode())));
+    public void updateVoiceState2(Long voiceId) { //HttpServletRequest request
+//        User user = userService.getUser(request);
+//        Voice voice = voiceRepository.findOneByUser_IdAndVoiceId(
+//                user.getId(), voiceId).orElseThrow(() -> new BaseException(
+//                new ApiError(UNMACHED_VOICE_USER.getMessage(), UNMACHED_VOICE_USER.getCode())));
+        Voice voice = voiceRepository.findById(voiceId)
+                .orElseThrow(() -> new BaseException(new ApiError("존재하지 않는 음성입니다.", 0)));
+        User user = voice.getUser();
         try {
             voice.update(2);
         } catch (Exception e) {
             throw new BaseException(
                     new ApiError(FAIL_UPDATE_VOICE.getMessage(), FAIL_UPDATE_VOICE.getCode()));
         }
+
+        // sse 알림 & notify 추가
+        String msg = "\"" + voice.getVoiceTitle() + "\" 음성의 학습이 완료되었습니다.";
+        sseService.send(user, NotificationType.TRAINING, msg);
     }
 
     @Transactional

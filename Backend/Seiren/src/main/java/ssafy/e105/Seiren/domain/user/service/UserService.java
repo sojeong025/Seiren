@@ -22,9 +22,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ssafy.e105.Seiren.domain.notify.repository.NotifyRepository;
 import ssafy.e105.Seiren.domain.product.entity.Product;
 import ssafy.e105.Seiren.domain.product.repository.ProductRepository;
-import ssafy.e105.Seiren.domain.product.service.ProductService;
 import ssafy.e105.Seiren.domain.user.dto.ProfileImgRequest;
 import ssafy.e105.Seiren.domain.user.dto.UserInfoResponse;
 import ssafy.e105.Seiren.domain.user.dto.login.LoginReqDto;
@@ -36,7 +36,6 @@ import ssafy.e105.Seiren.domain.user.entity.User;
 import ssafy.e105.Seiren.domain.user.repository.UserRepository;
 import ssafy.e105.Seiren.domain.voice.entity.Voice;
 import ssafy.e105.Seiren.domain.voice.repository.VoiceRepository;
-import ssafy.e105.Seiren.domain.voice.service.VoiceService;
 import ssafy.e105.Seiren.global.error.type.BaseException;
 import ssafy.e105.Seiren.global.jwt.JwtTokenProvider;
 import ssafy.e105.Seiren.global.utils.ApiError;
@@ -54,19 +53,23 @@ public class UserService {
     private final RedisTemplate<String, String> redisTemplate;
     private final ProductRepository productRepository;
     private final VoiceRepository voiceRepository;
+    private final NotifyRepository notifyRepository;
 
     @Transactional
-    public RegisterResDto signup(RegisterReqDto registerReqDto){
+    public RegisterResDto signup(RegisterReqDto registerReqDto) {
         Optional<User> user = userRepository.findByEmail(registerReqDto.getEmail());
 
-        if(!user.isEmpty()) throw new IllegalArgumentException("이미 사용중인 아이디입니다.");
+        if (!user.isEmpty()) {
+            throw new IllegalArgumentException("이미 사용중인 아이디입니다.");
+        }
 
         userRepository.save(User.toEntitySwagger(registerReqDto, passwordEncoder));
-        try{
+        try {
             userRepository.flush();
-        }catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
-            throw new BaseException(new ApiError(REGISTER_ERROR.getMessage(), REGISTER_ERROR.getCode()));
+            throw new BaseException(
+                    new ApiError(REGISTER_ERROR.getMessage(), REGISTER_ERROR.getCode()));
         }
         return RegisterResDto.builder()
                 .check(true)
@@ -77,10 +80,10 @@ public class UserService {
      * 로그인 로직
      */
     public TokenDto login(
-        HttpServletResponse response,
-        LoginReqDto loginReqDto
-    ){
-        try{
+            HttpServletResponse response,
+            LoginReqDto loginReqDto
+    ) {
+        try {
             System.out.println("로그인 시작");
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -103,53 +106,60 @@ public class UserService {
             log.info("토큰Dto 생성 후 에러 >>> " + tokenDto);
 
             return tokenDto;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            throw new BaseException(new ApiError(LOGIN_ERROR.getMessage(),LOGIN_ERROR.getCode()));
+            throw new BaseException(new ApiError(LOGIN_ERROR.getMessage(), LOGIN_ERROR.getCode()));
         }
 
     }
 
-    public boolean nicknameCheck(String nickname){
+    public boolean nicknameCheck(String nickname) {
 
-        if(nickname.matches("^[0-9a-zA-Zㄱ-ㅎ가-힣]{2,8}$")){
+        if (nickname.matches("^[0-9a-zA-Zㄱ-ㅎ가-힣]{2,8}$")) {
             Optional<User> user = userRepository.findByNickname(nickname);
-            if(!user.isEmpty()) throw new BaseException(new ApiError(EXIST_NICKNAME.getMessage(), EXIST_NICKNAME.getCode()));
+            if (!user.isEmpty()) {
+                throw new BaseException(
+                        new ApiError(EXIST_NICKNAME.getMessage(), EXIST_NICKNAME.getCode()));
+            }
             return true;
 
         }
-        throw new BaseException(new ApiError(NICKNAME_UNMATCHED_FORMAT.getMessage(), NICKNAME_UNMATCHED_FORMAT.getCode()));
+        throw new BaseException(new ApiError(NICKNAME_UNMATCHED_FORMAT.getMessage(),
+                NICKNAME_UNMATCHED_FORMAT.getCode()));
 
     }
 
     @Transactional
-    public boolean nicknameUpdate(HttpServletRequest request, NicknameReqDto nicknameReqDto){
+    public boolean nicknameUpdate(HttpServletRequest request, NicknameReqDto nicknameReqDto) {
 
-        if(nicknameReqDto.getNickname().matches("^[0-9a-zA-Zㄱ-ㅎ가-힣]{2,8}$")){
+        if (nicknameReqDto.getNickname().matches("^[0-9a-zA-Zㄱ-ㅎ가-힣]{2,8}$")) {
             User user = getUser(request);
             user.updateNickname(nicknameReqDto.getNickname());
             return true;
         }
-        throw new BaseException(new ApiError(UPDATE_NICKNAME_ERROR.getMessage(), UPDATE_NICKNAME_ERROR.getCode()));
+        throw new BaseException(
+                new ApiError(UPDATE_NICKNAME_ERROR.getMessage(), UPDATE_NICKNAME_ERROR.getCode()));
     }
 
     @Transactional
-    public boolean profileImgUpdate(HttpServletRequest request, ProfileImgRequest profileImgRequest){
-        try{
+    public boolean profileImgUpdate(HttpServletRequest request,
+            ProfileImgRequest profileImgRequest) {
+        try {
             User user = getUser(request);
             user.updateProfileImg(profileImgRequest.getProfileImgUrl());
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            throw new BaseException(new ApiError(UPDATE_PROFILE_IMG_ERROR.getMessage(), UPDATE_PROFILE_IMG_ERROR.getCode()));
+            throw new BaseException(new ApiError(UPDATE_PROFILE_IMG_ERROR.getMessage(),
+                    UPDATE_PROFILE_IMG_ERROR.getCode()));
         }
     }
 
     @Transactional
-    public boolean deleteUser(HttpServletRequest request){
+    public boolean deleteUser(HttpServletRequest request) {
         User user = getUser(request);
         List<Voice> voiceList = voiceRepository.findByUser_IdAndStateIsThree(user.getId(), 3);
-        for(Voice voice : voiceList){
+        for (Voice voice : voiceList) {
             Product product = productRepository.findByVoice_VoiceId(voice.getVoiceId()).get();
             product.update(false);
             voice.update(true, 4);
@@ -158,17 +168,21 @@ public class UserService {
         return true;
     }
 
-    public UserInfoResponse getUserInfo(HttpServletRequest request){
+    public UserInfoResponse getUserInfo(HttpServletRequest request) {
         User user = getUser(request);
         return UserInfoResponse.builder()
+                .userId(user.getId())
                 .nickname(user.getNickname())
                 .profileImg(user.getProfileImg())
+                .newNotifyCount(notifyRepository.countByUserAndIsReadFalse(user))
                 .build();
     }
 
-    public User getUser(HttpServletRequest request){
-        return userRepository.findByEmail(jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request)))
-                .orElseThrow(()-> new BaseException(new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode())));
+    public User getUser(HttpServletRequest request) {
+        return userRepository.findByEmail(
+                        jwtTokenProvider.getUserEmail(jwtTokenProvider.resolveToken(request)))
+                .orElseThrow(() -> new BaseException(
+                        new ApiError(NOT_EXIST_USER.getMessage(), NOT_EXIST_USER.getCode())));
     }
 
 }

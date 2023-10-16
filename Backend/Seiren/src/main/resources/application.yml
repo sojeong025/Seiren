@@ -28,6 +28,7 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+    open-in-view: false
   security:
     user:
       password: 1234
@@ -123,6 +124,7 @@ spring:
       username: ${spring.datasource.username}
       password: ${spring.datasource.password}
       driver-class-name: ${spring.datasource.driver-class-name}
+      max-lifetime: 1800000 # 30분
       data-source-properties:
         rewriteBatchedStatements: true
   data:
@@ -155,7 +157,7 @@ spring:
     activate:
       on-profile: port_8081
   data:
-    kakao-redirectUrl: http://j9e105.p.ssafy.io/oauth/callback/kakao
+    kakao-redirectUrl: https://j9e105.p.ssafy.io/oauth/callback/kakao
 
 server:
   port: 8081
