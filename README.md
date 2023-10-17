@@ -11,125 +11,63 @@
 
 1. [개요](#개요)
 2. [서비스 화면](#서비스-화면)
-4. [주요 기능](#주요-기능)
-5. [개발 환경](#개발-환경)
-6. [기술 소개](#기술-소개)
-7. [설계 문서](#설계-문서)
-8. [팀원 소개](#팀원-소개)
+3. [기술 소개](#기술-소개)
+4. [개발 환경](#개발-환경)
+5. [설계 문서](#설계-문서)
+6. [팀원 소개](#팀원-소개)
 
-## 개요
+
+## 1. 개요
 > <b>프로젝트 기간</b> : 2023/08/21 ~ 2023/10/06 <br>
-> <b>참고자료 </b> : [UCC](https://www.youtube.com/watch?v=2VDcku13lkk)
+> <b>참고자료 </b> : 🎞 [UCC](https://www.youtube.com/watch?v=2VDcku13lkk)
 📃 [최종발표 자료](https://drive.google.com/file/d/1iTcuW2Ohn8m3WWf5kYmd6j4i9W_lP2A0/view?usp=sharing)
 <br>
 
-## 서비스 화면
+## 2. 서비스 화면
+1️⃣ <b>메인 페이지 & 어바웃 페이지</b>
+
 |<img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif">|<img src="/uploads/2aacb8c24e0a0c2636d27daeecbb4d86/loginPage.gif">|
 | :------: | :------: |
 | **Main Page** | **Login Page** |
 |<img src="/uploads/32ccc43db339a9ed12116fcb20e4dcc3/aboutPage.gif">|<img src="/uploads/20b5f7042593edc9a22ac2a87271c8fb/aboutPage_2_.gif">|
 | **About Page** | **About Page** |
+<br>
+2️⃣ <b>스토어 페이지</b>
+
 |<img src="/uploads/8d96fe715733efc63cfeac4fd46dd5fe/store_1_.gif">|<img src="/uploads/e6438fe3809461e35185600fd901284d/store_2_.gif">|
+| :------: | :------: |
 | **Store Page** | **Filter** |
+|<img src="/uploads/039dc5ea323bd4450f62eac52a0b8cc3/storeDetail_1_.gif">|<img src="/uploads/0ae386b2b1a527daabbfe97a8b52f2bc/storeDetail_2_.gif">|
+| **Product Detail** | **Product Test** |
+|<img src="/uploads/262a3a8e1d7017dbb32dfe972a90d59b/storeDetail_3_.gif">||
+| **Purchase Page** ||
+<br>
+3️⃣ <b>레코드 페이지</b>
 
-## Store Page
+|<img src="/uploads/38afd98467912b918655bd97fcc69779/Record_1_.gif">|<img src="/uploads/5d2ffa58914cf30695035ed714cf40a8/Record_2_.gif">|
+| :------: | :------: |
+| **No Voice** | **Record Page** |
+|<img src="/uploads/ec21511dd6834c82f446919adfcdcb71/Record_3_.gif">|<img src="/uploads/dea2f06ce9f944f9e2ff4bcc9db57a4c/Record_4_.gif">|
+| **Voice Studying Page** | **Voice Finish Page** |
+|<img src="/uploads/0ae836df524a155fb4d6b95c26ee455f/Record_5_.gif">||
+| **Product Custom Page** ||
 
 <br>
-<img src="/uploads/8d96fe715733efc63cfeac4fd46dd5fe/store_1_.gif" width="400" />
-<img src="/uploads/e6438fe3809461e35185600fd901284d/store_2_.gif" width="400" />
-<br>
+3️⃣ <b>마이 페이지</b>
 
-- 학습된 AI-Voice를 상품 등록 하면 해당 페이지에서 판매가 가능하다.
-- 상품 등록된 여러가지 목소리를 열람할 수 있다.
-- 검색 기능을 통해 상품들을 필터링하여 볼 수 있다.
-
-## Store Detail Page
-
-<br>
-<img src="/uploads/039dc5ea323bd4450f62eac52a0b8cc3/storeDetail_1_.gif" width="400px">
-<img src="/uploads/0ae386b2b1a527daabbfe97a8b52f2bc/storeDetail_2_.gif" width="400px">
-<br>
-
-- 선택한 목소리의 정보를 볼 수 있다.
-- 등록된 3가지의 미리듣기 문장을 들을 수 있다.
-- 최대 20자의 체험하기 기능을 제공한다.
-- 구매하기 버튼을 통해 글자 단위로 구매가 가능하다.
-
+|<img src="/uploads/c2a0f26fc27688da96d352629e3d3eda/myProfile_1_.gif">|<img src="/uploads/617651b2810508539ddd939648e842fc/myProfile_2_.gif">|
+| :------: | :------: |
+| **Profile Page** | **My Voice Detail** |
+|<img src="/uploads/ba7f379b9911bdef6735666d4ce60492/my_SellList_1_.gif">|<img src="/uploads/1d6bb2185eb42eaa48210a2f87166ff8/my_SellList_2_.gif">|
+| **SellList Page** | **Sell Detail** |
+|<img src="/uploads/ba7f379b9911bdef6735666d4ce60492/my_SellList_1_.gif">||
+| **BuyList Page** ||
+|<img src="/uploads/b9271c3ec2943b264009c7c62e79f29b/my_Use_1_.gif">|<img src="/uploads/f29bc3308956cd43cefccfeef91e631d/my_Use_2_.gif">|
+| **UseList Page** | **VoiceUse Detail** |
 
 <br>
-<img src="/uploads/262a3a8e1d7017dbb32dfe972a90d59b/storeDetail_3_.gif" width="400px"> 
-<br>
 
-- 구매하기를 누를 시 글자 단위로 구매가 가능하다
-- 구매를 하게되면 바로 사용이 가능하게 사용 페이지로 연결된다.
-
-## Voice Study Page
-
-<br>
-<img src="/uploads/38afd98467912b918655bd97fcc69779/Record_1_.gif" width="400px">
-<img src="/uploads/5d2ffa58914cf30695035ed714cf40a8/Record_2_.gif" width="400px">
-<br>
-
-- 녹음을 하기 전 Voice 정보를 먼저 등록한다.
-- 제공된 문장을 통해 녹음을 진행합니다.
-
-<br>
-<img src="/uploads/ec21511dd6834c82f446919adfcdcb71/Record_3_.gif" width="400px">
-<img src="/uploads/dea2f06ce9f944f9e2ff4bcc9db57a4c/Record_4_.gif" width="400px">
-<img src="/uploads/0ae836df524a155fb4d6b95c26ee455f/Record_5_.gif" width="400px">
-<br>
-
-- 충분한 녹음이 완료되면 목소리 학습이 활성화 됩니다.
-- 녹음된 파일을 통해 나만의 AI-Voice 모델을 생성합니다.
-
-
-## My profile Page
-
-<br>
-<img src="/uploads/c2a0f26fc27688da96d352629e3d3eda/myProfile_1_.gif" width="400px">
-<img src="/uploads/617651b2810508539ddd939648e842fc/myProfile_2_.gif" width="400px">
-<br>
-
-- 내가 등록한 목소리와 좋아요를 누른 목소리를 볼 수 있다.
-- 네브바는 사이드바로 변경된다.
-- 목소리 디테일로 들어가면 수정이 가능하다.
-
-## My SellList Page
-
-<br>
-<img src="/uploads/ba7f379b9911bdef6735666d4ce60492/my_SellList_1_.gif" width="400px">
-<img src="/uploads/1d6bb2185eb42eaa48210a2f87166ff8/my_SellList_2_.gif" width="400px">
-<br>
-
-- 전체 판매 통계를 볼 수 있다.
-- 판매 중인 상품의 디테일에서 판매내역을 볼 수 있다.
-- 판매 중인 상품의 정보를 수정 할 수 있다.
-
-
-## My BuyList Page
-
-<br>
-<img src="/uploads/4a9c1f217d3b0f8b725edf4315c54210/my_BuyList_1_.gif" width="400px">
-<br>
-
-- 자신이 구매한 보이스 구매내역을 볼 수 있습니다.
-- 어떤 목적으로 언제, 몇자를, 얼마에 구매한 지 알 수 있습니다.
-- 전체 사용 금액을 사용할 수 있다.
-
-
-## My UseList Page
-
-<br>
-<img src="/uploads/b9271c3ec2943b264009c7c62e79f29b/my_Use_1_.gif" width="400px">
-<img src="/uploads/f29bc3308956cd43cefccfeef91e631d/my_Use_2_.gif" width="400px">
-<br>
-
-- 자신이 구매한 목소리를 사용 할 수 있다.
-- 사용할 목소리를 선택하면 텍스트를 입력해 사용이 가능하고,
-- 제작된 파일을 다운받을 수 있다.
-
-# 주요 기능
-
+## 3. 기술 소개
 - ##### 1. AI-VOICE 생성
   
   - ###### 자신의 목소리 여러가지 등록 가능
@@ -146,25 +84,20 @@
 - ##### 3. 역동적 디자인
   
   - ###### GSAP을 이용한 애니메이션 추가
+<br>
 
-
-
-# 개발 환경
-
-## ⚙ Management Tool
-
+## 4. 개발 환경
+### ⚙ Management Tool
 - 형상 관리 : Gitlab
 - 이슈 관리 : Jira
 - 커뮤니케이션 : Mattermost, Notion, Discord
 - 디자인 : Figma, PowerPoint
 
-## 💻 IDE
-
+### 💻 IDE
 - Visual Studio Code `1.83.0`
 - IntelliJ `11.0.19`
 
-## 📱 Frontend
-
+### 📱 Frontend
 - @date-io/date-fns@2.17.0
 - @emotion/react@11.11.1
 - @emotion/styled@11.11.0
@@ -219,7 +152,7 @@
 - vite-tsconfig-paths@4.2.1
 └── vite@4.4.9
 
-## 💾 Backend
+### 💾 Backend
   - jpa
   - redis
   - security
@@ -232,7 +165,7 @@
   - jwt
   - s3
 
-## AI
+### AI
 
   - Cython
   - librosa==0.8.0
@@ -257,7 +190,7 @@
   - gradio
 
 
-## Infra
+### Infra
 
 - AWS S3
 - AWS EC2
@@ -268,33 +201,12 @@
 - Ubuntu 20.04.6 LTS
 - Spring Boot
 
-# 기술 소개
+<br>
 
-- AI-VOICE 생성
-  
-  - 자신의 목소리 여러가지 등록 가능
-  - 다발적 AI-Voice 학습 가능
-  - 적은 량의 데이터로도 양질의 Voice 모델
-
-- Store 기능
-  
-  - 생성된 AI-Voice 모델 (글자단위) 판매 및 구매 가능
-  - 타인의 AI-Voice 모델 구매 가능 (글자단위)
-  - 생성한 TTS 다운로드 및 바로듣기 가능
-
-- 카카오 로그인
-  
-  - `OAUTH2` 인증을 이용해 불필요한 개인정보 입력 최소화
-
-- 역동적 디자인
-  
-  - GSAP을 이용한 애니메이션 추가
+## 5. 설계 문서
 
 
-# 설계 문서
-
-
-## 📃 요구사항 명세서
+### ◼ 요구사항 명세서
 
 <img src="/uploads/9c292c154b9c1a414048690300e731d8/요구사항명세서_1_.PNG"/>
 
@@ -306,7 +218,7 @@
 
 
 
-## 📝 API 명세서
+### ◼ API 명세서
 
 <img src="/uploads/80e004e8fc866b0015fda80f1c8ec04b/API_1_.png"/>
 
@@ -330,13 +242,14 @@
 
 
 
-## 📏 ERD
+### ◼ ERD
 
 <img src="/uploads/efab5be1d9c1978c56821e5de9e71d59/ERD.png"/>
 
+### ◼ Swagger
 
 
-## 📐 시스템 아키텍처
+### ◼ 시스템 아키텍처
 
 <img src="/uploads/62e9409e4baf25518fbeaff640d8f493/아키텍쳐.png"/>
 
