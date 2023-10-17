@@ -238,21 +238,18 @@
 ![14._구매목적](/uploads/dbd77baafb487ce714f01284161ebf81/14._구매목적.PNG)
 
 
-### ○ ERD
-
-<img src="/uploads/efab5be1d9c1978c56821e5de9e71d59/ERD.png"/>
-
-
-### ○ 시스템 아키텍처
-![아키택쳐](/uploads/dacd894a5eec8ea8b4d5d1bf55788ac0/아키택쳐.png)
+### ○ ERD 및 시스템 아키텍쳐
+|<img src="/uploads/efab5be1d9c1978c56821e5de9e71d59/ERD.png"/>|![아키택쳐](/uploads/dacd894a5eec8ea8b4d5d1bf55788ac0/아키택쳐.png)|
+|:------:|:--:|
+|ERD|시스템 아키텍쳐|
 
 
 ## 6. 팀원 소개
 
 | **[성제현](https://github.com/protofu)**                                                          | **[정소정](https://github.com/sojeong025)**                                                           | **[최진석](https://github.com/choiapple)**                                                               | **[구배성](https://github.com/deerKBS)**                                                               | **[황재영](https://github.com/JJaeki)**                                                              | **라동엽**                                                             |
-|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|
-| <img title="" src="/uploads/ae66cf5c3a1b0cfd159d6035dc1f5524/SJH.png" alt="" width="500"> | <img title="" src="/uploads/3fc78fc8638acc7c10f2020b1bafebaf/JSJ.png" alt="" width="500"> | <img title="" src="/uploads/aff04cba1009b64aa036b167c033b0cc/CJS.png" alt="" width="500"> | <img title="" src="/uploads/1d9490cf7bf23efd3e0886878d01ec7c/KBS.png" alt="" width="500"> | <img title="" src="/uploads/66541ff290a9a539a3d87e82943fd568/HJY.png" alt="" width="500"> | <img title="" src="/uploads/7741e56d270cd1f471b93ca2b02ff0ff/RDY.png" alt="" width="500"> |
-| Frontend                                                                                           | Frontend                                                                                           | FullStack                                                                                           | FullStack & CI/CD                                                                                          | Backend                                                                                            | AI                                                                                            |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| <img title="" src="/uploads/ae66cf5c3a1b0cfd159d6035dc1f5524/SJH.png" alt=""> | <img title="" src="/uploads/3fc78fc8638acc7c10f2020b1bafebaf/JSJ.png" alt="" > | <img title="" src="/uploads/aff04cba1009b64aa036b167c033b0cc/CJS.png" alt="" > | <img title="" src="/uploads/1d9490cf7bf23efd3e0886878d01ec7c/KBS.png" alt="" > | <img title="" src="/uploads/66541ff290a9a539a3d87e82943fd568/HJY.png" alt=""> | <img title="" src="/uploads/7741e56d270cd1f471b93ca2b02ff0ff/RDY.png" width="400" alt=""> |
+|Frontend|Frontend|FullStack|FullStack & CI/CD|Backend|AI|
 
 #### 👥 역할 분담
 
