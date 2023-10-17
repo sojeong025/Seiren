@@ -24,7 +24,7 @@
 <br>
 
 ## 2. 서비스 화면
-1️⃣ <b>메인 페이지 & 어바웃 페이지</b>
+1️ <b>메인 페이지 & 어바웃 페이지</b>
 
 |<img src="/uploads/fc870d20ec0b9eb15af9a4a4357f25db/Main.gif">|<img src="/uploads/84b0aa201aa1476bf57b0e45284e2697/Login.gif">|
 | :------: | :------: |
@@ -206,81 +206,64 @@
 ## 5. 설계 문서
 
 
-### ◼ 요구사항 명세서
-
-<img src="/uploads/9c292c154b9c1a414048690300e731d8/요구사항명세서_1_.PNG"/>
-
-<img src="/uploads/8b736ad644021063f32428bbd78a7807/요구사항명세서_2_.PNG"/>
-
-<img src="/uploads/b4d831567ba8d698a565841b3f9b8412/요구사항명세서_3_.PNG"/>
-
-<img src="/uploads/6cc05dd2d6f40df975303a0791a22aca/요구사항명세서_4_.PNG"/>
+### ○ 요구사항 명세서
+![요구사항1](/uploads/5c0aa80cb0c8b670dbc58a037d30bc65/요구사항1.PNG)
+![요구사항2](/uploads/d7e9378964d26778819a16b861f28ead/요구사항2.PNG)
+![요구사항3](/uploads/7e7984f26ea96c88f006b16d71460a04/요구사항3.PNG)
+![요구사항4](/uploads/8185508f29ab6fc22519d21029ab1fcf/요구사항4.PNG)
 
 
 
-### ◼ API 명세서
+### ○ API 명세서
+- <b>Swagger</b>
+![swagger1](/uploads/3f045ec71e257cc681a7f2a5302b229a/swagger1.png)
+![swagger3](/uploads/e9631c629b514ce3b6efdaddda31049c/swagger3.png)
+![swagger4](/uploads/ad16306dd0926e33c12a114112e0626c/swagger4.png)
+![swagger2](/uploads/7daef0f1eb4e277d05aa15cae49a8e2c/swagger2.png)
 
-<img src="/uploads/80e004e8fc866b0015fda80f1c8ec04b/API_1_.png"/>
-
-<img src="/uploads/d6157b98e9d8ed90764bc0628a74bfdc/API_2_.png"/>
-
-<img src="/uploads/9b5257a6e62fe9b2de6d946451fd8e8a/API_3_.png"/>
-
-<img src="/uploads/7aadb26c23fa044663099434ec58a0af/API_4_.png"/>
-
-<img src="/uploads/0c8fbc6120e7b4ab1323d3615b03eb59/API_5_.png"/>
-
-<img src="/uploads/07f39ae93f2e24ea1fa217cb4c0f001a/API_6_.png"/>
-
-<img src="/uploads/a36b5cd74a4ef63d9d640292ab31008d/API_7_.png"/>
-
-<img src="/uploads/6f62a7904da6e57a4fa0593907cdafb3/API_8_.png"/>
-
-<img src="/uploads/7fa5376f4b3c62ba491165de6a6c7317/API_9_.png"/>
-
-<img src="/uploads/9ae7f0f3c3129d3ed9be14ad92bd5bb1/API_10_.png"/>
+- <b>API 명세서</b>
+![01._회원인증](/uploads/88f7ac346d7c3227430c6772af3d68ec/01._회원인증.PNG)
+![02._마이페이지_회원정보](/uploads/14afb6bf5b4cd0c000637698dfb35f64/02._마이페이지_회원정보.PNG)
+![03._마이페이지_구매_내역](/uploads/e90b527f8faef22bbb6f95a2718af433/03._마이페이지_구매_내역.PNG)
+![04._마이페이지_내가_만든_목소리](/uploads/d328779dc00e19fc8c2eda74ae626c25/04._마이페이지_내가_만든_목소리.PNG)
+![05._마이페이지_판매관리](/uploads/f69b238a52e6ac622f862be827b5b259/05._마이페이지_판매관리.PNG)
+![06._마이페이지_구매한_목소리_BOX](/uploads/c337650a95a425bbc6e29c096ec64d10/06._마이페이지_구매한_목소리_BOX.PNG)
+![07._내_목소리_생성](/uploads/2e0ef7047fcc14418aff15f4c94401a6/07._내_목소리_생성.PNG)
+![08._Voice_Shop](/uploads/d70bf9856ddc4e6b82721fd580b8cc01/08._Voice_Shop.PNG)
+![09._결제](/uploads/2169e73da8b5758b177f459a8eca5dc7/09._결제.PNG)
+![10._찜](/uploads/502835d876cd4564cf55b450baa8c9b2/10._찜.PNG)
+![11._알림](/uploads/72435eaf9a4d7c81765c53acb8b7b31a/11._알림.PNG)
+![12._카테고리](/uploads/c1399d49b711b03be3244eb3b17c6356/12._카테고리.PNG)
+![13.대본](/uploads/ccf5c0bb9b76d26006ddd2a0c7e14ccd/13.대본.PNG)
+![14._구매목적](/uploads/dbd77baafb487ce714f01284161ebf81/14._구매목적.PNG)
 
 
-
-### ◼ ERD
+### ○ ERD
 
 <img src="/uploads/efab5be1d9c1978c56821e5de9e71d59/ERD.png"/>
 
-### ◼ Swagger
+
+### ○ 시스템 아키텍처
+![아키택쳐](/uploads/dacd894a5eec8ea8b4d5d1bf55788ac0/아키택쳐.png)
 
 
-### ◼ 시스템 아키텍처
-
-<img src="/uploads/62e9409e4baf25518fbeaff640d8f493/아키텍쳐.png"/>
-
-# 팀원 소개
+## 6. 팀원 소개
 
 | **[성제현](https://github.com/protofu)**                                                          | **[정소정](https://github.com/sojeong025)**                                                           | **[최진석](https://github.com/choiapple)**                                                               | **[구배성](https://github.com/deerKBS)**                                                               | **[황재영](https://github.com/JJaeki)**                                                              | **라동엽**                                                             |
 |:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|
 | <img title="" src="/uploads/ae66cf5c3a1b0cfd159d6035dc1f5524/SJH.png" alt="" width="500"> | <img title="" src="/uploads/3fc78fc8638acc7c10f2020b1bafebaf/JSJ.png" alt="" width="500"> | <img title="" src="/uploads/aff04cba1009b64aa036b167c033b0cc/CJS.png" alt="" width="500"> | <img title="" src="/uploads/1d9490cf7bf23efd3e0886878d01ec7c/KBS.png" alt="" width="500"> | <img title="" src="/uploads/66541ff290a9a539a3d87e82943fd568/HJY.png" alt="" width="500"> | <img title="" src="/uploads/7741e56d270cd1f471b93ca2b02ff0ff/RDY.png" alt="" width="500"> |
 | Frontend                                                                                           | Frontend                                                                                           | FullStack                                                                                           | FullStack & CI/CD                                                                                          | Backend                                                                                            | AI                                                                                            |
 
-## 😎 역할 분담
+#### 👥 역할 분담
 
-**Frontend**
+- **성제현** : UX/UI 설계 / 마이페이지 제작 및 api / 문서화 작업 / 빌드 및 오류 수정
 
-- 성제현 : UX/UI 설계 / 마이페이지 제작 및 api / 문서화 작업 / 빌드 및 오류 수정
+- **정소정** : UX/UI 설계 / PPT 및 영상 제작 / 발표 / 디자인 총괄 / Record 및 상품 관리
 
-- 정소정 : UX/UI 설계 / PPT제작 / 영상 제작 / 발표 / 디자인 총괄 / 전 페이지 검수
+- **최진석** : API 제작 / front api 연결 / 오류 수정 / DB 설계
 
-**Full Stack**
+- **구배성**: API 제작 / CI/CD 담당 / 영상 제작 / Front 배포 오류 수정
 
-- 최진석 : API 제작 / front api 연결 / 오류 수정 / DB 설계
+- **황재영** : API 제작 / 검색 기능 제작 / DB 관리
 
-**Full Stack & CI/CD**
-
-- 구배성: API 제작 / CI/CD 담당 / 영상 제작 / Front 배포 오류 수정
-
-**Backend**
-
-- 황재영 : API 제작 / 검색 기능 제작 / DB 관리
-
-
-**AI**
-
-- 라동엽 : Flask 서버 구축 / AI 학습 모델 생성 
+- **라동엽** : Flask 서버 구축 / AI 학습 모델 생성 
