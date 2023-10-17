@@ -3,7 +3,7 @@
 # 🎙&nbsp; Seiren
 사용자가 자신의 <b>목소리를 등록</b>하고, 텍스트를 입력하면<br/> 해당 텍스트가 <b>사용자의 목소리로 변환되어 출력</b>되는 <U>AI 기반 음성 서비스</U> <br/>  
 
-<img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif" width="700">
+<img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif">
 </div>
 
 
@@ -20,7 +20,7 @@
 ## 1. 개요
 > <b>프로젝트 기간</b> : 2023/08/21 ~ 2023/10/06 <br>
 > <b>참고자료 </b> : 🎞 [UCC](https://www.youtube.com/watch?v=2VDcku13lkk)
-📃 [최종발표 자료](https://drive.google.com/file/d/1iTcuW2Ohn8m3WWf5kYmd6j4i9W_lP2A0/view?usp=sharing)
+📃 [최종발표 PPT](https://drive.google.com/file/d/1iTcuW2Ohn8m3WWf5kYmd6j4i9W_lP2A0/view?usp=sharing)
 <br>
 
 ## 2. 서비스 화면
