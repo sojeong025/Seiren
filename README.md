@@ -1,62 +1,36 @@
+<div align="center">
+
+# 🎙&nbsp; Seiren
+사용자가 자신의 <b>목소리를 등록</b>하고, 텍스트를 입력하면<br/> 해당 텍스트가 <b>사용자의 목소리로 변환되어 출력</b>되는 <U>AI 기반 음성 서비스</U> <br/>  
+
 <img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif" width="700">
+</div>
 
 
-# Seiren
+## 목차
 
-- AI Voice 학습 및 거래 플랫폼
-
-# 목차
-
-1. [결과물](#결과물)
+1. [개요](#개요)
 2. [서비스 화면](#서비스-화면)
-3. [주요 기능](#주요-기능)
-4. [개발 환경](#개발-환경)
-5. [기술 소개](#기술-소개)
-6. [설계 문서](#설계-문서)
-7. [팀원 소개](#팀원-소개)
+4. [주요 기능](#주요-기능)
+5. [개발 환경](#개발-환경)
+6. [기술 소개](#기술-소개)
+7. [설계 문서](#설계-문서)
+8. [팀원 소개](#팀원-소개)
 
-# 결과물
-
-- 📽 [UCC](https://www.youtube.com/watch?v=2VDcku13lkk)
-
-- 🎤 [중간발표 자료]()
-
-- 🎤 [최종발표 자료]()
-
-
-## Main Page
-
-<br>
-<img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif" width="400">
+## 개요
+> <b>프로젝트 기간</b> : 2023/08/21 ~ 2023/10/06 <br>
+> <b>참고자료 </b> : [UCC](https://www.youtube.com/watch?v=2VDcku13lkk)
+📃 [최종발표 자료](https://drive.google.com/file/d/1iTcuW2Ohn8m3WWf5kYmd6j4i9W_lP2A0/view?usp=sharing)
 <br>
 
-- 메인페이지. 네브바에 각 페이지로 갈 수 있는 링크들이 있음.
-- 사이트의 대략적인 느낌을 얻을 수 있습니다.
-
-
-## Login Page
-
-<br>
-<img src="/uploads/2aacb8c24e0a0c2636d27daeecbb4d86/loginPage.gif" width="400">
-<br>
-
-- 카카오 로그인 화면이다.
-- 로그인 시 카카오 프로필을 받아온다.
-
-## About Page
-
-<br>
-<img src="/uploads/32ccc43db339a9ed12116fcb20e4dcc3/aboutPage.gif" width="400">
-<img src="/uploads/20b5f7042593edc9a22ac2a87271c8fb/aboutPage_2_.gif" width="400">
-
-
-<br>
-
-- 플랫폼에 대한 자세한 설명이 적혀있는 페이지
-- 역동적인 효과로 시선을 끈다.
-- 플랫폼의 주요 기능을 다루고 바로 이동할 수 있게 도와준다.
-- 또한, UCC를 바로 볼 수 있다.
-
+## 서비스 화면
+|<img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif">|<img src="/uploads/2aacb8c24e0a0c2636d27daeecbb4d86/loginPage.gif">|
+| :------: | :------: |
+| **Main Page** | **Login Page** |
+|<img src="/uploads/32ccc43db339a9ed12116fcb20e4dcc3/aboutPage.gif">|<img src="/uploads/20b5f7042593edc9a22ac2a87271c8fb/aboutPage_2_.gif">|
+| **About Page** | **About Page** |
+|<img src="/uploads/8d96fe715733efc63cfeac4fd46dd5fe/store_1_.gif">|<img src="/uploads/e6438fe3809461e35185600fd901284d/store_2_.gif">|
+| **Store Page** | **Filter** |
 
 ## Store Page
 
