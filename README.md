@@ -26,25 +26,25 @@
 ## 2. 서비스 화면
 1️⃣ <b>메인 페이지 & 어바웃 페이지</b>
 
-|<img src="/uploads/546376ee0d8c24cbd63b99b676d93932/Main.gif">|<img src="/uploads/a90b77b569150704b866777c100ce095/Login.gif">|
+|<img src="/uploads/fc870d20ec0b9eb15af9a4a4357f25db/Main.gif">|<img src="/uploads/84b0aa201aa1476bf57b0e45284e2697/Login.gif">|
 | :------: | :------: |
 | **Main Page** | **Login Page** |
-|<img src="/uploads/740d4c44ab6f43e936086472b4f10494/about1.gif">|<img src="/uploads/10abe2d49a6bbd4f53bcedb5b64c34f2/about2.gif">|
+|<img src="/uploads/f4411ae105f3956f5b05429426e957b3/about1.gif">|<img src="/uploads/5f6bac0d52f7cc62d1c8484e90bc2195/about2.gif">|
 | **About Page** | **About Page** |
 <br>
 2️⃣ <b>스토어 페이지</b>
 
-|<img src="/uploads/ca3296dd7050ce641fec2bf9e56a1332/store1.gif">|<img src="/uploads/6514a07b79025502cadec2e0ba36111a/store2.gif">|
+|<img src="/uploads/f0773c885f0ce947b33cc3d1fcb46fc5/store1.gif">|<img src="/uploads/347e47be073141d8423b9493b0acff12/store2.gif">|
 | :------: | :------: |
 | **Store Page** | **Filter** |
-|<img src="/uploads/15ea5953029b21aa6329dce8a5124635/store3.gif">|<img src="/uploads/5fe88334c11cfefeb9b1a08fcbaf39f2/store4.gif">|
+|<img src="/uploads/c841aa6f12bf2f5d0f7715e21d88f89c/store3.gif">|<img src="/uploads/a773aafe1f0b95800823fd4c90a09960/store4.gif">|
 | **Product Detail** | **Product Test** |
-|<img src="/uploads/7d1c8b085533f2d5713222286c4b7f55/store5.gif">||
+|<img src="/uploads/3cf0fe7efa929e6b71701206ff5f201a/store5.gif">||
 | **Purchase Page** ||
 <br>
 3️⃣ <b>레코드 페이지</b>
 
-|<img src="/uploads/f6bc2557f5b0358b0fa9f1d954499d95/novoice.gif">|<img src="/uploads/b59307ddcb52e3adb0946330ee7b9738/Record.gif">|
+|<img src="/uploads/859437d5eae82873b88a48d927862818/novoice.gif">|<img src="/uploads/3c99df66796c6c0cbb775b2e394e5b18/Record.gif">|
 | :------: | :------: |
 | **No Voice** | **Record Page** |
 |<img src="/uploads/ec21511dd6834c82f446919adfcdcb71/Record_3_.gif">|<img src="/uploads/dea2f06ce9f944f9e2ff4bcc9db57a4c/Record_4_.gif">|
