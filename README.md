@@ -3,7 +3,7 @@
 # 🎙&nbsp; Seiren
 사용자가 자신의 <b>목소리를 등록</b>하고, 텍스트를 입력하면<br/> 해당 텍스트가 <b>사용자의 목소리로 변환되어 출력</b>되는 <U>AI 기반 음성 서비스</U> <br/>  
 
-<img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif">
+<img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif" width="400px">
 </div>
 
 
@@ -239,9 +239,16 @@
 
 
 ### ○ ERD 및 시스템 아키텍쳐
-|<img src="/uploads/efab5be1d9c1978c56821e5de9e71d59/ERD.png"/>|![아키택쳐](/uploads/dacd894a5eec8ea8b4d5d1bf55788ac0/아키택쳐.png)|
-|:--:|:--:|
-| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ERD &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |시스템 아키텍쳐|
+<table>
+  <tr>
+    <td style="text-align:center;">
+      <img src="/uploads/efab5be1d9c1978c56821e5de9e71d59/ERD.png" width="300px" height="200px" />
+    </td>
+    <td style="text-align:center;">
+      <img src="/uploads/dacd894a5eec8ea8b4d5d1bf55788ac0/아키택쳐.png" width="300px" height="200px" />
+    </td>
+  </tr>
+</table>
 
 
 ## 6. 팀원 소개
