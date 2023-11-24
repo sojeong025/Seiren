@@ -3,7 +3,7 @@
 # 🎙&nbsp; Seiren
 사용자가 자신의 <b>목소리를 등록</b>하고, 텍스트를 입력하면<br/> 해당 텍스트가 <b>사용자의 목소리로 변환되어 출력</b>되는 <U>AI 기반 음성 서비스</U> <br/>  
 
-<img src="/uploads/b0d820abc89c226c41d3803a36fe3bf6/MainPage.gif" width="400px">
+<img src="./gif_files/MainPage.gif" width="400px">
 </div>
 
 
