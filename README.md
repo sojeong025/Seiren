@@ -207,45 +207,45 @@
 
 
 ### ○ 요구사항 명세서
-![요구사항1](/uploads/5c0aa80cb0c8b670dbc58a037d30bc65/요구사항1.PNG)
-![요구사항2](/uploads/d7e9378964d26778819a16b861f28ead/요구사항2.PNG)
-![요구사항3](/uploads/7e7984f26ea96c88f006b16d71460a04/요구사항3.PNG)
-![요구사항4](/uploads/8185508f29ab6fc22519d21029ab1fcf/요구사항4.PNG)
+![요구사항1](./image_files/요구사항1.PNG)
+![요구사항2](./image_files/요구사항2.PNG)
+![요구사항3](./image_files/요구사항3.PNG)
+![요구사항4](./image_files/요구사항4.PNG)
 
 
 
 ### ○ API 명세서
 - <b>Swagger</b>
-![swagger1](/uploads/3f045ec71e257cc681a7f2a5302b229a/swagger1.png)
-![swagger3](/uploads/e9631c629b514ce3b6efdaddda31049c/swagger3.png)
-![swagger4](/uploads/ad16306dd0926e33c12a114112e0626c/swagger4.png)
-![swagger2](/uploads/7daef0f1eb4e277d05aa15cae49a8e2c/swagger2.png)
+![swagger1](./image_files/swagger1.png)
+![swagger3](./image_files/swagger3.png)
+![swagger4](./image_files/swagger4.png)
+![swagger2](./image_files/swagger2.png)
 
 - <b>API 명세서</b>
-![01._회원인증](/uploads/88f7ac346d7c3227430c6772af3d68ec/01._회원인증.PNG)
-![02._마이페이지_회원정보](/uploads/14afb6bf5b4cd0c000637698dfb35f64/02._마이페이지_회원정보.PNG)
-![03._마이페이지_구매_내역](/uploads/e90b527f8faef22bbb6f95a2718af433/03._마이페이지_구매_내역.PNG)
-![04._마이페이지_내가_만든_목소리](/uploads/d328779dc00e19fc8c2eda74ae626c25/04._마이페이지_내가_만든_목소리.PNG)
-![05._마이페이지_판매관리](/uploads/f69b238a52e6ac622f862be827b5b259/05._마이페이지_판매관리.PNG)
-![06._마이페이지_구매한_목소리_BOX](/uploads/c337650a95a425bbc6e29c096ec64d10/06._마이페이지_구매한_목소리_BOX.PNG)
-![07._내_목소리_생성](/uploads/2e0ef7047fcc14418aff15f4c94401a6/07._내_목소리_생성.PNG)
-![08._Voice_Shop](/uploads/d70bf9856ddc4e6b82721fd580b8cc01/08._Voice_Shop.PNG)
-![09._결제](/uploads/2169e73da8b5758b177f459a8eca5dc7/09._결제.PNG)
-![10._찜](/uploads/502835d876cd4564cf55b450baa8c9b2/10._찜.PNG)
-![11._알림](/uploads/72435eaf9a4d7c81765c53acb8b7b31a/11._알림.PNG)
-![12._카테고리](/uploads/c1399d49b711b03be3244eb3b17c6356/12._카테고리.PNG)
-![13.대본](/uploads/ccf5c0bb9b76d26006ddd2a0c7e14ccd/13.대본.PNG)
-![14._구매목적](/uploads/dbd77baafb487ce714f01284161ebf81/14._구매목적.PNG)
+![01._회원인증](./image_files/01._회원인증.PNG)
+![02._마이페이지_회원정보](./image_files/02._마이페이지_회원정보.PNG)
+![03._마이페이지_구매_내역](./image_files/03._마이페이지_구매_내역.PNG)
+![04._마이페이지_내가_만든_목소리](./image_files/04._마이페이지_내가_만든_목소리.PNG)
+![05._마이페이지_판매관리](./image_files/05._마이페이지_판매관리.PNG)
+![06._마이페이지_구매한_목소리_BOX](./image_files/06._마이페이지_구매한_목소리_BOX.PNG)
+![07._내_목소리_생성](./image_files/07._내_목소리_생성.PNG)
+![08._Voice_Shop](./image_files/08._Voice_Shop.PNG)
+![09._결제](./image_files/09._결제.PNG)
+![10._찜](./image_files/10._찜.PNG)
+![11._알림](./image_files/11._알림.PNG)
+![12._카테고리](./image_files/12._카테고리.PNG)
+![13.대본](./image_files/13.대본.PNG)
+![14._구매목적](./image_files/14._구매목적.PNG)
 
 
 ### ○ ERD 및 시스템 아키텍쳐
 <table>
   <tr>
     <td style="text-align:center;">
-      <img src="/uploads/efab5be1d9c1978c56821e5de9e71d59/ERD.png" width="300px" height="200px" />
+      <img src="./image_files/ERD.png" width="300px" height="200px" />
     </td>
     <td style="text-align:center;">
-      <img src="/uploads/dacd894a5eec8ea8b4d5d1bf55788ac0/아키택쳐.png" width="300px" height="200px" />
+      <img src="./image_files/아키택쳐.png" width="300px" height="200px" />
     </td>
   </tr>
 </table>
@@ -255,7 +255,7 @@
 
 | **[성제현](https://github.com/protofu)**|**[정소정](https://github.com/sojeong025)**|**[최진석](https://github.com/choiapple)**|**[구배성](https://github.com/deerKBS)**|**[황재영](https://github.com/JJaeki)**|**라동엽**|
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| <img title="" src="/uploads/ae66cf5c3a1b0cfd159d6035dc1f5524/SJH.png" alt=""> | <img title="" src="/uploads/3fc78fc8638acc7c10f2020b1bafebaf/JSJ.png" alt="" > | <img title="" src="/uploads/aff04cba1009b64aa036b167c033b0cc/CJS.png" alt="" > | <img title="" src="/uploads/1d9490cf7bf23efd3e0886878d01ec7c/KBS.png" alt="" > | <img title="" src="/uploads/66541ff290a9a539a3d87e82943fd568/HJY.png" alt=""> | <img title="" src="/uploads/7741e56d270cd1f471b93ca2b02ff0ff/RDY.png" alt=""> |
+| <img title="" src="./image_files/SJH.png" alt=""> | <img title="" src="./image_files/JSJ.png" alt="" > | <img title="" src="./image_files/CJS.png" alt="" > | <img title="" src="./image_files/KBS.png" alt="" > | <img title="" src="./image_files/HJY.png" alt=""> | <img title="" src="./image_files/RDY.png" alt=""> |
 |Frontend|Frontend|FullStack|FullStack & CI/CD|Backend|AI|
 
 #### 👥 역할 분담
