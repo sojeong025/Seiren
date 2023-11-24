@@ -88,7 +88,7 @@
 
 ## 4. 개발 환경
 ### ⚙ Management Tool
-- 형상 관리 : Gitlab
+- 형상 관리 : <img src="https://img.shields.io/badge/Gitlab-FC6D26?style=flat-square&logo=Gitlab&logoColor=white"/>
 - 이슈 관리 : Jira
 - 커뮤니케이션 : Mattermost, Notion, Discord
 - 디자인 : Figma, PowerPoint
