@@ -26,43 +26,43 @@
 ## 2. 서비스 화면
 1️ <b>메인 페이지 & 어바웃 페이지</b>
 
-|<img src="/uploads/fc870d20ec0b9eb15af9a4a4357f25db/Main.gif">|<img src="/uploads/84b0aa201aa1476bf57b0e45284e2697/Login.gif">|
+|<img src="./gif_files/Main.gif">|<img src="./gif_files/Login.gif">|
 | :------: | :------: |
 | **Main Page** | **Login Page** |
-|<img src="/uploads/f4411ae105f3956f5b05429426e957b3/about1.gif">|<img src="/uploads/5f6bac0d52f7cc62d1c8484e90bc2195/about2.gif">|
+|<img src="./gif_files/about1.gif">|<img src="./gif_files/about2.gif">|
 | **About Page** | **About Page** |
 <br>
 2️⃣ <b>스토어 페이지</b>
 
-|<img src="/uploads/f0773c885f0ce947b33cc3d1fcb46fc5/store1.gif">|<img src="/uploads/347e47be073141d8423b9493b0acff12/store2.gif">|
+|<img src="./gif_files/store1.gif">|<img src="./gif_files/store2.gif">|
 | :------: | :------: |
 | **Store Page** | **Filter** |
-|<img src="/uploads/c841aa6f12bf2f5d0f7715e21d88f89c/store3.gif">|<img src="/uploads/a773aafe1f0b95800823fd4c90a09960/store4.gif">|
+|<img src="./gif_files/store3.gif">|<img src="./gif_files/store4.gif">|
 | **Product Detail** | **Product Test** |
-|<img src="/uploads/3cf0fe7efa929e6b71701206ff5f201a/store5.gif">||
+|<img src="./gif_files/store5.gif">||
 | **Purchase Page** ||
 <br>
 3️⃣ <b>레코드 페이지</b>
 
-|<img src="/uploads/859437d5eae82873b88a48d927862818/novoice.gif">|<img src="/uploads/3c99df66796c6c0cbb775b2e394e5b18/Record.gif">|
+|<img src="./gif_files/novoice.gif">|<img src="./gif_files/Record.gif">|
 | :------: | :------: |
 | **No Voice** | **Record Page** |
-|<img src="/uploads/ec21511dd6834c82f446919adfcdcb71/Record_3_.gif">|<img src="/uploads/dea2f06ce9f944f9e2ff4bcc9db57a4c/Record_4_.gif">|
+|<img src="./gif_files/Record_3_.gif">|<img src="./gif_files/Record_4_.gif">|
 | **Voice Studying Page** | **Voice Finish Page** |
-|<img src="/uploads/0ae836df524a155fb4d6b95c26ee455f/Record_5_.gif">||
+|<img src="./gif_files/Record_5_.gif">||
 | **Product Custom Page** ||
 
 <br>
 3️⃣ <b>마이 페이지</b>
 
-|<img src="/uploads/c2a0f26fc27688da96d352629e3d3eda/myProfile_1_.gif">|<img src="/uploads/617651b2810508539ddd939648e842fc/myProfile_2_.gif">|
+|<img src="./gif_files/myProfile_1_.gif">|<img src="./gif_files/myProfile_2_.gif">|
 | :------: | :------: |
 | **Profile Page** | **My Voice Detail** |
-|<img src="/uploads/ba7f379b9911bdef6735666d4ce60492/my_SellList_1_.gif">|<img src="/uploads/1d6bb2185eb42eaa48210a2f87166ff8/my_SellList_2_.gif">|
+|<img src="./gif_files/my_SellList_1_.gif">|<img src="./gif_files/my_SellList_2_.gif">|
 | **SellList Page** | **Sell Detail** |
-|<img src="/uploads/ba7f379b9911bdef6735666d4ce60492/my_SellList_1_.gif">||
+|<img src="./gif_files/my_SellList_1_.gif">||
 | **BuyList Page** ||
-|<img src="/uploads/b9271c3ec2943b264009c7c62e79f29b/my_Use_1_.gif">|<img src="/uploads/f29bc3308956cd43cefccfeef91e631d/my_Use_2_.gif">|
+|<img src="./gif_files/my_Use_1_.gif">|<img src="./gif_files/my_Use_2_.gif">|
 | **UseList Page** | **VoiceUse Detail** |
 
 <br>
