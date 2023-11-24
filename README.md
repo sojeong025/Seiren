@@ -17,13 +17,13 @@
 6. [팀원 소개](#팀원-소개)
 
 
-### 1. 개요
+## 1. 개요
 > <b>프로젝트 기간</b> : 2023/08/21 ~ 2023/10/06 <br>
 > <b>참고자료 </b> : 🎞 [UCC](https://www.youtube.com/watch?v=2VDcku13lkk)
 📃 [최종발표 PPT](https://drive.google.com/file/d/1iTcuW2Ohn8m3WWf5kYmd6j4i9W_lP2A0/view?usp=sharing)
 <br>
 
-### 2. 개발 환경
+## 2. 개발 환경
 #### ⚙ Management Tool
 <img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white"> <img src="https://img.shields.io/badge/GitLab-FC6D26?style=for-the-badge&logo=GitLab&logoColor=white"> <img src="https://img.shields.io/badge/mattermost-0058CC?style=for-the-badge&logo=mattermost&logoColor=white"> <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
 
@@ -65,7 +65,7 @@
   - gradio
 <br/>
 
-### 3. 서비스 화면
+## 3. 서비스 화면
 1️ <b>메인 페이지 & 어바웃 페이지</b>
 
 |<img src="./gif_files/Main.gif">|<img src="./gif_files/Login.gif">|
@@ -109,7 +109,7 @@
 
 <br>
 
-### 4. 기술 소개
+## 4. 기술 소개
 - ##### 1. AI-VOICE 생성
   
   - ###### 자신의 목소리 여러가지 등록 가능
@@ -129,7 +129,7 @@
 <br>
 
 
-### 5. 설계 문서
+## 5. 설계 문서
 #### ○ 요구사항 명세서
 ![요구사항1](./image_files/요구사항1.PNG)
 ![요구사항2](./image_files/요구사항2.PNG)
@@ -174,7 +174,7 @@
 </table>
 
 
-### 6. 팀원 소개
+## 6. 팀원 소개
 
 | **[성제현](https://github.com/protofu)**|**[정소정](https://github.com/sojeong025)**|**[최진석](https://github.com/choiapple)**|**[구배성](https://github.com/deerKBS)**|**[황재영](https://github.com/JJaeki)**|**라동엽**|
 |:---:|:---:|:---:|:---:|:---:|:---:|
