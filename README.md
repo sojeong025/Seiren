@@ -88,14 +88,10 @@
 
 ## 4. 개발 환경
 ### ⚙ Management Tool
-- 형상 관리 : <img src="https://img.shields.io/badge/Gitlab-FC6D26?style=flat&logo=Gitlab&logoColor=white"/>
-- 이슈 관리 : Jira
-- 커뮤니케이션 : Mattermost, Notion, Discord
-- 디자인 : Figma, PowerPoint
+<img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white"> <img src="https://img.shields.io/badge/GitLab-FC6D26?style=for-the-badge&logo=GitLab&logoColor=white"> <img src="https://img.shields.io/badge/mattermost-0058CC?style=for-the-badge&logo=mattermost&logoColor=white"> <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
 
 ### 💻 IDE
-- Visual Studio Code `1.83.0`
-- IntelliJ `11.0.19`
+<img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"> <img src="https://img.shields.io/badge/intellijidea-000000?style=for-the-badge&logo=intellijidea&logoColor=white">
 
 ### 📱 Frontend
 - @date-io/date-fns@2.17.0
