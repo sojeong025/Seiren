@@ -10,20 +10,62 @@
 ## 목차
 
 1. [개요](#개요)
-2. [서비스 화면](#서비스-화면)
-3. [기술 소개](#기술-소개)
-4. [개발 환경](#개발-환경)
+2. [개발 환경](#개발-환경)
+3. [서비스 화면](#서비스-화면)
+4. [기술 소개](#기술-소개)
 5. [설계 문서](#설계-문서)
 6. [팀원 소개](#팀원-소개)
 
 
-## 1. 개요
+### 1. 개요
 > <b>프로젝트 기간</b> : 2023/08/21 ~ 2023/10/06 <br>
 > <b>참고자료 </b> : 🎞 [UCC](https://www.youtube.com/watch?v=2VDcku13lkk)
 📃 [최종발표 PPT](https://drive.google.com/file/d/1iTcuW2Ohn8m3WWf5kYmd6j4i9W_lP2A0/view?usp=sharing)
 <br>
 
-## 2. 서비스 화면
+### 2. 개발 환경
+#### ⚙ Management Tool
+<img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white"> <img src="https://img.shields.io/badge/GitLab-FC6D26?style=for-the-badge&logo=GitLab&logoColor=white"> <img src="https://img.shields.io/badge/mattermost-0058CC?style=for-the-badge&logo=mattermost&logoColor=white"> <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+
+#### 💻 IDE
+<img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"> <img src="https://img.shields.io/badge/intellijidea-000000?style=for-the-badge&logo=intellijidea&logoColor=white">
+
+#### Infra
+![docker](https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![amazonec2](https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white) ![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=white) <img src="https://img.shields.io/badge/Amazon S3-569A31?&style=for-the-badge&logo=Amazon S3&logoColor=white"/> <img src="https://img.shields.io/badge/ubuntu-E95420?&style=for-the-badge&logo=ubuntu&logoColor=white"/> <img src="https://img.shields.io/badge/nginx-009639?&style=for-the-badge&logo=nginx&logoColor=white"/>
+
+#### 📱 Frontend
+<img src="https://img.shields.io/badge/HTML5-E34F26?&style=for-the-badge&logo=HTML5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS-1572b6?&style=for-the-badge&logo=css3&logoColor=white"/>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?&style=for-the-badge&logo=JavaScript&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white"> <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white"> <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"> <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"> <img src="https://img.shields.io/badge/recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=white"> 
+
+#### 💾 Backend
+![Java](https://img.shields.io/badge/java-23ED8B00?style=for-the-badge&logo=openjdk&logoColor=white) ![SpringBoot](https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white) ![SpringBoot](https://img.shields.io/badge/springsecurity-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)  </br> ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white) <img src="https://img.shields.io/badge/JPA-1572b6?&style=for-the-badge&logo=JPA&logoColor=white"/> ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)  ![mysql](https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+  
+#### AI
+  - Cython
+  - librosa==0.8.0
+  - matplotlib
+  - numpy
+  - scipy
+  - tensorboard
+  - unidecode
+  - pyopenjtalk
+  - jamo
+  - pypinyin
+  - jieba
+  - protobuf
+  - cn2an
+  - inflect
+  - eng_to_ipa
+  - ko_pron
+  - indic_transliteration
+  - num_thai
+  - opencc
+  - ipython
+  - gradio
+<br/>
+
+### 3. 서비스 화면
 1️ <b>메인 페이지 & 어바웃 페이지</b>
 
 |<img src="./gif_files/Main.gif">|<img src="./gif_files/Login.gif">|
@@ -67,7 +109,7 @@
 
 <br>
 
-## 3. 기술 소개
+### 4. 기술 소개
 - ##### 1. AI-VOICE 생성
   
   - ###### 자신의 목소리 여러가지 등록 가능
@@ -86,131 +128,16 @@
   - ###### GSAP을 이용한 애니메이션 추가
 <br>
 
-## 4. 개발 환경
-### ⚙ Management Tool
-<img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white"> <img src="https://img.shields.io/badge/GitLab-FC6D26?style=for-the-badge&logo=GitLab&logoColor=white"> <img src="https://img.shields.io/badge/mattermost-0058CC?style=for-the-badge&logo=mattermost&logoColor=white"> <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
 
-### 💻 IDE
-<img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"> <img src="https://img.shields.io/badge/intellijidea-000000?style=for-the-badge&logo=intellijidea&logoColor=white">
-
-### 📱 Frontend
-- @date-io/date-fns@2.17.0
-- @emotion/react@11.11.1
-- @emotion/styled@11.11.0
-- @lottiefiles/react-lottie-player@3.5.3
-- @mui/material@5.14.11
-- @mui/styled-engine-sc@5.14.11
-- @types/axios@0.14.0
-- @types/node@20.8.2
-- @types/react-dom@18.2.8
-- @types/react@18.2.24
-- @typescript-eslint/eslint-plugin@6.7.4
-- @typescript-eslint/parser@6.7.4
-- @vitejs/plugin-react-swc@3.4.0
-- @vitejs/plugin-react@4.1.0
-- audiobuffer-to-wav@1.0.0
-- aws-sdk@2.1468.0
-- axios@0.21.4
-- date-fns@2.30.0
-- esbuild@0.18.20 invalid: "^0.19.4" from the root project
-- eslint-config-prettier@9.0.0
-- eslint-import-resolver-typescript@3.6.1
-- eslint-plugin-import@2.28.1
-- eslint-plugin-prettier@5.0.0
-- eslint-plugin-react-hooks@4.6.0
-- eslint-plugin-react-refresh@0.4.3
-- eslint-plugin-react@7.33.2
-- eslint@8.50.0
-- extendable-media-recorder-wav-encoder@7.0.98
-- extendable-media-recorder@9.1.2
-- framer-motion@10.16.4
-- gsap@3.12.2
-- lottie-react@2.4.0
-- prettier@3.0.3
-- react-calendar@4.6.0
-- react-datepicker@4.18.0
-- react-dom@18.2.0
-- react-icons@4.11.0
-- UNMET DEPENDENCY react-player@^2.13.0
-- react-router-dom@6.16.0
-- react-scroll@1.8.9
-- react-slick@0.29.0
-- react-youtube@10.1.0
-- react@18.2.0
-- recharts@2.8.0
-- recoil@0.7.7
-- rollup@3.29.4
-- slick-carousel@1.8.1
-- standardized-audio-context@25.3.57
-- styled-components@5.3.11
-- terser@5.21.0
-- typescript@5.2.2
-- vite-tsconfig-paths@4.2.1
-└── vite@4.4.9
-
-### 💾 Backend
-  - jpa
-  - redis
-  - security
-  - jdbc
-  - oauth2
-  - lombok
-  - h2
-  - mysql
-  - swagger
-  - jwt
-  - s3
-
-### AI
-
-  - Cython
-  - librosa==0.8.0
-  - matplotlib
-  - numpy
-  - scipy
-  - tensorboard
-  - unidecode
-  - pyopenjtalk
-  - jamo
-  - pypinyin
-  - jieba
-  - protobuf
-  - cn2an
-  - inflect
-  - eng_to_ipa
-  - ko_pron
-  - indic_transliteration
-  - num_thai
-  - opencc
-  - ipython
-  - gradio
-
-
-### Infra
-
-- AWS S3
-- AWS EC2
-- Nginx 1.18.0
-- Docker 20.10.12
-- Jenkins
-- Redis
-- Ubuntu 20.04.6 LTS
-- Spring Boot
-
-<br>
-
-## 5. 설계 문서
-
-
-### ○ 요구사항 명세서
+### 5. 설계 문서
+#### ○ 요구사항 명세서
 ![요구사항1](./image_files/요구사항1.PNG)
 ![요구사항2](./image_files/요구사항2.PNG)
 ![요구사항3](./image_files/요구사항3.PNG)
 ![요구사항4](./image_files/요구사항4.PNG)
 
 
-
-### ○ API 명세서
+#### ○ API 명세서
 - <b>Swagger</b>
 ![swagger1](./image_files/swagger1.png)
 ![swagger3](./image_files/swagger3.png)
@@ -234,7 +161,7 @@
 ![14._구매목적](./image_files/14._구매목적.PNG)
 
 
-### ○ ERD 및 시스템 아키텍쳐
+#### ○ ERD 및 시스템 아키텍쳐
 <table>
   <tr>
     <td style="text-align:center;">
@@ -247,7 +174,7 @@
 </table>
 
 
-## 6. 팀원 소개
+### 6. 팀원 소개
 
 | **[성제현](https://github.com/protofu)**|**[정소정](https://github.com/sojeong025)**|**[최진석](https://github.com/choiapple)**|**[구배성](https://github.com/deerKBS)**|**[황재영](https://github.com/JJaeki)**|**라동엽**|
 |:---:|:---:|:---:|:---:|:---:|:---:|
