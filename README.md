@@ -186,7 +186,6 @@
 | <img title="" src="./image_files/SJH.png" alt=""> | <img title="" src="./image_files/JSJ.png" alt="" > | <img title="" src="./image_files/CJS.png" alt="" > | <img title="" src="./image_files/KBS.png" alt="" > | <img title="" src="./image_files/HJY.png" alt=""> | <img title="" src="./image_files/RDY.png" alt=""> |
 |Frontend|Frontend|FullStack|FullStack & CI/CD|Backend|AI|
 
-#### 👥 역할 분담
 
 - **성제현** : UX/UI 설계 / 마이페이지 제작 및 api / 문서화 작업 / 빌드 및 오류 수정
 
