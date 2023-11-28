@@ -64,7 +64,7 @@
 
 <a name="contents"></a>
 ## 3. 서비스 화면
-1️ <b>메인 페이지 & 어바웃 페이지</b>
+1️⃣ <b>메인 페이지 & 어바웃 페이지</b>
 
 |<img src="./gif_files/Main.gif">|<img src="./gif_files/Login.gif">|
 | :------: | :------: |
