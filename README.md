@@ -113,7 +113,7 @@
 
 <br>
 
-3️⃣ <b>마이 페이지</b>
+3️4️⃣ <b>마이 페이지</b>
 
 |<img src="./gif_files/myProfile_1_.gif">|<img src="./gif_files/myProfile_2_.gif">|
 | :------: | :------: |
